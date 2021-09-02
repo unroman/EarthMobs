@@ -32,7 +32,7 @@ public class VilerWitch extends Witch {
 		if (!this.isDrinkingPotion()) {
 			Vec3 vec3 = p_34143_.getDeltaMovement();
 			double d0 = p_34143_.getX() + vec3.x - this.getX();
-			double d1 = p_34143_.getEyeY() - (double)1.1F - this.getY();
+			double d1 = p_34143_.getEyeY() - (double) 1.1F - this.getY();
 			double d2 = p_34143_.getZ() + vec3.z - this.getZ();
 			double d3 = Math.sqrt(d0 * d0 + d2 * d2);
 			Potion potion = Potions.HARMING;
@@ -43,7 +43,7 @@ public class VilerWitch extends Witch {
 					potion = Potions.REGENERATION;
 				}
 
-				this.setTarget((LivingEntity)null);
+				this.setTarget((LivingEntity) null);
 			} else if (d3 >= 8.0D && !p_34143_.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
 				potion = Potions.SLOWNESS;
 			} else if (p_34143_.getHealth() >= 8.0F && !p_34143_.hasEffect(MobEffects.POISON)) {
@@ -57,7 +57,7 @@ public class VilerWitch extends Witch {
 			thrownpotion.setXRot(thrownpotion.getXRot() - -20.0F);
 			thrownpotion.shoot(d0, d1 + d3 * 0.2D, d2, 0.75F, 8.0F);
 			if (!this.isSilent()) {
-				this.level.playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITCH_THROW, this.getSoundSource(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
+				this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITCH_THROW, this.getSoundSource(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
 			}
 
 			this.level.addFreshEntity(thrownpotion);

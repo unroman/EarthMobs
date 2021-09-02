@@ -5,16 +5,14 @@ import baguchan.earthmobsmod.client.ModModelLayers;
 import baguchan.earthmobsmod.client.model.VilerWitchModel;
 import baguchan.earthmobsmod.client.render.layer.VilerWitchItemLayer;
 import baguchan.earthmobsmod.entity.VilerWitch;
-import net.minecraft.client.model.BookModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.WitchItemLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VilerWitchRenderer <T extends VilerWitch> extends MobRenderer<T, VilerWitchModel<T>> {
+public class VilerWitchRenderer<T extends VilerWitch> extends MobRenderer<T, VilerWitchModel<T>> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/viler_witch.png");
 
 	public VilerWitchRenderer(EntityRendererProvider.Context p_173952_) {

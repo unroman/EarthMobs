@@ -6,7 +6,6 @@ import baguchan.earthmobsmod.client.model.WoolyCowModel;
 import baguchan.earthmobsmod.client.render.VilerWitchRenderer;
 import baguchan.earthmobsmod.client.render.WoolyCowRenderer;
 import baguchan.earthmobsmod.registry.ModEntities;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;

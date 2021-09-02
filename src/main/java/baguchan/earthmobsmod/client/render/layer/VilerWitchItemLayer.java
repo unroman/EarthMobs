@@ -1,15 +1,11 @@
 package baguchan.earthmobsmod.client.render.layer;
 
 import baguchan.earthmobsmod.client.model.VilerWitchModel;
-import baguchan.earthmobsmod.client.render.VilerWitchRenderer;
-import baguchan.earthmobsmod.entity.VilerWitch;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import net.minecraft.client.model.WitchModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.CrossedArmsItemLayer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,7 +28,7 @@ public class VilerWitchItemLayer<T extends LivingEntity> extends CrossedArmsItem
 			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
 			p_117685_.mulPose(Vector3f.XP.rotationDegrees(140.0F));
 			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(10.0F));
-			p_117685_.translate(0.0D, (double)-0.4F, (double)0.4F);
+			p_117685_.translate(0.0D, (double) -0.4F, (double) 0.4F);
 		}
 
 		super.render(p_117685_, p_117686_, p_117687_, p_117688_, p_117689_, p_117690_, p_117691_, p_117692_, p_117693_, p_117694_);
