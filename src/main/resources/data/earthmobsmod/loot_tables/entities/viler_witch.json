@@ -137,6 +137,28 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 0.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+                "min": 0.0,
+                "max": 1.0
+              }
+            }
+          ],
+          "name": "earthmobsmod:undead_spider_eye"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 1,
           "functions": [
             {
