@@ -6,7 +6,7 @@
   "item.earthmobsmod.mud_bucket": "泥バケツ",
   "item.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "item.earthmobsmod.horn": "ホーン",
-  "item.earthmobsmod.cluckshroom_spawn_egg": "きのコッコのスポーンエッグ",
+  "item.earthmobsmod.cluck_shroom_spawn_egg": "きのコッコのスポーンエッグ",
   "item.earthmobsmod.moobloom_spawn_egg": "ムーブロームのスポーンエッグ",
   "item.earthmobsmod.horned_sheep_spawn_egg": "角のある羊のスポーンエッグ",
   "item.earthmobsmod.rainbow_sheep_spawn_egg": "虹色の羊のスポーンエッグ",
@@ -17,7 +17,7 @@
   "item.earthmobsmod.lobber_zombie_spawn_egg": "ロバ―ゾンビのスポーンエッグ",
   "item.earthmobsmod.viler_witch_spawn_egg": "Viler Witchのスポーンエッグ",
   "entity.earthmobsmod.muddypig": "泥まみれのブタ",
-  "entity.earthmobsmod.cluckshroom": "きのコッコ",
+  "entity.earthmobsmod.cluck_shroom": "きのコッコ",
   "entity.earthmobsmod.moobloom": "ムーブローム",
   "entity.earthmobsmod.horned_sheep": "角のある羊",
   "entity.earthmobsmod.rainbow_sheep": "虹色の羊",
@@ -26,6 +26,7 @@
   "entity.earthmobsmod.bone_spider": "骨クモ",
   "entity.earthmobsmod.bouldering_zombie": "ボルダリングゾンビ",
   "entity.earthmobsmod.lobber_zombie": "ロバ―ゾンビ",
-  "entity.earthmobsmod.viler_witch": "Viler Witch",
+  "entity.earthmobsmod.viler_witch": "卑怯なウィッチ",
+  "entity.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "fluid.earthmobsmod.mud": "泥"
 }
