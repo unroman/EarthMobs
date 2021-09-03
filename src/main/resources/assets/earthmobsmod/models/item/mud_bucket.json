@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "earthmobsmod:items/mud_bucket"
+    "layer0": "earthmobsmod:item/mud_bucket"
   }
 }

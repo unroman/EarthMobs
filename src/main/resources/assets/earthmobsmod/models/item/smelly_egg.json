@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "earthmobsmod:items/smelly_egg"
+    "layer0": "earthmobsmod:item/smelly_egg"
   }
 }
