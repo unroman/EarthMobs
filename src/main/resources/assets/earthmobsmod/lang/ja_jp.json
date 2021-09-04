@@ -5,6 +5,8 @@
   "block.earthmobsmod.rainbow_carpet": "虹色のカーペット",
   "item.earthmobsmod.mud_bucket": "泥バケツ",
   "item.earthmobsmod.smelly_egg": "キノコの生えた卵",
+  "item.earthmobsmod.bone_shard": "骨の破片",
+  "item.earthmobsmod.bone_spider_eye": "骨グモの目",
   "item.earthmobsmod.horn": "ホーン",
   "item.earthmobsmod.cluck_shroom_spawn_egg": "きのコッコのスポーンエッグ",
   "item.earthmobsmod.moobloom_spawn_egg": "ムーブロームのスポーンエッグ",
@@ -28,5 +30,6 @@
   "entity.earthmobsmod.lobber_zombie": "ロバ―ゾンビ",
   "entity.earthmobsmod.viler_witch": "卑怯なウィッチ",
   "entity.earthmobsmod.smelly_egg": "キノコの生えた卵",
+  "entity.earthmobsmod.bone_shard": "骨の破片",
   "fluid.earthmobsmod.mud": "泥"
 }

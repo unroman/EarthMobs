@@ -20,7 +20,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 18.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 8.0F).add(Attributes.ARMOR_TOUGHNESS, 0.5F).add(Attributes.FOLLOW_RANGE, 18.0F);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 18.0D).add(Attributes.ATTACK_DAMAGE, 3.0F).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 8.0F).add(Attributes.ARMOR_TOUGHNESS, 0.5F).add(Attributes.FOLLOW_RANGE, 18.0F);
 	}
 
 	@Override
@@ -115,8 +115,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		double d1 = p_29912_.getX() - this.getX();
 		double d2 = p_29912_.getEyeY() - this.getEyeY();
 		double d3 = p_29912_.getZ() - this.getZ();
-		double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double) 0.2F;
-		bone.shoot(d1, d2 + d4, d3, 1.6F, 10.0F + p_29913_);
+		bone.shoot(d1, d2, d3, 1.6F, 10.0F + p_29913_);
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}

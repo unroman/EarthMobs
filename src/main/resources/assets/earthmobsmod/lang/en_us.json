@@ -6,6 +6,8 @@
   "item.earthmobsmod.mud_bucket": "Mud Bucket",
   "item.earthmobsmod.smelly_egg": "Smelly Egg",
   "item.earthmobsmod.horn": "Horn",
+  "item.earthmobsmod.bone_shard": "BoneShard",
+  "item.earthmobsmod.bone_spider_eye": "Bone Spider Eye",
   "item.earthmobsmod.cluck_shroom_spawn_egg": "Cluckshroom Spawn Egg",
   "item.earthmobsmod.moobloom_spawn_egg": "Moobloom Spawn Egg",
   "item.earthmobsmod.horned_sheep_spawn_egg": "Horned Sheep Spawn Egg",
@@ -28,6 +30,7 @@
   "entity.earthmobsmod.lobber_zombie": "Lobber Zombie",
   "entity.earthmobsmod.viler_witch": "Viler Witch",
   "entity.earthmobsmod.smelly_egg": "Smelly Egg",
+  "entity.earthmobsmod.bone_shard": "Bone Shard",
   "fluid.earthmobsmod.mud": "Mud",
   "earthmobsmod.config.spawnEarthMobsMoobloom": "Spawn EarthMobs Moobloom"
 }
