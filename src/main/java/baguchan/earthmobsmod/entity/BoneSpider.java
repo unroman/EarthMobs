@@ -65,12 +65,12 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 				}
 
 				double d0 = this.spider.distanceToSqr(livingentity);
-				if (d0 < 4.0D) {
+				if (d0 < 12.0D) {
 					if (!flag) {
 						return;
 					}
 
-					if (this.attackTime <= 0) {
+					if (d0 < 3.5D && this.attackTime <= 0) {
 						this.attackTime = 20;
 						this.spider.doHurtTarget(livingentity);
 					}
