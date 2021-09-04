@@ -1,4 +1,4 @@
-package baguchan.earthmobsmod.entity;
+package baguchan.earthmobsmod.entity.projectile;
 
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModItems;
@@ -6,40 +6,36 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public class SmellyEgg extends ThrowableItemProjectile {
-	public SmellyEgg(EntityType<? extends SmellyEgg> p_37391_, Level p_37392_) {
+public class BoneShard extends ThrowableItemProjectile {
+	public BoneShard(EntityType<? extends BoneShard> p_37391_, Level p_37392_) {
 		super(p_37391_, p_37392_);
 	}
 
-	public SmellyEgg(Level p_37399_, LivingEntity p_37400_) {
-		super(ModEntities.SMELLY_EGG, p_37400_, p_37399_);
+	public BoneShard(Level p_37399_, LivingEntity p_37400_) {
+		super(ModEntities.BONE_SHARD, p_37400_, p_37399_);
 	}
 
-	public SmellyEgg(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
-		super(ModEntities.SMELLY_EGG, p_37395_, p_37396_, p_37397_, p_37394_);
+	public BoneShard(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
+		super(ModEntities.BONE_SHARD, p_37395_, p_37396_, p_37397_, p_37394_);
 	}
 
 	protected Item getDefaultItem() {
-		return ModItems.SMELLY_EGG;
+		return ModItems.BONE_SHARD;
 	}
 
 	private ParticleOptions getParticle() {
-		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.SMELLY_EGG.getDefaultInstance());
+		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.BONE_SHARD.getDefaultInstance());
 	}
 
 	public void handleEntityEvent(byte p_37402_) {
@@ -56,30 +52,12 @@ public class SmellyEgg extends ThrowableItemProjectile {
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), 0);
+		entity.hurt(DamageSource.thrown(this, this.getOwner()), 5);
 	}
 
 	protected void onHit(HitResult p_37488_) {
 		super.onHit(p_37488_);
 		if (!this.level.isClientSide) {
-			if (this.random.nextInt(8) == 0) {
-				int i = 1;
-				if (this.random.nextInt(32) == 0) {
-					i = 4;
-				}
-
-				for (int j = 0; j < i; ++j) {
-					CluckShroom chicken = ModEntities.CLUCK_SHROOM.create(this.level);
-					chicken.setAge(-24000);
-					chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-					this.level.addFreshEntity(chicken);
-				}
-			} else if (this.random.nextInt(3) == 0) {
-				this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, 1.0F);
-				ItemEntity chicken = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), new ItemStack(Items.RED_MUSHROOM));
-				this.level.addFreshEntity(chicken);
-			}
-
 			this.level.broadcastEntityEvent(this, (byte) 3);
 			this.discard();
 		}

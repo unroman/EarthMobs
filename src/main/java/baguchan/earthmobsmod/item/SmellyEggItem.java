@@ -1,6 +1,6 @@
 package baguchan.earthmobsmod.item;
 
-import baguchan.earthmobsmod.entity.SmellyEgg;
+import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

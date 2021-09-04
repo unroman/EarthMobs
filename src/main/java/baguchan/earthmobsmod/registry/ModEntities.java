@@ -1,7 +1,12 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.entity.*;
+import baguchan.earthmobsmod.entity.BoneSpider;
+import baguchan.earthmobsmod.entity.CluckShroom;
+import baguchan.earthmobsmod.entity.VilerWitch;
+import baguchan.earthmobsmod.entity.WoolyCow;
+import baguchan.earthmobsmod.entity.projectile.BoneShard;
+import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -26,6 +31,8 @@ public class ModEntities {
 	public static final EntityType<VilerWitch> VILER_WITCH = EntityType.Builder.of(VilerWitch::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("viler_witch"));
 
 	public static final EntityType<SmellyEgg> SMELLY_EGG = EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg"));
+	public static final EntityType<BoneShard> BONE_SHARD = EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard"));
+
 
 	private static String prefix(String path) {
 		return EarthMobsMod.MODID + "." + path;
@@ -40,6 +47,8 @@ public class ModEntities {
 		event.getRegistry().register(VILER_WITCH.setRegistryName("viler_witch"));
 
 		event.getRegistry().register(SMELLY_EGG.setRegistryName("smelly_egg"));
+		event.getRegistry().register(BONE_SHARD.setRegistryName("bone_shard"));
+
 
 		Raid.RaiderType.create("viler_witch", VILER_WITCH, new int[]{0, 0, 1, 0, 1, 1, 2, 1});
 

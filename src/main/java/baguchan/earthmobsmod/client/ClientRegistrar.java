@@ -28,6 +28,7 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.VILER_WITCH, VilerWitchRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG, ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.BONE_SHARD, ThrownItemRenderer::new);
 	}
 
 	@SubscribeEvent
