@@ -20,7 +20,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 18.0D).add(Attributes.ATTACK_DAMAGE, 3.0F).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 8.0F).add(Attributes.ARMOR_TOUGHNESS, 0.5F).add(Attributes.FOLLOW_RANGE, 18.0F);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 28.0D).add(Attributes.ATTACK_DAMAGE, 4.0F).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 8.0F).add(Attributes.FOLLOW_RANGE, 18.0F);
 	}
 
 	@Override
@@ -65,27 +65,28 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 				}
 
 				double d0 = this.spider.distanceToSqr(livingentity);
-				if (d0 < 12.0D) {
+				if (d0 < 32.0D) {
 					if (!flag) {
 						return;
 					}
+					this.attackStep = 0;
 
-					if (d0 < 3.5D && this.attackTime <= 0) {
+					if (d0 < 4.0D + this.spider.getBbWidth() && this.attackTime <= 0) {
 						this.attackTime = 20;
 						this.spider.doHurtTarget(livingentity);
 					}
 
 					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-					this.spider.getNavigation().createPath(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 10);
+					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
 				} else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
 					if (this.attackTime <= 0) {
 						++this.attackStep;
 						if (this.attackStep == 1) {
-							this.attackTime = 20;
-						} else if (this.attackStep <= 4) {
+							this.attackTime = 30;
+						} else if (this.attackStep <= 3) {
 							this.attackTime = 10;
 						} else {
-							this.attackTime = 20;
+							this.attackTime = 30;
 							this.attackStep = 0;
 						}
 
@@ -98,7 +99,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 
 					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
 				} else if (this.lastSeen < 5) {
-					this.spider.getNavigation().createPath(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 10);
+					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
 				}
 
 				super.tick();
@@ -115,7 +116,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		double d1 = p_29912_.getX() - this.getX();
 		double d2 = p_29912_.getEyeY() - this.getEyeY();
 		double d3 = p_29912_.getZ() - this.getZ();
-		bone.shoot(d1, d2, d3, 1.6F, 10.0F + p_29913_);
+		bone.shoot(d1, d2, d3, 1.4F, 2.0F + p_29913_);
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}
