@@ -120,4 +120,9 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}
+
+	@Override
+	public float getScale() {
+		return this.isBaby() ? 0.75F : 1.25F;
+	}
 }
