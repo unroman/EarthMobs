@@ -2,6 +2,7 @@ package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,11 +13,13 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.Level;
 
+import java.util.Collection;
 import java.util.EnumSet;
 
 public class BoneSpider extends Spider implements RangedAttackMob {
 	public BoneSpider(EntityType<? extends BoneSpider> p_33786_, Level p_33787_) {
 		super(p_33786_, p_33787_);
+		this.xpReward = 10;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -117,6 +120,12 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		double d2 = p_29912_.getEyeY() - this.getEyeY();
 		double d3 = p_29912_.getZ() - this.getZ();
 		bone.shoot(d1, d2, d3, 1.4F, 2.0F + p_29913_);
+		Collection<MobEffectInstance> collection = this.getActiveEffects();
+		if (!collection.isEmpty()) {
+			for (MobEffectInstance mobEffectInstance : this.getActiveEffects()) {
+				bone.addEffect(mobEffectInstance);
+			}
+		}
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}

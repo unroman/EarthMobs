@@ -1,10 +1,7 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.entity.BoneSpider;
-import baguchan.earthmobsmod.entity.CluckShroom;
-import baguchan.earthmobsmod.entity.VilerWitch;
-import baguchan.earthmobsmod.entity.WoolyCow;
+import baguchan.earthmobsmod.entity.*;
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
 import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
 import net.minecraft.world.entity.EntityType;
@@ -28,6 +25,8 @@ public class ModEntities {
 	public static final EntityType<WoolyCow> WOOLY_COW = EntityType.Builder.of(WoolyCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).build(prefix("wooly_cow"));
 
 	public static final EntityType<BoneSpider> BONE_SPIDER = EntityType.Builder.of(BoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("bone_spider"));
+	public static final EntityType<StrayBoneSpider> STRAY_BONE_SPIDER = EntityType.Builder.of(StrayBoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("stray_bone_spider"));
+
 	public static final EntityType<VilerWitch> VILER_WITCH = EntityType.Builder.of(VilerWitch::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("viler_witch"));
 
 	public static final EntityType<SmellyEgg> SMELLY_EGG = EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg"));
@@ -44,6 +43,7 @@ public class ModEntities {
 		event.getRegistry().register(WOOLY_COW.setRegistryName("wooly_cow"));
 
 		event.getRegistry().register(BONE_SPIDER.setRegistryName("bone_spider"));
+		event.getRegistry().register(STRAY_BONE_SPIDER.setRegistryName("stray_bone_spider"));
 		event.getRegistry().register(VILER_WITCH.setRegistryName("viler_witch"));
 
 		event.getRegistry().register(SMELLY_EGG.setRegistryName("smelly_egg"));
@@ -55,6 +55,7 @@ public class ModEntities {
 		SpawnPlacements.register(CLUCK_SHROOM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
 		SpawnPlacements.register(WOOLY_COW, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+		SpawnPlacements.register(STRAY_BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
 		SpawnPlacements.register(VILER_WITCH, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
 	}
 
@@ -63,6 +64,7 @@ public class ModEntities {
 		event.put(CLUCK_SHROOM, Chicken.createAttributes().build());
 		event.put(WOOLY_COW, Cow.createAttributes().build());
 		event.put(BONE_SPIDER, BoneSpider.createAttributes().build());
+		event.put(STRAY_BONE_SPIDER, BoneSpider.createAttributes().build());
 		event.put(VILER_WITCH, VilerWitch.createAttributes().build());
 	}
 }
