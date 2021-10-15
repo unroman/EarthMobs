@@ -3,6 +3,8 @@
   "block.earthmobsmod.potted_buttercup": "花瓶入りゴールデンブローム",
   "block.earthmobsmod.rainbow_wool": "虹色の羊毛",
   "block.earthmobsmod.rainbow_carpet": "虹色のカーペット",
+  "block.earthmobsmod.carved_melon": "くり抜いたスイカ",
+  "block.earthmobsmod.carved_melon_shoot": "怒った顔のスイカ",
   "item.earthmobsmod.mud_bucket": "泥バケツ",
   "item.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "item.earthmobsmod.bone_shard": "骨の破片",
@@ -31,7 +33,9 @@
   "entity.earthmobsmod.bouldering_zombie": "ボルダリングゾンビ",
   "entity.earthmobsmod.lobber_zombie": "ロバ―ゾンビ",
   "entity.earthmobsmod.viler_witch": "卑怯なウィッチ",
+  "entity.earthmobsmod.melon_golem": "スイカゴーレム",
   "entity.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "entity.earthmobsmod.bone_shard": "骨の破片",
+  "entity.earthmobsmod.melon_seeds": "スイカの種",
   "fluid.earthmobsmod.mud": "泥"
 }

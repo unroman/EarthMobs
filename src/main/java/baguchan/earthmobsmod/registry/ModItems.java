@@ -2,6 +2,8 @@ package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.item.SmellyEggItem;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -21,6 +23,21 @@ public class ModItems {
 	public static final Item BONE_SPIDER_SPAWNEGG = new SpawnEggItem(ModEntities.BONE_SPIDER, 0x461C2E, 0x6130B7, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC));
 	public static final Item STRAY_BONE_SPIDER_SPAWNEGG = new SpawnEggItem(ModEntities.STRAY_BONE_SPIDER, 0x20112F, 0x30B6B2, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC));
 	public static final Item VILER_WITCH_SPAWNEGG = new SpawnEggItem(ModEntities.VILER_WITCH, 0x111322, 0x37464D, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC));
+
+	public static void register(RegistryEvent.Register<Item> registry, Item item, String id) {
+		if (item instanceof BlockItem)
+			Item.BY_BLOCK.put(((BlockItem) item).getBlock(), item);
+		item.setRegistryName(new ResourceLocation("tofucraft", id));
+		registry.getRegistry().register(item);
+	}
+
+	public static void register(RegistryEvent.Register<Item> registry, Item item) {
+		if (item instanceof BlockItem && item.getRegistryName() == null) {
+			item.setRegistryName(((BlockItem) item).getBlock().getRegistryName());
+			Item.BY_BLOCK.put(((BlockItem) item).getBlock(), item);
+		}
+		registry.getRegistry().register(item);
+	}
 
 	@SubscribeEvent
 	public static void registerItem(RegistryEvent.Register<Item> event) {

@@ -21,12 +21,15 @@ public class ClientRegistrar {
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM, CluckShroomRender::new);
 		event.registerEntityRenderer(ModEntities.WOOLY_COW, WoolyCowRenderer::new);
+		event.registerEntityRenderer(ModEntities.MELON_GOLEM, MelonGolemRenderer::new);
+
 		event.registerEntityRenderer(ModEntities.BONE_SPIDER, BoneSpiderRender::new);
 		event.registerEntityRenderer(ModEntities.STRAY_BONE_SPIDER, StrayBoneSpiderRender::new);
 		event.registerEntityRenderer(ModEntities.VILER_WITCH, VilerWitchRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG, ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD, ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.MELON_SEED, ThrownItemRenderer::new);
 	}
 
 	@SubscribeEvent

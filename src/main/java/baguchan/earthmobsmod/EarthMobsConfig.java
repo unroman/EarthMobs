@@ -56,7 +56,7 @@ public class EarthMobsConfig {
 					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
 			boneSpiderSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.boneSpiderSpawnRate")
-					.defineInRange("Bone Spider SpawnRate", 30, 0, 1000);
+					.defineInRange("Bone Spider SpawnRate", 10, 0, 1000);
 		}
 	}
 
