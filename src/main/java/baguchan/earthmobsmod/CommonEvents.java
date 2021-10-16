@@ -1,6 +1,8 @@
 package baguchan.earthmobsmod;
 
 import baguchan.earthmobsmod.registry.ModBlocks;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +21,7 @@ public class CommonEvents {
 			itemStack.hurtAndBreak(1, event.getPlayer(), (p_29910_) -> {
 				p_29910_.broadcastBreakEvent(event.getHand());
 			});
+			event.getPlayer().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			event.getPlayer().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.defaultBlockState(), 2);
 
 			event.setUseItem(Event.Result.ALLOW);

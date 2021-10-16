@@ -14,6 +14,7 @@ import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.raid.Raid;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -25,7 +26,7 @@ public class ModEntities {
 
 	public static final EntityType<CluckShroom> CLUCK_SHROOM = EntityType.Builder.of(CluckShroom::new, MobCategory.CREATURE).sized(0.4F, 0.7F).build(prefix("cluck_shroom"));
 	public static final EntityType<WoolyCow> WOOLY_COW = EntityType.Builder.of(WoolyCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).build(prefix("wooly_cow"));
-	public static final EntityType<MelonGolem> MELON_GOLEM = EntityType.Builder.of(MelonGolem::new, MobCategory.CREATURE).sized(0.7F, 1.9F).build(prefix("melon_golem"));
+	public static final EntityType<MelonGolem> MELON_GOLEM = EntityType.Builder.of(MelonGolem::new, MobCategory.MISC).sized(0.7F, 1.9F).immuneTo(Blocks.POWDER_SNOW).build(prefix("melon_golem"));
 
 
 	public static final EntityType<BoneSpider> BONE_SPIDER = EntityType.Builder.of(BoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("bone_spider"));

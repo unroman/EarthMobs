@@ -219,15 +219,17 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 
 		public boolean canUse() {
 			LivingEntity livingentity = this.golem.getTarget();
-			return livingentity != null && livingentity.isAlive() && this.golem.canAttack(livingentity);
+			return livingentity != null && livingentity.isAlive() && this.golem.canAttack(livingentity) && this.lastSeen < 200;
 		}
 
 		public void start() {
 			this.attackStep = 0;
+			this.golem.setAggressive(true);
 		}
 
 		public void stop() {
 			this.lastSeen = 0;
+			this.golem.setAggressive(false);
 		}
 
 		public void tick() {
@@ -247,7 +249,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 						++this.attackStep;
 						if (this.attackStep == 1) {
 							this.attackTime = 20;
-						} else if (this.attackStep <= 4) {
+						} else if (this.attackStep <= 5) {
 							this.attackTime = 6;
 						} else {
 							this.attackTime = 20;
@@ -262,8 +264,11 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 					}
 
 					this.golem.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-				} else if (this.lastSeen < 5) {
+				}
+				if (d0 >= 10F * 10F && d0 < this.getFollowDistance() * this.getFollowDistance() && flag || this.lastSeen >= 5) {
 					this.golem.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
+				} else {
+					this.golem.getNavigation().stop();
 				}
 
 				super.tick();
