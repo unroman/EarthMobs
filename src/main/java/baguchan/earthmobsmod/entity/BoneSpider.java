@@ -101,6 +101,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 					}
 
 					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
+					this.spider.getNavigation().stop();
 				} else if (this.lastSeen < 5) {
 					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
 				}
