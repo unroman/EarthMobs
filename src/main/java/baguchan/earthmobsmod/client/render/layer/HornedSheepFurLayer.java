@@ -1,11 +1,11 @@
 package baguchan.earthmobsmod.client.render.layer;
 
+import baguchan.earthmobsmod.client.model.HornedSheepFurModel;
 import baguchan.earthmobsmod.client.model.HornedSheepModel;
 import baguchan.earthmobsmod.entity.HornedSheep;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.SheepFurModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,11 +22,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HornedSheepFurLayer extends RenderLayer<HornedSheep, HornedSheepModel<HornedSheep>> {
 	private static final ResourceLocation SHEEP_FUR_LOCATION = new ResourceLocation("textures/entity/sheep/sheep_fur.png");
-	private final SheepFurModel<HornedSheep> model;
+	private final HornedSheepFurModel<HornedSheep> model;
 
 	public HornedSheepFurLayer(RenderLayerParent<HornedSheep, HornedSheepModel<HornedSheep>> p_174533_, EntityModelSet p_174534_) {
 		super(p_174533_);
-		this.model = new SheepFurModel<>(p_174534_.bakeLayer(ModelLayers.SHEEP_FUR));
+		this.model = new HornedSheepFurModel<>(p_174534_.bakeLayer(ModelLayers.SHEEP_FUR));
 	}
 
 	public void render(PoseStack p_117421_, MultiBufferSource p_117422_, int p_117423_, HornedSheep p_117424_, float p_117425_, float p_117426_, float p_117427_, float p_117428_, float p_117429_, float p_117430_) {

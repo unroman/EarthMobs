@@ -22,6 +22,11 @@ public class HornedSheep extends Sheep {
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
 	}
 
+	public void aiStep() {
+		this.updateSwingTime();
+		super.aiStep();
+	}
+
 	public static AttributeSupplier.Builder createAttributes() {
 		return Sheep.createAttributes().add(Attributes.ATTACK_DAMAGE, 4.0D).add(Attributes.ATTACK_KNOCKBACK, (double) 0.5F);
 	}
