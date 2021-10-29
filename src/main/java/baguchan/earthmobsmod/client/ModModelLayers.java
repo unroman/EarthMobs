@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModModelLayers {
 	public static ModelLayerLocation CLUCK_SHROOM = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "cluck_shroom"), "cluck_shroom");
 	public static ModelLayerLocation WOOLY_COW = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "wooly_cow"), "wooly_cow");
+	public static ModelLayerLocation HORNED_SHEEP = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "horned_sheep"), "horned_sheep");
 
 	public static ModelLayerLocation BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bone_spider"), "bone_spider");
 	public static ModelLayerLocation STRAY_BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "stray_bone_spider"), "stray_bone_spider");

@@ -26,6 +26,8 @@ public class ModEntities {
 
 	public static final EntityType<CluckShroom> CLUCK_SHROOM = EntityType.Builder.of(CluckShroom::new, MobCategory.CREATURE).sized(0.4F, 0.7F).build(prefix("cluck_shroom"));
 	public static final EntityType<WoolyCow> WOOLY_COW = EntityType.Builder.of(WoolyCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).build(prefix("wooly_cow"));
+	public static final EntityType<HornedSheep> HORNED_SHEEP = EntityType.Builder.of(HornedSheep::new, MobCategory.CREATURE).sized(0.9F, 1.3F).build(prefix("horned_sheep"));
+
 	public static final EntityType<MelonGolem> MELON_GOLEM = EntityType.Builder.of(MelonGolem::new, MobCategory.MISC).sized(0.7F, 1.9F).immuneTo(Blocks.POWDER_SNOW).build(prefix("melon_golem"));
 
 
@@ -47,6 +49,7 @@ public class ModEntities {
 	public static void registerEntity(RegistryEvent.Register<EntityType<?>> event) {
 		event.getRegistry().register(CLUCK_SHROOM.setRegistryName("cluck_shroom"));
 		event.getRegistry().register(WOOLY_COW.setRegistryName("wooly_cow"));
+		event.getRegistry().register(HORNED_SHEEP.setRegistryName("horned_sheep"));
 		event.getRegistry().register(MELON_GOLEM.setRegistryName("melon_golem"));
 
 
@@ -63,6 +66,7 @@ public class ModEntities {
 
 		SpawnPlacements.register(CLUCK_SHROOM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
 		SpawnPlacements.register(WOOLY_COW, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(HORNED_SHEEP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(MELON_GOLEM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
 		SpawnPlacements.register(BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
 		SpawnPlacements.register(STRAY_BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
@@ -73,6 +77,7 @@ public class ModEntities {
 	public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
 		event.put(CLUCK_SHROOM, Chicken.createAttributes().build());
 		event.put(WOOLY_COW, Cow.createAttributes().build());
+		event.put(HORNED_SHEEP, HornedSheep.createAttributes().build());
 		event.put(MELON_GOLEM, MelonGolem.createAttributes().build());
 		event.put(BONE_SPIDER, BoneSpider.createAttributes().build());
 		event.put(STRAY_BONE_SPIDER, BoneSpider.createAttributes().build());

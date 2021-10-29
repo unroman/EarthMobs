@@ -1,10 +1,7 @@
 package baguchan.earthmobsmod.client;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.client.model.BoneSpiderModel;
-import baguchan.earthmobsmod.client.model.CluckShroomModel;
-import baguchan.earthmobsmod.client.model.VilerWitchModel;
-import baguchan.earthmobsmod.client.model.WoolyCowModel;
+import baguchan.earthmobsmod.client.model.*;
 import baguchan.earthmobsmod.client.render.*;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -21,6 +18,7 @@ public class ClientRegistrar {
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM, CluckShroomRender::new);
 		event.registerEntityRenderer(ModEntities.WOOLY_COW, WoolyCowRenderer::new);
+		event.registerEntityRenderer(ModEntities.HORNED_SHEEP, HornedSheepRenderer::new);
 		event.registerEntityRenderer(ModEntities.MELON_GOLEM, MelonGolemRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.BONE_SPIDER, BoneSpiderRender::new);
@@ -36,6 +34,7 @@ public class ClientRegistrar {
 	public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(ModModelLayers.CLUCK_SHROOM, CluckShroomModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.WOOLY_COW, WoolyCowModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP, HornedSheepModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);
