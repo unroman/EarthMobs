@@ -124,7 +124,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		Collection<MobEffectInstance> collection = this.getActiveEffects();
 		if (!collection.isEmpty()) {
 			for (MobEffectInstance mobEffectInstance : this.getActiveEffects()) {
-				bone.addEffect(mobEffectInstance);
+				bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), 200, 0));
 			}
 		}
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));

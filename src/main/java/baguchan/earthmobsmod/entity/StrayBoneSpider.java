@@ -24,8 +24,8 @@ public class StrayBoneSpider extends BoneSpider {
 
 		Collection<MobEffectInstance> collection = this.getActiveEffects();
 		if (!collection.isEmpty()) {
-			for (MobEffectInstance mobEffectInstance : collection) {
-				bone.addEffect(mobEffectInstance);
+			for (MobEffectInstance mobEffectInstance : this.getActiveEffects()) {
+				bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), 200, 0));
 			}
 		}
 		bone.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
