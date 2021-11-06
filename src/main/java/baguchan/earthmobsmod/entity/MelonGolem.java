@@ -83,6 +83,11 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 		return true;
 	}
 
+	public boolean canAttackType(EntityType<?> p_28851_) {
+		return p_28851_ == EntityType.CREEPER ? false : super.canAttackType(p_28851_);
+
+	}
+
 	public void aiStep() {
 		super.aiStep();
 		if (!this.level.isClientSide) {
