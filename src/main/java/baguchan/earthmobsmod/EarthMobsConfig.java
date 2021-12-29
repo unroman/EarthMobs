@@ -69,7 +69,7 @@ public class EarthMobsConfig {
 			hyperRabbitSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.hyperRabbitSpawnRate")
 					.comment("Changed Hyper Rabbit SpawnRate. [0 ~ 100]")
-					.defineInRange("Hyper Rabbit SpawnRate", 10, 0, 100);
+					.defineInRange("Hyper Rabbit SpawnRate", 5, 0, 100);
 			boneSpiderSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.boneSpiderSpawnRate")
 					.comment("Changed Bone Spider SpawnRate. [0 ~ 1000]")
