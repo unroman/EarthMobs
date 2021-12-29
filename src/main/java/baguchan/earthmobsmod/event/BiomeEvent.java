@@ -35,9 +35,11 @@ public class BiomeEvent {
 				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP, EarthMobsConfig.hornedSheepSpawnRate, 3, 6));
 			}
 
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && (
-					BiomeDictionary.hasType(biome, BiomeDictionary.Type.SPOOKY)) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
-				event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BONE_SPIDER, EarthMobsConfig.boneSpiderSpawnRate, 2, 3));
+			if (EarthMobsConfig.boneSpiderSpawnRate > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && (
+						BiomeDictionary.hasType(biome, BiomeDictionary.Type.SPOOKY)) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BONE_SPIDER, EarthMobsConfig.boneSpiderSpawnRate, 2, 3));
+				}
 			}
 		}
 	}

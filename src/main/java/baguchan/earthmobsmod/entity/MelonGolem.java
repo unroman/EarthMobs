@@ -94,7 +94,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 			int i = Mth.floor(this.getX());
 			int j = Mth.floor(this.getY());
 			int k = Mth.floor(this.getZ());
-			if (this.level.getBiome(new BlockPos(i, 0, k)).getTemperature(new BlockPos(i, j, k)) > 1.0F) {
+			if (this.level.getBiome(new BlockPos(i, 0, k)).getBaseTemperature() > 1.0F) {
 				this.hurt(DamageSource.ON_FIRE, 1.0F);
 			}
 
@@ -109,7 +109,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 				j = Mth.floor(this.getY());
 				k = Mth.floor(this.getZ() + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 				BlockPos blockpos = new BlockPos(i, j, k);
-				if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getTemperature(blockpos) < 0.8F && blockstate.canSurvive(this.level, blockpos)) {
+				if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos)) {
 					this.level.setBlockAndUpdate(blockpos, blockstate);
 				}
 			}
