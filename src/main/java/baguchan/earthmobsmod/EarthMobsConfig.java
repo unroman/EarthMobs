@@ -53,15 +53,19 @@ public class EarthMobsConfig {
 		public Common(ForgeConfigSpec.Builder builder) {
 			woolyCowSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.woolyCowSpawnRate")
+					.comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
 					.defineInRange("Wooly cow SpawnRate", 10, 0, 100);
 			cluckshroomSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.cluckshroomSpawnRate")
+					.comment("Changed Cluckshroom SpawnRate. [0 ~ 100]")
 					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
 			hornedSheepSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.hornedSheepSpawnRate")
+					.comment("Changed Horned SpawnRate. [0 ~ 100]")
 					.defineInRange("Horned SpawnRate", 10, 0, 100);
 			boneSpiderSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.boneSpiderSpawnRate")
+					.comment("Changed Bone Spider SpawnRate. [0 ~ 1000]")
 					.defineInRange("Bone Spider SpawnRate", 10, 0, 1000);
 		}
 	}

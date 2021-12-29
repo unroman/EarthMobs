@@ -1,11 +1,19 @@
 package baguchan.earthmobsmod;
 
+import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.registry.ModBlocks;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,6 +21,17 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = EarthMobsMod.MODID)
 public class CommonEvents {
+	@SubscribeEvent
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.register(ShadowCapability.class);
+	}
+
+	@SubscribeEvent
+	public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof LivingEntity) {
+			event.addCapability(new ResourceLocation(EarthMobsMod.MODID, "shadow"), new ShadowCapability());
+		}
+	}
 
 	@SubscribeEvent
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -26,5 +45,22 @@ public class CommonEvents {
 
 			event.setUseItem(Event.Result.ALLOW);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onUpdate(LivingEvent.LivingUpdateEvent event) {
+		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
+			shadowCapability.tick(event.getEntityLiving());
+		});
+	}
+
+	@SubscribeEvent
+	public static void onDamaged(LivingDamageEvent event) {
+		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
+			if (shadowCapability.getPercentBoost() >= 0.65F) {
+				event.setAmount(0.0F);
+				event.setCanceled(true);
+			}
+		});
 	}
 }

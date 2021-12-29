@@ -1,6 +1,10 @@
 package baguchan.earthmobsmod;
 
+import baguchan.earthmobsmod.capability.ShadowCapability;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -17,6 +21,9 @@ public class EarthMobsMod {
 	public static final String MODID = "earthmobsmod";
 	// Directly reference a log4j logger.
 	private static final Logger LOGGER = LogManager.getLogger(MODID);
+
+	public static Capability<ShadowCapability> SHADOW_CAP = CapabilityManager.get(new CapabilityToken<>() {
+	});
 
 	public EarthMobsMod() {
 		// Register the setup method for modloading

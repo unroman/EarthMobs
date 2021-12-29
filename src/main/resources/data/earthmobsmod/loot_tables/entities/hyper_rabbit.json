@@ -12,8 +12,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 5.0
+                "min": 0.0,
+                "max": 1.0
               },
               "add": false
             },
@@ -26,7 +26,7 @@
               }
             }
           ],
-          "name": "minecraft:string"
+          "name": "minecraft:rabbit_hide"
         }
       ]
     },
@@ -41,10 +41,24 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 6.0
+                "min": 0.0,
+                "max": 1.0
               },
               "add": false
+            },
+            {
+              "function": "minecraft:furnace_smelt",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "flags": {
+                      "is_on_fire": true
+                    }
+                  },
+                  "entity": "this"
+                }
+              ]
             },
             {
               "function": "minecraft:looting_enchant",
@@ -55,7 +69,7 @@
               }
             }
           ],
-          "name": "earthmobsmod:bone_shard"
+          "name": "minecraft:rabbit"
         }
       ]
     },
@@ -65,31 +79,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": -1.0,
-                "max": 1.0
-              },
-              "add": false
-            },
-            {
-              "function": "minecraft:looting_enchant",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 0.0,
-                "max": 1.0
-              }
-            }
-          ],
-          "name": "earthmobsmod:bone_spider_eye"
+          "name": "earthmobsmod:hyper_rabbit_foot"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:killed_by_player"
+        },
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.1,
+          "looting_multiplier": 0.03
         }
       ]
     }

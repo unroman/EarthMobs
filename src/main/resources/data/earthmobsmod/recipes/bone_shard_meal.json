@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "bonemeal",
   "ingredients": [
     {
@@ -8,6 +8,6 @@
   ],
   "result": {
     "item": "minecraft:bone_meal",
-    "count": 1
+    "count": 2
   }
 }

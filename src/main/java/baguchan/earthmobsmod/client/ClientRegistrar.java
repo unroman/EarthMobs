@@ -19,6 +19,7 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM, CluckShroomRender::new);
 		event.registerEntityRenderer(ModEntities.WOOLY_COW, WoolyCowRenderer::new);
 		event.registerEntityRenderer(ModEntities.HORNED_SHEEP, HornedSheepRenderer::new);
+		event.registerEntityRenderer(ModEntities.HYPER_RABBIT, HyperRabbitRenderer::new);
 		event.registerEntityRenderer(ModEntities.MELON_GOLEM, MelonGolemRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.BONE_SPIDER, BoneSpiderRender::new);
@@ -36,6 +37,7 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.WOOLY_COW, WoolyCowModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP, HornedSheepModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP_FUR, HornedSheepModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.HYPER_RABBIT, HyperRabbitModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);

@@ -9,6 +9,7 @@ public class ModModelLayers {
 	public static ModelLayerLocation WOOLY_COW = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "wooly_cow"), "wooly_cow");
 	public static ModelLayerLocation HORNED_SHEEP = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "horned_sheep"), "horned_sheep");
 	public static ModelLayerLocation HORNED_SHEEP_FUR = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "horned_sheep_fur"), "horned_sheep_fur");
+	public static ModelLayerLocation HYPER_RABBIT = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "hyper_rabbit"), "hyper_rabbit");
 
 
 	public static ModelLayerLocation BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bone_spider"), "bone_spider");
