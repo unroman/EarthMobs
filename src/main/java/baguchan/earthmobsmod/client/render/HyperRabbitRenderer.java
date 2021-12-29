@@ -4,6 +4,7 @@ import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.client.ModModelLayers;
 import baguchan.earthmobsmod.client.model.HyperRabbitModel;
 import baguchan.earthmobsmod.entity.HyperRabbit;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -12,14 +13,34 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class HyperRabbitRenderer<T extends HyperRabbit> extends MobRenderer<T, HyperRabbitModel<T>> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/hyper_rabbit.png");
+	private static final ResourceLocation RABBIT_BROWN_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/brown.png");
+	private static final ResourceLocation RABBIT_WHITE_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/white.png");
+	private static final ResourceLocation RABBIT_GOLD_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/gold.png");
+	private static final ResourceLocation RABBIT_SA_X_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/sa_x.png");
 
 	public HyperRabbitRenderer(EntityRendererProvider.Context p_173952_) {
 		super(p_173952_, new HyperRabbitModel<>(p_173952_.bakeLayer(ModModelLayers.HYPER_RABBIT)), 0.3F);
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(T p_110775_1_) {
-		return TEXTURE;
+	public ResourceLocation getTextureLocation(T p_115803_) {
+		String s = ChatFormatting.stripFormatting(p_115803_.getName().getString());
+
+		switch (p_115803_.getRabbitType()) {
+			case 0:
+			default:
+				return RABBIT_BROWN_LOCATION;
+			case 1:
+				return RABBIT_WHITE_LOCATION;
+			case 2:
+				return RABBIT_GOLD_LOCATION;
+			case 99:
+				return RABBIT_SA_X_LOCATION;
+		}
+	}
+
+	@Override
+	protected boolean isShaking(T p_115304_) {
+		return super.isShaking(p_115304_) || p_115304_.isSpark();
 	}
 }

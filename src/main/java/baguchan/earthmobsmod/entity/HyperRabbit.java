@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -43,6 +44,21 @@ public class HyperRabbit extends Rabbit {
 	@Override
 	public Rabbit getBreedOffspring(ServerLevel p_149035_, AgeableMob p_149036_) {
 		return ModEntities.HYPER_RABBIT.create(p_149035_);
+	}
+
+	@Override
+	public void setRabbitType(int p_29734_) {
+		if (p_29734_ > 2 && p_29734_ != 99) {
+			p_29734_ = 0;
+		}
+
+
+		super.setRabbitType(p_29734_);
+
+		if (p_29734_ == 99 && !this.hasCustomName()) {
+			this.setCustomName(new TextComponent("SA_X"));
+			this.setSpark(true);
+		}
 	}
 
 	@Override
