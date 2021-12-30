@@ -56,7 +56,7 @@ public class HyperRabbitModel<T extends HyperRabbit> extends EntityModel<T> {
 		PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(16, 3).addBox(3.0F, -6.5F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 3).addBox(-4.0F, -4.5F, 2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 3).addBox(-4.0F, -6.5F, 4.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 10).addBox(-3.0F, -7.0F, -2.0F, 6.0F, 5.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 5.0F, -8.0F));
+				.texOffs(0, 10).addBox(-3.0F, -7.0F, -2.0F, 6.0F, 5.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, -12.0F, -0.6109F, 0.0F, 0.0F));
 
 		PartDefinition tail = torso.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(22, 10).addBox(-1.5F, 0.0F, 1.0F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(35, 10).addBox(-1.5F, -1.0F, 1.0F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -9.0F, 3.0F));
@@ -75,17 +75,17 @@ public class HyperRabbitModel<T extends HyperRabbit> extends EntityModel<T> {
 				.texOffs(30, 24).addBox(-1.0F, -2.0F, 3.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, -1.5F, -4.3F));
 
 		PartDefinition frontLegLeft = body.addOrReplaceChild("frontLegLeft", CubeListBuilder.create().texOffs(8, 35).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F))
-				.texOffs(61, 0).addBox(1.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -2.0F, -9.0F));
+				.texOffs(61, 0).addBox(1.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -5.0F, -9.0F, -0.6109F, 0.0F, 0.0F));
 
 		PartDefinition frontLegRight = body.addOrReplaceChild("frontLegRight", CubeListBuilder.create().texOffs(0, 35).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F))
-				.texOffs(61, 0).addBox(-1.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -2.0F, -9.0F));
+				.texOffs(61, 0).addBox(-1.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -5.0F, -9.0F, -0.6109F, 0.0F, 0.0F));
 
 		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -5.0F, -5.0F, 5.0F, 5.0F, 5.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 1).addBox(2.5F, -2.0F, -5.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 3).addBox(-3.5F, -3.5F, -3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 3).addBox(-3.5F, -4.5F, -1.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
 				.texOffs(16, 3).addBox(2.5F, -4.5F, -3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-				.texOffs(16, 3).addBox(0.5F, -6.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.0F, -9.0F));
+				.texOffs(16, 3).addBox(0.5F, -6.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.0F, -10.0F));
 
 		PartDefinition head_r1 = head.addOrReplaceChild("head_r1", CubeListBuilder.create().texOffs(39, 5).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, -5.0F, -4.0F, 0.2618F, 0.0F, 0.0F));
 
@@ -113,41 +113,19 @@ public class HyperRabbitModel<T extends HyperRabbit> extends EntityModel<T> {
 		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
 
 		this.jumpRotation = Mth.sin(entity.getJumpCompletion(f) * (float) Math.PI);
-		this.haunchLeft.xRot = (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
-		this.haunchRight.xRot = (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
+		this.haunchLeft.xRot = -0.6109F + (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
+		this.haunchRight.xRot = -0.6109F + (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
 		this.rearFootLeft.xRot = this.jumpRotation * 50.0F * ((float) Math.PI / 180F);
 		this.rearFootRight.xRot = this.jumpRotation * 50.0F * ((float) Math.PI / 180F);
-		this.frontLegLeft.xRot = (this.jumpRotation * -40.0F - 11.0F) * ((float) Math.PI / 180F);
-		this.frontLegRight.xRot = (this.jumpRotation * -40.0F - 11.0F) * ((float) Math.PI / 180F);
+		this.frontLegLeft.xRot = -0.6109F + (this.jumpRotation * -29.0F) * ((float) Math.PI / 180F);
+		this.frontLegRight.xRot = -0.6109F + (this.jumpRotation * -29.0F) * ((float) Math.PI / 180F);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack p_103555_, VertexConsumer p_103556_, int p_103557_, int p_103558_, float p_103559_, float p_103560_, float p_103561_, float p_103562_) {
-		if (this.young) {
-			float f = 1.5F;
-			p_103555_.pushPose();
-			p_103555_.scale(0.56666666F, 0.56666666F, 0.56666666F);
-			p_103555_.translate(0.0D, 1.375D, 0.125D);
-			ImmutableList.of(this.head, this.earLeft, this.earRight, this.nose).forEach((p_103597_) -> {
-				p_103597_.render(p_103555_, p_103556_, p_103557_, p_103558_, p_103559_, p_103560_, p_103561_, p_103562_);
-			});
-			p_103555_.popPose();
-			p_103555_.pushPose();
-			p_103555_.scale(0.4F, 0.4F, 0.4F);
-			p_103555_.translate(0.0D, 2.25D, 0.0D);
-			ImmutableList.of(this.rearFootLeft, this.rearFootRight, this.haunchLeft, this.haunchRight, this.body, this.frontLegLeft, this.frontLegRight, this.tail).forEach((p_103587_) -> {
-				p_103587_.render(p_103555_, p_103556_, p_103557_, p_103558_, p_103559_, p_103560_, p_103561_, p_103562_);
-			});
-			p_103555_.popPose();
-		} else {
-			p_103555_.pushPose();
-			p_103555_.scale(0.6F, 0.6F, 0.6F);
-			p_103555_.translate(0.0D, 1.0D, 0.0D);
-			ImmutableList.of(this.rearFootLeft, this.rearFootRight, this.haunchLeft, this.haunchRight, this.body, this.frontLegLeft, this.frontLegRight, this.head, this.earRight, this.earLeft, this.tail, this.nose).forEach((p_103572_) -> {
-				p_103572_.render(p_103555_, p_103556_, p_103557_, p_103558_, p_103559_, p_103560_, p_103561_, p_103562_);
-			});
-			p_103555_.popPose();
-		}
+		ImmutableList.of(this.body).forEach((p_103597_) -> {
+			p_103597_.render(p_103555_, p_103556_, p_103557_, p_103558_, p_103559_, p_103560_, p_103561_, p_103562_);
+		});
 
 	}
 }

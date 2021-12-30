@@ -99,6 +99,10 @@ public class ClientEvents {
 				}
 
 				posestack.scale(-1.0F, -1.0F, 1.0F);
+				if (entity instanceof HyperRabbit) {
+					float scale = entity.isBaby() ? 0.4F : 0.6F;
+					posestack.scale(scale, scale, scale);
+				}
 				posestack.translate(0.0F, (double) -1.501F, 0.0F);
 
 
@@ -158,6 +162,10 @@ public class ClientEvents {
 				}
 
 				posestack.scale(-1.0F, -1.0F, 1.0F);
+				if (entity instanceof HyperRabbit) {
+					float scale = entity.isBaby() ? 0.4F : 0.6F;
+					posestack.scale(scale, scale, scale);
+				}
 				posestack.translate(0.0F, (double) -1.501F, 0.0F);
 
 

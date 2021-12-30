@@ -53,12 +53,11 @@ public class HyperRabbit extends Rabbit {
 		}
 
 
-		super.setRabbitType(p_29734_);
-
 		if (p_29734_ == 99 && !this.hasCustomName()) {
-			this.setCustomName(new TextComponent("SA_X"));
+			this.setCustomName(new TextComponent("HR_X"));
 			this.setSpark(true);
 		}
+		super.setRabbitType(p_29734_);
 	}
 
 	@Override
@@ -91,10 +90,11 @@ public class HyperRabbit extends Rabbit {
 			boolean flag = livingentity.isDamageSourceBlocked(DamageSource.mobAttack(this));
 			float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
 			float f2 = flag ? 0.25F : 1.0F;
+			int i = getRabbitType() == 99 ? 2 : 1;
 			double d1 = this.getX() - livingentity.getX();
 			double d2 = this.getZ() - livingentity.getZ();
 			if (!flag) {
-				if (livingentity.hurt(DamageSource.mobAttack(this), 3.0F)) {
+				if (livingentity.hurt(DamageSource.mobAttack(this), 3.0F * i)) {
 					this.playSound(SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 					this.doEnchantDamageEffects(this, livingentity);
 					livingentity.knockback(f2 * f1, d1, d2);
