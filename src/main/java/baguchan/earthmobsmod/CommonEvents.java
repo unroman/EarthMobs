@@ -57,7 +57,7 @@ public class CommonEvents {
 	@SubscribeEvent
 	public static void onDamaged(LivingDamageEvent event) {
 		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
-			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().isExplosion() && !event.getSource().isBypassArmor()) {
+			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().isFire() && !event.getSource().isExplosion() && !event.getSource().isBypassArmor()) {
 				event.setAmount(event.getAmount() / (1.1F - shadowCapability.getPercentBoost()));
 				event.setCanceled(true);
 			}
