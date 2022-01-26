@@ -24,7 +24,6 @@ import java.util.UUID;
 
 public class ShadowCapability implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 	private static final UUID SPEED_MODIFIER_BOOST_UUID = UUID.fromString("a4be9598-fd19-8c8b-7e3d-142defd78b7c");
-	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_BOOST_UUID = UUID.fromString("14a625c7-7e50-9e29-0165-b8017f41fdbb");
 	public float prevShadowX;
 	public float prevShadowY;
 	public float prevShadowZ;
@@ -102,14 +101,6 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 			}
 
 		}
-
-		AttributeInstance attributeinstance2 = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-		if (attributeinstance2 != null) {
-			if (attributeinstance2.getModifier(KNOCKBACK_RESISTANCE_MODIFIER_BOOST_UUID) != null) {
-				attributeinstance2.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER_BOOST_UUID);
-			}
-
-		}
 	}
 
 	protected void tryAddBooster(LivingEntity entity) {
@@ -135,16 +126,6 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 
 			float f = 0.15F * percentBoost;
 			attributeinstance.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_BOOST_UUID, "Spark Boost", (double) f, AttributeModifier.Operation.ADDITION));
-		}
-
-		if (percentBoost > 0) {
-			AttributeInstance attributeinstance = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-			if (attributeinstance == null) {
-				return;
-			}
-
-			float f = 0.4F * percentBoost;
-			attributeinstance.addTransientModifier(new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_BOOST_UUID, "Spark KnockBack Resistance Boost", (double) f, AttributeModifier.Operation.ADDITION));
 		}
 	}
 
