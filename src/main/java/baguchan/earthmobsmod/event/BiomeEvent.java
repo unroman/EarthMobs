@@ -22,27 +22,27 @@ public class BiomeEvent {
 			ResourceKey<Biome> biome = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
 
 			if (event.getName().toString().contains("minecraft:mushroom_fields") || event.getName().toString().contains("minecraft:mushroom_field_shore")) {
-				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.CLUCK_SHROOM, EarthMobsConfig.cluckshroomSpawnRate, 2, 3));
+				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.CLUCK_SHROOM.get(), EarthMobsConfig.cluckshroomSpawnRate, 2, 3));
 			}
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && (
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
-				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW, EarthMobsConfig.woolyCowSpawnRate, 3, 6));
+				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.woolyCowSpawnRate, 3, 6));
 			}
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
-				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP, EarthMobsConfig.hornedSheepSpawnRate, 3, 6));
+				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP.get(), EarthMobsConfig.hornedSheepSpawnRate, 3, 6));
 			}
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS))) {
-				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HYPER_RABBIT, EarthMobsConfig.hyperRabbitSpawnRate, 3, 4));
+				event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HYPER_RABBIT.get(), EarthMobsConfig.hyperRabbitSpawnRate, 3, 4));
 			}
 
 			if (EarthMobsConfig.boneSpiderSpawnRate > 0) {
 				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && (
 						BiomeDictionary.hasType(biome, BiomeDictionary.Type.SPOOKY)) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
-					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BONE_SPIDER, EarthMobsConfig.boneSpiderSpawnRate, 2, 3));
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BONE_SPIDER.get(), EarthMobsConfig.boneSpiderSpawnRate, 2, 3));
 				}
 			}
 		}

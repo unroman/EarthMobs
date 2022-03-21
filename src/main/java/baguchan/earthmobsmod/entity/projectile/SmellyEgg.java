@@ -28,19 +28,19 @@ public class SmellyEgg extends ThrowableItemProjectile {
 	}
 
 	public SmellyEgg(Level p_37399_, LivingEntity p_37400_) {
-		super(ModEntities.SMELLY_EGG, p_37400_, p_37399_);
+		super(ModEntities.SMELLY_EGG.get(), p_37400_, p_37399_);
 	}
 
 	public SmellyEgg(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
-		super(ModEntities.SMELLY_EGG, p_37395_, p_37396_, p_37397_, p_37394_);
+		super(ModEntities.SMELLY_EGG.get(), p_37395_, p_37396_, p_37397_, p_37394_);
 	}
 
 	protected Item getDefaultItem() {
-		return ModItems.SMELLY_EGG;
+		return ModItems.SMELLY_EGG.get();
 	}
 
 	private ParticleOptions getParticle() {
-		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.SMELLY_EGG.getDefaultInstance());
+		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.SMELLY_EGG.get().getDefaultInstance());
 	}
 
 	public void handleEntityEvent(byte p_37402_) {
@@ -70,7 +70,7 @@ public class SmellyEgg extends ThrowableItemProjectile {
 				}
 
 				for (int j = 0; j < i; ++j) {
-					CluckShroom chicken = ModEntities.CLUCK_SHROOM.create(this.level);
+					CluckShroom chicken = ModEntities.CLUCK_SHROOM.get().create(this.level);
 					chicken.setAge(-24000);
 					chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 					this.level.addFreshEntity(chicken);

@@ -16,76 +16,61 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
+	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, EarthMobsMod.MODID);
 
-	public static final EntityType<CluckShroom> CLUCK_SHROOM = EntityType.Builder.of(CluckShroom::new, MobCategory.CREATURE).sized(0.4F, 0.7F).clientTrackingRange(10).build(prefix("cluck_shroom"));
-	public static final EntityType<WoolyCow> WOOLY_COW = EntityType.Builder.of(WoolyCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).build(prefix("wooly_cow"));
-	public static final EntityType<HornedSheep> HORNED_SHEEP = EntityType.Builder.of(HornedSheep::new, MobCategory.CREATURE).sized(0.9F, 1.3F).clientTrackingRange(10).build(prefix("horned_sheep"));
-	public static final EntityType<HyperRabbit> HYPER_RABBIT = EntityType.Builder.of(HyperRabbit::new, MobCategory.CREATURE).sized(0.4F, 0.6F).clientTrackingRange(8).build(prefix("hyper_rabbit"));
-
-
-	public static final EntityType<MelonGolem> MELON_GOLEM = EntityType.Builder.of(MelonGolem::new, MobCategory.MISC).sized(0.7F, 1.9F).immuneTo(Blocks.POWDER_SNOW).clientTrackingRange(8).build(prefix("melon_golem"));
+	public static final RegistryObject<EntityType<CluckShroom>> CLUCK_SHROOM = ENTITIES.register("cluck_shroom", () -> EntityType.Builder.of(CluckShroom::new, MobCategory.CREATURE).sized(0.4F, 0.7F).clientTrackingRange(10).build(prefix("cluck_shroom")));
+	public static final RegistryObject<EntityType<WoolyCow>> WOOLY_COW = ENTITIES.register("wooly_cow", () -> EntityType.Builder.of(WoolyCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).build(prefix("wooly_cow")));
+	public static final RegistryObject<EntityType<HornedSheep>> HORNED_SHEEP = ENTITIES.register("horned_sheep", () -> EntityType.Builder.of(HornedSheep::new, MobCategory.CREATURE).sized(0.9F, 1.3F).clientTrackingRange(10).build(prefix("horned_sheep")));
+	public static final RegistryObject<EntityType<HyperRabbit>> HYPER_RABBIT = ENTITIES.register("hyper_rabbit", () -> EntityType.Builder.of(HyperRabbit::new, MobCategory.CREATURE).sized(0.4F, 0.6F).clientTrackingRange(8).build(prefix("hyper_rabbit")));
 
 
-	public static final EntityType<BoneSpider> BONE_SPIDER = EntityType.Builder.of(BoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("bone_spider"));
-	public static final EntityType<StrayBoneSpider> STRAY_BONE_SPIDER = EntityType.Builder.of(StrayBoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("stray_bone_spider"));
+	public static final RegistryObject<EntityType<MelonGolem>> MELON_GOLEM = ENTITIES.register("melon_golem", () -> EntityType.Builder.of(MelonGolem::new, MobCategory.MISC).sized(0.7F, 1.9F).immuneTo(Blocks.POWDER_SNOW).clientTrackingRange(8).build(prefix("melon_golem")));
 
-	public static final EntityType<VilerWitch> VILER_WITCH = EntityType.Builder.of(VilerWitch::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("viler_witch"));
 
-	public static final EntityType<SmellyEgg> SMELLY_EGG = EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg"));
-	public static final EntityType<BoneShard> BONE_SHARD = EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard"));
-	public static final EntityType<MelonSeed> MELON_SEED = EntityType.Builder.<MelonSeed>of(MelonSeed::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("melon_seeds"));
+	public static final RegistryObject<EntityType<BoneSpider>> BONE_SPIDER = ENTITIES.register("bone_spider", () -> EntityType.Builder.of(BoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("bone_spider")));
+	public static final RegistryObject<EntityType<StrayBoneSpider>> STRAY_BONE_SPIDER = ENTITIES.register("stray_bone_spider", () -> EntityType.Builder.of(StrayBoneSpider::new, MobCategory.MONSTER).sized(1.4F, 0.9F).build(prefix("stray_bone_spider")));
 
+	public static final RegistryObject<EntityType<VilerWitch>> VILER_WITCH = ENTITIES.register("viller_witch", () -> EntityType.Builder.of(VilerWitch::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("viler_witch")));
+
+	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
+	public static final RegistryObject<EntityType<BoneShard>> BONE_SHARD = ENTITIES.register("bone_shard", () -> EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard")));
+	public static final RegistryObject<EntityType<MelonSeed>> MELON_SEED = ENTITIES.register("melon_seed", () -> EntityType.Builder.<MelonSeed>of(MelonSeed::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("melon_seeds")));
 
 	private static String prefix(String path) {
 		return EarthMobsMod.MODID + "." + path;
 	}
 
 	@SubscribeEvent
-	public static void registerEntity(RegistryEvent.Register<EntityType<?>> event) {
-		event.getRegistry().register(CLUCK_SHROOM.setRegistryName("cluck_shroom"));
-		event.getRegistry().register(WOOLY_COW.setRegistryName("wooly_cow"));
-		event.getRegistry().register(HORNED_SHEEP.setRegistryName("horned_sheep"));
-		event.getRegistry().register(HYPER_RABBIT.setRegistryName("hyper_rabbit"));
-		event.getRegistry().register(MELON_GOLEM.setRegistryName("melon_golem"));
-
-
-		event.getRegistry().register(BONE_SPIDER.setRegistryName("bone_spider"));
-		event.getRegistry().register(STRAY_BONE_SPIDER.setRegistryName("stray_bone_spider"));
-		event.getRegistry().register(VILER_WITCH.setRegistryName("viler_witch"));
-
-		event.getRegistry().register(SMELLY_EGG.setRegistryName("smelly_egg"));
-		event.getRegistry().register(BONE_SHARD.setRegistryName("bone_shard"));
-		event.getRegistry().register(MELON_SEED.setRegistryName("melon_seeds"));
-
-
-		Raid.RaiderType.create("viler_witch", VILER_WITCH, new int[]{0, 0, 1, 0, 1, 1, 2, 1});
-
-		SpawnPlacements.register(CLUCK_SHROOM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
-		SpawnPlacements.register(WOOLY_COW, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(HORNED_SHEEP, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(HYPER_RABBIT, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(MELON_GOLEM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
-		SpawnPlacements.register(BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-		SpawnPlacements.register(STRAY_BONE_SPIDER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-		SpawnPlacements.register(VILER_WITCH, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-	}
-
-	@SubscribeEvent
 	public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
-		event.put(CLUCK_SHROOM, Chicken.createAttributes().build());
-		event.put(WOOLY_COW, Cow.createAttributes().build());
-		event.put(HORNED_SHEEP, HornedSheep.createAttributes().build());
-		event.put(HYPER_RABBIT, HyperRabbit.createAttributes().build());
-		event.put(MELON_GOLEM, MelonGolem.createAttributes().build());
-		event.put(BONE_SPIDER, BoneSpider.createAttributes().build());
-		event.put(STRAY_BONE_SPIDER, BoneSpider.createAttributes().build());
-		event.put(VILER_WITCH, VilerWitch.createAttributes().build());
+
+
+		Raid.RaiderType.create("viler_witch", VILER_WITCH.get(), new int[]{0, 0, 1, 0, 1, 1, 2, 1});
+
+		SpawnPlacements.register(CLUCK_SHROOM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
+		SpawnPlacements.register(WOOLY_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(HORNED_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(HYPER_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(MELON_GOLEM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+		SpawnPlacements.register(BONE_SPIDER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+		SpawnPlacements.register(STRAY_BONE_SPIDER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+		SpawnPlacements.register(VILER_WITCH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+
+		event.put(CLUCK_SHROOM.get(), Chicken.createAttributes().build());
+		event.put(WOOLY_COW.get(), Cow.createAttributes().build());
+		event.put(HORNED_SHEEP.get(), HornedSheep.createAttributes().build());
+		event.put(HYPER_RABBIT.get(), HyperRabbit.createAttributes().build());
+		event.put(MELON_GOLEM.get(), MelonGolem.createAttributes().build());
+		event.put(BONE_SPIDER.get(), BoneSpider.createAttributes().build());
+		event.put(STRAY_BONE_SPIDER.get(), BoneSpider.createAttributes().build());
+		event.put(VILER_WITCH.get(), VilerWitch.createAttributes().build());
 	}
 }

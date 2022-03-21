@@ -10,24 +10,39 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class ModBlocks {
-	public static final Block CARVED_MELON = new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD));
-	public static final Block CARVED_MELON_SHOOT = new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD));
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, EarthMobsMod.MODID);
 
-	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> registry) {
-		registry.getRegistry().register(CARVED_MELON.setRegistryName("carved_melon"));
-		registry.getRegistry().register(CARVED_MELON_SHOOT.setRegistryName("carved_melon_shoot"));
+
+	public static final RegistryObject<Block> CARVED_MELON = register("cavered_melon", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> CARVED_MELON_SHOOT = register("cavered_melon_shoot", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_ORANGE).strength(1.0F).sound(SoundType.WOOD)));
+
+	private static <T extends Block> RegistryObject<T> baseRegister(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
+		RegistryObject<T> register = BLOCKS.register(name, block);
+		ModItems.ITEMS.register(name, item.apply(register));
+		return register;
 	}
 
-	@SubscribeEvent
-	public static void registerItem(RegistryEvent.Register<Item> event) {
-		ModItems.register(event, new BlockItem(CARVED_MELON, (new Item.Properties()).tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-		ModItems.register(event, new BlockItem(CARVED_MELON_SHOOT, (new Item.Properties())));
+	private static <T extends Block> RegistryObject<T> noItemRegister(String name, Supplier<? extends T> block) {
+		RegistryObject<T> register = BLOCKS.register(name, block);
+		return register;
+	}
+
+	private static <B extends Block> RegistryObject<B> register(String name, Supplier<? extends Block> block) {
+		return (RegistryObject<B>) baseRegister(name, block, ModBlocks::registerBlockItem);
+	}
+
+	private static <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block) {
+		return () -> {
+			return new BlockItem(Objects.requireNonNull(block.get()), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS));
+		};
 	}
 }

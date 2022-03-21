@@ -42,7 +42,7 @@ public class CommonEvents {
 				p_29910_.broadcastBreakEvent(event.getHand());
 			});
 			event.getPlayer().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			event.getPlayer().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.defaultBlockState(), 2);
+			event.getPlayer().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState(), 2);
 
 			event.setUseItem(Event.Result.ALLOW);
 		}

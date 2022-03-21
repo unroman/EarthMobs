@@ -39,7 +39,7 @@ public class ModEffects {
 	}
 
 	public static void init() {
-		BrewingRecipeRegistry.addRecipe(Ingredient.of(createPotion(Potions.SWIFTNESS)), Ingredient.of(ModItems.HYPER_RABBIT_FOOT), createPotion(HYPER_SPARK_POTION));
+		BrewingRecipeRegistry.addRecipe(Ingredient.of(createPotion(Potions.SWIFTNESS)), Ingredient.of(ModItems.HYPER_RABBIT_FOOT.get()), createPotion(HYPER_SPARK_POTION));
 		BrewingRecipeRegistry.addRecipe(Ingredient.of(createPotion(HYPER_SPARK_POTION)), Ingredient.of(Items.REDSTONE), createPotion(LONG_HYPER_SPARK_POTION));
 	}
 }
