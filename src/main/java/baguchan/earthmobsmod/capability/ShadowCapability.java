@@ -52,32 +52,34 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	private float percentBoost;
 
 	public void tick(LivingEntity livingEntity) {
-		double elasticity = 0.25D;
-		this.prevShadowX = this.shadowX;
-		this.prevShadowY = this.shadowY;
-		this.prevShadowZ = this.shadowZ;
-		this.prevShadowX2 = this.shadowX2;
-		this.prevShadowY2 = this.shadowY2;
-		this.prevShadowZ2 = this.shadowZ2;
-		this.prevYBodyRot = this.yBodyRot;
-		this.prevYBodyRot2 = this.yBodyRot2;
-		this.yBodyRot = (float) (this.yBodyRot + (livingEntity.yBodyRot - this.yBodyRot) * elasticity * 0.75D);
-		this.yBodyRot2 = (float) (this.yBodyRot2 + (this.yBodyRot - this.yBodyRot2) * elasticity * 0.3499999940395355D);
-		this.xRot = (float) (this.xRot + (livingEntity.getXRot() - this.xRot) * elasticity * 0.75D);
-		this.xRot2 = (float) (this.xRot2 + (this.xRot - this.xRot2) * elasticity * 0.3499999940395355D);
-		this.shadowX = (float) (this.shadowX + (livingEntity.getX() - this.shadowX) * elasticity);
-		this.shadowY = (float) (this.shadowY + (livingEntity.getY() - this.shadowY) * elasticity);
-		this.shadowZ = (float) (this.shadowZ + (livingEntity.getZ() - this.shadowZ) * elasticity);
-		this.shadowX2 = (float) (this.shadowX2 + (this.shadowX - this.shadowX2) * elasticity * 0.375D);
-		this.shadowY2 = (float) (this.shadowY2 + (this.shadowY - this.shadowY2) * elasticity * 0.375D);
-		this.shadowZ2 = (float) (this.shadowZ2 + (this.shadowZ - this.shadowZ2) * elasticity * 0.375D);
+		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK)) {
+			double elasticity = 0.25D;
+			this.prevShadowX = this.shadowX;
+			this.prevShadowY = this.shadowY;
+			this.prevShadowZ = this.shadowZ;
+			this.prevShadowX2 = this.shadowX2;
+			this.prevShadowY2 = this.shadowY2;
+			this.prevShadowZ2 = this.shadowZ2;
+			this.prevYBodyRot = this.yBodyRot;
+			this.prevYBodyRot2 = this.yBodyRot2;
+			this.yBodyRot = (float) (this.yBodyRot + (livingEntity.yBodyRot - this.yBodyRot) * elasticity * 0.75D);
+			this.yBodyRot2 = (float) (this.yBodyRot2 + (this.yBodyRot - this.yBodyRot2) * elasticity * 0.3499999940395355D);
+			this.xRot = (float) (this.xRot + (livingEntity.getXRot() - this.xRot) * elasticity * 0.75D);
+			this.xRot2 = (float) (this.xRot2 + (this.xRot - this.xRot2) * elasticity * 0.3499999940395355D);
+			this.shadowX = (float) (this.shadowX + (livingEntity.getX() - this.shadowX) * elasticity);
+			this.shadowY = (float) (this.shadowY + (livingEntity.getY() - this.shadowY) * elasticity);
+			this.shadowZ = (float) (this.shadowZ + (livingEntity.getZ() - this.shadowZ) * elasticity);
+			this.shadowX2 = (float) (this.shadowX2 + (this.shadowX - this.shadowX2) * elasticity * 0.375D);
+			this.shadowY2 = (float) (this.shadowY2 + (this.shadowY - this.shadowY2) * elasticity * 0.375D);
+			this.shadowZ2 = (float) (this.shadowZ2 + (this.shadowZ - this.shadowZ2) * elasticity * 0.375D);
 
-		if (percentBoost >= 0.65F) {
-			pushEntities(livingEntity);
+			if (livingEntity.hasEffect(ModEffects.HYPER_SPARK) && percentBoost >= 0.65F) {
+				pushEntities(livingEntity);
+			}
+
+			removeBoost(livingEntity);
+			tryAddBooster(livingEntity);
 		}
-
-		removeBoost(livingEntity);
-		tryAddBooster(livingEntity);
 	}
 
 	protected void pushEntities(LivingEntity entity) {
