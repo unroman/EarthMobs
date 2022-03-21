@@ -23,11 +23,11 @@ public class MelonSeed extends ThrowableItemProjectile {
 	}
 
 	public MelonSeed(Level p_37399_, LivingEntity p_37400_) {
-		super(ModEntities.MELON_SEED.get(), p_37400_, p_37399_);
+		super(ModEntities.MELON_SEED, p_37400_, p_37399_);
 	}
 
 	public MelonSeed(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
-		super(ModEntities.MELON_SEED.get(), p_37395_, p_37396_, p_37397_, p_37394_);
+		super(ModEntities.MELON_SEED, p_37395_, p_37396_, p_37397_, p_37394_);
 	}
 
 	protected Item getDefaultItem() {

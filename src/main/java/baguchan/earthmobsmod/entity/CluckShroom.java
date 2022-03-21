@@ -49,7 +49,7 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 	public ItemEntity spawnAtLocation(ItemLike p_19999_) {
 		//override to smelly egg
 		if (p_19999_.asItem() == Items.EGG) {
-			p_19999_ = ModItems.SMELLY_EGG.get();
+			p_19999_ = ModItems.SMELLY_EGG;
 		}
 
 		return super.spawnAtLocation(p_19999_);
@@ -155,7 +155,7 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 	}
 
 	public CluckShroom getBreedOffspring(ServerLevel p_148942_, AgeableMob p_148943_) {
-		CluckShroom mushroomchickin = ModEntities.CLUCK_SHROOM.get().create(p_148942_);
+		CluckShroom mushroomchickin = ModEntities.CLUCK_SHROOM.create(p_148942_);
 		mushroomchickin.setCluckShroomType(this.getOffspringType((CluckShroom) p_148943_));
 		return mushroomchickin;
 	}

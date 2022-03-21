@@ -43,7 +43,7 @@ public class HyperRabbit extends Rabbit {
 
 	@Override
 	public Rabbit getBreedOffspring(ServerLevel p_149035_, AgeableMob p_149036_) {
-		return ModEntities.HYPER_RABBIT.get().create(p_149035_);
+		return ModEntities.HYPER_RABBIT.create(p_149035_);
 	}
 
 	@Override

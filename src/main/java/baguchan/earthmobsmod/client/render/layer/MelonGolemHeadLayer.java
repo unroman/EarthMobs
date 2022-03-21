@@ -29,7 +29,7 @@ public class MelonGolemHeadLayer extends RenderLayer<MelonGolem, SnowGolemModel<
 
 	public void render(PoseStack p_117494_, MultiBufferSource p_117495_, int p_117496_, MelonGolem p_117497_, float p_117498_, float p_117499_, float p_117500_, float p_117501_, float p_117502_, float p_117503_) {
 		if (p_117497_.hasMelon()) {
-			Block block = p_117497_.isAggressive() ? ModBlocks.CARVED_MELON_SHOOT.get() : ModBlocks.CARVED_MELON.get();
+			Block block = p_117497_.isAggressive() ? ModBlocks.CARVED_MELON_SHOOT : ModBlocks.CARVED_MELON;
 
 			Minecraft minecraft = Minecraft.getInstance();
 			boolean flag = minecraft.shouldEntityAppearGlowing(p_117497_) && p_117497_.isInvisible();

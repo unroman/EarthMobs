@@ -43,19 +43,19 @@ public class BoneShard extends ThrowableItemProjectile {
 	}
 
 	public BoneShard(Level p_37399_, LivingEntity p_37400_) {
-		super(ModEntities.BONE_SHARD.get(), p_37400_, p_37399_);
+		super(ModEntities.BONE_SHARD, p_37400_, p_37399_);
 	}
 
 	public BoneShard(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
-		super(ModEntities.BONE_SHARD.get(), p_37395_, p_37396_, p_37397_, p_37394_);
+		super(ModEntities.BONE_SHARD, p_37395_, p_37396_, p_37397_, p_37394_);
 	}
 
 	protected Item getDefaultItem() {
-		return ModItems.BONE_SHARD.get();
+		return ModItems.BONE_SHARD;
 	}
 
 	private ParticleOptions getParticle() {
-		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.BONE_SHARD.get().getDefaultInstance());
+		return new ItemParticleOption(ParticleTypes.ITEM, ModItems.BONE_SHARD.getDefaultInstance());
 	}
 
 	private void makeParticle(int p_36877_) {

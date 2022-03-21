@@ -65,7 +65,7 @@ public class WoolyCow extends Cow implements Shearable, net.minecraftforge.commo
 	}
 
 	public Cow getBreedOffspring(ServerLevel p_148884_, AgeableMob p_148885_) {
-		return ModEntities.WOOLY_COW.get().create(p_148884_);
+		return ModEntities.WOOLY_COW.create(p_148884_);
 	}
 
 	public void addAdditionalSaveData(CompoundTag p_29864_) {

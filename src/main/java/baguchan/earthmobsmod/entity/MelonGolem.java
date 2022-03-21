@@ -94,7 +94,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 			int i = Mth.floor(this.getX());
 			int j = Mth.floor(this.getY());
 			int k = Mth.floor(this.getZ());
-			if (this.level.getBiome(new BlockPos(i, 0, k)).value().getBaseTemperature() > 1.0F) {
+			if (this.level.getBiome(new BlockPos(i, 0, k)).getBaseTemperature() > 1.0F) {
 				this.hurt(DamageSource.ON_FIRE, 1.0F);
 			}
 
@@ -109,7 +109,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 				j = Mth.floor(this.getY());
 				k = Mth.floor(this.getZ() + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 				BlockPos blockpos = new BlockPos(i, j, k);
-				if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).value().getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos)) {
+				if (this.level.isEmptyBlock(blockpos) && this.level.getBiome(blockpos).getBaseTemperature() < 0.8F && blockstate.canSurvive(this.level, blockpos)) {
 					this.level.setBlockAndUpdate(blockpos, blockstate);
 				}
 			}
@@ -154,7 +154,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 		this.level.playSound((Player) null, this, SoundEvents.SNOW_GOLEM_SHEAR, p_29907_, 1.0F, 1.0F);
 		if (!this.level.isClientSide()) {
 			this.setMelon(false);
-			this.spawnAtLocation(new ItemStack(ModBlocks.CARVED_MELON.get()), 1.7F);
+			this.spawnAtLocation(new ItemStack(ModBlocks.CARVED_MELON), 1.7F);
 		}
 	}
 
@@ -206,7 +206,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 		world.playSound(null, this, SoundEvents.SNOW_GOLEM_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
 		if (!world.isClientSide()) {
 			setMelon(false);
-			return java.util.Collections.singletonList(new ItemStack(ModBlocks.CARVED_MELON.get()));
+			return java.util.Collections.singletonList(new ItemStack(ModBlocks.CARVED_MELON));
 		}
 		return java.util.Collections.emptyList();
 	}

@@ -16,19 +16,19 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientRegistrar {
 	@SubscribeEvent
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM.get(), CluckShroomRender::new);
-		event.registerEntityRenderer(ModEntities.WOOLY_COW.get(), WoolyCowRenderer::new);
-		event.registerEntityRenderer(ModEntities.HORNED_SHEEP.get(), HornedSheepRenderer::new);
-		event.registerEntityRenderer(ModEntities.HYPER_RABBIT.get(), HyperRabbitRenderer::new);
-		event.registerEntityRenderer(ModEntities.MELON_GOLEM.get(), MelonGolemRenderer::new);
+		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM, CluckShroomRender::new);
+		event.registerEntityRenderer(ModEntities.WOOLY_COW, WoolyCowRenderer::new);
+		event.registerEntityRenderer(ModEntities.HORNED_SHEEP, HornedSheepRenderer::new);
+		event.registerEntityRenderer(ModEntities.HYPER_RABBIT, HyperRabbitRenderer::new);
+		event.registerEntityRenderer(ModEntities.MELON_GOLEM, MelonGolemRenderer::new);
 
-		event.registerEntityRenderer(ModEntities.BONE_SPIDER.get(), BoneSpiderRender::new);
-		event.registerEntityRenderer(ModEntities.STRAY_BONE_SPIDER.get(), StrayBoneSpiderRender::new);
-		event.registerEntityRenderer(ModEntities.VILER_WITCH.get(), VilerWitchRenderer::new);
+		event.registerEntityRenderer(ModEntities.BONE_SPIDER, BoneSpiderRender::new);
+		event.registerEntityRenderer(ModEntities.STRAY_BONE_SPIDER, StrayBoneSpiderRender::new);
+		event.registerEntityRenderer(ModEntities.VILER_WITCH, VilerWitchRenderer::new);
 
-		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(ModEntities.MELON_SEED.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.SMELLY_EGG, ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.BONE_SHARD, ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.MELON_SEED, ThrownItemRenderer::new);
 	}
 
 	@SubscribeEvent

@@ -32,7 +32,7 @@ public class CarvedMelonBlock extends Block {
 	private BlockPattern snowGolemFull;
 
 	private static final Predicate<BlockState> MELON_PREDICATE = (p_51396_) -> {
-		return p_51396_ != null && (p_51396_.is(ModBlocks.CARVED_MELON.get()) || p_51396_.is(ModBlocks.CARVED_MELON_SHOOT.get()));
+		return p_51396_ != null && (p_51396_.is(ModBlocks.CARVED_MELON) || p_51396_.is(ModBlocks.CARVED_MELON_SHOOT));
 	};
 
 	public CarvedMelonBlock(Properties properties) {
@@ -60,7 +60,7 @@ public class CarvedMelonBlock extends Block {
 				p_51379_.levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
 			}
 
-			MelonGolem melongolem = ModEntities.MELON_GOLEM.get().create(p_51379_);
+			MelonGolem melongolem = ModEntities.MELON_GOLEM.create(p_51379_);
 			BlockPos blockpos1 = blockpattern$blockpatternmatch.getBlock(0, 2, 0).getPos();
 			melongolem.moveTo((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.05D, (double) blockpos1.getZ() + 0.5D, 0.0F, 0.0F);
 			p_51379_.addFreshEntity(melongolem);
