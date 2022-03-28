@@ -26,7 +26,7 @@ public abstract class MudFluid extends ForgeFlowingFluid {
 
 	@Override
 	public int getTickDelay(LevelReader level) {
-		return 5;
+		return 20;
 	}
 
 	@Override
