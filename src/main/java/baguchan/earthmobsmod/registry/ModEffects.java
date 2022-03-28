@@ -1,7 +1,7 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.effect.HyperSparkEffect;
+import baguchan.earthmobsmod.entity.effect.HyperSparkEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;

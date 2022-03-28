@@ -3,6 +3,7 @@ package baguchan.earthmobsmod.client.model;// Made with Blockbench 4.1.5
 // Paste this class into your mod and generate all required imports
 
 
+import baguchan.earthmobsmod.api.ISheared;
 import net.minecraft.client.model.PigModel;
 import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -31,7 +32,7 @@ public class MuddyPigModel<T extends Entity> extends PigModel<T> {
 
 		PartDefinition mud = head.addOrReplaceChild("mud", CubeListBuilder.create().texOffs(48, 0).addBox(-1.0F, -1.0F, 0.0F, 4.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -4.0F, -7.0F));
 
-		PartDefinition flower = mud.addOrReplaceChild("flower", CubeListBuilder.create(), PartPose.offset(3.0F, -1.0F, 2.0F));
+		PartDefinition flower = mud.addOrReplaceChild("flower", CubeListBuilder.create().texOffs(20, 0).addBox(-3.0F, 0.0F, 0.0F, 4.0F, 0.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -1.0F, 2.0F, 1.5708F, 0.0F, 0.0F));
 
 
 		return LayerDefinition.create(meshdefinition, 64, 32);
@@ -40,5 +41,9 @@ public class MuddyPigModel<T extends Entity> extends PigModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+
+		if (entity instanceof ISheared) {
+			this.flower.visible = !((ISheared) entity).isSheared();
+		}
 	}
 }

@@ -3,6 +3,7 @@ package baguchan.earthmobsmod.client;
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.client.model.*;
 import baguchan.earthmobsmod.client.render.*;
+import baguchan.earthmobsmod.client.render.layer.MuddyPigFlowerLayer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.client.Minecraft;
@@ -53,6 +54,7 @@ public class ClientRegistrar {
 		Minecraft.getInstance().getEntityRenderDispatcher().renderers.values().forEach(r -> {
 			if (r instanceof PigRenderer) {
 				((PigRenderer) r).addLayer(new MuddyPigMudLayer((PigRenderer) r, event.getEntityModels()));
+				((PigRenderer) r).addLayer(new MuddyPigFlowerLayer((PigRenderer) r, event.getEntityModels()));
 			}
 		});
 	}

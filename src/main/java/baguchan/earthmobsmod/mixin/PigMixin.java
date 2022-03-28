@@ -4,6 +4,7 @@ package baguchan.earthmobsmod.mixin;
 import baguchan.earthmobsmod.api.IMuddy;
 import baguchan.earthmobsmod.api.IOnMud;
 import baguchan.earthmobsmod.api.ISheared;
+import baguchan.earthmobsmod.util.DyeUtil;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -125,7 +126,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 	public void tick() {
 		super.tick();
 		if (this.isAlive() && this instanceof IOnMud) {
-			if (((IOnMud) this).isOnMud() && this.isMuddy() && !this.isShaking) {
+			if (((IOnMud) this).isOnMud() && (!this.isMuddy() || this.isSheared()) && !this.isShaking) {
 				this.isShaking = true;
 				this.inMud = true;
 			} else if (this.isInWaterRainOrBubble() && this.isMuddy() && !this.isShaking) {
@@ -172,6 +173,8 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 					this.shakeAnimO = 0.0F;
 					this.shakeAnim = 0.0F;
 					this.setMuddy(true);
+					this.setSheared(false);
+					this.setColor(DyeUtil.getRandomColor(this.random));
 				}
 
 				if (this.shakeAnim > 0.4F) {
@@ -207,7 +210,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 
 	@Override
 	public boolean isShearable(@javax.annotation.Nonnull ItemStack item, Level world, BlockPos pos) {
-		return this.isAlive() && !this.isSheared() && !this.isBaby();
+		return this.isAlive() && !this.isSheared() && !this.isBaby() && this.isMuddy();
 	}
 
 	@javax.annotation.Nonnull

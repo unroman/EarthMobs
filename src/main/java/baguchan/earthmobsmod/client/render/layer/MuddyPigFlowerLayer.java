@@ -17,24 +17,25 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class MuddyPigMudLayer extends RenderLayer<Pig, PigModel<Pig>> {
-	private static final ResourceLocation MUD_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/muddypig/muddy_pig.png");
-	private static final ResourceLocation DRY_MUD_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/muddypig/dry_muddy_pig.png");
+public class MuddyPigFlowerLayer extends RenderLayer<Pig, PigModel<Pig>> {
+	private static final ResourceLocation LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/muddypig/pig_muddy_flower.png");
 
 	private final MuddyPigModel<Pig> model;
 
-	public MuddyPigMudLayer(RenderLayerParent<Pig, PigModel<Pig>> p_174533_, EntityModelSet p_174534_) {
+	public MuddyPigFlowerLayer(RenderLayerParent<Pig, PigModel<Pig>> p_174533_, EntityModelSet p_174534_) {
 		super(p_174533_);
 		this.model = new MuddyPigModel<>(p_174534_.bakeLayer(ModModelLayers.MUDDY_PIG));
 	}
 
 	public void render(PoseStack p_117421_, MultiBufferSource p_117422_, int p_117423_, Pig pig, float p_117425_, float p_117426_, float p_117427_, float p_117428_, float p_117429_, float p_117430_) {
 		if (pig instanceof IMuddy && pig instanceof ISheared) {
-			if (((IMuddy) pig).isMuddy()) {
+			if (((IMuddy) pig).isMuddy() && !((ISheared) pig).isSheared()) {
 				if (pig.isInvisible()) {
 					Minecraft minecraft = Minecraft.getInstance();
 					boolean flag = minecraft.shouldEntityAppearGlowing(pig);
@@ -42,22 +43,7 @@ public class MuddyPigMudLayer extends RenderLayer<Pig, PigModel<Pig>> {
 						this.getParentModel().copyPropertiesTo(this.model);
 						this.model.prepareMobModel(pig, p_117425_, p_117426_, p_117427_);
 						this.model.setupAnim(pig, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_);
-						VertexConsumer vertexconsumer = p_117422_.getBuffer(RenderType.outline(MUD_LOCATION));
-						this.model.renderToBuffer(p_117421_, vertexconsumer, p_117423_, LivingEntityRenderer.getOverlayCoords(pig, 0.0F), 0.0F, 0.0F, 0.0F, 1.0F);
-					}
-
-				} else {
-					coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, MUD_LOCATION, p_117421_, p_117422_, p_117423_, pig, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_, p_117427_, 1.0F, 1.0F, 1.0F);
-				}
-			}/* else {
-				if (pig.isInvisible()) {
-					Minecraft minecraft = Minecraft.getInstance();
-					boolean flag = minecraft.shouldEntityAppearGlowing(pig);
-					if (flag) {
-						this.getParentModel().copyPropertiesTo(this.model);
-						this.model.prepareMobModel(pig, p_117425_, p_117426_, p_117427_);
-						this.model.setupAnim(pig, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_);
-						VertexConsumer vertexconsumer = p_117422_.getBuffer(RenderType.outline(DRY_MUD_LOCATION));
+						VertexConsumer vertexconsumer = p_117422_.getBuffer(RenderType.outline(LOCATION));
 						this.model.renderToBuffer(p_117421_, vertexconsumer, p_117423_, LivingEntityRenderer.getOverlayCoords(pig, 0.0F), 0.0F, 0.0F, 0.0F, 1.0F);
 					}
 
@@ -84,9 +70,9 @@ public class MuddyPigMudLayer extends RenderLayer<Pig, PigModel<Pig>> {
 						f2 = afloat[2];
 					}
 
-					coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, DRY_MUD_LOCATION, p_117421_, p_117422_, p_117423_, pig, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_, p_117427_, f, f1, f2);
+					coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, LOCATION, p_117421_, p_117422_, p_117423_, pig, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_, p_117427_, f, f1, f2);
 				}
-			}*/
+			}
 		}
 	}
 }
