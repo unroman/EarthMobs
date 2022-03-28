@@ -3,7 +3,11 @@ package baguchan.earthmobsmod.client;
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.client.model.*;
 import baguchan.earthmobsmod.client.render.*;
+import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -38,8 +42,18 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP, HornedSheepModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP_FUR, HornedSheepModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HYPER_RABBIT, HyperRabbitModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.MUDDY_PIG, () -> MuddyPigModel.createBodyLayer(CubeDeformation.NONE));
 		event.registerLayerDefinition(ModModelLayers.BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);
+	}
+
+	@SubscribeEvent
+	public static void registerEntityRenders(EntityRenderersEvent.AddLayers event) {
+		Minecraft.getInstance().getEntityRenderDispatcher().renderers.values().forEach(r -> {
+			if (r instanceof PigRenderer) {
+				((PigRenderer) r).addLayer(new MuddyPigMudLayer((PigRenderer) r, event.getEntityModels()));
+			}
+		});
 	}
 }

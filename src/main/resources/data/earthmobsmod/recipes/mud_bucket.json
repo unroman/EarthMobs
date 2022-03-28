@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D",
+    "B"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:dirt"
+    },
+    "B": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "earthmobsmod:mud_bucket"
+  }
+}
