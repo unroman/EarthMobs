@@ -40,10 +40,9 @@ public class LobberZombie extends Zombie implements RangedAttackMob {
 		ZombieFlesh zombieFlesh = new ZombieFlesh(this.level, this);
 		double d0 = p_29912_.getEyeY() - this.getEyeY();
 		double d1 = p_29912_.getX() - this.getX();
-		double d2 = d0 - zombieFlesh.getY();
 		double d3 = p_29912_.getZ() - this.getZ();
 		double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double) 0.1F;
-		zombieFlesh.shoot(d1, d2 + d4, d3, 1.6F, 8.0F);
+		zombieFlesh.shoot(d1, d0 + d4, d3, 0.8F, 0.1F);
 		this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(zombieFlesh);
 		this.swing(InteractionHand.MAIN_HAND);
