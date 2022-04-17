@@ -16,5 +16,6 @@ public class ModModelLayers {
 	public static ModelLayerLocation BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bone_spider"), "bone_spider");
 	public static ModelLayerLocation STRAY_BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "stray_bone_spider"), "stray_bone_spider");
 	public static ModelLayerLocation VILER_WITCH = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "viler_witch"), "viler_witch");
+	public static ModelLayerLocation BOULDERING_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_zombie"), "bouldering_zombie");
 
 }
