@@ -20,7 +20,7 @@ mixin {
     add sourceSets.main, "earthmobsmod.refmap.json"
 }
 
-version = '1.18.2-0.7.0'
+version = '1.18.2-0.7.1'
 group = 'baguchan.earthmobsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'EarthMobs'
 
