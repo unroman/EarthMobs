@@ -17,6 +17,7 @@ public class EarthMobsConfig {
 	public static int boneSpiderSpawnRate;
 	public static int hyperRabbitSpawnRate;
 	public static int boulderingZombieSpawnRate;
+	public static int lobberZombieSpawnRate;
 
 	static {
 		Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
@@ -31,6 +32,7 @@ public class EarthMobsConfig {
 		boneSpiderSpawnRate = COMMON.boneSpiderSpawnRate.get();
 		hyperRabbitSpawnRate = COMMON.hyperRabbitSpawnRate.get();
 		boulderingZombieSpawnRate = COMMON.boulderingZombieSpawnRate.get();
+		lobberZombieSpawnRate = COMMON.lobberZombieSpawnRate.get();
 	}
 
 
@@ -55,6 +57,7 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
 		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
 		public final ForgeConfigSpec.IntValue boulderingZombieSpawnRate;
+		public final ForgeConfigSpec.IntValue lobberZombieSpawnRate;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			woolyCowSpawnRate = builder
@@ -80,7 +83,11 @@ public class EarthMobsConfig {
 			boulderingZombieSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.boulderingZombieSpawnRate")
 					.comment("Changed BoulderingZombie SpawnRate. [0 ~ 1000]")
-					.defineInRange("Bone Spider SpawnRate", 30, 0, 1000);
+					.defineInRange("BoulderingZombie SpawnRate", 20, 0, 1000);
+			lobberZombieSpawnRate = builder
+					.translation(EarthMobsMod.MODID + ".config.lobberZombieSpawnRate")
+					.comment("Changed LobberZombie SpawnRate. [0 ~ 1000]")
+					.defineInRange("LobberZombie SpawnRate", 20, 0, 1000);
 		}
 	}
 

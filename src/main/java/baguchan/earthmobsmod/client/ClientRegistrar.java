@@ -31,10 +31,12 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.STRAY_BONE_SPIDER.get(), StrayBoneSpiderRender::new);
 		event.registerEntityRenderer(ModEntities.VILER_WITCH.get(), VilerWitchRenderer::new);
 		event.registerEntityRenderer(ModEntities.BOULDERING_ZOMBIE.get(), BoulderingZombieRenderer::new);
+		event.registerEntityRenderer(ModEntities.LOBBER_ZOMBIE.get(), LobberZombieRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.MELON_SEED.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(ModEntities.ZOMBIE_FLESH.get(), ThrownItemRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -49,6 +51,7 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.BOULDERING_ZOMBIE, () -> BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE));
+		event.registerLayerDefinition(ModModelLayers.LOBBER_ZOMBIE, () -> LobberZombieModel.createBodyLayer(CubeDeformation.NONE));
 	}
 
 	@SubscribeEvent
