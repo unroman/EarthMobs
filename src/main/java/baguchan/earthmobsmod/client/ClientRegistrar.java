@@ -8,6 +8,7 @@ import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,6 +33,8 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.VILER_WITCH.get(), VilerWitchRenderer::new);
 		event.registerEntityRenderer(ModEntities.BOULDERING_ZOMBIE.get(), BoulderingZombieRenderer::new);
 		event.registerEntityRenderer(ModEntities.LOBBER_ZOMBIE.get(), LobberZombieRenderer::new);
+		event.registerEntityRenderer(ModEntities.BOULDERING_DROWNED.get(), BoulderingDrownedRenderer::new);
+		event.registerEntityRenderer(ModEntities.LOBBER_DROWNED.get(), LobberDrownedRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);
@@ -50,8 +53,15 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);
-		event.registerLayerDefinition(ModModelLayers.BOULDERING_ZOMBIE, () -> BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE));
-		event.registerLayerDefinition(ModModelLayers.LOBBER_ZOMBIE, () -> LobberZombieModel.createBodyLayer(CubeDeformation.NONE));
+
+		LayerDefinition layerDefinition = BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE);
+		LayerDefinition layerDefinition2 = LobberZombieModel.createBodyLayer(CubeDeformation.NONE);
+		event.registerLayerDefinition(ModModelLayers.BOULDERING_ZOMBIE, () -> layerDefinition);
+		event.registerLayerDefinition(ModModelLayers.LOBBER_ZOMBIE, () -> layerDefinition2);
+		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED, () -> layerDefinition);
+		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED, () -> layerDefinition2);
+		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED_OUTER, () -> BoulderingZombieModel.createBodyLayer(new CubeDeformation(0.25F)));
+		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED_OUTER, () -> LobberZombieModel.createBodyLayer(new CubeDeformation(0.25F)));
 	}
 
 	@SubscribeEvent

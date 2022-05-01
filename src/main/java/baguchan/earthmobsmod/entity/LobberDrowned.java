@@ -13,20 +13,20 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class LobberZombie extends Zombie implements RangedAttackMob {
-	public LobberZombie(EntityType<? extends LobberZombie> p_34271_, Level p_34272_) {
+public class LobberDrowned extends Drowned implements RangedAttackMob {
+	public LobberDrowned(EntityType<? extends LobberDrowned> p_34271_, Level p_34272_) {
 		super(p_34271_, p_34272_);
 	}
 
 	protected void addBehaviourGoals() {
-		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 10.0F));
+		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 6.5F));
 		this.goalSelector.addGoal(6, new MoveThroughVillageGoal(this, 1.0D, true, 4, this::canBreakDoors));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(ZombifiedPiglin.class));
@@ -39,7 +39,7 @@ public class LobberZombie extends Zombie implements RangedAttackMob {
 
 	@Override
 	protected void doUnderWaterConversion() {
-		this.convertToZombieType(ModEntities.LOBBER_DROWNED.get());
+		this.convertToZombieType(ModEntities.LOBBER_ZOMBIE.get());
 		if (!this.isSilent()) {
 			this.level.levelEvent((Player) null, 1040, this.blockPosition(), 0);
 		}
@@ -52,7 +52,7 @@ public class LobberZombie extends Zombie implements RangedAttackMob {
 		double d1 = p_29912_.getX() - this.getX();
 		double d3 = p_29912_.getZ() - this.getZ();
 		double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double) 0.1F;
-		zombieFlesh.shoot(d1, d0 + d4, d3, 0.8F, 0.1F);
+		zombieFlesh.shoot(d1, d0 + d4, d3, 0.9F, 0.4F);
 		this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(zombieFlesh);
 		this.swing(InteractionHand.MAIN_HAND);

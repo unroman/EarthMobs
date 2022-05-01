@@ -19,5 +19,9 @@ public class ModModelLayers {
 	public static ModelLayerLocation BOULDERING_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_zombie"), "bouldering_zombie");
 	public static ModelLayerLocation LOBBER_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_zombie"), "lobber_zombie");
 
+	public static ModelLayerLocation BOULDERING_DROWNED = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_drowned"), "bouldering_drowned");
+	public static ModelLayerLocation LOBBER_DROWNED = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_drowned"), "lobber_drowned");
 
+	public static ModelLayerLocation BOULDERING_DROWNED_OUTER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_drowned_outer"), "bouldering_drowned_outer");
+	public static ModelLayerLocation LOBBER_DROWNED_OUTER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_drowned_outer"), "lobber_drowned_outer");
 }
