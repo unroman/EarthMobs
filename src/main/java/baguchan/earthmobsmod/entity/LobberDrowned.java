@@ -2,10 +2,15 @@ package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.entity.projectile.ZombieFlesh;
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.goal.MoveThroughVillageGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -19,6 +24,12 @@ import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+
+import java.util.Random;
 
 public class LobberDrowned extends Drowned implements RangedAttackMob {
 	public LobberDrowned(EntityType<? extends LobberDrowned> p_34271_, Level p_34272_) {
@@ -56,5 +67,23 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 		this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(zombieFlesh);
 		this.swing(InteractionHand.MAIN_HAND);
+	}
+
+	public static boolean checkLobberDrownedSpawnRules(EntityType<LobberDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, Random p_32354_) {
+		if (!p_32351_.getFluidState(p_32353_.below()).is(FluidTags.WATER)) {
+			return false;
+		} else {
+			Holder<Biome> holder = p_32351_.getBiome(p_32353_);
+			boolean flag = p_32351_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_32351_, p_32353_, p_32354_) && (p_32352_ == MobSpawnType.SPAWNER || p_32351_.getFluidState(p_32353_).is(FluidTags.WATER));
+			if (!holder.is(Biomes.RIVER) && !holder.is(Biomes.FROZEN_RIVER)) {
+				return p_32354_.nextInt(40) == 0 && isDeepEnoughToSpawn(p_32351_, p_32353_) && flag;
+			} else {
+				return p_32354_.nextInt(15) == 0 && flag;
+			}
+		}
+	}
+
+	private static boolean isDeepEnoughToSpawn(LevelAccessor p_32367_, BlockPos p_32368_) {
+		return p_32368_.getY() < p_32367_.getSeaLevel() - 5;
 	}
 }

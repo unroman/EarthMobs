@@ -1,18 +1,27 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+
+import java.util.Random;
 
 public class BoulderingDrowned extends Drowned {
 	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(BoulderingDrowned.class, EntityDataSerializers.BYTE);
@@ -64,7 +73,21 @@ public class BoulderingDrowned extends Drowned {
 		this.entityData.set(DATA_FLAGS_ID, b0);
 	}
 
-	protected PathNavigation createNavigation(Level p_33802_) {
-		return new WallClimberNavigation(this, p_33802_);
+	public static boolean checkBoulderingDrownedSpawnRules(EntityType<BoulderingDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, Random p_32354_) {
+		if (!p_32351_.getFluidState(p_32353_.below()).is(FluidTags.WATER)) {
+			return false;
+		} else {
+			Holder<Biome> holder = p_32351_.getBiome(p_32353_);
+			boolean flag = p_32351_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_32351_, p_32353_, p_32354_) && (p_32352_ == MobSpawnType.SPAWNER || p_32351_.getFluidState(p_32353_).is(FluidTags.WATER));
+			if (!holder.is(Biomes.RIVER) && !holder.is(Biomes.FROZEN_RIVER)) {
+				return p_32354_.nextInt(40) == 0 && isDeepEnoughToSpawn(p_32351_, p_32353_) && flag;
+			} else {
+				return p_32354_.nextInt(15) == 0 && flag;
+			}
+		}
+	}
+
+	private static boolean isDeepEnoughToSpawn(LevelAccessor p_32367_, BlockPos p_32368_) {
+		return p_32368_.getY() < p_32367_.getSeaLevel() - 5;
 	}
 }
