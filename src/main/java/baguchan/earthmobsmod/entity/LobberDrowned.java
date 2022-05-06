@@ -1,7 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.entity.goal.GoToWaterGoal;
 import baguchan.earthmobsmod.entity.projectile.ZombieFlesh;
-import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
@@ -37,6 +38,7 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 	}
 
 	protected void addBehaviourGoals() {
+		this.goalSelector.addGoal(1, new GoToWaterGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 6.5F));
 		this.goalSelector.addGoal(6, new MoveThroughVillageGoal(this, 1.0D, true, 4, this::canBreakDoors));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -44,16 +46,8 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Axolotl.class, true, false));
 		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
-	}
-
-
-	@Override
-	protected void doUnderWaterConversion() {
-		this.convertToZombieType(ModEntities.LOBBER_ZOMBIE.get());
-		if (!this.isSilent()) {
-			this.level.levelEvent((Player) null, 1040, this.blockPosition(), 0);
-		}
 	}
 
 	@Override

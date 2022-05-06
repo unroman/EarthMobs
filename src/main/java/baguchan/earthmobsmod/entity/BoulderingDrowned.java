@@ -1,6 +1,5 @@
 package baguchan.earthmobsmod.entity;
 
-import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -9,12 +8,15 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -26,8 +28,15 @@ import java.util.Random;
 public class BoulderingDrowned extends Drowned {
 	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(BoulderingDrowned.class, EntityDataSerializers.BYTE);
 
+	protected final WaterBoundPathNavigation waterNavigation;
+	protected final GroundPathNavigation groundNavigation;
+	boolean searchingForLand;
+
+
 	public BoulderingDrowned(EntityType<? extends BoulderingDrowned> p_34271_, Level p_34272_) {
 		super(p_34271_, p_34272_);
+		this.waterNavigation = new WaterBoundPathNavigation(this, p_34272_);
+		this.groundNavigation = new WallClimberNavigation(this, p_34272_);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -46,12 +55,26 @@ public class BoulderingDrowned extends Drowned {
 		}
 	}
 
-	@Override
-	protected void doUnderWaterConversion() {
-		this.convertToZombieType(ModEntities.BOULDERING_DROWNED.get());
-		if (!this.isSilent()) {
-			this.level.levelEvent((Player) null, 1040, this.blockPosition(), 0);
+	boolean wantsToSwim() {
+		if (this.searchingForLand) {
+			return true;
+		} else {
+			LivingEntity livingentity = this.getTarget();
+			return livingentity != null && livingentity.isInWater();
 		}
+	}
+
+	public void updateSwimming() {
+		if (!this.level.isClientSide) {
+			if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
+				this.navigation = this.waterNavigation;
+				this.setSwimming(true);
+			} else {
+				this.navigation = this.groundNavigation;
+				this.setSwimming(false);
+			}
+		}
+
 	}
 
 	public boolean onClimbable() {
