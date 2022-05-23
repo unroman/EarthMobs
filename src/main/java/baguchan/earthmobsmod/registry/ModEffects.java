@@ -2,6 +2,7 @@ package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.effect.HyperSparkEffect;
+import baguchan.earthmobsmod.recipe.ModBrewingRecipe;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,7 +39,7 @@ public class ModEffects {
 	}
 
 	public static void init() {
-		BrewingRecipeRegistry.addRecipe(Ingredient.of(createPotion(Potions.SWIFTNESS)), Ingredient.of(ModItems.HYPER_RABBIT_FOOT.get()), createPotion(HYPER_SPARK_POTION));
-		BrewingRecipeRegistry.addRecipe(Ingredient.of(createPotion(HYPER_SPARK_POTION)), Ingredient.of(Items.REDSTONE), createPotion(LONG_HYPER_SPARK_POTION));
+		BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(createPotion(Potions.SWIFTNESS), new ItemStack(ModItems.HYPER_RABBIT_FOOT.get()), createPotion(HYPER_SPARK_POTION)));
+		BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(createPotion(HYPER_SPARK_POTION), new ItemStack(Items.REDSTONE), createPotion(LONG_HYPER_SPARK_POTION)));
 	}
 }
