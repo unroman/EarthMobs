@@ -2,11 +2,15 @@ package baguchan.earthmobsmod.entity;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FlowerBlock;
 import org.apache.commons.lang3.tuple.Pair;
 
 public interface IFlowerCow {
 
-	Pair<MobEffect, Integer> getEffectForCow();
+	default Pair<MobEffect, Integer> getEffectForCow() {
+		FlowerBlock flowerblock = (FlowerBlock) getFlower();
+		return Pair.of(flowerblock.getSuspiciousStewEffect(), flowerblock.getEffectDuration());
+	}
 
 	Block getFlower();
 }

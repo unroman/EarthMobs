@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModBlocks;
+import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -10,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +21,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SuspiciousStewItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerBlock;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,11 +47,6 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 		} else {
 			return super.mobInteract(p_28941_, p_28942_);
 		}
-	}
-
-	public Pair<MobEffect, Integer> getEffectForCow() {
-		FlowerBlock flowerblock = ModBlocks.BUTTERCUP.get();
-		return Pair.of(flowerblock.getSuspiciousStewEffect(), flowerblock.getEffectDuration());
 	}
 
 	@Override
@@ -97,5 +93,10 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 			return items;
 		}
 		return java.util.Collections.emptyList();
+	}
+
+	@Override
+	public Cow getBreedOffspring(ServerLevel p_148890_, AgeableMob p_148891_) {
+		return ModEntities.MOOBLOOM.get().create(p_148890_);
 	}
 }
