@@ -5,17 +5,22 @@ import baguchan.earthmobsmod.client.model.*;
 import baguchan.earthmobsmod.client.render.*;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigFlowerLayer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
+import baguchan.earthmobsmod.registry.ModBlocks;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -26,6 +31,8 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.WOOLY_COW.get(), WoolyCowRenderer::new);
 		event.registerEntityRenderer(ModEntities.HORNED_SHEEP.get(), HornedSheepRenderer::new);
 		event.registerEntityRenderer(ModEntities.HYPER_RABBIT.get(), HyperRabbitRenderer::new);
+		event.registerEntityRenderer(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);
+
 		event.registerEntityRenderer(ModEntities.MELON_GOLEM.get(), MelonGolemRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.BONE_SPIDER.get(), BoneSpiderRender::new);
@@ -72,5 +79,18 @@ public class ClientRegistrar {
 				((PigRenderer) r).addLayer(new MuddyPigFlowerLayer((PigRenderer) r, event.getEntityModels()));
 			}
 		});
+	}
+
+
+	public static void renderBlockLayer() {
+		setRenderLayer(ModBlocks.BUTTERCUP.get(), RenderType.cutout());
+	}
+
+	private static void setRenderLayer(Block block, RenderType type) {
+		ItemBlockRenderTypes.setRenderLayer(block, type::equals);
+	}
+
+	public static void setup(FMLCommonSetupEvent event) {
+		renderBlockLayer();
 	}
 }
