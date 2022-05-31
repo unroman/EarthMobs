@@ -51,6 +51,8 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<BoulderingDrowned>> BOULDERING_DROWNED = ENTITIES.register("bouldering_drowned", () -> EntityType.Builder.of(BoulderingDrowned::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("bouldering_drowned")));
 	public static final RegistryObject<EntityType<LobberDrowned>> LOBBER_DROWNED = ENTITIES.register("lobber_drowned", () -> EntityType.Builder.of(LobberDrowned::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build(prefix("lobber_drowned")));
 
+	public static final RegistryObject<EntityType<TropicalSlime>> TROPICAL_SLIME = ENTITIES.register("tropical_slime", () -> EntityType.Builder.of(TropicalSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build(prefix("tropical_slime")));
+
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
 	public static final RegistryObject<EntityType<BoneShard>> BONE_SHARD = ENTITIES.register("bone_shard", () -> EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard")));
@@ -83,6 +85,8 @@ public class ModEntities {
 		SpawnPlacements.register(BOULDERING_DROWNED.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BoulderingDrowned::checkBoulderingDrownedSpawnRules);
 		SpawnPlacements.register(LOBBER_DROWNED.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LobberDrowned::checkLobberDrownedSpawnRules);
 
+		SpawnPlacements.register(TROPICAL_SLIME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TropicalSlime::checkTropicalSpawnRules);
+
 
 		event.put(CLUCK_SHROOM.get(), Chicken.createAttributes().build());
 		event.put(WOOLY_COW.get(), Cow.createAttributes().build());
@@ -99,5 +103,6 @@ public class ModEntities {
 		event.put(LOBBER_ZOMBIE.get(), Zombie.createAttributes().build());
 		event.put(BOULDERING_DROWNED.get(), BoulderingDrowned.createAttributes().build());
 		event.put(LOBBER_DROWNED.get(), Zombie.createAttributes().build());
+		event.put(TROPICAL_SLIME.get(), Monster.createMonsterAttributes().build());
 	}
 }

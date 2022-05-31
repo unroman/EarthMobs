@@ -27,6 +27,8 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue boulderingZombieSpawnRate;
 		public final ForgeConfigSpec.IntValue lobberZombieSpawnRate;
 
+		public final ForgeConfigSpec.IntValue tropicalSlimeSpawnRate;
+
 		public Common(ForgeConfigSpec.Builder builder) {
 			woolyCowSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.woolyCowSpawnRate")
@@ -64,6 +66,10 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.lobberZombieSpawnRate")
 					.comment("Changed LobberZombie SpawnRate. [0 ~ 1000]")
 					.defineInRange("LobberZombie SpawnRate", 20, 0, 1000);
+			tropicalSlimeSpawnRate = builder
+					.translation(EarthMobsMod.MODID + ".config.tropicalSlimeSpawnRate")
+					.comment("Changed TropicalSlime SpawnRate. [0 ~ 1000]")
+					.defineInRange("TropicalSlime SpawnRate", 2, 0, 1000);
 		}
 	}
 
