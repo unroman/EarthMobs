@@ -69,7 +69,7 @@ public class EarthMobsConfig {
 			tropicalSlimeSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.tropicalSlimeSpawnRate")
 					.comment("Changed TropicalSlime SpawnRate. [0 ~ 1000]")
-					.defineInRange("TropicalSlime SpawnRate", 2, 0, 1000);
+					.defineInRange("TropicalSlime SpawnRate", 3, 0, 1000);
 		}
 	}
 
