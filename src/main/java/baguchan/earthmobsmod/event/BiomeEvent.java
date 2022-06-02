@@ -87,6 +87,19 @@ public class BiomeEvent {
 					event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.MOOLIP.get(), EarthMobsConfig.COMMON.moolipSpawnRate.get(), 3, 4));
 				}
 			}
+
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+				if (EarthMobsConfig.COMMON.skeletonWolfOverWorldSpawnRate.get() > 0) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.SKELETON_WOLF.get(), EarthMobsConfig.COMMON.skeletonWolfOverWorldSpawnRate.get(), 3, 4));
+				}
+			}
+
+			if (EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get() > 0) {
+				if (Biomes.SOUL_SAND_VALLEY.equals(biome)) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.SKELETON_WOLF.get(), EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get(), 1, 2));
+					event.getSpawns().addMobCharge(ModEntities.SKELETON_WOLF.get(), 0.7, 0.15F);
+				}
+			}
 		}
 	}
 }

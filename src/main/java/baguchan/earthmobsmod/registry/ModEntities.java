@@ -53,6 +53,8 @@ public class ModEntities {
 
 	public static final RegistryObject<EntityType<TropicalSlime>> TROPICAL_SLIME = ENTITIES.register("tropical_slime", () -> EntityType.Builder.of(TropicalSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build(prefix("tropical_slime")));
 
+	public static final RegistryObject<EntityType<SkeletonWolf>> SKELETON_WOLF = ENTITIES.register("skeleton_wolf", () -> EntityType.Builder.of(SkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).build(prefix("skeleton_wolf")));
+
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
 	public static final RegistryObject<EntityType<BoneShard>> BONE_SHARD = ENTITIES.register("bone_shard", () -> EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard")));
@@ -86,6 +88,7 @@ public class ModEntities {
 		SpawnPlacements.register(LOBBER_DROWNED.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LobberDrowned::checkLobberDrownedSpawnRules);
 
 		SpawnPlacements.register(TROPICAL_SLIME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TropicalSlime::checkTropicalSpawnRules);
+		SpawnPlacements.register(SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules);
 
 
 		event.put(CLUCK_SHROOM.get(), Chicken.createAttributes().build());
@@ -104,5 +107,6 @@ public class ModEntities {
 		event.put(BOULDERING_DROWNED.get(), BoulderingDrowned.createAttributes().build());
 		event.put(LOBBER_DROWNED.get(), Zombie.createAttributes().build());
 		event.put(TROPICAL_SLIME.get(), Monster.createMonsterAttributes().build());
+		event.put(SKELETON_WOLF.get(), SkeletonWolf.createAttributes().build());
 	}
 }

@@ -29,6 +29,9 @@ public class EarthMobsConfig {
 
 		public final ForgeConfigSpec.IntValue tropicalSlimeSpawnRate;
 
+		public final ForgeConfigSpec.IntValue skeletonWolfOverWorldSpawnRate;
+		public final ForgeConfigSpec.IntValue skeletonWolfNetherSpawnRate;
+
 		public Common(ForgeConfigSpec.Builder builder) {
 			woolyCowSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.woolyCowSpawnRate")
@@ -70,6 +73,16 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.tropicalSlimeSpawnRate")
 					.comment("Changed TropicalSlime SpawnRate. [0 ~ 1000]")
 					.defineInRange("TropicalSlime SpawnRate", 3, 0, 1000);
+
+			skeletonWolfOverWorldSpawnRate = builder
+					.translation(EarthMobsMod.MODID + ".config.skeletonWolfOverworldSpawnRate")
+					.comment("Changed SkeletonWolf SpawnRate In Overworld. [0 ~ 1000]")
+					.defineInRange("SkeletonWolf SpawnRate In Overworld", 10, 0, 1000);
+
+			skeletonWolfNetherSpawnRate = builder
+					.translation(EarthMobsMod.MODID + ".config.skeletonWolfNetherSpawnRate")
+					.comment("Changed SkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
+					.defineInRange("SkeletonWolf SpawnRate In Nether", 5, 0, 1000);
 		}
 	}
 
