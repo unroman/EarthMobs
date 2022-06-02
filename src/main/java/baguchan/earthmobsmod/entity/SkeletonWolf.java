@@ -14,7 +14,8 @@ import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -48,13 +49,8 @@ public class SkeletonWolf extends Wolf {
 		this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
 	}
 
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-	}
-
 	public static AttributeSupplier.Builder createAttributes() {
-		return Wolf.createAttributes().add(Attributes.MAX_HEALTH, 12.0F).add(Attributes.ATTACK_DAMAGE, 4.0D);
+		return Wolf.createAttributes().add(Attributes.MAX_HEALTH, 12.0F).add(Attributes.ATTACK_DAMAGE, 3.0D);
 	}
 
 	protected boolean isWorstCondition() {
@@ -71,14 +67,14 @@ public class SkeletonWolf extends Wolf {
 			this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(12.0D);
 		}
 
-		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 	}
 
 	public InteractionResult mobInteract(Player p_30412_, InteractionHand p_30413_) {
 		ItemStack itemstack = p_30412_.getItemInHand(p_30413_);
 		Item item = itemstack.getItem();
 		if (this.level.isClientSide) {
-			boolean flag = this.isOwnedBy(p_30412_) || this.isTame() || itemstack.is(Items.BONE) && !this.isTame() && !this.isAngry();
+			boolean flag = this.isOwnedBy(p_30412_) || this.isTame() || itemstack.is(Tags.Items.BONES) && !this.isTame() && !this.isAngry();
 			return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
 		} else {
 			if (this.isTame()) {
@@ -92,42 +88,24 @@ public class SkeletonWolf extends Wolf {
 					return InteractionResult.SUCCESS;
 				}
 
-				if (!(item instanceof DyeItem)) {
-					InteractionResult interactionresult = super.mobInteract(p_30412_, p_30413_);
-					if ((!interactionresult.consumesAction() || this.isBaby()) && this.isOwnedBy(p_30412_)) {
-						this.setOrderedToSit(!this.isOrderedToSit());
-						this.jumping = false;
-						this.navigation.stop();
-						this.setTarget((LivingEntity) null);
-						return InteractionResult.SUCCESS;
-					}
-
-					return interactionresult;
+				if (this.isFood(itemstack)) {
+					return InteractionResult.PASS;
 				}
 
-				DyeColor dyecolor = ((DyeItem) item).getDyeColor();
-				if (dyecolor != this.getCollarColor()) {
-					this.setCollarColor(dyecolor);
-					if (!p_30412_.getAbilities().instabuild) {
-						itemstack.shrink(1);
-					}
-
-					return InteractionResult.SUCCESS;
-				}
-			} else if (itemstack.is(Items.BONE) && !this.isAngry()) {
+			} else if (itemstack.is(Tags.Items.BONES) && !this.isAngry()) {
 				if (!p_30412_.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
 
-					if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_30412_)) {
-						this.tame(p_30412_);
-						this.navigation.stop();
-						this.setTarget((LivingEntity) null);
-						this.setOrderedToSit(true);
-						this.level.broadcastEntityEvent(this, (byte) 7);
-					} else {
-						this.level.broadcastEntityEvent(this, (byte) 6);
-					}
+				if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_30412_)) {
+					this.tame(p_30412_);
+					this.navigation.stop();
+					this.setTarget((LivingEntity) null);
+					this.setOrderedToSit(true);
+					this.level.broadcastEntityEvent(this, (byte) 7);
+				} else {
+					this.level.broadcastEntityEvent(this, (byte) 6);
+				}
 
 				return InteractionResult.SUCCESS;
 			}
@@ -150,6 +128,11 @@ public class SkeletonWolf extends Wolf {
 	@Override
 	public boolean isFood(ItemStack p_30440_) {
 		return false;
+	}
+
+	@Override
+	public boolean removeWhenFarAway(double p_27598_) {
+		return !isTame();
 	}
 
 	@Override
