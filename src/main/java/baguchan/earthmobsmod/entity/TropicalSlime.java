@@ -7,10 +7,14 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -23,6 +27,9 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -80,8 +87,74 @@ public class TropicalSlime extends Slime {
 		return this.entityData.get(DATA_FISHS);
 	}
 
+	@Nullable
+	public ListTag getFishList() {
+		if (getFishData() != null) {
+			return (ListTag) getFishData().get(TAG_FISH_LIST);
+		}
+		return null;
+	}
+
 	protected void setFishData(CompoundTag p_36363_) {
 		this.entityData.set(DATA_FISHS, p_36363_);
+	}
+
+	public CompoundTag writeFromBucketTag(CompoundTag p_149163_) {
+		CompoundTag newTag = new CompoundTag();
+
+		if (p_149163_ != null && p_149163_.contains("BucketVariantTag")) {
+			int i = p_149163_.getInt("BucketVariantTag");
+
+			newTag.putInt(TAG_FISH_VARIANT, i);
+		}
+		return newTag;
+	}
+
+	public InteractionResult mobInteract(Player p_28941_, InteractionHand p_28942_) {
+		ItemStack itemstack = p_28941_.getItemInHand(p_28942_);
+		if (itemstack.is(Items.TROPICAL_FISH_BUCKET)) {
+			CompoundTag tag = writeFromBucketTag(itemstack.getTag());
+			if (getFishList() == null || !getFishList().isEmpty() && getFishList().size() < 4) {
+				if (!tag.isEmpty()) {
+					addFishData(tag.getInt(TAG_FISH_VARIANT));
+				} else {
+					int i;
+					int j;
+					int k;
+					int l;
+					i = this.random.nextInt(2);
+					j = this.random.nextInt(6);
+					k = this.random.nextInt(15);
+					l = this.random.nextInt(15);
+
+					this.addFishData(i | j << 8 | k << 16 | l << 24);
+				}
+			} else {
+				return InteractionResult.FAIL;
+			}
+			ItemStack itemstack1 = new ItemStack(Items.BUCKET);
+
+			ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, p_28941_, itemstack1, false);
+			p_28941_.setItemInHand(p_28942_, itemstack2);
+			SoundEvent soundevent = SoundEvents.BUCKET_EMPTY_FISH;
+			this.playSound(soundevent, 1.0F, 1.0F);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
+		} else if (itemstack.is(Items.WATER_BUCKET)) {
+			ItemStack itemstack1 = new ItemStack(Items.TROPICAL_FISH_BUCKET);
+
+			if (releaseFish(itemstack1)) {
+
+				ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, p_28941_, itemstack1, false);
+				p_28941_.setItemInHand(p_28942_, itemstack2);
+				SoundEvent soundevent = SoundEvents.BUCKET_FILL_FISH;
+				this.playSound(soundevent, 1.0F, 1.0F);
+				return InteractionResult.sidedSuccess(this.level.isClientSide);
+			} else {
+				return InteractionResult.FAIL;
+			}
+		} else {
+			return super.mobInteract(p_28941_, p_28942_);
+		}
 	}
 
 	protected void randomFishData() {
@@ -110,6 +183,25 @@ public class TropicalSlime extends Slime {
 		compoundnbt1.putInt(TAG_FISH_VARIANT, variant);
 		listnbt.add(compoundnbt1);
 		fishTag.put(TAG_FISH_LIST, listnbt);
+	}
+
+	protected boolean releaseFish(ItemStack stack) {
+
+		CompoundTag fishTag = this.getFishData();
+		ListTag listnbt = new ListTag();
+		if (fishTag != null) {
+			fishTag = this.getFishData();
+			if (fishTag.get(TAG_FISH_LIST) != null) {
+				listnbt = (ListTag) fishTag.get(TAG_FISH_LIST);
+			}
+		}
+		if (!listnbt.isEmpty()) {
+			int size = listnbt.size() - 1;
+			stack.getOrCreateTag().putInt("BucketVariantTag", ((CompoundTag) listnbt.get(size)).getInt(TAG_FISH_VARIANT));
+			listnbt.remove(size);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
