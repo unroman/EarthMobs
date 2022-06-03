@@ -36,6 +36,7 @@ public class HyperRabbit extends Rabbit {
 
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new ClimbOnTopOfPowderSnowGoal(this, this.level));
 		this.goalSelector.addGoal(1, new HyperRabbit.RabbitPanicGoal(this, 2.5D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 0.8D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(Items.CARROT, Items.GOLDEN_CARROT, Blocks.DANDELION), false));

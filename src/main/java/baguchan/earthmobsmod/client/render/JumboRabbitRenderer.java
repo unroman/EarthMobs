@@ -26,7 +26,7 @@ public class JumboRabbitRenderer<T extends JumboRabbit> extends MobRenderer<T, J
 
 	@Override
 	protected void scale(T p_115314_, PoseStack p_115315_, float p_115316_) {
-		float scale = p_115314_.isBaby() ? 0.4F : 0.6F;
+		float scale = p_115314_.isBaby() ? 0.6F : 1.0F;
 		p_115315_.scale(scale, scale, scale);
 		super.scale(p_115314_, p_115315_, p_115316_);
 	}

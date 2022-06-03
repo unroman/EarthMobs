@@ -82,9 +82,12 @@ public class JumboRabbitModel<T extends JumboRabbit> extends EntityModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = ageInTicks - (float) entity.tickCount;
+		this.nose.xRot = headPitch * ((float) Math.PI / 180F);
 		this.head.xRot = headPitch * ((float) Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
-
+		this.nose.yRot = netHeadYaw * ((float) Math.PI / 180F);
+		this.earRight.yRot = this.nose.yRot - 0.2617994F;
+		this.earLeft.yRot = this.nose.yRot + 0.2617994F;
 		this.jumpRotation = Mth.sin(entity.getJumpCompletion(f) * (float) Math.PI);
 		this.haunchLeft.xRot = -0.1745F + (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
 		this.haunchRight.xRot = -0.1745F + (this.jumpRotation * 50.0F - 21.0F) * ((float) Math.PI / 180F);
