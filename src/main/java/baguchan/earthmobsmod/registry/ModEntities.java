@@ -74,10 +74,10 @@ public class ModEntities {
 		SpawnPlacements.register(CLUCK_SHROOM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
 		SpawnPlacements.register(WOOLY_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(HORNED_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(HYPER_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(HYPER_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, HyperRabbit::checkHyperSpawnRules);
 		SpawnPlacements.register(MOOBLOOM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(MOOLIP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(JUMBO_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+		SpawnPlacements.register(JUMBO_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, JumboRabbit::checkJumboSpawnRules);
 
 
 		SpawnPlacements.register(MELON_GOLEM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
@@ -99,7 +99,7 @@ public class ModEntities {
 		event.put(HYPER_RABBIT.get(), HyperRabbit.createAttributes().build());
 		event.put(MOOBLOOM.get(), Cow.createAttributes().build());
 		event.put(MOOLIP.get(), Cow.createAttributes().build());
-		event.put(JUMBO_RABBIT.get(), Cow.createAttributes().build());
+		event.put(JUMBO_RABBIT.get(), JumboRabbit.createAttributes().build());
 
 		event.put(MELON_GOLEM.get(), MelonGolem.createAttributes().build());
 		event.put(BONE_SPIDER.get(), BoneSpider.createAttributes().build());

@@ -38,9 +38,9 @@ public class HyperRabbitRenderer<T extends HyperRabbit> extends MobRenderer<T, H
 			case 0:
 			default:
 				return RABBIT_BROWN_LOCATION;
-			case 1:
+			case 1, 2, 3:
 				return RABBIT_WHITE_LOCATION;
-			case 2:
+			case 4, 5:
 				return RABBIT_GOLD_LOCATION;
 			case 99:
 				return RABBIT_SA_X_LOCATION;

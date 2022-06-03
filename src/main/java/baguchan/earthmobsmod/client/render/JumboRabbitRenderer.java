@@ -14,9 +14,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class JumboRabbitRenderer<T extends JumboRabbit> extends MobRenderer<T, JumboRabbitModel<T>> {
-	private static final ResourceLocation RABBIT_BROWN_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/jumbo_rabbit/jumbo_rabbit.png");
-	private static final ResourceLocation RABBIT_WHITE_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/white.png");
-	private static final ResourceLocation RABBIT_GOLD_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/hyper_rabbit/gold.png");
+	private static final ResourceLocation RABBIT_BROWN_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/jumbo_rabbit/brown.png");
+	private static final ResourceLocation RABBIT_WHITE_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/jumbo_rabbit/white.png");
+	private static final ResourceLocation RABBIT_BLACK_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/jumbo_rabbit/black.png");
+	private static final ResourceLocation RABBIT_EVIL_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/jumbo_rabbit/evil.png");
+
 
 	public JumboRabbitRenderer(EntityRendererProvider.Context p_173952_) {
 		super(p_173952_, new JumboRabbitModel<>(p_173952_.bakeLayer(ModModelLayers.JUMBO_RABBIT)), 0.3F);
@@ -40,7 +42,13 @@ public class JumboRabbitRenderer<T extends JumboRabbit> extends MobRenderer<T, J
 			case 1:
 				return RABBIT_WHITE_LOCATION;
 			case 2:
-				return RABBIT_GOLD_LOCATION;
+				return RABBIT_BLACK_LOCATION;
+			case 3:
+				return RABBIT_WHITE_LOCATION;
+			case 5:
+				return RABBIT_WHITE_LOCATION;
+			case 99:
+				return RABBIT_EVIL_LOCATION;
 		}
 	}
 }
