@@ -36,7 +36,7 @@ public class JumboRabbit extends Rabbit {
 	public boolean doHurtTarget(Entity p_29659_) {
 		if (this.getRabbitType() == 99) {
 			this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-			return p_29659_.hurt(DamageSource.mobAttack(this), 10.0F);
+			return p_29659_.hurt(DamageSource.mobAttack(this), 9.0F);
 		} else {
 			return p_29659_.hurt(DamageSource.mobAttack(this), 5.0F);
 		}
