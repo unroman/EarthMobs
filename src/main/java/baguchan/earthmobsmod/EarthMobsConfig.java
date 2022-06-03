@@ -23,6 +23,7 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
 		public final ForgeConfigSpec.IntValue moobloomSpawnRate;
 		public final ForgeConfigSpec.IntValue moolipSpawnRate;
+		public final ForgeConfigSpec.IntValue jumboRabbitSpawnRate;
 
 		public final ForgeConfigSpec.IntValue boulderingZombieSpawnRate;
 		public final ForgeConfigSpec.IntValue lobberZombieSpawnRate;
@@ -57,6 +58,10 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.moolipSpawnRate")
 					.comment("Changed Moolip SpawnRate. [0 ~ 100]")
 					.defineInRange("Moolip SpawnRate", 10, 0, 100);
+			jumboRabbitSpawnRate = builder
+					.translation(EarthMobsMod.MODID + ".config.jumboRabbitSpawnRate")
+					.comment("Changed Jumbo Rabbit SpawnRate. [0 ~ 100]")
+					.defineInRange("Jumbo Rabbit SpawnRate", 5, 0, 100);
 			boneSpiderSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.boneSpiderSpawnRate")
 					.comment("Changed Bone Spider SpawnRate. [0 ~ 1000]")

@@ -100,6 +100,12 @@ public class BiomeEvent {
 					event.getSpawns().addMobCharge(ModEntities.SKELETON_WOLF.get(), 0.7, 0.15F);
 				}
 			}
+
+			if (EarthMobsConfig.COMMON.jumboRabbitSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) || Biomes.DESERT.equals(biome))) {
+					event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.JUMBO_RABBIT.get(), EarthMobsConfig.COMMON.jumboRabbitSpawnRate.get(), 3, 4));
+				}
+			}
 		}
 	}
 }
