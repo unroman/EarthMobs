@@ -67,9 +67,8 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), 3);
 
-		if (entity instanceof LivingEntity) {
+		if (entity instanceof LivingEntity && entity.hurt(DamageSource.thrown(this, this.getOwner()), 3)) {
 			((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.HUNGER, 60), entity);
 		}
 	}
