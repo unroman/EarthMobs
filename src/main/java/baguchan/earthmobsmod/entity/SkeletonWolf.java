@@ -4,6 +4,7 @@ import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -21,8 +22,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.Tags;
-
-import java.util.Random;
 
 public class SkeletonWolf extends Wolf {
 	public SkeletonWolf(EntityType<? extends Wolf> p_30369_, Level p_30370_) {
@@ -54,7 +53,7 @@ public class SkeletonWolf extends Wolf {
 	}
 
 	protected boolean isWorstCondition() {
-		return this.getBrightness() < 0.45F;
+		return this.getLightLevelDependentMagicValue() < 0.45F;
 	}
 
 	@Override
@@ -84,7 +83,7 @@ public class SkeletonWolf extends Wolf {
 					}
 
 					this.heal(2);
-					this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
+					this.gameEvent(GameEvent.ITEM_INTERACT_START);
 					return InteractionResult.SUCCESS;
 				}
 
@@ -140,7 +139,7 @@ public class SkeletonWolf extends Wolf {
 		return MobType.UNDEAD;
 	}
 
-	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor p_33009_, BlockPos p_33010_, Random p_33011_) {
+	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor p_33009_, BlockPos p_33010_, RandomSource p_33011_) {
 		if (p_33009_.getBrightness(LightLayer.SKY, p_33010_) > p_33011_.nextInt(32)) {
 			return false;
 		} else if (p_33009_.getBrightness(LightLayer.BLOCK, p_33010_) > 0) {
@@ -151,7 +150,7 @@ public class SkeletonWolf extends Wolf {
 		}
 	}
 
-	public static boolean checkSkeletonWolfSpawnRules(EntityType<? extends SkeletonWolf> p_33018_, ServerLevelAccessor p_33019_, MobSpawnType p_33020_, BlockPos p_33021_, Random p_33022_) {
+	public static boolean checkSkeletonWolfSpawnRules(EntityType<? extends SkeletonWolf> p_33018_, ServerLevelAccessor p_33019_, MobSpawnType p_33020_, BlockPos p_33021_, RandomSource p_33022_) {
 		return p_33019_.getBlockState(p_33021_.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isDarkEnoughToSpawn(p_33019_, p_33021_, p_33022_) && checkMobSpawnRules(p_33018_, p_33019_, p_33020_, p_33021_, p_33022_);
 	}
 }

@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Chicken;
@@ -32,7 +33,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 
 public class CluckShroom extends Chicken implements Shearable, net.minecraftforge.common.IForgeShearable {
@@ -55,12 +55,12 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 		return super.spawnAtLocation(p_19999_);
 	}
 
-	public static boolean checkCluckShroomSpawnRules(EntityType<CluckShroom> p_28949_, LevelAccessor p_28950_, MobSpawnType p_28951_, BlockPos p_28952_, Random p_28953_) {
+	public static boolean checkCluckShroomSpawnRules(EntityType<CluckShroom> p_28949_, LevelAccessor p_28950_, MobSpawnType p_28951_, BlockPos p_28952_, RandomSource p_28953_) {
 		return p_28950_.getBlockState(p_28952_.below()).is(Blocks.MYCELIUM) && p_28950_.getRawBrightness(p_28952_, 0) > 8;
 	}
 
 	public float getWalkTargetValue(BlockPos p_28933_, LevelReader p_28934_) {
-		return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getBrightness(p_28933_) - 0.5F;
+		return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getPathfindingCostFromLightLevels(p_28933_) - 0.5F;
 	}
 
 	public void thunderHit(ServerLevel p_28921_, LightningBolt p_28922_) {

@@ -1,0 +1,11 @@
+{
+  "type": "earthmobsmod:earth_entity_modifier",
+  "biomes": "#minecraft:is_forest",
+  "spawn": {
+    "type": "earthmobsmod:skeleton_wolf",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 10
+  },
+  "mob_category": "monster"
+}

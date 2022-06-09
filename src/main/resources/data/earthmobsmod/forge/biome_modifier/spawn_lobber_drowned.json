@@ -1,0 +1,13 @@
+{
+  "type": "earthmobsmod:earth_entity_modifier",
+  "biomes": [
+    "#minecraft:is_deep_ocean"
+  ],
+  "spawn": {
+    "type": "earthmobsmod:lobber_drowned",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 6
+  },
+  "mob_category": "monster"
+}

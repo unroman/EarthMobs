@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
@@ -29,8 +30,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-
-import java.util.Random;
 
 public class LobberDrowned extends Drowned implements RangedAttackMob {
 	public LobberDrowned(EntityType<? extends LobberDrowned> p_34271_, Level p_34272_) {
@@ -63,7 +62,7 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 		this.swing(InteractionHand.MAIN_HAND);
 	}
 
-	public static boolean checkLobberDrownedSpawnRules(EntityType<LobberDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, Random p_32354_) {
+	public static boolean checkLobberDrownedSpawnRules(EntityType<LobberDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, RandomSource p_32354_) {
 		if (!p_32351_.getFluidState(p_32353_.below()).is(FluidTags.WATER)) {
 			return false;
 		} else {

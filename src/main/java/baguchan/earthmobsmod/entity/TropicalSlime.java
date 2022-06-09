@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -41,7 +42,6 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
-import java.util.Random;
 
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
@@ -256,7 +256,7 @@ public class TropicalSlime extends Slime {
 		return p_30026_;
 	}
 
-	public static boolean checkTropicalSpawnRules(EntityType<TropicalSlime> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, Random p_32354_) {
+	public static boolean checkTropicalSpawnRules(EntityType<TropicalSlime> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, RandomSource p_32354_) {
 		if (!p_32351_.getFluidState(p_32353_.below()).is(FluidTags.WATER)) {
 			return false;
 		} else {

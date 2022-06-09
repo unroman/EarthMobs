@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,8 +23,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-
-import java.util.Random;
 
 public class BoulderingDrowned extends Drowned {
 	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(BoulderingDrowned.class, EntityDataSerializers.BYTE);
@@ -96,7 +95,7 @@ public class BoulderingDrowned extends Drowned {
 		this.entityData.set(DATA_FLAGS_ID, b0);
 	}
 
-	public static boolean checkBoulderingDrownedSpawnRules(EntityType<BoulderingDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, Random p_32354_) {
+	public static boolean checkBoulderingDrownedSpawnRules(EntityType<BoulderingDrowned> p_32350_, ServerLevelAccessor p_32351_, MobSpawnType p_32352_, BlockPos p_32353_, RandomSource p_32354_) {
 		if (!p_32351_.getFluidState(p_32353_.below()).is(FluidTags.WATER)) {
 			return false;
 		} else {

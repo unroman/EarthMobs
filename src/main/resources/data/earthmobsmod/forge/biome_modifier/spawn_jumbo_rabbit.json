@@ -1,0 +1,14 @@
+{
+  "type": "earthmobsmod:earth_entity_modifier",
+  "biomes": [
+    "#minecraft:is_forest",
+    "#minecraft:is_plain"
+  ],
+  "spawn": {
+    "type": "earthmobsmod:jumbo_rabbit",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 5
+  },
+  "mob_category": "creature"
+}

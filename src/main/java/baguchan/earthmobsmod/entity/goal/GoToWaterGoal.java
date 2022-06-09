@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity.goal;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
@@ -9,7 +10,6 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
-import java.util.Random;
 
 public class GoToWaterGoal extends Goal {
 	private final PathfinderMob mob;
@@ -54,7 +54,7 @@ public class GoToWaterGoal extends Goal {
 
 	@Nullable
 	private Vec3 getWaterPos() {
-		Random random = this.mob.getRandom();
+		RandomSource random = this.mob.getRandom();
 		BlockPos blockpos = this.mob.blockPosition();
 
 		for (int i = 0; i < 10; ++i) {

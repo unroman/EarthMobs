@@ -1,11 +1,11 @@
 package baguchan.earthmobsmod.util;
 
 import com.google.common.collect.Maps;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class DyeUtil {
@@ -27,7 +27,7 @@ public class DyeUtil {
 		return COLORARRAY_BY_COLOR.get(p_29830_);
 	}
 
-	public static DyeColor getRandomColor(Random p_29843_) {
+	public static DyeColor getRandomColor(RandomSource p_29843_) {
 		return DyeColor.byId(p_29843_.nextInt(15));
 	}
 

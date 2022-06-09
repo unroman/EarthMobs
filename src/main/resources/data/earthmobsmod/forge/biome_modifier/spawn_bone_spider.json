@@ -1,0 +1,13 @@
+{
+  "type": "earthmobsmod:earth_entity_modifier",
+  "biomes": [
+    "#forge:is_spookey"
+  ],
+  "spawn": {
+    "type": "earthmobsmod:bone_spider",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 10
+  },
+  "mob_category": "monster"
+}

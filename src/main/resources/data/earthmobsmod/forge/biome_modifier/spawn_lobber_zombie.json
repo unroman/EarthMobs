@@ -1,0 +1,13 @@
+{
+  "type": "earthmobsmod:earth_entity_modifier",
+  "biomes": [
+    "#minecraft:is_overworld"
+  ],
+  "spawn": {
+    "type": "earthmobsmod:lobber_zombie",
+    "maxCount": 4,
+    "minCount": 3,
+    "weight": 8
+  },
+  "mob_category": "monster"
+}

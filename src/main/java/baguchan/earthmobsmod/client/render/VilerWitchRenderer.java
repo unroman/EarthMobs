@@ -17,7 +17,7 @@ public class VilerWitchRenderer<T extends VilerWitch> extends MobRenderer<T, Vil
 
 	public VilerWitchRenderer(EntityRendererProvider.Context p_173952_) {
 		super(p_173952_, new VilerWitchModel<>(p_173952_.bakeLayer(ModModelLayers.VILER_WITCH)), 0.5F);
-		this.addLayer(new VilerWitchItemLayer<>(this));
+		this.addLayer(new VilerWitchItemLayer<>(this, p_173952_.getItemInHandRenderer()));
 	}
 
 

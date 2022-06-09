@@ -135,7 +135,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 			} else if (!this.inMud && this.isShaking) {
 				if (this.shakeAnim == 0.0F) {
 					this.playSound(SoundEvents.WOLF_SHAKE, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-					this.gameEvent(GameEvent.WOLF_SHAKING);
+					this.gameEvent(GameEvent.ITEM_INTERACT_START);
 				}
 
 				this.shakeAnimO = this.shakeAnim;
@@ -162,7 +162,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 			} else if (this.inMud && this.isShaking) {
 				if (this.shakeAnim == 0.0F) {
 					this.playSound(SoundEvents.WOLF_SHAKE, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-					this.gameEvent(GameEvent.WOLF_SHAKING);
+					this.gameEvent(GameEvent.ENTITY_INTERACT);
 				}
 
 				this.shakeAnimO = this.shakeAnim;

@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, EarthMobsMod.MODID);
 
-	public static final RegistryObject<LiquidBlock> MUD = noItemRegister("mud", () -> new LiquidBlock(ModFluids.MUD, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100F).noDrops()));
+	public static final RegistryObject<LiquidBlock> MUD = noItemRegister("mud", () -> new LiquidBlock(ModFluids.MUD, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100F).noLootTable()));
 
 	public static final RegistryObject<Block> CARVED_MELON = register("carved_melon", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> CARVED_MELON_SHOOT = register("carved_melon_shoot", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of(Material.VEGETABLE, MaterialColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
