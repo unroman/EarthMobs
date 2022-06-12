@@ -5,7 +5,7 @@
     "type": "earthmobsmod:wooly_cow",
     "maxCount": 4,
     "minCount": 3,
-    "weight": 5
+    "weight": 8
   },
   "mob_category": "creature"
 }

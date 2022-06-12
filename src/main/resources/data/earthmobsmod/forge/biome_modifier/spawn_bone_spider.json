@@ -1,6 +1,6 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
-  "biomes": "#forge:is_spookey",
+  "biomes": "#forge:is_spooky",
   "spawn": {
     "type": "earthmobsmod:bone_spider",
     "maxCount": 2,
