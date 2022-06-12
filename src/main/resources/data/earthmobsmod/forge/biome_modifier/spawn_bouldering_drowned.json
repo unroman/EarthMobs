@@ -1,9 +1,6 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
-  "biomes": [
-    "#minecraft:is_mountain",
-    "minecraft:dripstone_caves"
-  ],
+  "biomes": "minecraft:dripstone_caves",
   "spawn": {
     "type": "earthmobsmod:bouldering_drowned",
     "maxCount": 4,

@@ -17,7 +17,7 @@ public record EarthBiomeModifier(HolderSet<Biome> biomes, MobSpawnSettings.Spawn
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
 		if (phase == Phase.ADD && this.biomes.contains(biome) && biome.containsTag(BiomeTags.IS_OVERWORLD)) {
-			builder.getMobSpawnSettings().getSpawner(category).add(spawn);
+			builder.getMobSpawnSettings().addSpawn(category, spawn);
 
 		}
 	}

@@ -1,9 +1,6 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
-  "biomes": [
-    "#minecraft:is_mountain",
-    "#forge:is_cold/overworld"
-  ],
+  "biomes": "#earthmobsmod:cold_mob_spawnable",
   "spawn": {
     "type": "earthmobsmod:wooly_cow",
     "maxCount": 4,

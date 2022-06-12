@@ -1,9 +1,6 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
-  "biomes": [
-    "#minecraft:is_forest",
-    "#minecraft:is_plain"
-  ],
+  "biomes": "#earthmobsmod:earth_animal_spawnable",
   "spawn": {
     "type": "earthmobsmod:hyper_rabbit",
     "maxCount": 4,
