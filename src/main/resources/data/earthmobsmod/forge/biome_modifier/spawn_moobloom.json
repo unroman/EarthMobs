@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "minecraft:flower_forest",
+  "blacklist_biomes": [],
   "spawn": {
     "type": "earthmobsmod:moobloom",
     "maxCount": 4,

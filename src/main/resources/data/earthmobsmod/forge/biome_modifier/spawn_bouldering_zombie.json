@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "#minecraft:is_mountain",
+  "blacklist_biomes": [],
   "spawn": {
     "type": "earthmobsmod:bouldering_zombie",
     "maxCount": 4,

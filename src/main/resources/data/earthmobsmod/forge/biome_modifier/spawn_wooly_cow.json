@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "#earthmobsmod:cold_mob_spawnable",
+  "blacklist_biomes": [],
   "spawn": {
     "type": "earthmobsmod:wooly_cow",
     "maxCount": 4,

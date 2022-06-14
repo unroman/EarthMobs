@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "#earthmobsmod:earth_animal_spawnable",
+  "blacklist_biomes": [],
   "spawn": {
     "type": "earthmobsmod:jumbo_rabbit",
     "maxCount": 4,

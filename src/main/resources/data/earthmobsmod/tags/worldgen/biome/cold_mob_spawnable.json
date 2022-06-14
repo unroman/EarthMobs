@@ -1,6 +1,6 @@
 {
   "values": [
-    "#minecraft:is_mountain",
+    "#forge:is_mountain",
     "#forge:is_cold/overworld"
   ]
 }

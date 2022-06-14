@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "#minecraft:is_overworld",
+  "blacklist_biomes": "minecraft:mushroom_fields",
   "spawn": {
     "type": "earthmobsmod:lobber_zombie",
     "maxCount": 4,

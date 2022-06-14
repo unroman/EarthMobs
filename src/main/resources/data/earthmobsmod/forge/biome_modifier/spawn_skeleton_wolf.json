@@ -1,6 +1,7 @@
 {
   "type": "earthmobsmod:earth_entity_modifier",
   "biomes": "#minecraft:is_forest",
+  "blacklist_biomes": [],
   "spawn": {
     "type": "earthmobsmod:skeleton_wolf",
     "maxCount": 4,
