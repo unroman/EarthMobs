@@ -3,6 +3,8 @@ package baguchan.earthmobsmod;
 import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.client.ClientRegistrar;
 import baguchan.earthmobsmod.registry.*;
+import baguchan.earthmobsmod.world.features.ModEarthFeatures;
+import baguchan.earthmobsmod.world.features.ModEarthPlacements;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -41,6 +43,7 @@ public class EarthMobsMod {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		ModBlocks.BLOCKS.register(modBus);
 		ModEntities.ENTITIES.register(modBus);
+		ModFluidTypes.FLUID_TYPES.register(modBus);
 		ModFluids.FLUIDS.register(modBus);
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modBus);
 		ModEffects.MOB_EFFECTS.register(modBus);
@@ -54,6 +57,9 @@ public class EarthMobsMod {
 
 	private void setup(final FMLCommonSetupEvent event) {
 		ModEffects.init();
+		ModInteractionInformations.init();
+		ModEarthFeatures.init();
+		ModEarthPlacements.init();
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {

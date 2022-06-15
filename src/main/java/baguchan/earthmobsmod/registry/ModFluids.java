@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModFluids {
 	public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, EarthMobsMod.MODID);
 
-	public static final RegistryObject<FlowingFluid> MUD = FLUIDS.register("mud", () -> new MudFluid.Source(ModFluidProperties.MUD_PROPERTIES));
-	public static final RegistryObject<FlowingFluid> MUD_FLOW = FLUIDS.register("mud_flow", () -> new MudFluid.Flowing(ModFluidProperties.MUD_PROPERTIES));
+	public static final RegistryObject<FlowingFluid> MUD = FLUIDS.register("mud", () -> new MudFluid.Source());
+	public static final RegistryObject<FlowingFluid> MUD_FLOW = FLUIDS.register("mud_flow", () -> new MudFluid.Flowing());
 
 }
