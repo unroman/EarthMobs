@@ -1,14 +1,20 @@
 package baguchan.earthmobsmod.fluid;
 
-import baguchan.earthmobsmod.EarthMobsMod;
+import baguchan.earthmobsmod.registry.ModFluidTypes;
 import baguchan.earthmobsmod.registry.ModFluids;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 public abstract class MudFluid extends ForgeFlowingFluid {
@@ -17,11 +23,9 @@ public abstract class MudFluid extends ForgeFlowingFluid {
 		super(properties);
 	}
 
-	protected FluidAttributes createAttributes() {
-		return FluidAttributes.builder(new ResourceLocation(EarthMobsMod.MODID, "block/mud"), new ResourceLocation(EarthMobsMod.MODID, "block/flow_mud"))
-				.overlay(new ResourceLocation(EarthMobsMod.MODID, "block/mud_overlay"))
-				.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
-				.build(this);
+	@Override
+	public FluidType getFluidType() {
+		return ModFluidTypes.MUD.get();
 	}
 
 	@Override
@@ -45,6 +49,39 @@ public abstract class MudFluid extends ForgeFlowingFluid {
 
 	public int getDropOff(LevelReader p_76252_) {
 		return p_76252_.dimensionType().ultraWarm() ? 2 : 3;
+	}
+
+
+	private void fizz(LevelAccessor p_76213_, BlockPos p_76214_) {
+		p_76213_.levelEvent(1501, p_76214_, 0);
+	}
+
+	private void fizzWithWater(LevelAccessor p_76213_, BlockPos p_76214_) {
+		p_76213_.levelEvent(1501, p_76214_, 0);
+		p_76213_.levelEvent(2001, p_76214_, Block.getId(Blocks.MUD.defaultBlockState()));
+	}
+
+	protected void spreadTo(LevelAccessor p_76220_, BlockPos p_76221_, BlockState p_76222_, Direction p_76223_, FluidState p_76224_) {
+		FluidState fluidstate = p_76220_.getFluidState(p_76221_);
+		if (fluidstate.is(FluidTags.WATER)) {
+			if (p_76222_.getBlock() instanceof LiquidBlock) {
+				p_76220_.setBlock(p_76221_, Blocks.MUD.defaultBlockState(), 3);
+			}
+
+			this.fizzWithWater(p_76220_, p_76221_);
+			return;
+		}
+
+		if (fluidstate.is(FluidTags.LAVA)) {
+			if (p_76222_.getBlock() instanceof LiquidBlock) {
+				p_76220_.setBlock(p_76221_, Blocks.DIRT.defaultBlockState(), 3);
+			}
+
+			this.fizz(p_76220_, p_76221_);
+			return;
+		}
+
+		super.spreadTo(p_76220_, p_76221_, p_76222_, p_76223_, p_76224_);
 	}
 
 	public static class Flowing extends MudFluid {

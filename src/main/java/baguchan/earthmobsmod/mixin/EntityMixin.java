@@ -19,9 +19,7 @@ public class EntityMixin implements IOnMud {
 	@Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At("TAIL"))
 	void updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo callbackInfo) {
 		if (this.updateFluidHeightAndDoFluidPushing(ModTags.Fluids.MUD, 0.01D)) {
-			this.resetFallDistance();
 			this.wasTouchingMud = true;
-			this.clearFire();
 		} else {
 			this.wasTouchingMud = false;
 		}

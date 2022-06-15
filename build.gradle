@@ -20,7 +20,7 @@ mixin {
     add sourceSets.main, "earthmobsmod.refmap.json"
 }
 
-version = '1.19-2.0.1'
+version = '1.19-2.1.0'
 group = 'baguchan.earthmobsmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'EarthMobs'
 
@@ -134,7 +134,7 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.19-41.0.22'
+    minecraft 'net.minecraftforge:forge:1.19-41.0.30'
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
