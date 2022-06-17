@@ -1,10 +1,11 @@
 package baguchan.earthmobsmod.mixin;
 
 import baguchan.earthmobsmod.api.IOnMud;
-import baguchan.earthmobsmod.registry.ModTags;
+import baguchan.earthmobsmod.registry.ModFluidTypes;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.extensions.IForgeEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
-public class EntityMixin implements IOnMud {
+public abstract class EntityMixin implements IOnMud, IForgeEntity {
 
 	private boolean wasTouchingMud;
 
 	@Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At("TAIL"))
 	void updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo callbackInfo) {
-		if (this.updateFluidHeightAndDoFluidPushing(ModTags.Fluids.MUD, 0.01D)) {
+		if (this.isInFluidType(ModFluidTypes.MUD.get())) {
 			this.wasTouchingMud = true;
 		} else {
 			this.wasTouchingMud = false;
