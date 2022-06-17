@@ -14,14 +14,13 @@ public abstract class EntityMixin implements IOnMud, IForgeEntity {
 
 	private boolean wasTouchingMud;
 
-	@Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At("TAIL"))
-	void updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo callbackInfo) {
+	@Inject(method = "tick", at = @At("TAIL"))
+	void tick(CallbackInfo callbackInfo) {
 		if (this.isInFluidType(ModFluidTypes.MUD.get())) {
 			this.wasTouchingMud = true;
 		} else {
 			this.wasTouchingMud = false;
 		}
-
 	}
 
 	@Override
