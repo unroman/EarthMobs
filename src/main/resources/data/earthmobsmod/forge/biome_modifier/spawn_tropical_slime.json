@@ -6,7 +6,7 @@
     "type": "earthmobsmod:tropical_slime",
     "maxCount": 3,
     "minCount": 1,
-    "weight": 6
+    "weight": 10
   },
   "mob_category": "monster"
 }

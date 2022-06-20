@@ -67,8 +67,7 @@ public class ModEntities {
 		return EarthMobsMod.MODID + "." + path;
 	}
 
-	@SubscribeEvent
-	public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
+	public static void spawnPlacementSetup() {
 		Raid.RaiderType.create("viler_witch", VILER_WITCH.get(), new int[]{0, 0, 1, 0, 1, 1, 2, 1});
 
 		SpawnPlacements.register(CLUCK_SHROOM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CluckShroom::checkCluckShroomSpawnRules);
@@ -92,7 +91,10 @@ public class ModEntities {
 		SpawnPlacements.register(TROPICAL_SLIME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TropicalSlime::checkTropicalSpawnRules);
 		SpawnPlacements.register(SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules);
 
+	}
 
+	@SubscribeEvent
+	public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
 		event.put(CLUCK_SHROOM.get(), Chicken.createAttributes().build());
 		event.put(WOOLY_COW.get(), Cow.createAttributes().build());
 		event.put(HORNED_SHEEP.get(), HornedSheep.createAttributes().build());
