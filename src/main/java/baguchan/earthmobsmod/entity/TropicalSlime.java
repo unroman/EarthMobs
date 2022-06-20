@@ -39,6 +39,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fluids.FluidType;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -78,8 +79,8 @@ public class TropicalSlime extends Slime {
 	}
 
 	@Override
-	public boolean canBreatheUnderwater() {
-		return true;
+	public boolean canDrownInFluidType(FluidType type) {
+		return false;
 	}
 
 	@Nullable
