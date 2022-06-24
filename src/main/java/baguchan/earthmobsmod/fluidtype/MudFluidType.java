@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.fluidtype;
 
 import baguchan.earthmobsmod.EarthMobsMod;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -9,7 +10,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.IFluidTypeRenderProperties;
 import net.minecraftforge.fluids.FluidType;
 
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class MudFluidType extends FluidType {
@@ -49,8 +49,8 @@ public class MudFluidType extends FluidType {
 	public void initializeClient(Consumer<IFluidTypeRenderProperties> consumer) {
 		consumer.accept(new IFluidTypeRenderProperties() {
 			private static final ResourceLocation TEXTURE_STILL = new ResourceLocation(EarthMobsMod.MODID, "block/mud");
-			private static final ResourceLocation TEXTURE_FLOW = new ResourceLocation(EarthMobsMod.MODID, "block/mud");
-			private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(EarthMobsMod.MODID, "block/mud_overlay");
+			private static final ResourceLocation TEXTURE_FLOW = new ResourceLocation(EarthMobsMod.MODID, "block/flow_mud");
+			private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(EarthMobsMod.MODID, "textures/block/mud.png");
 
 			@Override
 			public ResourceLocation getStillTexture() {
@@ -63,7 +63,7 @@ public class MudFluidType extends FluidType {
 			}
 
 			@Override
-			public @Nullable ResourceLocation getOverlayTexture() {
+			public ResourceLocation getRenderOverlayTexture(Minecraft mc) {
 				return TEXTURE_OVERLAY;
 			}
 		});
