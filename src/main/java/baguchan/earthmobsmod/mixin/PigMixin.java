@@ -4,6 +4,7 @@ package baguchan.earthmobsmod.mixin;
 import baguchan.earthmobsmod.api.IMuddy;
 import baguchan.earthmobsmod.api.IOnMud;
 import baguchan.earthmobsmod.api.ISheared;
+import baguchan.earthmobsmod.entity.IHasFlower;
 import baguchan.earthmobsmod.util.DyeUtil;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
@@ -37,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 @Mixin(Pig.class)
-public abstract class PigMixin extends Animal implements IMuddy, net.minecraftforge.common.IForgeShearable, ISheared {
+public abstract class PigMixin extends Animal implements IMuddy, net.minecraftforge.common.IForgeShearable, ISheared, IHasFlower {
 	private static final EntityDataAccessor<Boolean> DATA_MUDDY_ID = SynchedEntityData.defineId(Pig.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> DATA_DYE_ID = SynchedEntityData.defineId(Pig.class, EntityDataSerializers.BYTE);
 	private static final Map<DyeColor, ItemLike> ITEM_BY_DYE = Util.make(Maps.newEnumMap(DyeColor.class), (p_29841_) -> {
@@ -229,5 +230,10 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 			return items;
 		}
 		return java.util.Collections.emptyList();
+	}
+
+	@Override
+	public boolean hasFlower() {
+		return !isSheared() && this.isMuddy();
 	}
 }

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShearable, IFlowerCow {
+public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShearable, IFlowerCow, IHasFlower {
 	public Moobloom(EntityType<? extends Cow> p_28285_, Level p_28286_) {
 		super(p_28285_, p_28286_);
 	}
@@ -98,5 +98,10 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 	@Override
 	public Cow getBreedOffspring(ServerLevel p_148890_, AgeableMob p_148891_) {
 		return ModEntities.MOOBLOOM.get().create(p_148890_);
+	}
+
+	@Override
+	public boolean hasFlower() {
+		return !this.isBaby();
 	}
 }
