@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.IFluidTypeRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
 
 import java.util.function.Consumer;
@@ -52,8 +52,9 @@ public class MudFluidType extends FluidType {
 	}
 
 	@Override
-	public void initializeClient(Consumer<IFluidTypeRenderProperties> consumer) {
-		consumer.accept(new IFluidTypeRenderProperties() {
+	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+		super.initializeClient(consumer);
+		consumer.accept(new IClientFluidTypeExtensions() {
 			private static final ResourceLocation TEXTURE_STILL = new ResourceLocation(EarthMobsMod.MODID, "block/mud");
 			private static final ResourceLocation TEXTURE_FLOW = new ResourceLocation(EarthMobsMod.MODID, "block/flow_mud");
 			private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(EarthMobsMod.MODID, "textures/block/mud.png");
