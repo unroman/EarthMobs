@@ -5,11 +5,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ModifiableBiomeInfo;
 
@@ -18,7 +18,7 @@ public record EarthBiomeModifier(HolderSet<Biome> biomes, HolderSet<Biome> black
 								 MobCategory category) implements BiomeModifier {
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
-		if (phase == Phase.ADD && this.biomes.contains(biome) && biome.containsTag(Tags.Biomes.IS_OVERWORLD) && !biome.is(Biomes.DEEP_DARK) && !blacklist_biomes.contains(biome)) {
+		if (phase == Phase.ADD && this.biomes.contains(biome) && biome.containsTag(BiomeTags.IS_OVERWORLD) && !biome.is(Biomes.DEEP_DARK) && !blacklist_biomes.contains(biome)) {
 			builder.getMobSpawnSettings().addSpawn(category, spawn);
 
 		}
