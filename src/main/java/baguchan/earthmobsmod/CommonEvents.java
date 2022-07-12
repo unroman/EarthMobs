@@ -36,28 +36,28 @@ public class CommonEvents {
 
 	@SubscribeEvent
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		ItemStack itemStack = event.getPlayer().getItemInHand(event.getHand());
-		if (itemStack.getItem() instanceof ShearsItem && event.getPlayer().level.getBlockState(event.getPos()).getBlock() == Blocks.MELON) {
-			itemStack.hurtAndBreak(1, event.getPlayer(), (p_29910_) -> {
+		ItemStack itemStack = event.getEntity().getItemInHand(event.getHand());
+		if (itemStack.getItem() instanceof ShearsItem && event.getEntity().level.getBlockState(event.getPos()).getBlock() == Blocks.MELON) {
+			itemStack.hurtAndBreak(1, event.getEntity(), (p_29910_) -> {
 				p_29910_.broadcastBreakEvent(event.getHand());
 			});
-			event.getPlayer().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			event.getPlayer().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState(), 2);
+			event.getEntity().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
+			event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState(), 2);
 
 			event.setUseItem(Event.Result.ALLOW);
 		}
 	}
 
 	@SubscribeEvent
-	public static void onUpdate(LivingEvent.LivingUpdateEvent event) {
-		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
-			shadowCapability.tick(event.getEntityLiving());
+	public static void onUpdate(LivingEvent.LivingTickEvent event) {
+		event.getEntity().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
+			shadowCapability.tick(event.getEntity());
 		});
 	}
 
 	@SubscribeEvent
 	public static void onHurt(LivingHurtEvent event) {
-		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
+		event.getEntity().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
 			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().isFire() && !event.getSource().isExplosion() && !event.getSource().isBypassArmor()) {
 				event.setAmount(event.getAmount() * (1.0F - shadowCapability.getPercentBoost()));
 			}
@@ -66,7 +66,7 @@ public class CommonEvents {
 
 	@SubscribeEvent
 	public static void onLivingKnockback(LivingKnockBackEvent event) {
-		event.getEntityLiving().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
+		event.getEntity().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
 			if (shadowCapability.getPercentBoost() >= 0.5F) {
 				event.setCanceled(true);
 			}
