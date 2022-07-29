@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.registry.ModBlocks;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
@@ -7,7 +8,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 public class Moolip extends Moobloom {
 	public Moolip(EntityType<? extends Cow> p_28285_, Level p_28286_) {
@@ -16,7 +16,7 @@ public class Moolip extends Moobloom {
 
 	@Override
 	public Block getFlower() {
-		return Blocks.PINK_TULIP;
+		return ModBlocks.PINK_DAISY.get();
 	}
 
 	@Override
