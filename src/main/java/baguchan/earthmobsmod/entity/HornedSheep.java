@@ -75,7 +75,7 @@ public class HornedSheep extends Sheep {
 		RandomSource randomsource = RandomSource.create((long) this.getUUID().hashCode());
 		TagKey<Instrument> tagkey = InstrumentTags.REGULAR_GOAT_HORNS;
 		HolderSet<Instrument> holderset = Registry.INSTRUMENT.getOrCreateTag(tagkey);
-		return InstrumentItem.create(ModItems.HORN.get(), holderset.getRandomElement(randomsource).get());
+		return InstrumentItem.create(ModItems.HORN_FLUTE.get(), holderset.getRandomElement(randomsource).get());
 	}
 
 	public void addHorns() {
