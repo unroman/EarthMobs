@@ -9,19 +9,25 @@ import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.SheepModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 public class HornedSheepModel<T extends HornedSheep> extends SheepModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final ModelPart body;
 	private final ModelPart head;
+	private final ModelPart horn;
 	private float headXRot;
 
 	public HornedSheepModel(ModelPart root) {
 		super(root);
 		this.body = root.getChild("body");
 		this.head = root.getChild("head");
+		this.horn = this.head.getChild("horn");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -40,6 +46,7 @@ public class HornedSheepModel<T extends HornedSheep> extends SheepModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.head.xRot = this.headXRot;
+		this.horn.visible = entity.hasHorn();
 	}
 
 	public void prepareMobModel(T p_103687_, float p_103688_, float p_103689_, float p_103690_) {
