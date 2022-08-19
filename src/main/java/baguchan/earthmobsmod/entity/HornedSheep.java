@@ -51,7 +51,7 @@ public class HornedSheep extends Sheep {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Goat.class, 12.0F, 1.25D, 1.3D) {
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Goat.class, 12.0F, 1.3D, 1.35D) {
 			@Override
 			public boolean canUse() {
 				return super.canUse() && !hasHorn();
@@ -62,7 +62,7 @@ public class HornedSheep extends Sheep {
 				return super.canContinueToUse() && !hasHorn();
 			}
 		});
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.25D, true));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.3D, true));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this) {
 			@Override
 			public boolean canUse() {
@@ -126,7 +126,7 @@ public class HornedSheep extends Sheep {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Sheep.createAttributes().add(Attributes.ATTACK_DAMAGE, 4.0D).add(Attributes.ATTACK_KNOCKBACK, (double) 0.5F);
+		return Sheep.createAttributes().add(Attributes.ATTACK_DAMAGE, 4.0D).add(Attributes.ATTACK_KNOCKBACK, (double) 0.75F);
 	}
 
 	@Override
@@ -138,9 +138,11 @@ public class HornedSheep extends Sheep {
 	public boolean doHurtTarget(Entity entity) {
 		boolean flag = super.doHurtTarget(entity);
 
-		if (!flag) {
-			this.dropHorn();
-			this.playSound(SoundEvents.SHEEP_HURT);
+		if (!flag && entity instanceof LivingEntity) {
+			if (((LivingEntity) entity).isBlocking()) {
+				this.dropHorn();
+				this.playSound(SoundEvents.SHEEP_HURT);
+			}
 		}
 
 		return flag;
