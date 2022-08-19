@@ -23,7 +23,7 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 28.0D).add(Attributes.ATTACK_DAMAGE, 4.0F).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 10.0F).add(Attributes.FOLLOW_RANGE, 18.0F);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 26.0D).add(Attributes.ATTACK_DAMAGE, 3.0F).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, 10.0F).add(Attributes.FOLLOW_RANGE, 18.0F);
 	}
 
 	@Override
@@ -85,11 +85,11 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 					if (this.attackTime <= 0) {
 						++this.attackStep;
 						if (this.attackStep == 1) {
-							this.attackTime = 30;
+							this.attackTime = 20;
 						} else if (this.attackStep <= 3) {
 							this.attackTime = 10;
 						} else {
-							this.attackTime = 30;
+							this.attackTime = 20;
 							this.attackStep = 0;
 						}
 

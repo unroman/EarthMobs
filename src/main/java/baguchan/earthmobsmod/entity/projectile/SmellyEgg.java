@@ -77,8 +77,16 @@ public class SmellyEgg extends ThrowableItemProjectile {
 				}
 			} else if (this.random.nextInt(3) == 0) {
 				this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, 1.0F);
-				ItemEntity chicken = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), new ItemStack(Items.RED_MUSHROOM));
-				this.level.addFreshEntity(chicken);
+				ItemStack stack;
+
+				if (this.random.nextBoolean()) {
+					stack = new ItemStack(Items.RED_MUSHROOM);
+				} else {
+					stack = new ItemStack(Items.BROWN_MUSHROOM);
+				}
+
+				ItemEntity mushroom = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), new ItemStack(Items.RED_MUSHROOM));
+				this.level.addFreshEntity(mushroom);
 			}
 
 			this.level.broadcastEntityEvent(this, (byte) 3);
