@@ -14,13 +14,17 @@ import net.minecraft.tags.InstrumentTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.InstrumentItem;
@@ -44,8 +48,29 @@ public class HornedSheep extends Sheep {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Goat.class, 12.0F, 1.25D, 1.3D) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && !hasHorn();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse() && !hasHorn();
+			}
+		});
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.25D, true));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
+		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && hasHorn();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse() && hasHorn();
+			}
+		}).setAlertOthers());
 	}
 
 	public boolean hasHorn() {
@@ -111,6 +136,17 @@ public class HornedSheep extends Sheep {
 		}
 
 		return flag;
+	}
+
+	@Override
+	public boolean hurt(DamageSource damagesource, float p_27568_) {
+		Entity entity1 = damagesource.getEntity();
+		if (entity1 != null) {
+			if (entity1 instanceof LivingEntity) {
+				this.setLastHurtByMob((LivingEntity) entity1);
+			}
+		}
+		return super.hurt(damagesource, p_27568_);
 	}
 
 	public ResourceLocation getDefaultLootTable() {
