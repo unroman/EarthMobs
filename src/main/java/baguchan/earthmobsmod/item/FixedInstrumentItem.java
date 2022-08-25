@@ -29,6 +29,6 @@ public class FixedInstrumentItem extends InstrumentItem {
 
 	@Override
 	public UseAnim getUseAnimation(ItemStack p_220133_) {
-		return UseAnim.BOW;
+		return UseAnim.TOOT_HORN;
 	}
 }
