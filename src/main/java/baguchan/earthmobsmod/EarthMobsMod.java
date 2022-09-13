@@ -2,7 +2,14 @@ package baguchan.earthmobsmod;
 
 import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.client.ClientRegistrar;
-import baguchan.earthmobsmod.registry.*;
+import baguchan.earthmobsmod.registry.ModBiomeModifiers;
+import baguchan.earthmobsmod.registry.ModBlocks;
+import baguchan.earthmobsmod.registry.ModEffects;
+import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModFluidTypes;
+import baguchan.earthmobsmod.registry.ModFluids;
+import baguchan.earthmobsmod.registry.ModInteractionInformations;
+import baguchan.earthmobsmod.registry.ModItems;
 import baguchan.earthmobsmod.world.features.ModEarthFeatures;
 import baguchan.earthmobsmod.world.features.ModEarthPlacements;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,7 +19,9 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -52,6 +61,7 @@ public class EarthMobsMod {
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EarthMobsConfig.COMMON_SPEC);
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientRegistrar::setup));
 	}
 
