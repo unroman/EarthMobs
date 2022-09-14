@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -149,19 +150,6 @@ public class TropicalSlime extends Slime implements Bucketable {
 			SoundEvent soundevent = SoundEvents.BUCKET_EMPTY_FISH;
 			this.playSound(soundevent, 1.0F, 1.0F);
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		} else if (itemstack.is(Items.WATER_BUCKET)) {
-			ItemStack itemstack1 = new ItemStack(Items.TROPICAL_FISH_BUCKET);
-
-			if (releaseFish(itemstack1)) {
-
-				ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, p_28941_, itemstack1, false);
-				p_28941_.setItemInHand(p_28942_, itemstack2);
-				SoundEvent soundevent = SoundEvents.BUCKET_FILL_FISH;
-				this.playSound(soundevent, 1.0F, 1.0F);
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
-			} else {
-				return InteractionResult.FAIL;
-			}
 		} else {
 			return this.isTiny() ? Bucketable.bucketMobPickup(p_28941_, p_28942_, this).orElse(super.mobInteract(p_28941_, p_28942_)) : super.mobInteract(p_28941_, p_28942_);
 		}
@@ -219,22 +207,24 @@ public class TropicalSlime extends Slime implements Bucketable {
 		super.remove(p_149847_);
 		CompoundTag compoundTag = this.getFishData();
 
-		if (compoundTag != null && compoundTag.get(TAG_FISH_LIST) != null) {
-			int i = this.getSize();
-			ListTag listTag = (ListTag) compoundTag.get(TAG_FISH_LIST);
+		if (this.isDeadOrDying()) {
+			if (compoundTag != null && compoundTag.get(TAG_FISH_LIST) != null) {
+				int i = this.getSize();
+				ListTag listTag = (ListTag) compoundTag.get(TAG_FISH_LIST);
 
-			float f = (float) i / 4.0F;
-			for (int l = 0; l < listTag.size(); ++l) {
-				float f1 = ((float) (l % 2) - 0.5F) * f;
-				float f2 = ((float) (l / 2) - 0.5F) * f;
-				TropicalFish fish = EntityType.TROPICAL_FISH.create(this.level);
-				if (this.isPersistenceRequired()) {
-					fish.setPersistenceRequired();
+				float f = (float) i / 4.0F;
+				for (int l = 0; l < listTag.size(); ++l) {
+					float f1 = ((float) (l % 2) - 0.5F) * f;
+					float f2 = ((float) (l / 2) - 0.5F) * f;
+					TropicalFish fish = EntityType.TROPICAL_FISH.create(this.level);
+					if (this.isPersistenceRequired()) {
+						fish.setPersistenceRequired();
+					}
+					fish.setVariant(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT));
+					fish.setInvulnerable(this.isInvulnerable());
+					fish.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
+					this.level.addFreshEntity(fish);
 				}
-				fish.setVariant(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT));
-				fish.setInvulnerable(this.isInvulnerable());
-				fish.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
-				this.level.addFreshEntity(fish);
 			}
 		}
 	}
@@ -318,7 +308,7 @@ public class TropicalSlime extends Slime implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return null;
+		return new ItemStack(ModItems.TROPICAL_SLIME_BUCKET.get());
 	}
 
 	@Override
@@ -466,9 +456,9 @@ public class TropicalSlime extends Slime implements Bucketable {
 					double d1 = this.wantedY - this.mob.getY();
 					//add Y movement
 					if (Math.abs(d1) > (double) 1.0E-5F) {
-						this.mob.setYya(d1 > 0.0D ? f1 : -f1);
+						this.mob.setYya(d1 > 0.0D ? Mth.lerp(2.0F, this.slime.getSpeed(), f1) : -Mth.lerp(2.0F, this.slime.getSpeed(), f1));
 					}
-					this.slime.setSpeed(Mth.lerp(0.125F, this.slime.getSpeed(), f1));
+					this.slime.setSpeed(Mth.lerp(2.0F, this.slime.getSpeed(), f1));
 
 				} else if (this.mob.isOnGround()) {
 					this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
