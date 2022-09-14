@@ -17,15 +17,21 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,9 +39,9 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
@@ -46,8 +52,10 @@ import java.util.EnumSet;
 
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
-public class TropicalSlime extends Slime {
+public class TropicalSlime extends Slime implements Bucketable {
 	public static final EntityDataAccessor<CompoundTag> DATA_FISHS = SynchedEntityData.defineId(TropicalSlime.class, EntityDataSerializers.COMPOUND_TAG);
+	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
+
 
 	public static final String TAG_FISH_VARIANT = "FishVariant";
 	public static final String TAG_FISH_LIST = "FishList";
@@ -61,6 +69,7 @@ public class TropicalSlime extends Slime {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(DATA_FISHS, new CompoundTag());
+		this.entityData.define(FROM_BUCKET, false);
 	}
 
 	protected void registerGoals() {
@@ -154,7 +163,7 @@ public class TropicalSlime extends Slime {
 				return InteractionResult.FAIL;
 			}
 		} else {
-			return super.mobInteract(p_28941_, p_28942_);
+			return this.isTiny() ? Bucketable.bucketMobPickup(p_28941_, p_28942_, this).orElse(super.mobInteract(p_28941_, p_28942_)) : super.mobInteract(p_28941_, p_28942_);
 		}
 	}
 
@@ -263,13 +272,15 @@ public class TropicalSlime extends Slime {
 		} else {
 			Holder<Biome> holder = p_32351_.getBiome(p_32353_);
 			boolean flag = p_32351_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_32351_, p_32353_, p_32354_) && (p_32352_ == MobSpawnType.SPAWNER || p_32351_.getFluidState(p_32353_).is(FluidTags.WATER));
-			if (!holder.is(Biomes.RIVER) && !holder.is(Biomes.FROZEN_RIVER)) {
-				return p_32354_.nextInt(40) == 0 && isDeepEnoughToSpawn(p_32351_, p_32353_) && flag;
-			} else {
-				return p_32354_.nextInt(15) == 0 && flag;
-			}
+
+			return p_32354_.nextInt(30) == 0 && flag;
 		}
 	}
+
+	public boolean checkSpawnObstruction(LevelReader p_32370_) {
+		return p_32370_.isUnobstructed(this);
+	}
+
 
 	private static boolean isDeepEnoughToSpawn(LevelAccessor p_32367_, BlockPos p_32368_) {
 		return p_32368_.getY() < p_32367_.getSeaLevel() - 5;
@@ -278,6 +289,41 @@ public class TropicalSlime extends Slime {
 	float getSoundPitch() {
 		float f = this.isTiny() ? 1.4F : 0.8F;
 		return ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * f;
+	}
+
+	@Override
+	public boolean fromBucket() {
+		return this.entityData.get(FROM_BUCKET);
+	}
+
+	public void setFromBucket(boolean p_149196_) {
+		this.entityData.set(FROM_BUCKET, p_149196_);
+	}
+
+	@Override
+	public void saveToBucketTag(ItemStack p_149187_) {
+		Bucketable.saveDefaultDataToBucketTag(this, p_149187_);
+		CompoundTag compoundtag = p_149187_.getOrCreateTag();
+		compoundtag.put("FishData", this.getFishData());
+	}
+
+	@Override
+	public void loadFromBucketTag(CompoundTag p_149163_) {
+		Bucketable.loadDefaultDataFromBucketTag(this, p_149163_);
+		this.setSize(1, true);
+		if (p_149163_.contains("FishData")) {
+			this.setFishData(p_149163_.getCompound("FishData"));
+		}
+	}
+
+	@Override
+	public ItemStack getBucketItemStack() {
+		return null;
+	}
+
+	@Override
+	public SoundEvent getPickupSound() {
+		return SoundEvents.BUCKET_FILL_FISH;
 	}
 
 	static class SlimeAttackGoal extends Goal {
