@@ -52,6 +52,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	private float percentBoost;
 
 	public void tick(LivingEntity livingEntity) {
+		removeBoost(livingEntity);
 		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK.get())) {
 			double elasticity = 0.25D;
 			this.prevShadowX = this.shadowX;
@@ -76,8 +77,6 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 			if (percentBoost >= 0.65F) {
 				pushEntities(livingEntity);
 			}
-
-			removeBoost(livingEntity);
 			tryAddBooster(livingEntity);
 		}
 	}
