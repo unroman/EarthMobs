@@ -37,10 +37,10 @@ public class CommonEvents {
 	@SubscribeEvent
 	public void onEntityJoinWorld(LivingSpawnEvent.SpecialSpawn event) {
 		if (event.getEntity() instanceof final AbstractVillager villager) {
-			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingDrowned.class, 8.0F, 0.6D, 0.6D));
-			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingZombie.class, 8.0F, 0.6D, 0.6D));
-			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberDrowned.class, 8.0F, 0.6D, 0.6D));
-			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberZombie.class, 8.0F, 0.6D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingDrowned.class, 8.0F, 0.8D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingZombie.class, 8.0F, 0.8D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberDrowned.class, 8.0F, 0.8D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberZombie.class, 8.0F, 0.8D, 0.6D));
 		}
 	}
 
