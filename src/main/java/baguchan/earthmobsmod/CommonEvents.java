@@ -1,12 +1,18 @@
 package baguchan.earthmobsmod;
 
 import baguchan.earthmobsmod.capability.ShadowCapability;
+import baguchan.earthmobsmod.entity.BoulderingDrowned;
+import baguchan.earthmobsmod.entity.BoulderingZombie;
+import baguchan.earthmobsmod.entity.LobberDrowned;
+import baguchan.earthmobsmod.entity.LobberZombie;
 import baguchan.earthmobsmod.registry.ModBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.block.Blocks;
@@ -15,6 +21,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +32,16 @@ public class CommonEvents {
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.register(ShadowCapability.class);
+	}
+
+	@SubscribeEvent
+	public void onEntityJoinWorld(LivingSpawnEvent.SpecialSpawn event) {
+		if (event.getEntity() instanceof final AbstractVillager villager) {
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingDrowned.class, 8.0F, 0.6D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingZombie.class, 8.0F, 0.6D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberDrowned.class, 8.0F, 0.6D, 0.6D));
+			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, LobberZombie.class, 8.0F, 0.6D, 0.6D));
+		}
 	}
 
 	@SubscribeEvent
