@@ -4,9 +4,7 @@ import baguchan.earthmobsmod.EarthMobsConfig;
 import baguchan.earthmobsmod.registry.ModBiomeModifiers;
 import baguchan.earthmobsmod.registry.ModEntities;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
@@ -16,12 +14,13 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ModifiableBiomeInfo;
 
-public record EarthBiomeModifier(HolderSet<Biome> biomes, HolderSet<Biome> blacklist_biomes,
-								 MobSpawnSettings.SpawnerData spawn,
-								 MobCategory category) implements BiomeModifier {
+public class EarthBiomeModifier implements BiomeModifier {
+	public static final EarthBiomeModifier INSTANCE = new EarthBiomeModifier();
+
+
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
-		if (phase == Phase.ADD && this.biomes.contains(biome) && biome.containsTag(BiomeTags.IS_OVERWORLD) && !biome.is(Biomes.DEEP_DARK) && !biome.is(Tags.Biomes.IS_VOID) && !blacklist_biomes.contains(biome)) {
+		if (phase == Phase.ADD && biome.containsTag(BiomeTags.IS_OVERWORLD) && !biome.is(Biomes.DEEP_DARK) && !biome.is(Tags.Biomes.IS_VOID)) {
 
 			if (EarthMobsConfig.COMMON.cluckshroomSpawnRate.get() > 0) {
 				if (biome.is(Biomes.MUSHROOM_FIELDS)) {
@@ -105,15 +104,6 @@ public record EarthBiomeModifier(HolderSet<Biome> biomes, HolderSet<Biome> black
 				}
 			}
 		}
-	}
-
-	public static Codec<EarthBiomeModifier> makeCodec() {
-		return RecordCodecBuilder.create(builder -> builder
-				.group(Biome.LIST_CODEC.fieldOf("biomes").forGetter(EarthBiomeModifier::biomes),
-						Biome.LIST_CODEC.fieldOf("blacklist_biomes").forGetter(EarthBiomeModifier::blacklist_biomes),
-						MobSpawnSettings.SpawnerData.CODEC.fieldOf("spawn").forGetter(EarthBiomeModifier::spawn),
-						MobCategory.CODEC.fieldOf("mob_category").forGetter(EarthBiomeModifier::category))
-				.apply(builder, EarthBiomeModifier::new));
 	}
 
 	@Override

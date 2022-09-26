@@ -24,6 +24,6 @@ public class MudBiomeModifier implements BiomeModifier {
 
 	@Override
 	public Codec<? extends BiomeModifier> codec() {
-		return ModBiomeModifiers.EARTH_ENTITY_MODIFIER_TYPE.get();
+		return ModBiomeModifiers.EARTH_MUD_MODIFIER_TYPE.get();
 	}
 }
