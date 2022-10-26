@@ -32,6 +32,11 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		this.goalSelector.addGoal(2, new BoneSpiderAttackGoal(this));
 	}
 
+	@Override
+	public boolean isInvertedHealAndHarm() {
+		return true;
+	}
+
 	static class BoneSpiderAttackGoal extends Goal {
 		private final BoneSpider spider;
 		private int attackStep;
@@ -133,6 +138,6 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 
 	@Override
 	public float getScale() {
-		return this.isBaby() ? 0.65F : 1.15F;
+		return this.isBaby() ? 0.6F : 1.1F;
 	}
 }
