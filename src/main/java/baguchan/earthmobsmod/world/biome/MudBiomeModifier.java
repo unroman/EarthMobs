@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.world.biome;
 
+import baguchan.earthmobsmod.EarthMobsConfig;
 import baguchan.earthmobsmod.registry.ModBiomeModifiers;
 import baguchan.earthmobsmod.world.features.ModEarthPlacements;
 import com.mojang.serialization.Codec;
@@ -17,7 +18,7 @@ public class MudBiomeModifier implements BiomeModifier {
 
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
-		if (phase == Phase.ADD && (biome.is(Biomes.MANGROVE_SWAMP) || biome.is(Tags.Biomes.IS_SWAMP) && biome.is(BiomeTags.IS_OVERWORLD))) {
+		if (phase == Phase.ADD && EarthMobsConfig.COMMON.mudSpawnInOverworld.get() && (biome.is(Biomes.MANGROVE_SWAMP) || biome.is(Tags.Biomes.IS_SWAMP) && biome.is(BiomeTags.IS_OVERWORLD))) {
 			builder.getGenerationSettings().addFeature(GenerationStep.Decoration.LAKES, ModEarthPlacements.LAKE_MUD_SURFACE);
 		}
 	}

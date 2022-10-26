@@ -66,5 +66,14 @@
   "item.minecraft.potion.effect.long_hyper_spark": "Potion of Hyper Spark",
   "item.minecraft.splash_potion.effect.long_hyper_spark": "Splash Potion of Hyper Spark",
   "item.minecraft.lingering_potion.effect.long_hyper_spark": "Lingering Potion of Hyper Spark",
-  "item.minecraft.tipped_arrow.effect.long_hyper_spark": "Arrow of Hyper Spark"
+  "item.minecraft.tipped_arrow.effect.long_hyper_spark": "Arrow of Hyper Spark",
+  "effect.earthmobsmod.undead_body": "Undead Body",
+  "item.minecraft.potion.effect.undead_body": "Potion of Undead Body",
+  "item.minecraft.splash_potion.effect.undead_body": "Splash Potion of Undead Body",
+  "item.minecraft.lingering_potion.effect.undead_body": "Lingering Potion of Undead Body",
+  "item.minecraft.tipped_arrow.effect.undead_body": "Arrow of Undead Body",
+  "item.minecraft.potion.effect.long_undead_body": "Potion of Undead Body",
+  "item.minecraft.splash_potion.effect.long_undead_body": "Splash Potion of Undead Body",
+  "item.minecraft.lingering_potion.effect.long_undead_body": "Lingering Potion of Undead Body",
+  "item.minecraft.tipped_arrow.effect.long_undead_body": "Arrow of Undead Body"
 }

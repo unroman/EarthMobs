@@ -66,5 +66,14 @@
   "item.minecraft.potion.effect.long_hyper_spark": "ハイパースパークのポーション",
   "item.minecraft.splash_potion.effect.long_hyper_spark": "ハイパースパークのスプラッシュポーション",
   "item.minecraft.lingering_potion.effect.long_hyper_spark": "ハイパースパークの残留ポーション",
-  "item.minecraft.tipped_arrow.effect.long_hyper_spark": "ハイパースパークの矢"
+  "item.minecraft.tipped_arrow.effect.long_hyper_spark": "ハイパースパークの矢",
+  "effect.earthmobsmod.undead_body": "アンデット化",
+  "item.minecraft.potion.effect.undead_body": "アンデット化のポーション",
+  "item.minecraft.splash_potion.effect.undead_body": "アンデット化のスプラッシュポーション",
+  "item.minecraft.lingering_potion.effect.undead_body": "アンデット化の残留ポーション",
+  "item.minecraft.tipped_arrow.effect.undead_body": "アンデット化の矢",
+  "item.minecraft.potion.effect.long_undead_body": "アンデット化のポーション",
+  "item.minecraft.splash_potion.effect.long_undead_body": "アンデット化のスプラッシュポーション",
+  "item.minecraft.lingering_potion.effect.long_undead_body": "アンデット化の残留ポーション",
+  "item.minecraft.tipped_arrow.effect.long_undead_body": "アンデット化の矢"
 }
