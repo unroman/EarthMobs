@@ -138,6 +138,6 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 
 	@Override
 	public float getScale() {
-		return this.isBaby() ? 0.6F : 1.1F;
+		return this.isBaby() ? 0.6F : 1.0F;
 	}
 }
