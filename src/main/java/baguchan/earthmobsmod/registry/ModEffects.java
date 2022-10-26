@@ -26,7 +26,7 @@ public class ModEffects {
 
 	public static final RegistryObject<MobEffect> HYPER_SPARK = MOB_EFFECTS.register("hyper_spark", () -> new HyperSparkEffect(MobEffectCategory.BENEFICIAL, 0xDA784A));
 
-	public static final RegistryObject<MobEffect> UNDEAD_BODY = MOB_EFFECTS.register("undead_body", () -> new HyperSparkEffect(MobEffectCategory.BENEFICIAL, 0xDA784A));
+	public static final RegistryObject<MobEffect> UNDEAD_BODY = MOB_EFFECTS.register("undead_body", () -> new HyperSparkEffect(MobEffectCategory.BENEFICIAL, 0xFFFFFF));
 
 	public static final RegistryObject<Potion> HYPER_SPARK_POTION = POTION.register("hyper_spark", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(HYPER_SPARK.get()), 3600)));
 	public static final RegistryObject<Potion> LONG_HYPER_SPARK_POTION = POTION.register("long_hyper_spark", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(HYPER_SPARK.get()), 9600)));
