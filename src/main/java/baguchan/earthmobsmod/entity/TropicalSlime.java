@@ -32,7 +32,6 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.TropicalFish;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -55,7 +54,7 @@ import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
 public class TropicalSlime extends Slime implements Bucketable {
 	public static final EntityDataAccessor<CompoundTag> DATA_FISHS = SynchedEntityData.defineId(TropicalSlime.class, EntityDataSerializers.COMPOUND_TAG);
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(TropicalSlime.class, EntityDataSerializers.BOOLEAN);
 
 
 	public static final String TAG_FISH_VARIANT = "FishVariant";

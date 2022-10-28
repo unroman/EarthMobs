@@ -14,7 +14,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -23,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
-import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +43,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class MelonGolem extends AbstractGolem implements Shearable, RangedAttackMob, net.minecraftforge.common.IForgeShearable {
-	private static final EntityDataAccessor<Byte> DATA_MELON_ID = SynchedEntityData.defineId(SnowGolem.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> DATA_MELON_ID = SynchedEntityData.defineId(MelonGolem.class, EntityDataSerializers.BYTE);
 	private static final byte MELON_FLAG = 16;
 	private static final float EYE_HEIGHT = 1.7F;
 
