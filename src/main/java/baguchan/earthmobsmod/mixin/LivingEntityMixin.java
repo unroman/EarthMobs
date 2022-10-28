@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Objects;
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 	protected LivingEntityMixin(EntityType<? extends Entity> p_20966_, Level p_20967_) {
@@ -21,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(method = "getMobType", at = @At("HEAD"), cancellable = true)
 	public void getMobType(CallbackInfoReturnable<MobType> callbackInfoReturnable) {
-		if (hasEffect(ModEffects.UNDEAD_BODY.get())) {
+		if (hasEffect(Objects.requireNonNull(ModEffects.UNDEAD_BODY.get()))) {
 			callbackInfoReturnable.setReturnValue(MobType.UNDEAD);
 		}
 	}

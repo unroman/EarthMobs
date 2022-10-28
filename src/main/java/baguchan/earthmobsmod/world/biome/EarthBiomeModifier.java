@@ -29,13 +29,13 @@ public class EarthBiomeModifier implements BiomeModifier {
 			}
 
 			if (EarthMobsConfig.COMMON.woolyCowSpawnRate.get() > 0) {
-				if (biome.is(BiomeTags.IS_MOUNTAIN) || biome.is(Tags.Biomes.IS_COLD)) {
+				if (biome.is(Tags.Biomes.IS_MOUNTAIN) || biome.is(Tags.Biomes.IS_COLD)) {
 					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.COMMON.woolyCowSpawnRate.get(), 3, 6));
 				}
 			}
 
 			if (EarthMobsConfig.COMMON.hornedSheepSpawnRate.get() > 0) {
-				if (biome.is(BiomeTags.IS_MOUNTAIN)) {
+				if (biome.is(Tags.Biomes.IS_MOUNTAIN)) {
 					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP.get(), EarthMobsConfig.COMMON.hornedSheepSpawnRate.get(), 3, 6));
 				}
 			}
@@ -54,7 +54,7 @@ public class EarthBiomeModifier implements BiomeModifier {
 				}
 
 				if (EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get() > 0) {
-					if (biome.is(BiomeTags.IS_MOUNTAIN)) {
+					if (biome.is(Tags.Biomes.IS_MOUNTAIN)) {
 						builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BOULDERING_ZOMBIE.get(), EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get(), 4, 4));
 					}
 				}
