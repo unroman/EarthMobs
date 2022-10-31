@@ -28,7 +28,7 @@ public class DyeUtil {
 	}
 
 	public static DyeColor getRandomColor(RandomSource p_29843_) {
-		return DyeColor.byId(p_29843_.nextInt(15));
+		return DyeColor.byId(p_29843_.nextInt(DyeColor.values().length));
 	}
 
 }
