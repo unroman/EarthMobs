@@ -2,14 +2,12 @@ package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModItems;
-import baguchan.earthmobsmod.registry.ModLootTables;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.InstrumentTags;
@@ -157,47 +155,5 @@ public class HornedSheep extends Sheep {
 			}
 		}
 		return super.hurt(damagesource, p_27568_);
-	}
-
-	public ResourceLocation getDefaultLootTable() {
-		if (this.isSheared()) {
-			return this.getType().getDefaultLootTable();
-		} else {
-			switch (this.getColor()) {
-				case WHITE:
-				default:
-					return ModLootTables.HORNED_SHEEP_WHITE;
-				case ORANGE:
-					return ModLootTables.HORNED_SHEEP_ORANGE;
-				case MAGENTA:
-					return ModLootTables.HORNED_SHEEP_MAGENTA;
-				case LIGHT_BLUE:
-					return ModLootTables.HORNED_SHEEP_LIGHT_BLUE;
-				case YELLOW:
-					return ModLootTables.HORNED_SHEEP_YELLOW;
-				case LIME:
-					return ModLootTables.HORNED_SHEEP_LIME;
-				case PINK:
-					return ModLootTables.HORNED_SHEEP_PINK;
-				case GRAY:
-					return ModLootTables.HORNED_SHEEP_GRAY;
-				case LIGHT_GRAY:
-					return ModLootTables.HORNED_SHEEP_LIGHT_GRAY;
-				case CYAN:
-					return ModLootTables.HORNED_SHEEP_CYAN;
-				case PURPLE:
-					return ModLootTables.HORNED_SHEEP_PURPLE;
-				case BLUE:
-					return ModLootTables.HORNED_SHEEP_BLUE;
-				case BROWN:
-					return ModLootTables.HORNED_SHEEP_BROWN;
-				case GREEN:
-					return ModLootTables.HORNED_SHEEP_GREEN;
-				case RED:
-					return ModLootTables.HORNED_SHEEP_RED;
-				case BLACK:
-					return ModLootTables.HORNED_SHEEP_BLACK;
-			}
-		}
 	}
 }
