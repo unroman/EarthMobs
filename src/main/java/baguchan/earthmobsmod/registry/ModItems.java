@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
+import baguchan.earthmobsmod.item.BoneShardItem;
 import baguchan.earthmobsmod.item.FixedInstrumentItem;
 import baguchan.earthmobsmod.item.SmellyEggItem;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +22,7 @@ public class ModItems {
 
 
 	public static final RegistryObject<Item> SMELLY_EGG = ITEMS.register("smelly_egg", () -> new SmellyEggItem((new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
-	public static final RegistryObject<Item> BONE_SHARD = ITEMS.register("bone_shard", () -> new Item((new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
+	public static final RegistryObject<Item> BONE_SHARD = ITEMS.register("bone_shard", () -> new BoneShardItem((new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
 	public static final RegistryObject<Item> BONE_SPIDER_EYE = ITEMS.register("bone_spider_eye", () -> new Item((new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
 	public static final RegistryObject<Item> HORN = ITEMS.register("horn", () -> new Item((new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
 	public static final RegistryObject<Item> HORN_FLUTE = ITEMS.register("horn_flute", () -> new FixedInstrumentItem((new Item.Properties()).tab(CreativeModeTab.TAB_MISC), InstrumentTags.GOAT_HORNS));

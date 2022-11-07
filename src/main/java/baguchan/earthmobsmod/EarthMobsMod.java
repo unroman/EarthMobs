@@ -10,6 +10,7 @@ import baguchan.earthmobsmod.registry.ModFluidTypes;
 import baguchan.earthmobsmod.registry.ModFluids;
 import baguchan.earthmobsmod.registry.ModInteractionInformations;
 import baguchan.earthmobsmod.registry.ModItems;
+import baguchan.earthmobsmod.registry.ModRecipes;
 import baguchan.earthmobsmod.world.features.ModEarthFeatures;
 import baguchan.earthmobsmod.world.features.ModEarthPlacements;
 import net.minecraftforge.api.distmarker.Dist;
@@ -58,6 +59,7 @@ public class EarthMobsMod {
 		ModEffects.MOB_EFFECTS.register(modBus);
 		ModEffects.POTION.register(modBus);
 		ModItems.ITEMS.register(modBus);
+		ModRecipes.RECIPE_SERIALIZERS.register(modBus);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
