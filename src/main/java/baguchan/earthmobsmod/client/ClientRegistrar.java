@@ -38,6 +38,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -114,7 +115,7 @@ public class ClientRegistrar {
 	@SubscribeEvent
 	public static void registerEntityRenders(RegisterColorHandlersEvent.Item event) {
 		event.register((p_92693_, p_92694_) -> {
-			return p_92694_ == 0 ? PotionUtils.getColor(p_92693_) : -1;
+			return PotionUtils.getPotion(p_92693_) != Potions.EMPTY ? PotionUtils.getColor(p_92693_) : 0xFFFFFF;
 		}, ModItems.BONE_SHARD.get());
 	}
 

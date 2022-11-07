@@ -23,7 +23,6 @@ public class VilerWitchItemLayer<T extends LivingEntity> extends CrossedArmsItem
 		ItemStack itemstack = p_117688_.getMainHandItem();
 		p_117685_.pushPose();
 		if (itemstack.is(Items.POTION)) {
-			this.getParentModel().getHead().translateAndRotate(p_117685_);
 			this.getParentModel().getNose().translateAndRotate(p_117685_);
 			p_117685_.translate(0.0625D, 0.25D, 0.0D);
 			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
