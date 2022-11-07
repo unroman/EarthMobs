@@ -1,19 +1,47 @@
 package baguchan.earthmobsmod.client;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.client.model.*;
-import baguchan.earthmobsmod.client.render.*;
+import baguchan.earthmobsmod.client.model.BoneSpiderModel;
+import baguchan.earthmobsmod.client.model.BoulderingZombieModel;
+import baguchan.earthmobsmod.client.model.CluckShroomModel;
+import baguchan.earthmobsmod.client.model.HornedSheepModel;
+import baguchan.earthmobsmod.client.model.HyperRabbitModel;
+import baguchan.earthmobsmod.client.model.JumboRabbitModel;
+import baguchan.earthmobsmod.client.model.LobberZombieModel;
+import baguchan.earthmobsmod.client.model.MuddyPigModel;
+import baguchan.earthmobsmod.client.model.VilerWitchModel;
+import baguchan.earthmobsmod.client.model.WoolyCowModel;
+import baguchan.earthmobsmod.client.render.BoneSpiderRender;
+import baguchan.earthmobsmod.client.render.BoulderingDrownedRenderer;
+import baguchan.earthmobsmod.client.render.BoulderingZombieRenderer;
+import baguchan.earthmobsmod.client.render.CluckShroomRender;
+import baguchan.earthmobsmod.client.render.HornedSheepRenderer;
+import baguchan.earthmobsmod.client.render.HyperRabbitRenderer;
+import baguchan.earthmobsmod.client.render.JumboRabbitRenderer;
+import baguchan.earthmobsmod.client.render.LobberDrownedRenderer;
+import baguchan.earthmobsmod.client.render.LobberZombieRenderer;
+import baguchan.earthmobsmod.client.render.MelonGolemRenderer;
+import baguchan.earthmobsmod.client.render.MoobloomRenderer;
+import baguchan.earthmobsmod.client.render.MoolipRenderer;
+import baguchan.earthmobsmod.client.render.SkeletonWolfRenderer;
+import baguchan.earthmobsmod.client.render.StrayBoneSpiderRender;
+import baguchan.earthmobsmod.client.render.TropicalSlimeRenderer;
+import baguchan.earthmobsmod.client.render.VilerWitchRenderer;
+import baguchan.earthmobsmod.client.render.WoolyCowRenderer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigFlowerLayer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -81,6 +109,13 @@ public class ClientRegistrar {
 				((PigRenderer) r).addLayer(new MuddyPigFlowerLayer((PigRenderer) r, event.getEntityModels()));
 			}
 		});
+	}
+
+	@SubscribeEvent
+	public static void registerEntityRenders(RegisterColorHandlersEvent.Item event) {
+		event.register((p_92693_, p_92694_) -> {
+			return p_92694_ == 0 ? PotionUtils.getColor(p_92693_) : -1;
+		}, ModItems.BONE_SHARD.get());
 	}
 
 	public static void setup(FMLCommonSetupEvent event) {
