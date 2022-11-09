@@ -23,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(method = "getMobType", at = @At("HEAD"), cancellable = true)
 	public void getMobType(CallbackInfoReturnable<MobType> callbackInfoReturnable) {
-		if (hasEffect(Objects.requireNonNull(ModEffects.UNDEAD_BODY.get()))) {
+		if (ModEffects.UNDEAD_BODY != null && hasEffect(Objects.requireNonNull(ModEffects.UNDEAD_BODY.get()))) {
 			callbackInfoReturnable.setReturnValue(MobType.UNDEAD);
 		}
 	}
