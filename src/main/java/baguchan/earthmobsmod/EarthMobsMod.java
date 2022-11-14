@@ -68,7 +68,6 @@ public class EarthMobsMod {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		ModEntities.spawnPlacementSetup();
 		ModEffects.init();
 		ModInteractionInformations.init();
 		ModEarthFeatures.init();

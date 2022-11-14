@@ -17,7 +17,9 @@ public class EarthMobsConfig {
 
 	public static class Common {
 		public final ForgeConfigSpec.IntValue woolyCowSpawnRate;
+		public final ForgeConfigSpec.IntValue umbraCowSpawnRate;
 		public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
+		public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
 		public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
 		public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
 		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
@@ -40,10 +42,16 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.woolyCowSpawnRate")
 					.comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
 					.defineInRange("Wooly cow SpawnRate", 10, 0, 100);
+			umbraCowSpawnRate = builder
+					.comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
+					.defineInRange("Umbra Cow SpawnRate", 10, 0, 100);
 			cluckshroomSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.cluckshroomSpawnRate")
 					.comment("Changed Cluckshroom SpawnRate. [0 ~ 100]")
 					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
+			fancyChickenSpawnRate = builder
+					.comment("Changed Fancy Chicken SpawnRate. [0 ~ 100]")
+					.defineInRange("Fancy Chicken SpawnRate", 8, 0, 100);
 			hornedSheepSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.hornedSheepSpawnRate")
 					.comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
