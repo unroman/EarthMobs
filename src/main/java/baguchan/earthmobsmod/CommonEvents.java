@@ -7,6 +7,7 @@ import baguchan.earthmobsmod.entity.BoulderingZombie;
 import baguchan.earthmobsmod.entity.LobberDrowned;
 import baguchan.earthmobsmod.entity.LobberZombie;
 import baguchan.earthmobsmod.registry.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -56,13 +57,17 @@ public class CommonEvents {
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 		ItemStack itemStack = event.getEntity().getItemInHand(event.getHand());
 		if (itemStack.getItem() instanceof ShearsItem && event.getEntity().level.getBlockState(event.getPos()).getBlock() == Blocks.MELON) {
-			itemStack.hurtAndBreak(1, event.getEntity(), (p_29910_) -> {
-				p_29910_.broadcastBreakEvent(event.getHand());
-			});
-			event.getEntity().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, event.getHitVec().getDirection()), 2);
+			Direction direction = event.getHitVec().getDirection();
+			if (direction != Direction.DOWN && direction != Direction.UP) {
+				itemStack.hurtAndBreak(1, event.getEntity(), (p_29910_) -> {
+					p_29910_.broadcastBreakEvent(event.getHand());
+				});
+				event.getEntity().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-			event.setUseItem(Event.Result.ALLOW);
+				event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, direction), 2);
+
+				event.setUseItem(Event.Result.ALLOW);
+			}
 		}
 	}
 

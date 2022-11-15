@@ -1,10 +1,8 @@
 package baguchan.earthmobsmod;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EarthMobsConfig {
 	public static final Common COMMON;
 	public static final ForgeConfigSpec COMMON_SPEC;
