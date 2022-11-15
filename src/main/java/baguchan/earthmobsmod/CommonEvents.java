@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod;
 
+import baguchan.earthmobsmod.block.CarvedMelonBlock;
 import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.entity.BoulderingDrowned;
 import baguchan.earthmobsmod.entity.BoulderingZombie;
@@ -59,7 +60,7 @@ public class CommonEvents {
 				p_29910_.broadcastBreakEvent(event.getHand());
 			});
 			event.getEntity().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState(), 2);
+			event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, event.getHitVec().getDirection()), 2);
 
 			event.setUseItem(Event.Result.ALLOW);
 		}
