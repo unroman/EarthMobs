@@ -257,11 +257,11 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 					if (this.attackTime <= 0) {
 						++this.attackStep;
 						if (this.attackStep == 1) {
-							this.attackTime = 20;
+							this.attackTime = 10;
 						} else if (this.attackStep <= 5) {
-							this.attackTime = 6;
+							this.attackTime = 5;
 						} else {
-							this.attackTime = 20;
+							this.attackTime = 10;
 							this.attackStep = 0;
 						}
 
