@@ -26,27 +26,28 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 	public boolean matches(CraftingContainer p_44515_, Level p_44516_) {
 		List<Item> list = Lists.newArrayList();
 		List<Item> list2 = Lists.newArrayList();
-			if (ForgeRegistries.ITEMS.tags().getTag(Tags.Items.RODS_WOODEN) == null) {
-				return false;
-			}
+		if (ForgeRegistries.ITEMS.tags().getTag(Tags.Items.RODS_WOODEN) == null) {
+			return false;
+		}
 
+		int slot = 0;
 
-			for (int i = 0; i < p_44515_.getWidth(); ++i) {
-				for (int j = 0; j < p_44515_.getHeight(); ++j) {
-					ItemStack itemstack = p_44515_.getItem(i + j);
+		for (int i = 0; i < p_44515_.getWidth(); ++i) {
+			for (int j = 0; j < p_44515_.getHeight(); ++j) {
+				ItemStack itemstack = p_44515_.getItem(i + j * p_44515_.getWidth());
 
-					if (itemstack.is(ModItems.BONE_SHARD.get())) {
-						list.add(itemstack.getItem());
-					} else if (itemstack.is(Items.FEATHER)) {
-						list.add(itemstack.getItem());
-					} else if (itemstack.is(Tags.Items.RODS_WOODEN)) {
-						list2.add(itemstack.getItem());
-					}
+				if (j == 0 && itemstack.is(ModItems.BONE_SHARD.get())) {
+					slot = i;
+					list.add(itemstack.getItem());
+				} else if (j == 2 && slot == i && itemstack.is(Items.FEATHER)) {
+					list.add(itemstack.getItem());
+				} else if (j == 1 && slot == i && itemstack.is(Tags.Items.RODS_WOODEN)) {
+					list2.add(itemstack.getItem());
 				}
+			}
 			}
 
 			return list.contains(Items.FEATHER) && list.contains(ModItems.BONE_SHARD.get()) && list2.size() == 1;
-
 	}
 
 	public ItemStack assemble(CraftingContainer p_44513_) {
