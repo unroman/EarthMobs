@@ -45,7 +45,7 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 				}
 			}
 
-			return list.contains(Items.FEATHER) && list.contains(ModItems.BONE_SHARD.get()) && list2.size() == 1 && ForgeRegistries.ITEMS.tags().getTag(Tags.Items.RODS_WOODEN).contains(list2.get(0));
+			return list.contains(Items.FEATHER) && list.contains(ModItems.BONE_SHARD.get()) && list2.size() == 1;
 
 	}
 
@@ -68,7 +68,7 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 	}
 
 	public boolean canCraftInDimensions(int p_44505_, int p_44506_) {
-		return p_44505_ * p_44506_ >= 3;
+		return true;
 	}
 
 	public RecipeSerializer<?> getSerializer() {
