@@ -94,6 +94,8 @@
   "subtitles.entity.earthmobsmod.bone_spider.spit": "Bone Spider Spit",
   "subtitles.entity.earthmobsmod.bone_spider.bone_stab": "Bone Spider Stub",
   "subtitles.entity.earthmobsmod.duck.idle": "Duck Quack",
+  "subtitles.entity.earthmobsmod.duck.hurt": "Duck Hurt",
+  "subtitles.entity.earthmobsmod.duck.death": "Duck Death",
   "subtitles.entity.earthmobsmod.duck.step": "Duck Step",
   "subtitles.entity.earthmobsmod.skeleton_wolf.bark": "Skeleton Wolf Bark",
   "subtitles.entity.earthmobsmod.skeleton_wolf.growl": "Skeleton Wolf Growl",

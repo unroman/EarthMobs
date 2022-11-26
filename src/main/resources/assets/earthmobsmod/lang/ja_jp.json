@@ -86,5 +86,22 @@
   "item.minecraft.potion.effect.long_undead_body": "アンデット化のポーション",
   "item.minecraft.splash_potion.effect.long_undead_body": "アンデット化のスプラッシュポーション",
   "item.minecraft.lingering_potion.effect.long_undead_body": "アンデット化の残留ポーション",
-  "item.minecraft.tipped_arrow.effect.long_undead_body": "アンデット化の矢"
+  "item.minecraft.tipped_arrow.effect.long_undead_body": "アンデット化の矢",
+  "subtitles.entity.earthmobsmod.bone_spider.walk": "骨グモが歩く",
+  "subtitles.entity.earthmobsmod.bone_spider.say": "骨グモが鳴く",
+  "subtitles.entity.earthmobsmod.bone_spider.hurt": "骨グモがダメージを受ける",
+  "subtitles.entity.earthmobsmod.bone_spider.death": "骨グモが死ぬ",
+  "subtitles.entity.earthmobsmod.bone_spider.spit": "骨グモが吐く",
+  "subtitles.entity.earthmobsmod.bone_spider.bone_stab": "骨グモの骨が当たる",
+  "subtitles.entity.earthmobsmod.duck.idle": "アヒルが鳴く",
+  "subtitles.entity.earthmobsmod.duck.hurt": "アヒルがダメージを受ける",
+  "subtitles.entity.earthmobsmod.duck.death": "アヒルが死ぬ",
+  "subtitles.entity.earthmobsmod.duck.step": "アヒルが歩く",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.bark": "スケルトンウルフが吠える",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.growl": "スケルトンウルフが泣く",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.hurt": "スケルトンウルフがダメージを受ける",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.death": "スケルトンウルフが死ぬ",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.step": "スケルトンウルフが歩く",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "スケルトンウルフがあえぐ",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "スケルトンウルフが鳴く"
 }

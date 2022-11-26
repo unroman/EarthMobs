@@ -1,8 +1,10 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Chicken;
@@ -39,6 +41,16 @@ public class Duck extends Chicken {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return null;
+		return ModSounds.DUCK_IDLE.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource p_28262_) {
+		return ModSounds.DUCK_IDLE.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return ModSounds.DUCK_IDLE.get();
 	}
 }
