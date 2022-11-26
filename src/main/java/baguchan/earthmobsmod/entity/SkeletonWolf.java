@@ -33,6 +33,7 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -69,7 +70,7 @@ public class SkeletonWolf extends Wolf {
 	}
 
 	protected boolean isWorstCondition() {
-		return this.getLightLevelDependentMagicValue() < 0.45F;
+		return this.getLightLevelDependentMagicValue() < 0.4F;
 	}
 
 	@Override
@@ -93,7 +94,7 @@ public class SkeletonWolf extends Wolf {
 			return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
 		} else {
 			if (this.isTame()) {
-				if (itemstack.is(Tags.Items.BONES) && this.getHealth() < this.getMaxHealth()) {
+				if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH)) && this.getHealth() < this.getMaxHealth()) {
 					if (!p_30412_.getAbilities().instabuild) {
 						itemstack.shrink(1);
 					}
@@ -107,7 +108,7 @@ public class SkeletonWolf extends Wolf {
 					return InteractionResult.PASS;
 				}
 
-			} else if (itemstack.is(Tags.Items.BONES) && !this.isAngry()) {
+			} else if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH)) && !this.isAngry()) {
 				if (!p_30412_.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
