@@ -18,6 +18,7 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue umbraCowSpawnRate;
 		public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
 		public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
+		public final ForgeConfigSpec.IntValue duckSpawnRate;
 		public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
 		public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
 		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
@@ -32,6 +33,7 @@ public class EarthMobsConfig {
 
 		public final ForgeConfigSpec.IntValue skeletonWolfOverWorldSpawnRate;
 		public final ForgeConfigSpec.IntValue skeletonWolfNetherSpawnRate;
+		public final ForgeConfigSpec.IntValue witherSkeletonWolfNetherSpawnRate;
 
 		public final ForgeConfigSpec.BooleanValue mudSpawnInOverworld;
 
@@ -49,7 +51,10 @@ public class EarthMobsConfig {
 					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
 			fancyChickenSpawnRate = builder
 					.comment("Changed Fancy Chicken SpawnRate. [0 ~ 100]")
-					.defineInRange("Fancy Chicken SpawnRate", 8, 0, 100);
+					.defineInRange("Fancy Chicken SpawnRate", 6, 0, 100);
+			duckSpawnRate = builder
+					.comment("Changed Duck SpawnRate. [0 ~ 100]")
+					.defineInRange("Duck SpawnRate", 8, 0, 100);
 			hornedSheepSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.hornedSheepSpawnRate")
 					.comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
@@ -96,6 +101,9 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.skeletonWolfNetherSpawnRate")
 					.comment("Changed SkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
 					.defineInRange("SkeletonWolf SpawnRate In Nether", 5, 0, 1000);
+			witherSkeletonWolfNetherSpawnRate = builder
+					.comment("Changed WitherSkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
+					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 4, 0, 1000);
 
 			mudSpawnInOverworld = builder
 					.translation(EarthMobsMod.MODID + ".config.mudSpawnInOverworld")

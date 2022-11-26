@@ -5,6 +5,7 @@ import baguchan.earthmobsmod.entity.BoneSpider;
 import baguchan.earthmobsmod.entity.BoulderingDrowned;
 import baguchan.earthmobsmod.entity.BoulderingZombie;
 import baguchan.earthmobsmod.entity.CluckShroom;
+import baguchan.earthmobsmod.entity.Duck;
 import baguchan.earthmobsmod.entity.FancyChicken;
 import baguchan.earthmobsmod.entity.HornedSheep;
 import baguchan.earthmobsmod.entity.HyperRabbit;
@@ -19,7 +20,9 @@ import baguchan.earthmobsmod.entity.StrayBoneSpider;
 import baguchan.earthmobsmod.entity.TropicalSlime;
 import baguchan.earthmobsmod.entity.UmbraCow;
 import baguchan.earthmobsmod.entity.VilerWitch;
+import baguchan.earthmobsmod.entity.WitherSkeletonWolf;
 import baguchan.earthmobsmod.entity.WoolyCow;
+import baguchan.earthmobsmod.entity.ZombifiedPig;
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
 import baguchan.earthmobsmod.entity.projectile.MelonSeed;
 import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
@@ -58,6 +61,8 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<Moobloom>> MOOBLOOM = ENTITIES.register("moobloom", () -> EntityType.Builder.of(Moobloom::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(8).build(prefix("moobloom")));
 	public static final RegistryObject<EntityType<Moolip>> MOOLIP = ENTITIES.register("moolip", () -> EntityType.Builder.of(Moolip::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(8).build(prefix("moolip")));
 	public static final RegistryObject<EntityType<JumboRabbit>> JUMBO_RABBIT = ENTITIES.register("jumbo_rabbit", () -> EntityType.Builder.of(JumboRabbit::new, MobCategory.CREATURE).sized(0.7F, 1.2F).clientTrackingRange(8).build(prefix("jumbo_rabbit")));
+	public static final RegistryObject<EntityType<ZombifiedPig>> ZOMBIFIED_PIG = ENTITIES.register("zombified_pig", () -> EntityType.Builder.of(ZombifiedPig::new, MobCategory.CREATURE).sized(0.6F, 0.85F).fireImmune().build(prefix("zombified_pig")));
+	public static final RegistryObject<EntityType<Duck>> DUCK = ENTITIES.register("duck", () -> EntityType.Builder.of(Duck::new, MobCategory.CREATURE).sized(0.4F, 0.7F).build(prefix("duck")));
 
 
 	public static final RegistryObject<EntityType<MelonGolem>> MELON_GOLEM = ENTITIES.register("melon_golem", () -> EntityType.Builder.of(MelonGolem::new, MobCategory.MISC).sized(0.7F, 1.9F).immuneTo(Blocks.POWDER_SNOW).clientTrackingRange(8).build(prefix("melon_golem")));
@@ -77,6 +82,7 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<TropicalSlime>> TROPICAL_SLIME = ENTITIES.register("tropical_slime", () -> EntityType.Builder.of(TropicalSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build(prefix("tropical_slime")));
 
 	public static final RegistryObject<EntityType<SkeletonWolf>> SKELETON_WOLF = ENTITIES.register("skeleton_wolf", () -> EntityType.Builder.of(SkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).build(prefix("skeleton_wolf")));
+	public static final RegistryObject<EntityType<WitherSkeletonWolf>> WITHER_SKELETON_WOLF = ENTITIES.register("wither_skeleton_wolf", () -> EntityType.Builder.of(WitherSkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).fireImmune().immuneTo(Blocks.WITHER_ROSE).build(prefix("wither_skeleton_wolf")));
 
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
@@ -102,6 +108,8 @@ public class ModEntities {
 		event.register(MOOBLOOM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(MOOLIP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(JUMBO_RABBIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, JumboRabbit::checkJumboSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(ZOMBIFIED_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(DUCK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
 
 		event.register(MELON_GOLEM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
@@ -115,7 +123,7 @@ public class ModEntities {
 
 		event.register(TROPICAL_SLIME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TropicalSlime::checkTropicalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-
+		event.register(WITHER_SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 	}
 
 	@SubscribeEvent
@@ -129,6 +137,8 @@ public class ModEntities {
 		event.put(MOOBLOOM.get(), Cow.createAttributes().build());
 		event.put(MOOLIP.get(), Cow.createAttributes().build());
 		event.put(JUMBO_RABBIT.get(), JumboRabbit.createAttributes().build());
+		event.put(ZOMBIFIED_PIG.get(), ZombifiedPig.createAttributes().build());
+		event.put(DUCK.get(), Chicken.createAttributes().build());
 
 		event.put(MELON_GOLEM.get(), MelonGolem.createAttributes().build());
 		event.put(BONE_SPIDER.get(), BoneSpider.createAttributes().build());
@@ -140,5 +150,6 @@ public class ModEntities {
 		event.put(LOBBER_DROWNED.get(), Zombie.createAttributes().build());
 		event.put(TROPICAL_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(SKELETON_WOLF.get(), SkeletonWolf.createAttributes().build());
+		event.put(WITHER_SKELETON_WOLF.get(), SkeletonWolf.createAttributes().build());
 	}
 }

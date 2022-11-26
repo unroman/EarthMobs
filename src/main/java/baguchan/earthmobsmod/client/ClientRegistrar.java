@@ -16,6 +16,7 @@ import baguchan.earthmobsmod.client.render.BoneSpiderRender;
 import baguchan.earthmobsmod.client.render.BoulderingDrownedRenderer;
 import baguchan.earthmobsmod.client.render.BoulderingZombieRenderer;
 import baguchan.earthmobsmod.client.render.CluckShroomRender;
+import baguchan.earthmobsmod.client.render.DuckRenderer;
 import baguchan.earthmobsmod.client.render.FancyChickenRenderer;
 import baguchan.earthmobsmod.client.render.HornedSheepRenderer;
 import baguchan.earthmobsmod.client.render.HyperRabbitRenderer;
@@ -30,7 +31,9 @@ import baguchan.earthmobsmod.client.render.StrayBoneSpiderRender;
 import baguchan.earthmobsmod.client.render.TropicalSlimeRenderer;
 import baguchan.earthmobsmod.client.render.UmbraCowRenderer;
 import baguchan.earthmobsmod.client.render.VilerWitchRenderer;
+import baguchan.earthmobsmod.client.render.WitherSkeletonWolfRenderer;
 import baguchan.earthmobsmod.client.render.WoolyCowRenderer;
+import baguchan.earthmobsmod.client.render.ZombifiedPigRenderer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigFlowerLayer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModEntities;
@@ -64,6 +67,8 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);
 		event.registerEntityRenderer(ModEntities.MOOLIP.get(), MoolipRenderer::new);
 		event.registerEntityRenderer(ModEntities.JUMBO_RABBIT.get(), JumboRabbitRenderer::new);
+		event.registerEntityRenderer(ModEntities.ZOMBIFIED_PIG.get(), ZombifiedPigRenderer::new);
+		event.registerEntityRenderer(ModEntities.DUCK.get(), DuckRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.MELON_GOLEM.get(), MelonGolemRenderer::new);
 
@@ -77,6 +82,8 @@ public class ClientRegistrar {
 
 		event.registerEntityRenderer(ModEntities.TROPICAL_SLIME.get(), TropicalSlimeRenderer::new);
 		event.registerEntityRenderer(ModEntities.SKELETON_WOLF.get(), SkeletonWolfRenderer::new);
+		event.registerEntityRenderer(ModEntities.WITHER_SKELETON_WOLF.get(), WitherSkeletonWolfRenderer::new);
+
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);

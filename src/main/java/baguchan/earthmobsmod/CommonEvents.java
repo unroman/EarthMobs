@@ -83,6 +83,9 @@ public class CommonEvents {
 		event.getEntity().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
 			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().isFire() && !event.getSource().isExplosion() && !event.getSource().isBypassArmor()) {
 				event.setAmount(event.getAmount() * (1.0F - shadowCapability.getPercentBoost()));
+				if (shadowCapability.getPercentBoost() > 0.9F) {
+					event.setCanceled(true);
+				}
 			}
 		});
 	}

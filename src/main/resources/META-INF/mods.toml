@@ -32,6 +32,7 @@ authors = "bagu_chan, MCVinnyq, Farcr" #optional
 description = '''
 
 Adds Content from the spinoff game Minecraft Earth!
+Also Extra Earth Like Mob Add Too!
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

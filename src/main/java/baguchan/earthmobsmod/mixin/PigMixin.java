@@ -5,6 +5,8 @@ import baguchan.earthmobsmod.api.IMuddy;
 import baguchan.earthmobsmod.api.IOnMud;
 import baguchan.earthmobsmod.api.ISheared;
 import baguchan.earthmobsmod.entity.IHasFlower;
+import baguchan.earthmobsmod.entity.ZombifiedPig;
+import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.util.DyeUtil;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
@@ -14,10 +16,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.ai.goal.EatBlockGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
@@ -126,7 +131,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 
 	public void tick() {
 		super.tick();
-		if (this.isAlive() && this instanceof IOnMud) {
+		if (this.isAlive() && this instanceof IOnMud && this.canMuddy()) {
 			if (((IOnMud) this).isOnMud() && (!this.isMuddy() || this.isSheared()) && !this.isShaking) {
 				this.isShaking = true;
 				this.inMud = true;
@@ -194,6 +199,27 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 		}
 	}
 
+	@Override
+	public void thunderHit(ServerLevel p_19927_, LightningBolt p_19928_) {
+		if (p_19927_.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, EntityType.ZOMBIFIED_PIGLIN, (timer) -> {
+		})) {
+			ZombifiedPig zombifiedpig = ModEntities.ZOMBIFIED_PIG.get().create(p_19927_);
+			zombifiedpig.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
+			zombifiedpig.setNoAi(this.isNoAi());
+			zombifiedpig.setBaby(this.isBaby());
+			if (this.hasCustomName()) {
+				zombifiedpig.setCustomName(this.getCustomName());
+				zombifiedpig.setCustomNameVisible(this.isCustomNameVisible());
+			}
+
+			zombifiedpig.setPersistenceRequired();
+			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, zombifiedpig);
+			p_19927_.addFreshEntity(zombifiedpig);
+			this.discard();
+		} else {
+			super.thunderHit(p_19927_, p_19928_);
+		}
+	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
 	public void addAdditionalSaveData(CompoundTag p_27587_, CallbackInfo callbackInfo) {
