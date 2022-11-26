@@ -17,6 +17,8 @@ public class ModSounds {
 	public static final RegistryObject<SoundEvent> BONE_SPIDER_DEATH = createEvent("entity.bone_spider.death");
 
 	public static final RegistryObject<SoundEvent> DUCK_IDLE = createEvent("entity.duck.idle");
+	public static final RegistryObject<SoundEvent> DUCK_HURT = createEvent("entity.duck.hurt");
+	public static final RegistryObject<SoundEvent> DUCK_DEATH = createEvent("entity.duck.death");
 	public static final RegistryObject<SoundEvent> DUCK_STEP = createEvent("entity.duck.step");
 
 	public static final RegistryObject<SoundEvent> SKELETON_WOLF_BARK = createEvent("entity.skeleton_wolf.bark");

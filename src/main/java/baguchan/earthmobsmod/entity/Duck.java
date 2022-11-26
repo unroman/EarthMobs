@@ -2,6 +2,7 @@ package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class Duck extends Chicken {
 
@@ -46,11 +48,16 @@ public class Duck extends Chicken {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource p_28262_) {
-		return ModSounds.DUCK_IDLE.get();
+		return ModSounds.DUCK_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return ModSounds.DUCK_IDLE.get();
+		return ModSounds.DUCK_DEATH.get();
+	}
+
+	@Override
+	protected void playStepSound(BlockPos p_28254_, BlockState p_28255_) {
+		this.playSound(ModSounds.DUCK_STEP.get(), 0.15F, 1.0F);
 	}
 }
