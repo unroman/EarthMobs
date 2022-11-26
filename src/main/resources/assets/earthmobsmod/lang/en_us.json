@@ -86,5 +86,20 @@
   "item.minecraft.potion.effect.long_undead_body": "Potion of Undead Body",
   "item.minecraft.splash_potion.effect.long_undead_body": "Splash Potion of Undead Body",
   "item.minecraft.lingering_potion.effect.long_undead_body": "Lingering Potion of Undead Body",
-  "item.minecraft.tipped_arrow.effect.long_undead_body": "Arrow of Undead Body"
+  "item.minecraft.tipped_arrow.effect.long_undead_body": "Arrow of Undead Body",
+  "subtitles.entity.earthmobsmod.bone_spider.walk": "Bone Spider Walk",
+  "subtitles.entity.earthmobsmod.bone_spider.say": "Bone Spider Hiss",
+  "subtitles.entity.earthmobsmod.bone_spider.hurt": "Bone Spider Hurt",
+  "subtitles.entity.earthmobsmod.bone_spider.death": "Bone Spider Death",
+  "subtitles.entity.earthmobsmod.bone_spider.spit": "Bone Spider Spit",
+  "subtitles.entity.earthmobsmod.bone_spider.bone_stab": "Bone Spider Stub",
+  "subtitles.entity.earthmobsmod.duck.idle": "Duck Quack",
+  "subtitles.entity.earthmobsmod.duck.step": "Duck Step",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.bark": "Skeleton Wolf Bark",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.growl": "Skeleton Wolf Growl",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.hurt": "Skeleton Wolf Hurt",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.death": "Skeleton Wolf Death",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.step": "Skeleton Wolf Step",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "Skeleton Wolf Panting",
+  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "Skeleton Wolf Whine"
 }

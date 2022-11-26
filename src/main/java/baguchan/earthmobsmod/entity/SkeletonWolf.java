@@ -1,12 +1,15 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +40,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.Tags;
 
@@ -154,6 +158,29 @@ public class SkeletonWolf extends Wolf {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEAD;
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		if (this.isAngry()) {
+			return ModSounds.SKELETON_WOLF_GROWL.get();
+		} else if (this.random.nextInt(3) == 0) {
+			return this.isTame() && this.getHealth() < 10.0F ? ModSounds.SKELETON_WOLF_WHINE.get() : ModSounds.SKELETON_WOLF_PANTING.get();
+		} else {
+			return ModSounds.SKELETON_WOLF_BARK.get();
+		}
+	}
+
+	protected SoundEvent getHurtSound(DamageSource p_30424_) {
+		return ModSounds.SKELETON_WOLF_HURT.get();
+	}
+
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SKELETON_WOLF_DEATH.get();
+	}
+
+	protected void playStepSound(BlockPos p_30415_, BlockState p_30416_) {
+		this.playSound(ModSounds.SKELETON_WOLF_STEP.get(), 0.15F, 1.0F);
 	}
 
 	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor p_33009_, BlockPos p_33010_, RandomSource p_33011_) {

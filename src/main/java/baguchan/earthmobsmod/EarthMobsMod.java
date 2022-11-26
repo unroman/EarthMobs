@@ -11,6 +11,7 @@ import baguchan.earthmobsmod.registry.ModFluids;
 import baguchan.earthmobsmod.registry.ModInteractionInformations;
 import baguchan.earthmobsmod.registry.ModItems;
 import baguchan.earthmobsmod.registry.ModRecipes;
+import baguchan.earthmobsmod.registry.ModSounds;
 import baguchan.earthmobsmod.world.features.ModEarthFeatures;
 import baguchan.earthmobsmod.world.features.ModEarthPlacements;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,6 +52,7 @@ public class EarthMobsMod {
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+		ModSounds.SOUND_EVENTS.register(modBus);
 		ModBlocks.BLOCKS.register(modBus);
 		ModEntities.ENTITIES.register(modBus);
 		ModFluidTypes.FLUID_TYPES.register(modBus);

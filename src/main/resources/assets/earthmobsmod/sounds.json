@@ -1,0 +1,126 @@
+{
+  "entity.bone_spider.walk": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/walk1",
+      "earthmobsmod:entity/bone_spider/walk2",
+      "earthmobsmod:entity/bone_spider/walk3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.walk"
+  },
+  "entity.bone_spider.say": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/say1",
+      "earthmobsmod:entity/bone_spider/say2",
+      "earthmobsmod:entity/bone_spider/say3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.say"
+  },
+  "entity.bone_spider.hurt": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/say1",
+      "earthmobsmod:entity/bone_spider/say2",
+      "earthmobsmod:entity/bone_spider/say3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.hurt"
+  },
+  "entity.bone_spider.death": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/death1",
+      "earthmobsmod:entity/bone_spider/death2"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.death"
+  },
+  "entity.bone_spider.spit": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/spit1",
+      "earthmobsmod:entity/bone_spider/spit2",
+      "earthmobsmod:entity/bone_spider/spit3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.spit"
+  },
+  "entity.bone_spider.bone_stab": {
+    "sounds": [
+      "earthmobsmod:entity/bone_spider/bone_stab"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.bone_spider.bone_stab"
+  },
+  "entity.duck.idle": {
+    "sounds": [
+      "earthmobsmod:entity/duck/idle1",
+      "earthmobsmod:entity/duck/idle2",
+      "earthmobsmod:entity/duck/idle3",
+      "earthmobsmod:entity/duck/idle4",
+      "earthmobsmod:entity/duck/idle5"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.duck.idle"
+  },
+  "entity.duck.step": {
+    "sounds": [
+      "earthmobsmod:entity/duck/step1",
+      "earthmobsmod:entity/duck/step2",
+      "earthmobsmod:entity/duck/step3",
+      "earthmobsmod:entity/duck/step4",
+      "earthmobsmod:entity/duck/step5",
+      "earthmobsmod:entity/duck/step6"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.duck.step"
+  },
+  "entity.skeleton_wolf.bark": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/bark1",
+      "earthmobsmod:entity/skeleton_wolf/bark2",
+      "earthmobsmod:entity/skeleton_wolf/bark3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.bark"
+  },
+  "entity.skeleton_wolf.growl": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/growl1",
+      "earthmobsmod:entity/skeleton_wolf/growl2",
+      "earthmobsmod:entity/skeleton_wolf/growl3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.growl"
+  },
+  "entity.skeleton_wolf.hurt": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/hurt1",
+      "earthmobsmod:entity/skeleton_wolf/hurt2",
+      "earthmobsmod:entity/skeleton_wolf/hurt3"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.hurt"
+  },
+  "entity.skeleton_wolf.death": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/death"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.death"
+  },
+  "entity.skeleton_wolf.step": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/step1",
+      "earthmobsmod:entity/skeleton_wolf/step2",
+      "earthmobsmod:entity/skeleton_wolf/step3",
+      "earthmobsmod:entity/skeleton_wolf/step4",
+      "earthmobsmod:entity/skeleton_wolf/step5"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.step"
+  },
+  "entity.skeleton_wolf.panting": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/panting"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.panting"
+  },
+  "entity.skeleton_wolf.shake": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/shake"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.shake"
+  },
+  "entity.skeleton_wolf.whine": {
+    "sounds": [
+      "earthmobsmod:entity/skeleton_wolf/whine"
+    ],
+    "subtitle": "subtitles.entity.earthmobsmod.skeleton_wolf.whine"
+  }
+}

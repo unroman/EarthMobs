@@ -2,11 +2,14 @@ package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
 import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,6 +21,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -106,6 +110,23 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 
 	}
 
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.BONE_SPIDER_SAY.get();
+	}
+
+	protected SoundEvent getHurtSound(DamageSource p_30424_) {
+		return ModSounds.BONE_SPIDER_HURT.get();
+	}
+
+	protected SoundEvent getDeathSound() {
+		return ModSounds.BONE_SPIDER_DEATH.get();
+	}
+
+	protected void playStepSound(BlockPos p_30415_, BlockState p_30416_) {
+		this.playSound(ModSounds.BONE_SPIDER_WALK.get(), 0.15F, 1.0F);
+	}
+
 	public boolean canFreeze() {
 		return false;
 	}
@@ -165,14 +186,22 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
 					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
 				} else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
+					if (this.attackStep == 1) {
+						if (this.attackTime == 15) {
+							this.spider.playSound(ModSounds.BONE_SPIDER_SPIT.get(), this.spider.getSoundVolume(), 0.4F / (this.spider.getRandom().nextFloat() * 0.4F + 0.8F));
+						}
+					}
 					if (this.attackTime <= 0) {
 						++this.attackStep;
 						if (this.attackStep == 1) {
-							this.attackTime = 20;
+							this.attackTime = 30;
 						} else if (this.attackStep <= 3) {
-							this.attackTime = 10;
+							this.attackTime = 15;
+							if (this.attackStep <= 2) {
+								this.spider.playSound(ModSounds.BONE_SPIDER_SPIT.get(), this.spider.getSoundVolume(), 0.4F / (this.spider.getRandom().nextFloat() * 0.4F + 0.8F));
+							}
 						} else {
-							this.attackTime = 20;
+							this.attackTime = 10;
 							this.attackStep = 0;
 						}
 
@@ -210,7 +239,6 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 				bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 4, 0));
 			}
 		}
-		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}
 
