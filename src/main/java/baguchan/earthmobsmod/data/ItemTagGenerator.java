@@ -20,5 +20,6 @@ public class ItemTagGenerator extends ItemTagsProvider {
 	protected void addTags() {
 		tag(ItemTags.SMALL_FLOWERS).add(ModBlocks.BUTTERCUP.get().asItem(), ModBlocks.PINK_DAISY.get().asItem());
 		tag(Tags.Items.FEATHERS).add(ModItems.FANCY_FEATHER.get());
+		tag(Tags.Items.EGGS).add(ModItems.SMELLY_EGG.get());
 	}
 }
