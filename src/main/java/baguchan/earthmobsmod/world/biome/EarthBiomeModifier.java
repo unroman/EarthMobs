@@ -35,7 +35,7 @@ public class EarthBiomeModifier implements BiomeModifier {
 			}
 
 			if (EarthMobsConfig.COMMON.duckSpawnRate.get() > 0) {
-				if (biome.is(Tags.Biomes.IS_PLAINS) && !biome.is(Tags.Biomes.IS_COLD) && !biome.is(Tags.Biomes.IS_HOT)) {
+				if (biome.is(Tags.Biomes.IS_PLAINS) && !biome.is(Tags.Biomes.IS_COLD) && !biome.is(Tags.Biomes.IS_HOT) || biome.is(Tags.Biomes.IS_SWAMP)) {
 					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.DUCK.get(), EarthMobsConfig.COMMON.duckSpawnRate.get(), 3, 6));
 				}
 			}
