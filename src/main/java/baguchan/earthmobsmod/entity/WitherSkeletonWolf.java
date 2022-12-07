@@ -15,6 +15,8 @@ public class WitherSkeletonWolf extends SkeletonWolf {
 	public WitherSkeletonWolf(EntityType<? extends WitherSkeletonWolf> p_30369_, Level p_30370_) {
 		super(p_30369_, p_30370_);
 		this.setPathfindingMalus(BlockPathTypes.LAVA, 8.0F);
+		this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
+		this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 0.0F);
 	}
 
 	@Override

@@ -39,6 +39,7 @@
   "item.earthmobsmod.lobber_drowned_spawn_egg": "Lobber Drowned SpawnEgg",
   "item.earthmobsmod.tropical_slime_spawn_egg": "Tropical Slime SpawnEgg",
   "item.earthmobsmod.viler_witch_spawn_egg": "Viler Witch SpawnEgg",
+  "item.earthmobsmod.baby_ghast_spawn_egg": "Baby Ghast SpawnEgg",
   "entity.earthmobsmod.muddy_pig": "Muddy Pig",
   "entity.earthmobsmod.cluck_shroom": "Cluckshroom",
   "entity.earthmobsmod.fancy_chicken": "Fancy Chicken",
@@ -63,6 +64,7 @@
   "entity.earthmobsmod.lobber_drowned": "Lobber Drowned",
   "entity.earthmobsmod.tropical_slime": "Tropical Slime",
   "entity.earthmobsmod.viler_witch": "Viler Witch",
+  "entity.earthmobsmod.baby_ghast": "Baby Ghast",
   "entity.earthmobsmod.melon_golem": "Melon Golem",
   "entity.earthmobsmod.smelly_egg": "Smelly Egg",
   "entity.earthmobsmod.bone_shard": "Bone Shard",
@@ -103,5 +105,7 @@
   "subtitles.entity.earthmobsmod.skeleton_wolf.death": "Skeleton Wolf Death",
   "subtitles.entity.earthmobsmod.skeleton_wolf.step": "Skeleton Wolf Step",
   "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "Skeleton Wolf Panting",
-  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "Skeleton Wolf Whine"
+  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "Skeleton Wolf Whine",
+  "entity.earthmobsmod.baby_ghast.sit": "%1$s is now Sit",
+  "entity.earthmobsmod.baby_ghast.standing": "%1$s is now Standing"
 }

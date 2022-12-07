@@ -109,24 +109,32 @@ public class EarthBiomeModifier implements BiomeModifier {
 				}
 			}
 
-			if (EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get() > 0) {
-				if (biome.is(Biomes.SOUL_SAND_VALLEY)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.SKELETON_WOLF.get(), EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get(), 2, 3));
-					builder.getMobSpawnSettings().addMobCharge(ModEntities.SKELETON_WOLF.get(), 0.7, 0.15F);
-				}
-			}
-
-			if (EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get() > 0) {
-				if (biome.is(Biomes.SOUL_SAND_VALLEY)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.WITHER_SKELETON_WOLF.get(), EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get(), 2, 3));
-					builder.getMobSpawnSettings().addMobCharge(ModEntities.WITHER_SKELETON_WOLF.get(), 0.7, 0.15F);
-				}
-			}
-
 			if (EarthMobsConfig.COMMON.jumboRabbitSpawnRate.get() > 0) {
 				if (biome.is(Tags.Biomes.IS_PLAINS) || biome.is(BiomeTags.IS_FOREST) || biome.is(Tags.Biomes.IS_SANDY)) {
 					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.JUMBO_RABBIT.get(), EarthMobsConfig.COMMON.jumboRabbitSpawnRate.get(), 3, 4));
 				}
+			}
+
+
+		}
+
+		if (EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get() > 0) {
+			if (biome.is(Biomes.SOUL_SAND_VALLEY)) {
+				builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.SKELETON_WOLF.get(), EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get(), 2, 3));
+				builder.getMobSpawnSettings().addMobCharge(ModEntities.SKELETON_WOLF.get(), 0.7, 0.15F);
+			}
+		}
+
+		if (EarthMobsConfig.COMMON.babyGhastSpawnRate.get() > 0) {
+			if (biome.is(Biomes.CRIMSON_FOREST)) {
+				builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.BABY_GHAST.get(), EarthMobsConfig.COMMON.babyGhastSpawnRate.get(), 3, 4));
+			}
+		}
+
+		if (EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get() > 0) {
+			if (biome.is(Biomes.SOUL_SAND_VALLEY)) {
+				builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.WITHER_SKELETON_WOLF.get(), EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get(), 2, 3));
+				builder.getMobSpawnSettings().addMobCharge(ModEntities.WITHER_SKELETON_WOLF.get(), 0.7, 0.15F);
 			}
 		}
 	}

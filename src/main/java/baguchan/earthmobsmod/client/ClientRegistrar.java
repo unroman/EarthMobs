@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.client;
 
 import baguchan.earthmobsmod.EarthMobsMod;
+import baguchan.earthmobsmod.client.model.BabyGhastModel;
 import baguchan.earthmobsmod.client.model.BoneSpiderModel;
 import baguchan.earthmobsmod.client.model.BoulderingZombieModel;
 import baguchan.earthmobsmod.client.model.CluckShroomModel;
@@ -12,6 +13,7 @@ import baguchan.earthmobsmod.client.model.LobberZombieModel;
 import baguchan.earthmobsmod.client.model.MuddyPigModel;
 import baguchan.earthmobsmod.client.model.VilerWitchModel;
 import baguchan.earthmobsmod.client.model.WoolyCowModel;
+import baguchan.earthmobsmod.client.render.BabyGhastRenderer;
 import baguchan.earthmobsmod.client.render.BoneSpiderRender;
 import baguchan.earthmobsmod.client.render.BoulderingDrownedRenderer;
 import baguchan.earthmobsmod.client.render.BoulderingZombieRenderer;
@@ -83,7 +85,7 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.TROPICAL_SLIME.get(), TropicalSlimeRenderer::new);
 		event.registerEntityRenderer(ModEntities.SKELETON_WOLF.get(), SkeletonWolfRenderer::new);
 		event.registerEntityRenderer(ModEntities.WITHER_SKELETON_WOLF.get(), WitherSkeletonWolfRenderer::new);
-
+		event.registerEntityRenderer(ModEntities.BABY_GHAST.get(), BabyGhastRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);
@@ -104,6 +106,8 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.STRAY_BONE_SPIDER, BoneSpiderModel::createSpiderBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_WITCH, VilerWitchModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.BABY_GHAST, BabyGhastModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.BABY_GHAST_CORE, BabyGhastModel::createCoreLayer);
 
 		LayerDefinition layerDefinition = BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE);
 		LayerDefinition layerDefinition2 = LobberZombieModel.createBodyLayer(CubeDeformation.NONE);
@@ -126,7 +130,7 @@ public class ClientRegistrar {
 	}
 
 	@SubscribeEvent
-	public static void registerEntityRenders(RegisterColorHandlersEvent.Item event) {
+	public static void registerItemColorRenders(RegisterColorHandlersEvent.Item event) {
 		event.register((p_92693_, p_92694_) -> {
 			return PotionUtils.getPotion(p_92693_) != Potions.EMPTY ? PotionUtils.getColor(p_92693_) : 0xFFFFFF;
 		}, ModItems.BONE_SHARD.get());

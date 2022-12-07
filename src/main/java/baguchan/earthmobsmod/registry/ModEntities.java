@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
+import baguchan.earthmobsmod.entity.BabyGhast;
 import baguchan.earthmobsmod.entity.BoneSpider;
 import baguchan.earthmobsmod.entity.BoulderingDrowned;
 import baguchan.earthmobsmod.entity.BoulderingZombie;
@@ -83,6 +84,7 @@ public class ModEntities {
 
 	public static final RegistryObject<EntityType<SkeletonWolf>> SKELETON_WOLF = ENTITIES.register("skeleton_wolf", () -> EntityType.Builder.of(SkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).build(prefix("skeleton_wolf")));
 	public static final RegistryObject<EntityType<WitherSkeletonWolf>> WITHER_SKELETON_WOLF = ENTITIES.register("wither_skeleton_wolf", () -> EntityType.Builder.of(WitherSkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).fireImmune().immuneTo(Blocks.WITHER_ROSE).build(prefix("wither_skeleton_wolf")));
+	public static final RegistryObject<EntityType<BabyGhast>> BABY_GHAST = ENTITIES.register("baby_ghast", () -> EntityType.Builder.of(BabyGhast::new, MobCategory.MONSTER).sized(0.45F, 0.45F).fireImmune().build(prefix("baby_ghast")));
 
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
@@ -124,6 +126,7 @@ public class ModEntities {
 		event.register(TROPICAL_SLIME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TropicalSlime::checkTropicalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(WITHER_SKELETON_WOLF.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SkeletonWolf::checkSkeletonWolfSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(BABY_GHAST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BabyGhast::checkGhastSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 	}
 
 	@SubscribeEvent
@@ -151,5 +154,6 @@ public class ModEntities {
 		event.put(TROPICAL_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(SKELETON_WOLF.get(), SkeletonWolf.createAttributes().build());
 		event.put(WITHER_SKELETON_WOLF.get(), SkeletonWolf.createAttributes().build());
+		event.put(BABY_GHAST.get(), BabyGhast.createAttributes().build());
 	}
 }

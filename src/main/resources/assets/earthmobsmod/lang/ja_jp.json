@@ -39,6 +39,7 @@
   "item.earthmobsmod.lobber_drowned_spawn_egg": "ロバードラウンドのスポーンエッグ",
   "item.earthmobsmod.tropical_slime_spawn_egg": "トロピカルスライムのスポーンエッグ",
   "item.earthmobsmod.viler_witch_spawn_egg": "卑怯なウィッチのスポーンエッグ",
+  "item.earthmobsmod.baby_ghast_spawn_egg": "ベビーガストのスポーンエッグ",
   "entity.earthmobsmod.muddy_pig": "泥まみれのブタ",
   "entity.earthmobsmod.cluck_shroom": "きのコッコ",
   "entity.earthmobsmod.fancy_chicken": "派手なニワトリ",
@@ -63,6 +64,7 @@
   "entity.earthmobsmod.lobber_drowned": "ロバードラウンド",
   "entity.earthmobsmod.tropical_slime": "トロピカルスライム",
   "entity.earthmobsmod.viler_witch": "卑怯なウィッチ",
+  "entity.earthmobsmod.baby_ghast": "ベビーガスト",
   "entity.earthmobsmod.melon_golem": "スイカゴーレム",
   "entity.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "entity.earthmobsmod.bone_shard": "骨の破片",
@@ -103,5 +105,7 @@
   "subtitles.entity.earthmobsmod.skeleton_wolf.death": "スケルトンウルフが死ぬ",
   "subtitles.entity.earthmobsmod.skeleton_wolf.step": "スケルトンウルフが歩く",
   "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "スケルトンウルフがあえぐ",
-  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "スケルトンウルフが鳴く"
+  "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "スケルトンウルフが鳴く",
+  "entity.earthmobsmod.baby_ghast.sit": "%1$sは待機中だ",
+  "entity.earthmobsmod.baby_ghast.standing": "%1$sはついてくるようだ"
 }
