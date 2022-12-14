@@ -13,7 +13,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -139,7 +143,7 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 			Block block = ((BlockItem) item).getBlock();
 			if (block instanceof FlowerBlock) {
 				FlowerBlock flowerblock = (FlowerBlock) block;
-				return Optional.of(Pair.of(flowerblock.getSuspiciousStewEffect(), flowerblock.getEffectDuration()));
+				return Optional.of(Pair.of(flowerblock.getSuspiciousEffect(), flowerblock.getEffectDuration()));
 			}
 		}
 

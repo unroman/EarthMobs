@@ -3,7 +3,7 @@ package baguchan.earthmobsmod.client.render.layer;
 import baguchan.earthmobsmod.entity.MelonGolem;
 import baguchan.earthmobsmod.registry.ModBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -38,7 +38,7 @@ public class MelonGolemHeadLayer extends RenderLayer<MelonGolem, SnowGolemModel<
 				this.getParentModel().getHead().translateAndRotate(p_117494_);
 				float f = 0.625F;
 				p_117494_.translate(0.0D, -0.34375D, 0.0D);
-				p_117494_.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+				p_117494_.mulPose(Axis.YP.rotationDegrees(180.0F));
 				p_117494_.scale(0.625F, -0.625F, -0.625F);
 				ItemStack itemstack = new ItemStack(block);
 				if (flag) {

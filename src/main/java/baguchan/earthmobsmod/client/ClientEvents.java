@@ -5,7 +5,7 @@ import baguchan.earthmobsmod.entity.HyperRabbit;
 import baguchan.earthmobsmod.registry.ModEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -95,7 +95,7 @@ public class ClientEvents {
 				posestack.translate(deltaX, deltaY, deltaZ);
 
 				if (pose != Pose.SLEEPING) {
-					posestack.mulPose(Vector3f.YP.rotationDegrees(180.0F - f));
+					posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
 				}
 
 				posestack.scale(-1.0F, -1.0F, 1.0F);
@@ -158,7 +158,7 @@ public class ClientEvents {
 				posestack.translate(deltaX2, deltaY2, deltaZ2);
 
 				if (pose != Pose.SLEEPING) {
-					posestack.mulPose(Vector3f.YP.rotationDegrees(180.0F - f));
+					posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
 				}
 
 				posestack.scale(-1.0F, -1.0F, 1.0F);

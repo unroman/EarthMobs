@@ -64,17 +64,14 @@ public class HyperRabbit extends Rabbit {
 	}
 
 	@Override
-	public void setRabbitType(int p_29734_) {
-		if (p_29734_ > 2 && p_29734_ != 99) {
-			p_29734_ = 0;
+	public void setVariant(Rabbit.Variant p_29734_) {
+		if (p_29734_ == Rabbit.Variant.EVIL) {
+			if (!this.hasCustomName()) {
+				this.setCustomName(Component.literal("HR_X"));
+				this.setSpark(true);
+			}
 		}
-
-
-		if (p_29734_ == 99 && !this.hasCustomName()) {
-			this.setCustomName(Component.literal("HR_X"));
-			this.setSpark(true);
-		}
-		super.setRabbitType(p_29734_);
+		super.setVariant(p_29734_);
 	}
 
 	@Override
@@ -111,7 +108,7 @@ public class HyperRabbit extends Rabbit {
 			boolean flag = livingentity.isDamageSourceBlocked(DamageSource.mobAttack(this));
 			float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
 			float f2 = flag ? 0.25F : 1.0F;
-			int i = getRabbitType() == 99 ? 2 : 1;
+			int i = getVariant() == Variant.EVIL ? 2 : 1;
 			double d1 = this.getX() - livingentity.getX();
 			double d2 = this.getZ() - livingentity.getZ();
 			if (!flag) {
@@ -165,7 +162,7 @@ public class HyperRabbit extends Rabbit {
 		}
 
 		public boolean canUse() {
-			return this.rabbit.getRabbitType() != 99 && super.canUse();
+			return this.rabbit.getVariant() != Variant.EVIL && super.canUse();
 		}
 	}
 }

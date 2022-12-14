@@ -34,15 +34,15 @@ public class HyperRabbitRenderer<T extends HyperRabbit> extends MobRenderer<T, H
 	public ResourceLocation getTextureLocation(T p_115803_) {
 		String s = ChatFormatting.stripFormatting(p_115803_.getName().getString());
 
-		switch (p_115803_.getRabbitType()) {
-			case 0:
+		switch (p_115803_.getVariant()) {
+			case BROWN:
 			default:
 				return RABBIT_BROWN_LOCATION;
-			case 1, 2, 3:
+			case WHITE, SALT:
 				return RABBIT_WHITE_LOCATION;
-			case 4, 5:
+			case GOLD:
 				return RABBIT_GOLD_LOCATION;
-			case 99:
+			case EVIL:
 				return RABBIT_SA_X_LOCATION;
 		}
 	}

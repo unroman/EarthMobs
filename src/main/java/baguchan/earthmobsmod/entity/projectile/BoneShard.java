@@ -3,13 +3,12 @@ package baguchan.earthmobsmod.entity.projectile;
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModItems;
 import com.google.common.collect.Sets;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -28,7 +27,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.network.NetworkHooks;
 
 import java.util.Set;
 
@@ -119,7 +117,7 @@ public class BoneShard extends ThrowableItemProjectile {
 	public void addAdditionalSaveData(CompoundTag p_36881_) {
 		super.addAdditionalSaveData(p_36881_);
 		if (this.potion != Potions.EMPTY) {
-			p_36881_.putString("Potion", Registry.POTION.getKey(this.potion).toString());
+			p_36881_.putString("Potion", BuiltInRegistries.POTION.getKey(this.potion).toString());
 		}
 
 		if (!this.effects.isEmpty()) {
@@ -184,10 +182,5 @@ public class BoneShard extends ThrowableItemProjectile {
 			this.discard();
 		}
 
-	}
-
-	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

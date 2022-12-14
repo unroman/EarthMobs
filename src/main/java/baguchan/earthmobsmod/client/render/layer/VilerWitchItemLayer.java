@@ -2,7 +2,7 @@ package baguchan.earthmobsmod.client.render.layer;
 
 import baguchan.earthmobsmod.client.model.VilerWitchModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -25,9 +25,9 @@ public class VilerWitchItemLayer<T extends LivingEntity> extends CrossedArmsItem
 		if (itemstack.is(Items.POTION)) {
 			this.getParentModel().getNose().translateAndRotate(p_117685_);
 			p_117685_.translate(0.0625D, 0.25D, 0.0D);
-			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
-			p_117685_.mulPose(Vector3f.XP.rotationDegrees(140.0F));
-			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(10.0F));
+			p_117685_.mulPose(Axis.ZP.rotationDegrees(180.0F));
+			p_117685_.mulPose(Axis.XP.rotationDegrees(140.0F));
+			p_117685_.mulPose(Axis.ZP.rotationDegrees(10.0F));
 			p_117685_.translate(0.0D, (double) -0.4F, (double) 0.4F);
 		}
 

@@ -35,19 +35,17 @@ public class JumboRabbitRenderer<T extends JumboRabbit> extends MobRenderer<T, J
 	public ResourceLocation getTextureLocation(T p_115803_) {
 		String s = ChatFormatting.stripFormatting(p_115803_.getName().getString());
 
-		switch (p_115803_.getRabbitType()) {
-			case 0:
+		switch (p_115803_.getVariant()) {
+			case BROWN:
 			default:
 				return RABBIT_BROWN_LOCATION;
-			case 1:
+			case WHITE:
 				return RABBIT_WHITE_LOCATION;
-			case 2:
+			case BLACK:
 				return RABBIT_BLACK_LOCATION;
-			case 3:
+			case WHITE_SPLOTCHED:
 				return RABBIT_WHITE_LOCATION;
-			case 5:
-				return RABBIT_WHITE_LOCATION;
-			case 99:
+			case EVIL:
 				return RABBIT_EVIL_LOCATION;
 		}
 	}

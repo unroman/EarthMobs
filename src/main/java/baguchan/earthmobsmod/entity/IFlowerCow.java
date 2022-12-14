@@ -9,7 +9,7 @@ public interface IFlowerCow {
 
 	default Pair<MobEffect, Integer> getEffectForCow() {
 		FlowerBlock flowerblock = (FlowerBlock) getFlower();
-		return Pair.of(flowerblock.getSuspiciousStewEffect(), flowerblock.getEffectDuration());
+		return Pair.of(flowerblock.getSuspiciousEffect(), flowerblock.getEffectDuration());
 	}
 
 	Block getFlower();

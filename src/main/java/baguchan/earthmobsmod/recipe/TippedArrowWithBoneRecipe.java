@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -19,8 +20,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 
 public class TippedArrowWithBoneRecipe extends CustomRecipe {
-	public TippedArrowWithBoneRecipe(ResourceLocation p_44503_) {
-		super(p_44503_);
+	public TippedArrowWithBoneRecipe(ResourceLocation p_44503_, CraftingBookCategory p_251985_) {
+		super(p_44503_, p_251985_);
 	}
 
 	public boolean matches(CraftingContainer p_44515_, Level p_44516_) {

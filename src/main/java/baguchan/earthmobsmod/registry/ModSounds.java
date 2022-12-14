@@ -33,7 +33,7 @@ public class ModSounds {
 
 	private static RegistryObject<SoundEvent> createEvent(String sound) {
 		ResourceLocation name = new ResourceLocation(EarthMobsMod.MODID, sound);
-		return SOUND_EVENTS.register(sound, () -> new SoundEvent(name));
+		return SOUND_EVENTS.register(sound, () -> SoundEvent.createVariableRangeEvent(name));
 	}
 
 }

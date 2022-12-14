@@ -3,7 +3,7 @@ package baguchan.earthmobsmod.entity;
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -100,7 +100,7 @@ public class HornedSheep extends Sheep {
 	public ItemStack createHorn() {
 		RandomSource randomsource = RandomSource.create((long) this.getUUID().hashCode());
 		TagKey<Instrument> tagkey = InstrumentTags.REGULAR_GOAT_HORNS;
-		HolderSet<Instrument> holderset = Registry.INSTRUMENT.getOrCreateTag(tagkey);
+		HolderSet<Instrument> holderset = BuiltInRegistries.INSTRUMENT.getOrCreateTag(tagkey);
 		return InstrumentItem.create(ModItems.HORN_FLUTE.get(), holderset.getRandomElement(randomsource).get());
 	}
 

@@ -13,6 +13,6 @@ public class ModBiomeModifiers {
 	public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, EarthMobsMod.MODID);
 
 	public static final RegistryObject<Codec<EarthBiomeModifier>> EARTH_ENTITY_MODIFIER_TYPE = BIOME_MODIFIER_SERIALIZERS.register("earth_entity_modifier", () -> Codec.unit(EarthBiomeModifier.INSTANCE));
-	public static final RegistryObject<Codec<MudBiomeModifier>> EARTH_MUD_MODIFIER_TYPE = BIOME_MODIFIER_SERIALIZERS.register("earth_mud_modifier", () -> Codec.unit(MudBiomeModifier.INSTANCE));
+	public static final RegistryObject<Codec<MudBiomeModifier>> EARTH_MUD_MODIFIER_TYPE = BIOME_MODIFIER_SERIALIZERS.register("earth_mud_modifier", MudBiomeModifier::makeCodec);
 
 }

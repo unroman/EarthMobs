@@ -1,7 +1,7 @@
 package baguchan.earthmobsmod.data;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,10 +13,10 @@ public class DataGenerators {
 		/*event.getGenerator().addProvider(true, new BlockstateGenerator(event.getGenerator(), event.getExistingFileHelper()));
 		event.getGenerator().addProvider(true, new ItemModelGenerator(event.getGenerator(), event.getExistingFileHelper()));
 		*/
-		BlockTagsProvider blocktags = new BlockTagGenerator(event.getGenerator(), event.getExistingFileHelper());
-		event.getGenerator().addProvider(true, blocktags);
-		event.getGenerator().addProvider(true, new ItemTagGenerator(event.getGenerator(), blocktags, event.getExistingFileHelper()));
-		event.getGenerator().addProvider(true, new EntityTagGenerator(event.getGenerator(), event.getExistingFileHelper()));
-		//event.getGenerator().addProvider(true, new CraftingGenerator(event.getGenerator()));
+		BlockTagsProvider blocktags = new BlockTagGenerator(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());
+		event.getGenerator().addProvider(event.includeServer(), blocktags);
+		event.getGenerator().addProvider(event.includeServer(), new ItemTagGenerator(event.getGenerator().getPackOutput(), event.getLookupProvider(), blocktags, event.getExistingFileHelper()));
+		event.getGenerator().addProvider(event.includeServer(), new EntityTagGenerator(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+		event.getGenerator().addProvider(event.includeServer(), new WorldGenerator(event.getGenerator().getPackOutput()));
 	}
 }

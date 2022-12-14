@@ -2,19 +2,22 @@ package baguchan.earthmobsmod.data;
 
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.registry.ModEntities;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.concurrent.CompletableFuture;
+
 public class EntityTagGenerator extends EntityTypeTagsProvider {
-	public EntityTagGenerator(DataGenerator generator, ExistingFileHelper exFileHelper) {
-		super(generator, EarthMobsMod.MODID, exFileHelper);
+	public EntityTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper exFileHelper) {
+		super(output, lookupProvider, EarthMobsMod.MODID, exFileHelper);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void addTags() {
+	protected void addTags(HolderLookup.Provider p_256380_) {
 		this.tag(EntityTypeTags.AXOLOTL_ALWAYS_HOSTILES).add(ModEntities.BOULDERING_DROWNED.get(), ModEntities.LOBBER_DROWNED.get());
 		this.tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES).add(ModEntities.STRAY_BONE_SPIDER.get(), ModEntities.MELON_GOLEM.get());
 		this.tag(EntityTypeTags.FROG_FOOD).add(ModEntities.TROPICAL_SLIME.get());

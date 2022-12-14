@@ -12,8 +12,7 @@ import baguchan.earthmobsmod.registry.ModInteractionInformations;
 import baguchan.earthmobsmod.registry.ModItems;
 import baguchan.earthmobsmod.registry.ModRecipes;
 import baguchan.earthmobsmod.registry.ModSounds;
-import baguchan.earthmobsmod.world.features.ModEarthFeatures;
-import baguchan.earthmobsmod.world.features.ModEarthPlacements;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -30,6 +29,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Locale;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(EarthMobsMod.MODID)
@@ -72,8 +73,6 @@ public class EarthMobsMod {
 	private void setup(final FMLCommonSetupEvent event) {
 		ModEffects.init();
 		ModInteractionInformations.init();
-		ModEarthFeatures.init();
-		ModEarthPlacements.init();
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -81,5 +80,9 @@ public class EarthMobsMod {
 	}
 
 	private void processIMC(final InterModProcessEvent event) {
+	}
+
+	public static ResourceLocation prefix(String name) {
+		return new ResourceLocation(EarthMobsMod.MODID, name.toLowerCase(Locale.ROOT));
 	}
 }
