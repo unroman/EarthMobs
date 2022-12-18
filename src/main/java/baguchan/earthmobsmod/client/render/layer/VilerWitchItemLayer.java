@@ -24,11 +24,11 @@ public class VilerWitchItemLayer<T extends LivingEntity> extends CrossedArmsItem
 		if (itemstack.is(Items.POTION)) {
 			this.getParentModel().getHead().translateAndRotate(p_117685_);
 			this.getParentModel().getNose().translateAndRotate(p_117685_);
-			p_117685_.translate(0.0625D, 0.25D, 0.0D);
+			p_117685_.translate(0.0625F, 0.25F, 0.0F);
 			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
 			p_117685_.mulPose(Vector3f.XP.rotationDegrees(140.0F));
 			p_117685_.mulPose(Vector3f.ZP.rotationDegrees(10.0F));
-			p_117685_.translate(0.0D, (double) -0.4F, (double) 0.4F);
+			p_117685_.translate(0.0F, -0.4F, 0.4F);
 		}
 
 		super.render(p_117685_, p_117686_, p_117687_, p_117688_, p_117689_, p_117690_, p_117691_, p_117692_, p_117693_, p_117694_);

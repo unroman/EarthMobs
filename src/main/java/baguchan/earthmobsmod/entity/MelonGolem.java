@@ -14,7 +14,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -23,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
-import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +43,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class MelonGolem extends AbstractGolem implements Shearable, RangedAttackMob, net.minecraftforge.common.IForgeShearable {
-	private static final EntityDataAccessor<Byte> DATA_MELON_ID = SynchedEntityData.defineId(SnowGolem.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> DATA_MELON_ID = SynchedEntityData.defineId(MelonGolem.class, EntityDataSerializers.BYTE);
 	private static final byte MELON_FLAG = 16;
 	private static final float EYE_HEIGHT = 1.7F;
 
@@ -48,7 +52,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new MelonGolem.ShootSeedGoal(this));
+		this.goalSelector.addGoal(1, new ShootSeedGoal(this));
 		this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D, 1.0000001E-5F));
 		this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -219,7 +223,7 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 
 		public ShootSeedGoal(MelonGolem melonGolem) {
 			this.golem = melonGolem;
-			this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+			this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 		}
 
 		public boolean canUse() {
@@ -253,11 +257,11 @@ public class MelonGolem extends AbstractGolem implements Shearable, RangedAttack
 					if (this.attackTime <= 0) {
 						++this.attackStep;
 						if (this.attackStep == 1) {
-							this.attackTime = 20;
+							this.attackTime = 10;
 						} else if (this.attackStep <= 5) {
-							this.attackTime = 6;
+							this.attackTime = 5;
 						} else {
-							this.attackTime = 20;
+							this.attackTime = 10;
 							this.attackStep = 0;
 						}
 

@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -16,13 +17,18 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.monster.Slime;
@@ -32,9 +38,9 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
@@ -45,27 +51,30 @@ import java.util.Random;
 
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
-public class TropicalSlime extends Slime {
+public class TropicalSlime extends Slime implements Bucketable {
 	public static final EntityDataAccessor<CompoundTag> DATA_FISHS = SynchedEntityData.defineId(TropicalSlime.class, EntityDataSerializers.COMPOUND_TAG);
+	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(TropicalSlime.class, EntityDataSerializers.BOOLEAN);
+
 
 	public static final String TAG_FISH_VARIANT = "FishVariant";
 	public static final String TAG_FISH_LIST = "FishList";
 
 	public TropicalSlime(EntityType<? extends Slime> p_33588_, Level p_33589_) {
 		super(p_33588_, p_33589_);
-		this.moveControl = new TropicalSlime.SlimeMoveControl(this);
+		this.moveControl = new SlimeMoveControl(this);
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(DATA_FISHS, new CompoundTag());
+		this.entityData.define(FROM_BUCKET, false);
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new TropicalSlime.SlimeAttackGoal(this));
-		this.goalSelector.addGoal(3, new TropicalSlime.SlimeRandomDirectionGoal(this));
-		this.goalSelector.addGoal(5, new TropicalSlime.SlimeKeepOnJumpingGoal(this));
+		this.goalSelector.addGoal(2, new SlimeAttackGoal(this));
+		this.goalSelector.addGoal(3, new SlimeRandomDirectionGoal(this));
+		this.goalSelector.addGoal(5, new SlimeKeepOnJumpingGoal(this));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_33641_) -> {
 			return Math.abs(p_33641_.getY() - this.getY()) <= 4.0D;
 		}));
@@ -139,21 +148,8 @@ public class TropicalSlime extends Slime {
 			SoundEvent soundevent = SoundEvents.BUCKET_EMPTY_FISH;
 			this.playSound(soundevent, 1.0F, 1.0F);
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		} else if (itemstack.is(Items.WATER_BUCKET)) {
-			ItemStack itemstack1 = new ItemStack(Items.TROPICAL_FISH_BUCKET);
-
-			if (releaseFish(itemstack1)) {
-
-				ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, p_28941_, itemstack1, false);
-				p_28941_.setItemInHand(p_28942_, itemstack2);
-				SoundEvent soundevent = SoundEvents.BUCKET_FILL_FISH;
-				this.playSound(soundevent, 1.0F, 1.0F);
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
-			} else {
-				return InteractionResult.FAIL;
-			}
 		} else {
-			return super.mobInteract(p_28941_, p_28942_);
+			return this.isTiny() ? Bucketable.bucketMobPickup(p_28941_, p_28942_, this).orElse(super.mobInteract(p_28941_, p_28942_)) : super.mobInteract(p_28941_, p_28942_);
 		}
 	}
 
@@ -209,22 +205,24 @@ public class TropicalSlime extends Slime {
 		super.remove(p_149847_);
 		CompoundTag compoundTag = this.getFishData();
 
-		if (compoundTag != null && compoundTag.get(TAG_FISH_LIST) != null) {
-			int i = this.getSize();
-			ListTag listTag = (ListTag) compoundTag.get(TAG_FISH_LIST);
+		if (this.isDeadOrDying()) {
+			if (compoundTag != null && compoundTag.get(TAG_FISH_LIST) != null) {
+				int i = this.getSize();
+				ListTag listTag = (ListTag) compoundTag.get(TAG_FISH_LIST);
 
-			float f = (float) i / 4.0F;
-			for (int l = 0; l < listTag.size(); ++l) {
-				float f1 = ((float) (l % 2) - 0.5F) * f;
-				float f2 = ((float) (l / 2) - 0.5F) * f;
-				TropicalFish fish = EntityType.TROPICAL_FISH.create(this.level);
-				if (this.isPersistenceRequired()) {
-					fish.setPersistenceRequired();
+				float f = (float) i / 4.0F;
+				for (int l = 0; l < listTag.size(); ++l) {
+					float f1 = ((float) (l % 2) - 0.5F) * f;
+					float f2 = ((float) (l / 2) - 0.5F) * f;
+					TropicalFish fish = EntityType.TROPICAL_FISH.create(this.level);
+					if (this.isPersistenceRequired()) {
+						fish.setPersistenceRequired();
+					}
+					fish.setVariant(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT));
+					fish.setInvulnerable(this.isInvulnerable());
+					fish.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
+					this.level.addFreshEntity(fish);
 				}
-				fish.setVariant(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT));
-				fish.setInvulnerable(this.isInvulnerable());
-				fish.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
-				this.level.addFreshEntity(fish);
 			}
 		}
 	}
@@ -262,13 +260,15 @@ public class TropicalSlime extends Slime {
 		} else {
 			Holder<Biome> holder = p_32351_.getBiome(p_32353_);
 			boolean flag = p_32351_.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(p_32351_, p_32353_, p_32354_) && (p_32352_ == MobSpawnType.SPAWNER || p_32351_.getFluidState(p_32353_).is(FluidTags.WATER));
-			if (!holder.is(Biomes.RIVER) && !holder.is(Biomes.FROZEN_RIVER)) {
-				return p_32354_.nextInt(40) == 0 && isDeepEnoughToSpawn(p_32351_, p_32353_) && flag;
-			} else {
-				return p_32354_.nextInt(15) == 0 && flag;
-			}
+
+			return p_32354_.nextInt(30) == 0 && flag;
 		}
 	}
+
+	public boolean checkSpawnObstruction(LevelReader p_32370_) {
+		return p_32370_.isUnobstructed(this);
+	}
+
 
 	private static boolean isDeepEnoughToSpawn(LevelAccessor p_32367_, BlockPos p_32368_) {
 		return p_32368_.getY() < p_32367_.getSeaLevel() - 5;
@@ -279,13 +279,48 @@ public class TropicalSlime extends Slime {
 		return ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * f;
 	}
 
+	@Override
+	public boolean fromBucket() {
+		return this.entityData.get(FROM_BUCKET);
+	}
+
+	public void setFromBucket(boolean p_149196_) {
+		this.entityData.set(FROM_BUCKET, p_149196_);
+	}
+
+	@Override
+	public void saveToBucketTag(ItemStack p_149187_) {
+		Bucketable.saveDefaultDataToBucketTag(this, p_149187_);
+		CompoundTag compoundtag = p_149187_.getOrCreateTag();
+		compoundtag.put("FishData", this.getFishData());
+	}
+
+	@Override
+	public void loadFromBucketTag(CompoundTag p_149163_) {
+		Bucketable.loadDefaultDataFromBucketTag(this, p_149163_);
+		this.setSize(1, true);
+		if (p_149163_.contains("FishData")) {
+			this.setFishData(p_149163_.getCompound("FishData"));
+		}
+	}
+
+	@Override
+	public ItemStack getBucketItemStack() {
+		return new ItemStack(ModItems.TROPICAL_SLIME_BUCKET.get());
+	}
+
+	@Override
+	public SoundEvent getPickupSound() {
+		return SoundEvents.BUCKET_FILL_FISH;
+	}
+
 	static class SlimeAttackGoal extends Goal {
 		private final TropicalSlime slime;
 		private int growTiredTimer;
 
 		public SlimeAttackGoal(TropicalSlime p_33648_) {
 			this.slime = p_33648_;
-			this.setFlags(EnumSet.of(Goal.Flag.LOOK));
+			this.setFlags(EnumSet.of(Flag.LOOK));
 		}
 
 		public boolean canUse() {
@@ -293,7 +328,7 @@ public class TropicalSlime extends Slime {
 			if (livingentity == null) {
 				return false;
 			} else {
-				return !this.slime.canAttack(livingentity) ? false : this.slime.getMoveControl() instanceof TropicalSlime.SlimeMoveControl;
+				return !this.slime.canAttack(livingentity) ? false : this.slime.getMoveControl() instanceof SlimeMoveControl;
 			}
 		}
 
@@ -322,11 +357,11 @@ public class TropicalSlime extends Slime {
 			if (livingentity != null) {
 				this.slime.lookAt(livingentity, 10.0F, 10.0F);
 				//add this. because wantedY used in TropicalSlime special case
-				((TropicalSlime.SlimeMoveControl) this.slime.getMoveControl()).setWantedY(livingentity.getY());
+				((SlimeMoveControl) this.slime.getMoveControl()).setWantedY(livingentity.getY());
 			}
 
 
-			((TropicalSlime.SlimeMoveControl) this.slime.getMoveControl()).setDirection(this.slime.getYRot(), this.slime.isDealsDamage());
+			((SlimeMoveControl) this.slime.getMoveControl()).setDirection(this.slime.getYRot(), this.slime.isDealsDamage());
 		}
 	}
 
@@ -336,7 +371,7 @@ public class TropicalSlime extends Slime {
 
 		public SlimeKeepOnJumpingGoal(Slime p_33660_) {
 			this.slime = p_33660_;
-			this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+			this.setFlags(EnumSet.of(Flag.JUMP, Flag.MOVE));
 		}
 
 		public boolean canUse() {
@@ -344,7 +379,7 @@ public class TropicalSlime extends Slime {
 		}
 
 		public void tick() {
-			((TropicalSlime.SlimeMoveControl) this.slime.getMoveControl()).setWantedMovement(1.0D);
+			((SlimeMoveControl) this.slime.getMoveControl()).setWantedMovement(1.0D);
 		}
 	}
 
@@ -401,17 +436,17 @@ public class TropicalSlime extends Slime {
 
 		public void setWantedMovement(double p_33671_) {
 			this.speedModifier = p_33671_;
-			this.operation = MoveControl.Operation.MOVE_TO;
+			this.operation = Operation.MOVE_TO;
 		}
 
 		public void tick() {
 			this.mob.setYRot(this.rotlerp(this.mob.getYRot(), this.yRot, 90.0F));
 			this.mob.yHeadRot = this.mob.getYRot();
 			this.mob.yBodyRot = this.mob.getYRot();
-			if (this.operation != MoveControl.Operation.MOVE_TO) {
+			if (this.operation != Operation.MOVE_TO) {
 				this.mob.setZza(0.0F);
 			} else {
-				this.operation = MoveControl.Operation.WAIT;
+				this.operation = Operation.WAIT;
 				if (this.slime.isInWater() && !this.mob.isOnGround()) {
 
 					float f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
@@ -419,9 +454,9 @@ public class TropicalSlime extends Slime {
 					double d1 = this.wantedY - this.mob.getY();
 					//add Y movement
 					if (Math.abs(d1) > (double) 1.0E-5F) {
-						this.mob.setYya(d1 > 0.0D ? f1 : -f1);
+						this.mob.setYya(d1 > 0.0D ? Mth.lerp(2.0F, this.slime.getSpeed(), f1) : -Mth.lerp(2.0F, this.slime.getSpeed(), f1));
 					}
-					this.slime.setSpeed(Mth.lerp(0.125F, this.slime.getSpeed(), f1));
+					this.slime.setSpeed(Mth.lerp(2.0F, this.slime.getSpeed(), f1));
 
 				} else if (this.mob.isOnGround()) {
 					this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
@@ -454,11 +489,11 @@ public class TropicalSlime extends Slime {
 
 		public SlimeRandomDirectionGoal(TropicalSlime p_33679_) {
 			this.slime = p_33679_;
-			this.setFlags(EnumSet.of(Goal.Flag.LOOK));
+			this.setFlags(EnumSet.of(Flag.LOOK));
 		}
 
 		public boolean canUse() {
-			return this.slime.getTarget() == null && (this.slime.isOnGround() || this.slime.isInWater() || this.slime.isInLava() || this.slime.hasEffect(MobEffects.LEVITATION)) && this.slime.getMoveControl() instanceof TropicalSlime.SlimeMoveControl;
+			return this.slime.getTarget() == null && (this.slime.isOnGround() || this.slime.isInWater() || this.slime.isInLava() || this.slime.hasEffect(MobEffects.LEVITATION)) && this.slime.getMoveControl() instanceof SlimeMoveControl;
 		}
 
 		public void tick() {
@@ -467,7 +502,7 @@ public class TropicalSlime extends Slime {
 				this.chosenDegrees = (float) this.slime.getRandom().nextInt(360);
 			}
 
-			((TropicalSlime.SlimeMoveControl) this.slime.getMoveControl()).setDirection(this.chosenDegrees, false);
+			((SlimeMoveControl) this.slime.getMoveControl()).setDirection(this.chosenDegrees, false);
 		}
 	}
 }

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShearable, IFlowerCow {
+public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShearable, IFlowerCow, IHasFlower {
 	public Moobloom(EntityType<? extends Cow> p_28285_, Level p_28286_) {
 		super(p_28285_, p_28286_);
 	}
@@ -65,7 +65,7 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 		return shearInternal(player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS);
 	}
 
-	private java.util.List<ItemStack> shearInternal(SoundSource p_28924_) {
+	private List<ItemStack> shearInternal(SoundSource p_28924_) {
 		this.level.playSound((Player) null, this, SoundEvents.MOOSHROOM_SHEAR, p_28924_, 1.0F, 1.0F);
 		if (!this.level.isClientSide()) {
 			((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
@@ -86,7 +86,7 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 			cow.setInvulnerable(this.isInvulnerable());
 			this.level.addFreshEntity(cow);
 
-			java.util.List<ItemStack> items = new java.util.ArrayList<>();
+			List<ItemStack> items = new java.util.ArrayList<>();
 			for (int i = 0; i < 4; ++i) {
 				items.add(new ItemStack(ModBlocks.BUTTERCUP.get()));
 			}
@@ -98,5 +98,10 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 	@Override
 	public Cow getBreedOffspring(ServerLevel p_148890_, AgeableMob p_148891_) {
 		return ModEntities.MOOBLOOM.get().create(p_148890_);
+	}
+
+	@Override
+	public boolean hasFlower() {
+		return !this.isBaby();
 	}
 }

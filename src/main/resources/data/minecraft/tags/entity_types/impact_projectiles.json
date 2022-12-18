@@ -1,9 +1,6 @@
 {
-  "replace": false,
   "values": [
-    "earthmobsmod:smelly_egg",
     "earthmobsmod:bone_shard",
-    "earthmobsmod:melon_seeds",
-    "earthmobsmod:zombie_flesh"
+    "earthmobsmod:melon_seeds"
   ]
 }

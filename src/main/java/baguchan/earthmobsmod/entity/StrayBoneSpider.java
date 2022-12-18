@@ -15,6 +15,10 @@ public class StrayBoneSpider extends BoneSpider {
 		super(p_33786_, p_33787_);
 	}
 
+	public void startFreezeConversion(int p_149831_) {
+
+	}
+
 	public void performRangedAttack(LivingEntity p_29912_, float p_29913_) {
 		BoneShard bone = new BoneShard(this.level, this);
 		double d1 = p_29912_.getX() - this.getX();

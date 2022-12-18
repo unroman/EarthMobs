@@ -1,8 +1,39 @@
 package baguchan.earthmobsmod.client;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.client.model.*;
-import baguchan.earthmobsmod.client.render.*;
+import baguchan.earthmobsmod.client.model.BoneSpiderModel;
+import baguchan.earthmobsmod.client.model.BoulderingZombieModel;
+import baguchan.earthmobsmod.client.model.CluckShroomModel;
+import baguchan.earthmobsmod.client.model.FancyChickenModel;
+import baguchan.earthmobsmod.client.model.HornedSheepModel;
+import baguchan.earthmobsmod.client.model.HyperRabbitModel;
+import baguchan.earthmobsmod.client.model.JumboRabbitModel;
+import baguchan.earthmobsmod.client.model.LobberZombieModel;
+import baguchan.earthmobsmod.client.model.MuddyPigModel;
+import baguchan.earthmobsmod.client.model.VilerWitchModel;
+import baguchan.earthmobsmod.client.model.WoolyCowModel;
+import baguchan.earthmobsmod.client.render.BoneSpiderRender;
+import baguchan.earthmobsmod.client.render.BoulderingDrownedRenderer;
+import baguchan.earthmobsmod.client.render.BoulderingZombieRenderer;
+import baguchan.earthmobsmod.client.render.CluckShroomRender;
+import baguchan.earthmobsmod.client.render.DuckRenderer;
+import baguchan.earthmobsmod.client.render.FancyChickenRenderer;
+import baguchan.earthmobsmod.client.render.HornedSheepRenderer;
+import baguchan.earthmobsmod.client.render.HyperRabbitRenderer;
+import baguchan.earthmobsmod.client.render.JumboRabbitRenderer;
+import baguchan.earthmobsmod.client.render.LobberDrownedRenderer;
+import baguchan.earthmobsmod.client.render.LobberZombieRenderer;
+import baguchan.earthmobsmod.client.render.MelonGolemRenderer;
+import baguchan.earthmobsmod.client.render.MoobloomRenderer;
+import baguchan.earthmobsmod.client.render.MoolipRenderer;
+import baguchan.earthmobsmod.client.render.SkeletonWolfRenderer;
+import baguchan.earthmobsmod.client.render.StrayBoneSpiderRender;
+import baguchan.earthmobsmod.client.render.TropicalSlimeRenderer;
+import baguchan.earthmobsmod.client.render.UmbraCowRenderer;
+import baguchan.earthmobsmod.client.render.VilerWitchRenderer;
+import baguchan.earthmobsmod.client.render.WitherSkeletonWolfRenderer;
+import baguchan.earthmobsmod.client.render.WoolyCowRenderer;
+import baguchan.earthmobsmod.client.render.ZombifiedPigRenderer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigFlowerLayer;
 import baguchan.earthmobsmod.client.render.layer.MuddyPigMudLayer;
 import baguchan.earthmobsmod.registry.ModBlocks;
@@ -28,12 +59,16 @@ public class ClientRegistrar {
 	@SubscribeEvent
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModEntities.CLUCK_SHROOM.get(), CluckShroomRender::new);
+		event.registerEntityRenderer(ModEntities.FANCY_CHICKEN.get(), FancyChickenRenderer::new);
 		event.registerEntityRenderer(ModEntities.WOOLY_COW.get(), WoolyCowRenderer::new);
+		event.registerEntityRenderer(ModEntities.UMBRA_COW.get(), UmbraCowRenderer::new);
 		event.registerEntityRenderer(ModEntities.HORNED_SHEEP.get(), HornedSheepRenderer::new);
 		event.registerEntityRenderer(ModEntities.HYPER_RABBIT.get(), HyperRabbitRenderer::new);
 		event.registerEntityRenderer(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);
 		event.registerEntityRenderer(ModEntities.MOOLIP.get(), MoolipRenderer::new);
 		event.registerEntityRenderer(ModEntities.JUMBO_RABBIT.get(), JumboRabbitRenderer::new);
+		event.registerEntityRenderer(ModEntities.ZOMBIFIED_PIG.get(), ZombifiedPigRenderer::new);
+		event.registerEntityRenderer(ModEntities.DUCK.get(), DuckRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.MELON_GOLEM.get(), MelonGolemRenderer::new);
 
@@ -47,7 +82,7 @@ public class ClientRegistrar {
 
 		event.registerEntityRenderer(ModEntities.TROPICAL_SLIME.get(), TropicalSlimeRenderer::new);
 		event.registerEntityRenderer(ModEntities.SKELETON_WOLF.get(), SkeletonWolfRenderer::new);
-
+		event.registerEntityRenderer(ModEntities.WITHER_SKELETON_WOLF.get(), WitherSkeletonWolfRenderer::new);
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.BONE_SHARD.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.MELON_SEED.get(), ThrownItemRenderer::new);
@@ -57,6 +92,7 @@ public class ClientRegistrar {
 	@SubscribeEvent
 	public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(ModModelLayers.CLUCK_SHROOM, CluckShroomModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.FANCY_CHICKEN, FancyChickenModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.WOOLY_COW, WoolyCowModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP, HornedSheepModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.HORNED_SHEEP_FUR, HornedSheepModel::createBodyLayer);

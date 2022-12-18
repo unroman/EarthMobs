@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
 	public static ModelLayerLocation CLUCK_SHROOM = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "cluck_shroom"), "cluck_shroom");
+	public static ModelLayerLocation FANCY_CHICKEN = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "fancy_chicken"), "fancy_chicken");
 	public static ModelLayerLocation WOOLY_COW = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "wooly_cow"), "wooly_cow");
 	public static ModelLayerLocation HORNED_SHEEP = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "horned_sheep"), "horned_sheep");
 	public static ModelLayerLocation HORNED_SHEEP_FUR = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "horned_sheep_fur"), "horned_sheep_fur");
@@ -17,6 +18,10 @@ public class ModModelLayers {
 	public static ModelLayerLocation BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bone_spider"), "bone_spider");
 	public static ModelLayerLocation STRAY_BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "stray_bone_spider"), "stray_bone_spider");
 	public static ModelLayerLocation VILER_WITCH = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "viler_witch"), "viler_witch");
+	public static ModelLayerLocation BABY_GHAST = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "baby_ghast"), "baby_ghast");
+	public static ModelLayerLocation BABY_GHAST_CORE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "baby_ghast_core"), "baby_ghast_core");
+
+
 	public static ModelLayerLocation BOULDERING_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_zombie"), "bouldering_zombie");
 	public static ModelLayerLocation LOBBER_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_zombie"), "lobber_zombie");
 
@@ -25,4 +30,6 @@ public class ModModelLayers {
 
 	public static ModelLayerLocation BOULDERING_DROWNED_OUTER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_drowned_outer"), "bouldering_drowned_outer");
 	public static ModelLayerLocation LOBBER_DROWNED_OUTER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_drowned_outer"), "lobber_drowned_outer");
+
+
 }

@@ -1,31 +1,51 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import baguchan.earthmobsmod.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.*;
+import net.minecraft.world.entity.ai.goal.BegGoal;
+import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
+import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 
 import java.util.Random;
 
 public class SkeletonWolf extends Wolf {
-	public SkeletonWolf(EntityType<? extends Wolf> p_30369_, Level p_30370_) {
+	public SkeletonWolf(EntityType<? extends SkeletonWolf> p_30369_, Level p_30370_) {
 		super(p_30369_, p_30370_);
 	}
 
@@ -54,7 +74,7 @@ public class SkeletonWolf extends Wolf {
 	}
 
 	protected boolean isWorstCondition() {
-		return this.getBrightness() < 0.45F;
+		return this.getBrightness() < 0.4F;
 	}
 
 	@Override
@@ -78,13 +98,12 @@ public class SkeletonWolf extends Wolf {
 			return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
 		} else {
 			if (this.isTame()) {
-				if (itemstack.is(Tags.Items.BONES) && this.getHealth() < this.getMaxHealth()) {
+				if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH)) && this.getHealth() < this.getMaxHealth()) {
 					if (!p_30412_.getAbilities().instabuild) {
 						itemstack.shrink(1);
 					}
 
 					this.heal(2);
-					this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
 					return InteractionResult.SUCCESS;
 				}
 
@@ -92,7 +111,7 @@ public class SkeletonWolf extends Wolf {
 					return InteractionResult.PASS;
 				}
 
-			} else if (itemstack.is(Tags.Items.BONES) && !this.isAngry()) {
+			} else if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH)) && !this.isAngry()) {
 				if (!p_30412_.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
@@ -138,6 +157,29 @@ public class SkeletonWolf extends Wolf {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEAD;
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		if (this.isAngry()) {
+			return ModSounds.SKELETON_WOLF_GROWL.get();
+		} else if (this.random.nextInt(3) == 0) {
+			return this.isTame() && this.getHealth() < 10.0F ? ModSounds.SKELETON_WOLF_WHINE.get() : ModSounds.SKELETON_WOLF_PANTING.get();
+		} else {
+			return ModSounds.SKELETON_WOLF_BARK.get();
+		}
+	}
+
+	protected SoundEvent getHurtSound(DamageSource p_30424_) {
+		return ModSounds.SKELETON_WOLF_HURT.get();
+	}
+
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SKELETON_WOLF_DEATH.get();
+	}
+
+	protected void playStepSound(BlockPos p_30415_, BlockState p_30416_) {
+		this.playSound(ModSounds.SKELETON_WOLF_STEP.get(), 0.15F, 1.0F);
 	}
 
 	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor p_33009_, BlockPos p_33010_, Random p_33011_) {

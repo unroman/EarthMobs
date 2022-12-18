@@ -2,44 +2,41 @@ package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.effect.HyperSparkEffect;
-import baguchan.earthmobsmod.recipe.ModBrewingRecipe;
+import baguchan.earthmobsmod.effect.UndeadBodyEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEffects {
-	public static final MobEffect HYPER_SPARK = new HyperSparkEffect(MobEffectCategory.BENEFICIAL, 0xDA784A);
-	public static final Potion HYPER_SPARK_POTION = new Potion(new MobEffectInstance(HYPER_SPARK, 3600));
-	public static final Potion LONG_HYPER_SPARK_POTION = new Potion(new MobEffectInstance(HYPER_SPARK, 9600));
+	public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, EarthMobsMod.MODID);
+	public static final DeferredRegister<Potion> POTION = DeferredRegister.create(ForgeRegistries.POTIONS, EarthMobsMod.MODID);
 
-	@SubscribeEvent
-	public static void registerEffects(RegistryEvent.Register<MobEffect> event) {
-		event.getRegistry().register(HYPER_SPARK.setRegistryName("hyper_spark"));
-	}
 
-	@SubscribeEvent
-	public static void registerPotions(RegistryEvent.Register<Potion> event) {
-		event.getRegistry().register(HYPER_SPARK_POTION.setRegistryName("hyper_spark"));
-		event.getRegistry().register(LONG_HYPER_SPARK_POTION.setRegistryName("long_hyper_spark"));
-		init();
-	}
+	public static final RegistryObject<MobEffect> HYPER_SPARK = MOB_EFFECTS.register("hyper_spark", () -> new HyperSparkEffect(MobEffectCategory.BENEFICIAL, 0xDA784A));
 
-	public static ItemStack createPotion(Potion potion) {
-		return PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
-	}
+	public static final RegistryObject<MobEffect> UNDEAD_BODY = MOB_EFFECTS.register("undead_body", () -> new UndeadBodyEffect(MobEffectCategory.NEUTRAL, 0xFFFFFF));
+
+	public static final RegistryObject<Potion> HYPER_SPARK_POTION = POTION.register("hyper_spark", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(HYPER_SPARK.get()), 3600)));
+	public static final RegistryObject<Potion> LONG_HYPER_SPARK_POTION = POTION.register("long_hyper_spark", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(HYPER_SPARK.get()), 9600)));
+
+	public static final RegistryObject<Potion> UNDEAD_BODY_POTION = POTION.register("undead_body", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(UNDEAD_BODY.get()), 3600)));
+	public static final RegistryObject<Potion> LONG_UNDEAD_BODY_POTION = POTION.register("long_undead_body", () -> new Potion(new MobEffectInstance(Objects.requireNonNull(UNDEAD_BODY.get()), 9600)));
 
 	public static void init() {
-		BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(createPotion(Potions.SWIFTNESS), new ItemStack(ModItems.HYPER_RABBIT_FOOT.get()), createPotion(HYPER_SPARK_POTION)));
-		BrewingRecipeRegistry.addRecipe(new ModBrewingRecipe(createPotion(HYPER_SPARK_POTION), new ItemStack(Items.REDSTONE), createPotion(LONG_HYPER_SPARK_POTION)));
+		PotionBrewing.addMix(Potions.SWIFTNESS, ModItems.HYPER_RABBIT_FOOT.get(), HYPER_SPARK_POTION.get());
+		PotionBrewing.addMix(HYPER_SPARK_POTION.get(), Items.REDSTONE, LONG_HYPER_SPARK_POTION.get());
+		PotionBrewing.addMix(Potions.AWKWARD, ModItems.BONE_SPIDER_EYE.get(), UNDEAD_BODY_POTION.get());
+		PotionBrewing.addMix(UNDEAD_BODY_POTION.get(), Items.REDSTONE, LONG_UNDEAD_BODY_POTION.get());
 	}
 }

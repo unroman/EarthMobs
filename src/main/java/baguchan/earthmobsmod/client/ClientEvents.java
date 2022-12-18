@@ -35,7 +35,7 @@ public class ClientEvents {
 
 
 		entity.getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(illusion -> {
-			if (entity instanceof HyperRabbit && ((HyperRabbit) entity).isSpark() || entity.hasEffect(ModEffects.HYPER_SPARK)) {
+			if (entity instanceof HyperRabbit && ((HyperRabbit) entity).isSpark() || entity.hasEffect(ModEffects.HYPER_SPARK.get())) {
 				posestack.pushPose();
 				boolean shouldSit = entity.isPassenger() && (entity.getVehicle() != null && entity.getVehicle().shouldRiderSit());
 				float f = Mth.rotLerp(partialtick, entity.yBodyRotO, entity.yBodyRot);

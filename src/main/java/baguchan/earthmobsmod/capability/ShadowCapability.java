@@ -52,7 +52,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	private float percentBoost;
 
 	public void tick(LivingEntity livingEntity) {
-		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK)) {
+		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK.get())) {
 			double elasticity = 0.25D;
 			this.prevShadowX = this.shadowX;
 			this.prevShadowY = this.shadowY;
@@ -73,7 +73,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 			this.shadowY2 = (float) (this.shadowY2 + (this.shadowY - this.shadowY2) * elasticity * 0.375D);
 			this.shadowZ2 = (float) (this.shadowZ2 + (this.shadowZ - this.shadowZ2) * elasticity * 0.375D);
 
-			if (livingEntity.hasEffect(ModEffects.HYPER_SPARK) && percentBoost >= 0.65F) {
+			if (livingEntity.hasEffect(ModEffects.HYPER_SPARK.get()) && percentBoost >= 0.65F) {
 				pushEntities(livingEntity);
 			}
 
@@ -83,13 +83,15 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	}
 
 	protected void pushEntities(LivingEntity entity) {
-		List<LivingEntity> list = entity.level.getEntities(EntityTypeTest.forClass(LivingEntity.class), entity.getBoundingBox().expandTowards(0.05F, 0.0F, 0.05F), EntitySelector.pushableBy(entity));
-		if (!list.isEmpty()) {
-			for (int l = 0; l < list.size(); ++l) {
-				LivingEntity entity2 = list.get(l);
-				if (entity != entity2) {
-					entity2.knockback(2.0D * percentBoost, entity2.getX() - entity.getX(), entity2.getZ() - entity.getZ());
-					entity2.hurt(DamageSource.mobAttack(entity), Mth.floor(8.0F * percentBoost));
+		if (!entity.level.isClientSide()) {
+			List<LivingEntity> list = entity.level.getEntities(EntityTypeTest.forClass(LivingEntity.class), entity.getBoundingBox().expandTowards(0.05F, 0.0F, 0.05F), EntitySelector.pushableBy(entity));
+			if (!list.isEmpty()) {
+				for (int l = 0; l < list.size(); ++l) {
+					LivingEntity entity2 = list.get(l);
+					if (entity != entity2) {
+						entity2.knockback(2.0D * percentBoost, entity2.getX() - entity.getX(), entity2.getZ() - entity.getZ());
+						entity2.hurt(DamageSource.mobAttack(entity), Mth.floor(8.0F * percentBoost));
+					}
 				}
 			}
 		}
@@ -106,7 +108,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	}
 
 	protected void tryAddBooster(LivingEntity entity) {
-		if (entity.isSprinting() && entity.hasEffect(ModEffects.HYPER_SPARK)) {
+		if (entity.isSprinting() && entity.hasEffect(ModEffects.HYPER_SPARK.get())) {
 			if (percentBoost <= 1) {
 				percentBoost += 0.01F;
 			} else {

@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class SmellyEggItem extends Item {
-	public SmellyEggItem(Item.Properties p_41126_) {
+	public SmellyEggItem(Properties p_41126_) {
 		super(p_41126_);
 	}
 
