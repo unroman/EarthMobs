@@ -1,10 +1,8 @@
 package baguchan.earthmobsmod;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber(modid = EarthMobsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EarthMobsConfig {
 	public static final Common COMMON;
 	public static final ForgeConfigSpec COMMON_SPEC;
@@ -17,7 +15,10 @@ public class EarthMobsConfig {
 
 	public static class Common {
 		public final ForgeConfigSpec.IntValue woolyCowSpawnRate;
+		public final ForgeConfigSpec.IntValue umbraCowSpawnRate;
 		public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
+		public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
+		public final ForgeConfigSpec.IntValue duckSpawnRate;
 		public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
 		public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
 		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
@@ -32,16 +33,30 @@ public class EarthMobsConfig {
 
 		public final ForgeConfigSpec.IntValue skeletonWolfOverWorldSpawnRate;
 		public final ForgeConfigSpec.IntValue skeletonWolfNetherSpawnRate;
+		public final ForgeConfigSpec.IntValue witherSkeletonWolfNetherSpawnRate;
+
+		public final ForgeConfigSpec.IntValue babyGhastSpawnRate;
+
+		public final ForgeConfigSpec.BooleanValue mudSpawnInOverworld;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			woolyCowSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.woolyCowSpawnRate")
 					.comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
 					.defineInRange("Wooly cow SpawnRate", 10, 0, 100);
+			umbraCowSpawnRate = builder
+					.comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
+					.defineInRange("Umbra Cow SpawnRate", 10, 0, 100);
 			cluckshroomSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.cluckshroomSpawnRate")
 					.comment("Changed Cluckshroom SpawnRate. [0 ~ 100]")
 					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
+			fancyChickenSpawnRate = builder
+					.comment("Changed Fancy Chicken SpawnRate. [0 ~ 100]")
+					.defineInRange("Fancy Chicken SpawnRate", 6, 0, 100);
+			duckSpawnRate = builder
+					.comment("Changed Duck SpawnRate. [0 ~ 100]")
+					.defineInRange("Duck SpawnRate", 8, 0, 100);
 			hornedSheepSpawnRate = builder
 					.translation(EarthMobsMod.MODID + ".config.hornedSheepSpawnRate")
 					.comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
@@ -88,6 +103,17 @@ public class EarthMobsConfig {
 					.translation(EarthMobsMod.MODID + ".config.skeletonWolfNetherSpawnRate")
 					.comment("Changed SkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
 					.defineInRange("SkeletonWolf SpawnRate In Nether", 5, 0, 1000);
+			witherSkeletonWolfNetherSpawnRate = builder
+					.comment("Changed WitherSkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
+					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 4, 0, 1000);
+			babyGhastSpawnRate = builder
+					.comment("Changed Baby Ghast SpawnRate In Nether. [0 ~ 1000]")
+					.defineInRange("Baby Ghast SpawnRate In Nether", 6, 0, 100);
+
+			mudSpawnInOverworld = builder
+					.translation(EarthMobsMod.MODID + ".config.mudSpawnInOverworld")
+					.comment("Changed Mud Spawn in Overworld.")
+					.define("Mud Spawn in Overworld", true);
 		}
 	}
 

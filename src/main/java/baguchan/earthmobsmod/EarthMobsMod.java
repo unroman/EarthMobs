@@ -3,9 +3,11 @@ package baguchan.earthmobsmod;
 import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.client.ClientRegistrar;
 import baguchan.earthmobsmod.registry.ModBlocks;
+import baguchan.earthmobsmod.registry.ModEffects;
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModFluids;
 import baguchan.earthmobsmod.registry.ModItems;
+import baguchan.earthmobsmod.registry.ModSounds;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -48,6 +50,8 @@ public class EarthMobsMod {
 		ModEntities.ENTITIES.register(modBus);
 		ModFluids.FLUIDS.register(modBus);
 		ModItems.ITEMS.register(modBus);
+		ModEffects.MOB_EFFECTS.register(modBus);
+		ModSounds.SOUND_EVENTS.register(modBus);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);

@@ -1,6 +1,8 @@
 package baguchan.earthmobsmod.mixin;
 
 import baguchan.earthmobsmod.api.IOnMud;
+import baguchan.earthmobsmod.registry.ModEffects;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +15,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements IOnMud {
@@ -70,6 +75,18 @@ public abstract class LivingEntityMixin extends Entity implements IOnMud {
 
 	@Shadow
 	protected boolean isAffectedByFluids() {
+		return false;
+	}
+
+	@Inject(method = "isInvertedHealAndHarm", at = @At("HEAD"), cancellable = true)
+	public void isInvertedHealAndHarm(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+		if (hasEffect(Objects.requireNonNull(ModEffects.UNDEAD_BODY.get()))) {
+			callbackInfoReturnable.setReturnValue(true);
+		}
+	}
+
+	@Shadow
+	public boolean hasEffect(MobEffect p_21024_) {
 		return false;
 	}
 }
