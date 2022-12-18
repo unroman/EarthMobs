@@ -4,7 +4,11 @@ import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,6 +23,7 @@ public class VilerWitchModel<T extends LivingEntity> extends HierarchicalModel<T
 	private final ModelPart leftLeg;
 	protected final ModelPart nose;
 
+	private boolean holdingItem;
 
 	public VilerWitchModel(ModelPart p_170688_) {
 		this.root = p_170688_;
@@ -82,6 +87,12 @@ public class VilerWitchModel<T extends LivingEntity> extends HierarchicalModel<T
 			this.leftLeg.yRot = 0.0F;
 			this.leftLeg.zRot = 0.0F;
 		}
+
+		if (this.holdingItem) {
+			this.nose.setPos(0.0F, 1.0F, -1.5F);
+			this.nose.xRot = -0.9F;
+		}
+
 	}
 
 	public ModelPart getHat() {
@@ -94,5 +105,9 @@ public class VilerWitchModel<T extends LivingEntity> extends HierarchicalModel<T
 
 	public ModelPart getNose() {
 		return nose;
+	}
+
+	public void setHoldingItem(boolean p_104075_) {
+		this.holdingItem = p_104075_;
 	}
 }
