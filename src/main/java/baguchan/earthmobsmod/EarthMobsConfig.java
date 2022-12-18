@@ -35,7 +35,6 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue skeletonWolfNetherSpawnRate;
 		public final ForgeConfigSpec.IntValue witherSkeletonWolfNetherSpawnRate;
 
-		public final ForgeConfigSpec.IntValue babyGhastSpawnRate;
 
 		public final ForgeConfigSpec.BooleanValue mudSpawnInOverworld;
 
@@ -106,9 +105,6 @@ public class EarthMobsConfig {
 			witherSkeletonWolfNetherSpawnRate = builder
 					.comment("Changed WitherSkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
 					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 4, 0, 1000);
-			babyGhastSpawnRate = builder
-					.comment("Changed Baby Ghast SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("Baby Ghast SpawnRate In Nether", 6, 0, 100);
 
 			mudSpawnInOverworld = builder
 					.translation(EarthMobsMod.MODID + ".config.mudSpawnInOverworld")

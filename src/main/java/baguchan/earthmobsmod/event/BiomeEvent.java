@@ -35,6 +35,27 @@ public class BiomeEvent {
 				}
 			}
 
+			if (EarthMobsConfig.COMMON.fancyChickenSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&
+						BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+					event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.FANCY_CHICKEN.get(), EarthMobsConfig.COMMON.fancyChickenSpawnRate.get(), 3, 6));
+				}
+			}
+
+			if (EarthMobsConfig.COMMON.duckSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&
+						BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+					event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.DUCK.get(), EarthMobsConfig.COMMON.duckSpawnRate.get(), 3, 6));
+				}
+			}
+
+			if (EarthMobsConfig.COMMON.umbraCowSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && (
+						BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+					event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.UMBRA_COW.get(), EarthMobsConfig.COMMON.umbraCowSpawnRate.get(), 3, 6));
+				}
+			}
+
 			if (EarthMobsConfig.COMMON.hornedSheepSpawnRate.get() > 0) {
 				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&
 						BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
@@ -73,6 +94,18 @@ public class BiomeEvent {
 				}
 			}
 
+			if (EarthMobsConfig.COMMON.lobberZombieSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.VOID)) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.LOBBER_ZOMBIE.get(), EarthMobsConfig.COMMON.lobberZombieSpawnRate.get(), 2, 4));
+				}
+			}
+
+			if (EarthMobsConfig.COMMON.lobberZombieSpawnRate.get() > 0) {
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.VOID)) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.LOBBER_DROWNED.get(), EarthMobsConfig.COMMON.lobberZombieSpawnRate.get(), 2, 4));
+				}
+			}
+
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.VOID)) {
 				if (EarthMobsConfig.COMMON.tropicalSlimeSpawnRate.get() > 0) {
 					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.TROPICAL_SLIME.get(), EarthMobsConfig.COMMON.tropicalSlimeSpawnRate.get(), 1, 2));
@@ -98,6 +131,13 @@ public class BiomeEvent {
 				if (Biomes.SOUL_SAND_VALLEY.equals(biome)) {
 					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.SKELETON_WOLF.get(), EarthMobsConfig.COMMON.skeletonWolfNetherSpawnRate.get(), 1, 2));
 					event.getSpawns().addMobCharge(ModEntities.SKELETON_WOLF.get(), 0.7, 0.15F);
+				}
+			}
+
+			if (EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get() > 0) {
+				if (Biomes.SOUL_SAND_VALLEY.equals(biome)) {
+					event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.WITHER_SKELETON_WOLF.get(), EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get(), 1, 2));
+					event.getSpawns().addMobCharge(ModEntities.WITHER_SKELETON_WOLF.get(), 0.7, 0.15F);
 				}
 			}
 
