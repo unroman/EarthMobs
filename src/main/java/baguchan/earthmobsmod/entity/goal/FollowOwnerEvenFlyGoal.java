@@ -1,5 +1,6 @@
-package baguchan.earthmobsmod.entity;
+package baguchan.earthmobsmod.entity.goal;
 
+import baguchan.earthmobsmod.entity.BabyGhast;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;

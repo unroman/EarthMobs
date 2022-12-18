@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.entity.goal.FollowOwnerEvenFlyGoal;
 import baguchan.earthmobsmod.entity.goal.SitEvenFlying;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
