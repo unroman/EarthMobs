@@ -199,9 +199,9 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 		}
 	}
 
-	@Override
-	public void thunderHit(ServerLevel p_19927_, LightningBolt p_19928_) {
-		if (p_19927_.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, EntityType.ZOMBIFIED_PIGLIN, (timer) -> {
+	@Inject(method = "thunderHit", at = @At("HEAD"), cancellable = true)
+	public void thunderHit(ServerLevel p_19927_, LightningBolt p_19928_, CallbackInfo callbackInfo) {
+		if (p_19927_.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, ModEntities.ZOMBIFIED_PIG.get(), (timer) -> {
 		})) {
 			ZombifiedPig zombifiedpig = ModEntities.ZOMBIFIED_PIG.get().create(p_19927_);
 			zombifiedpig.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
@@ -216,8 +216,7 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, zombifiedpig);
 			p_19927_.addFreshEntity(zombifiedpig);
 			this.discard();
-		} else {
-			super.thunderHit(p_19927_, p_19928_);
+			callbackInfo.cancel();
 		}
 	}
 
