@@ -4,6 +4,8 @@ package baguchan.earthmobsmod.mixin;
 import baguchan.earthmobsmod.api.IMuddy;
 import baguchan.earthmobsmod.api.IOnMud;
 import baguchan.earthmobsmod.api.ISheared;
+import baguchan.earthmobsmod.entity.ZombifiedPig;
+import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.util.DyeUtil;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
@@ -13,10 +15,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.ai.goal.EatBlockGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
@@ -229,5 +234,26 @@ public abstract class PigMixin extends Animal implements IMuddy, net.minecraftfo
 			return items;
 		}
 		return java.util.Collections.emptyList();
+	}
+
+	@Inject(method = "thunderHit", at = @At("HEAD"), cancellable = true)
+	public void thunderHit(ServerLevel p_19927_, LightningBolt p_19928_, CallbackInfo callbackInfo) {
+		if (p_19927_.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, ModEntities.ZOMBIFIED_PIG.get(), (timer) -> {
+		})) {
+			ZombifiedPig zombifiedpig = ModEntities.ZOMBIFIED_PIG.get().create(p_19927_);
+			zombifiedpig.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
+			zombifiedpig.setNoAi(this.isNoAi());
+			zombifiedpig.setBaby(this.isBaby());
+			if (this.hasCustomName()) {
+				zombifiedpig.setCustomName(this.getCustomName());
+				zombifiedpig.setCustomNameVisible(this.isCustomNameVisible());
+			}
+
+			zombifiedpig.setPersistenceRequired();
+			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, zombifiedpig);
+			p_19927_.addFreshEntity(zombifiedpig);
+			this.discard();
+			callbackInfo.cancel();
+		}
 	}
 }
