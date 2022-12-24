@@ -219,7 +219,7 @@ public class TropicalSlime extends Slime implements Bucketable {
 					if (this.isPersistenceRequired()) {
 						fish.setPersistenceRequired();
 					}
-					fish.setVariant(TropicalFish.Pattern.byId(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT)));
+					fish.setPackedVariant(((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT));
 					fish.setInvulnerable(this.isInvulnerable());
 					fish.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
 					this.level.addFreshEntity(fish);
