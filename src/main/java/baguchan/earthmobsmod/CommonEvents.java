@@ -99,6 +99,9 @@ public class CommonEvents {
 				net.minecraftforge.event.ForgeEventFactory.onLivingConvert(pig, zombifiedpig);
 				event.getEntity().getLevel().addFreshEntity(zombifiedpig);
 				pig.discard();
+				event.setCanceled(true);
+			} else {
+				event.setCanceled(true);
 			}
 		}
 	}
