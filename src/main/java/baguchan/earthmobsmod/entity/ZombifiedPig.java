@@ -3,10 +3,8 @@ package baguchan.earthmobsmod.entity;
 import baguchan.earthmobsmod.api.IMuddy;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,12 +24,6 @@ public class ZombifiedPig extends Pig implements IMuddy {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
-	}
-
-	@Override
-	public void thunderHit(ServerLevel p_29473_, LightningBolt p_29474_) {
-		this.setSecondsOnFire(8);
-		this.hurt(DamageSource.LIGHTNING_BOLT, p_29474_.getDamage());
 	}
 
 	@Override
