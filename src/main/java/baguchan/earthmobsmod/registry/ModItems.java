@@ -95,6 +95,8 @@ public class ModItems {
 		}
 		if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
 			event.accept(SMELLY_EGG);
+			event.accept(FANCY_EGG);
+			event.accept(DUCK_EGG);
 			event.accept(BONE_SHARD);
 			event.accept(FANCY_FEATHER);
 			event.accept(BONE_SPIDER_EYE);
