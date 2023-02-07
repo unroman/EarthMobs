@@ -150,7 +150,7 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 		return Optional.empty();
 	}
 
-	private void setCluckShroomType(CluckShroom.CluckShroomType p_28929_) {
+	public void setCluckShroomType(CluckShroom.CluckShroomType p_28929_) {
 		this.entityData.set(DATA_TYPE, p_28929_.type);
 	}
 

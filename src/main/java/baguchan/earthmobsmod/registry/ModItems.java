@@ -3,7 +3,7 @@ package baguchan.earthmobsmod.registry;
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.item.BoneShardItem;
 import baguchan.earthmobsmod.item.FixedInstrumentItem;
-import baguchan.earthmobsmod.item.SmellyEggItem;
+import baguchan.earthmobsmod.item.ModEggItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.InstrumentTags;
 import net.minecraft.world.item.BucketItem;
@@ -25,7 +25,10 @@ public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, EarthMobsMod.MODID);
 
 
-	public static final RegistryObject<Item> SMELLY_EGG = ITEMS.register("smelly_egg", () -> new SmellyEggItem((new Item.Properties())));
+	public static final RegistryObject<Item> SMELLY_EGG = ITEMS.register("smelly_egg", () -> new ModEggItem(ModEntities.SMELLY_EGG, (new Item.Properties())));
+	public static final RegistryObject<Item> FANCY_EGG = ITEMS.register("fancy_egg", () -> new ModEggItem(ModEntities.FANCY_EGG, (new Item.Properties())));
+	public static final RegistryObject<Item> DUCK_EGG = ITEMS.register("duck_egg", () -> new ModEggItem(ModEntities.DUCK_EGG, (new Item.Properties())));
+
 	public static final RegistryObject<Item> BONE_SHARD = ITEMS.register("bone_shard", () -> new BoneShardItem((new Item.Properties())));
 	public static final RegistryObject<Item> FANCY_FEATHER = ITEMS.register("fancy_feather", () -> new Item((new Item.Properties())));
 

@@ -25,6 +25,8 @@ import baguchan.earthmobsmod.entity.WitherSkeletonWolf;
 import baguchan.earthmobsmod.entity.WoolyCow;
 import baguchan.earthmobsmod.entity.ZombifiedPig;
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
+import baguchan.earthmobsmod.entity.projectile.DuckEgg;
+import baguchan.earthmobsmod.entity.projectile.FancyEgg;
 import baguchan.earthmobsmod.entity.projectile.MelonSeed;
 import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
 import baguchan.earthmobsmod.entity.projectile.ZombieFlesh;
@@ -88,6 +90,9 @@ public class ModEntities {
 
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
+	public static final RegistryObject<EntityType<FancyEgg>> FANCY_EGG = ENTITIES.register("fancy_egg", () -> EntityType.Builder.<FancyEgg>of(FancyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("fancy_egg")));
+	public static final RegistryObject<EntityType<DuckEgg>> DUCK_EGG = ENTITIES.register("duck_egg", () -> EntityType.Builder.<DuckEgg>of(DuckEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("duck_egg")));
+
 	public static final RegistryObject<EntityType<BoneShard>> BONE_SHARD = ENTITIES.register("bone_shard", () -> EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard")));
 	public static final RegistryObject<EntityType<MelonSeed>> MELON_SEED = ENTITIES.register("melon_seeds", () -> EntityType.Builder.<MelonSeed>of(MelonSeed::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("melon_seeds")));
 	public static final RegistryObject<EntityType<ZombieFlesh>> ZOMBIE_FLESH = ENTITIES.register("zombie_flesh", () -> EntityType.Builder.<ZombieFlesh>of(ZombieFlesh::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("zombie_flesh")));
