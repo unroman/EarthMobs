@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
@@ -27,9 +26,7 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 	public boolean matches(CraftingContainer p_44515_, Level p_44516_) {
 		List<Item> list = Lists.newArrayList();
 		List<Item> list2 = Lists.newArrayList();
-		if (ForgeRegistries.ITEMS.tags().getTag(Tags.Items.RODS_WOODEN) == null) {
-			return false;
-		}
+		List<Item> list3 = Lists.newArrayList();
 
 		int slot = 0;
 
@@ -37,18 +34,38 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 			for (int j = 0; j < p_44515_.getHeight(); ++j) {
 				ItemStack itemstack = p_44515_.getItem(i + j * p_44515_.getWidth());
 
-				if (j == 0 && itemstack.is(ModItems.BONE_SHARD.get())) {
-					slot = i;
-					list.add(itemstack.getItem());
-				} else if (j == 2 && slot == i && itemstack.is(Items.FEATHER)) {
-					list.add(itemstack.getItem());
-				} else if (j == 1 && slot == i && itemstack.is(Tags.Items.RODS_WOODEN)) {
-					list2.add(itemstack.getItem());
+				if (j == 0) {
+					if (itemstack.is(ModItems.BONE_SHARD.get())) {
+						slot = i;
+						list.add(itemstack.getItem());
+					} else if (!itemstack.isEmpty()) {
+						return false;
+					}
+				} else if (j == 2) {
+					if (itemstack.is(Tags.Items.FEATHERS)) {
+						if (slot == i) {
+							list3.add(itemstack.getItem());
+						} else {
+							return false;
+						}
+					} else if (!itemstack.isEmpty()) {
+						return false;
+					}
+				} else if (j == 1) {
+					if (itemstack.is(Tags.Items.RODS_WOODEN)) {
+						if (slot == i) {
+							list2.add(itemstack.getItem());
+						} else {
+							return false;
+						}
+					} else if (!itemstack.isEmpty()) {
+						return false;
+					}
 				}
 			}
-			}
+		}
 
-			return list.contains(Items.FEATHER) && list.contains(ModItems.BONE_SHARD.get()) && list2.size() == 1;
+		return list3.size() == 1 && list.size() == 1 && list2.size() == 1;
 	}
 
 	public ItemStack assemble(CraftingContainer p_44513_) {
