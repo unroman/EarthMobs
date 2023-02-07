@@ -71,6 +71,7 @@
   "entity.earthmobsmod.melon_seeds": "Melon Seeds",
   "entity.earthmobsmod.zombie_flesh": "Zombie Flesh",
   "fluid.earthmobsmod.mud": "Mud",
+  "fluid_type.earthmobsmod.mud": "泥",
   "effect.earthmobsmod.hyper_spark": "Hyper Spark",
   "item.minecraft.potion.effect.hyper_spark": "Potion of Hyper Spark",
   "item.minecraft.splash_potion.effect.hyper_spark": "Splash Potion of Hyper Spark",

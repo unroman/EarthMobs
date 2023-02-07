@@ -71,6 +71,7 @@
   "entity.earthmobsmod.melon_seeds": "スイカの種",
   "entity.earthmobsmod.zombie_flesh": "ゾンビ肉",
   "fluid.earthmobsmod.mud": "泥",
+  "fluid_type.earthmobsmod.mud": "泥",
   "effect.earthmobsmod.hyper_spark": "ハイパースパーク",
   "item.minecraft.potion.effect.hyper_spark": "ハイパースパークのポーション",
   "item.minecraft.splash_potion.effect.hyper_spark": "ハイパースパークのスプラッシュポーション",
