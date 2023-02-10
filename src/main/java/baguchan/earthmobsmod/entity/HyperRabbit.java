@@ -21,22 +21,12 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Nullable;
 
 public class HyperRabbit extends Rabbit {
 	private static final EntityDataAccessor<Boolean> DATA_SPARK = SynchedEntityData.defineId(HyperRabbit.class, EntityDataSerializers.BOOLEAN);
@@ -46,16 +36,21 @@ public class HyperRabbit extends Rabbit {
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new ClimbOnTopOfPowderSnowGoal(this, this.level));
-		this.goalSelector.addGoal(1, new HyperRabbit.RabbitPanicGoal(this, 2.5D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 0.8D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(Items.CARROT, Items.GOLDEN_CARROT, Blocks.DANDELION), false));
-		this.goalSelector.addGoal(4, new HyperRabbit.RabbitAvoidEntityGoal<>(this, Player.class, 8.0F, 2.2D, 2.2D));
-		this.goalSelector.addGoal(4, new HyperRabbit.RabbitAvoidEntityGoal<>(this, Wolf.class, 10.0F, 2.2D, 2.2D));
-		this.goalSelector.addGoal(4, new HyperRabbit.RabbitAvoidEntityGoal<>(this, Monster.class, 4.0F, 2.2D, 2.2D));
-		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.6D));
-		this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 10.0F));
+		super.registerGoals();
+		this.goalSelector.getAvailableGoals().stream().map(it -> it.getGoal()).filter(it -> it instanceof PanicGoal).findFirst().ifPresent(goal -> {
+			this.goalSelector.removeGoal(goal);
+			this.goalSelector.addGoal(1, new RabbitPanicGoal(this, 1.25D));
+		});
+	}
+
+	@Override
+	public void setTarget(@Nullable LivingEntity p_21544_) {
+		super.setTarget(p_21544_);
+		if (p_21544_ != null) {
+			this.setSpark(true);
+		} else {
+			this.setSpark(false);
+		}
 	}
 
 	@Override
@@ -68,7 +63,6 @@ public class HyperRabbit extends Rabbit {
 		if (p_29734_ == Rabbit.Variant.EVIL) {
 			if (!this.hasCustomName()) {
 				this.setCustomName(Component.literal("HR_X"));
-				this.setSpark(true);
 			}
 		}
 		super.setVariant(p_29734_);
@@ -104,7 +98,7 @@ public class HyperRabbit extends Rabbit {
 	}
 
 	protected void dealDamage(LivingEntity livingentity) {
-		if (this.isAlive() && isSpark()) {
+		if (this.isAlive() && isSpark() && !this.isAlliedTo(livingentity)) {
 			boolean flag = livingentity.isDamageSourceBlocked(DamageSource.mobAttack(this));
 			float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
 			float f2 = flag ? 0.25F : 1.0F;
@@ -144,7 +138,9 @@ public class HyperRabbit extends Rabbit {
 		@Override
 		public void stop() {
 			super.stop();
-			this.rabbit.setSpark(false);
+			if (this.rabbit.getVariant() != Variant.EVIL) {
+				this.rabbit.setSpark(false);
+			}
 		}
 
 		public void tick() {
@@ -154,15 +150,27 @@ public class HyperRabbit extends Rabbit {
 	}
 
 	static class RabbitAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-		private final Rabbit rabbit;
+		private final HyperRabbit rabbit;
 
-		public RabbitAvoidEntityGoal(Rabbit p_29743_, Class<T> p_29744_, float p_29745_, double p_29746_, double p_29747_) {
+		public RabbitAvoidEntityGoal(HyperRabbit p_29743_, Class<T> p_29744_, float p_29745_, double p_29746_, double p_29747_) {
 			super(p_29743_, p_29744_, p_29745_, p_29746_, p_29747_);
 			this.rabbit = p_29743_;
 		}
 
 		public boolean canUse() {
 			return this.rabbit.getVariant() != Variant.EVIL && super.canUse();
+		}
+
+		@Override
+		public void start() {
+			super.start();
+			this.rabbit.setSpark(true);
+		}
+
+		@Override
+		public void stop() {
+			super.stop();
+			this.rabbit.setSpark(false);
 		}
 	}
 }

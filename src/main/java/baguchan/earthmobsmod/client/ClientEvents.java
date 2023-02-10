@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -122,7 +123,7 @@ public class ClientEvents {
 
 				renderer.getModel().prepareMobModel(entity, f5, f8, partialtick);
 				renderer.getModel().setupAnim(entity, f5, f8, f7, f2, f6);
-				VertexConsumer vertexconsumer = buffer.getBuffer(renderer.getModel().renderType(renderer.getTextureLocation(entity)));
+				VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entityTranslucent(renderer.getTextureLocation(entity)));
 				int i = getOverlayCoords(entity, 0.0F);
 				renderer.getModel().renderToBuffer(posestack, vertexconsumer, light, i, 1.0F, 1.0F, 1.0F, (0.45F));
 				posestack.popPose();

@@ -55,7 +55,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 		if (!livingEntity.level.isClientSide) {
 			removeBoost(livingEntity);
 		}
-		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK.get())) {
+
 			double elasticity = 0.25D;
 			this.prevShadowX = this.shadowX;
 			this.prevShadowY = this.shadowY;
@@ -76,7 +76,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 			this.shadowY2 = (float) (this.shadowY2 + (this.shadowY - this.shadowY2) * elasticity * 0.375D);
 			this.shadowZ2 = (float) (this.shadowZ2 + (this.shadowZ - this.shadowZ2) * elasticity * 0.375D);
 
-
+		if (livingEntity.hasEffect(ModEffects.HYPER_SPARK.get())) {
 			if (percentBoost >= 0.65F) {
 				pushEntities(livingEntity);
 			}
