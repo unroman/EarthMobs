@@ -1,7 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +33,6 @@ public class StrayBoneSpider extends BoneSpider {
 		}
 		bone.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
 
-		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.level.addFreshEntity(bone);
 	}
 }
