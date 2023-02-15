@@ -12,6 +12,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -179,6 +180,7 @@ public class BoneShard extends ThrowableItemProjectile {
 		super.onHit(p_37488_);
 		if (!this.level.isClientSide) {
 			this.level.broadcastEntityEvent(this, (byte) 3);
+			this.playSound(SoundEvents.TURTLE_EGG_BREAK, 0.4F, 1.25F);
 			this.discard();
 		}
 

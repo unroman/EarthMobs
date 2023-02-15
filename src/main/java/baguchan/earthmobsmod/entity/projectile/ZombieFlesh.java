@@ -5,6 +5,7 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -75,6 +76,7 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 		super.onHit(p_37488_);
 		if (!this.level.isClientSide) {
 			this.level.broadcastEntityEvent(this, (byte) 3);
+			this.playSound(SoundEvents.SLIME_BLOCK_BREAK, 0.4F, 1.0F);
 			this.discard();
 		}
 
