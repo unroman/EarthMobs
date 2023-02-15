@@ -24,7 +24,7 @@ public class StrayBoneShard extends BoneShard {
     }
 
     public StrayBoneShard(Level p_37399_, LivingEntity p_37400_) {
-        super(ModEntities.STRAY_BONE_SHARD.get(), p_37400_, p_37399_);
+        super(ModEntities.STRAY_BONE_SHARD.get(), p_37399_, p_37400_);
     }
 
     public StrayBoneShard(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
@@ -73,7 +73,7 @@ public class StrayBoneShard extends BoneShard {
 
     protected void onHitEntity(EntityHitResult p_37404_) {
         Entity entity = p_37404_.getEntity();
-        if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 3)) {
+        if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 2)) {
             if (entity instanceof LivingEntity) {
                 for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
                     ((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);

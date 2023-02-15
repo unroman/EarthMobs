@@ -71,6 +71,12 @@ public class EarthBiomeModifier implements BiomeModifier {
 					}
 				}
 
+				if (EarthMobsConfig.COMMON.strayBoneSpiderSpawnRate.get() > 0) {
+					if (biome.is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+						builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.STRAY_BONE_SPIDER.get(), EarthMobsConfig.COMMON.strayBoneSpiderSpawnRate.get(), 1, 1));
+					}
+				}
+
 				if (EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get() > 0) {
 					if (biome.is(Tags.Biomes.IS_MOUNTAIN)) {
 						builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BOULDERING_ZOMBIE.get(), EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get(), 4, 4));

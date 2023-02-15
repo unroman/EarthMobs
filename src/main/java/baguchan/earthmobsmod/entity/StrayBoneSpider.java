@@ -32,4 +32,9 @@ public class StrayBoneSpider extends BoneSpider {
 		}
 		this.level.addFreshEntity(bone);
 	}
+
+	@Override
+	public boolean canFreeze() {
+		return false;
+	}
 }

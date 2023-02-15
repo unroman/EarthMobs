@@ -167,7 +167,7 @@ public class BoneShard extends ThrowableItemProjectile {
 
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		Entity entity = p_37404_.getEntity();
-		if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 3)) {
+		if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 2)) {
 
 			if (entity instanceof LivingEntity) {
 				for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {

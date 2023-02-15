@@ -32,4 +32,9 @@ public class StrayBoneSpiderRender<T extends StrayBoneSpider> extends MobRendere
 		super.scale(p_115314_, p_115315_, p_115316_);
 		p_115315_.scale(p_115314_.getScale(), p_115314_.getScale(), p_115314_.getScale());
 	}
+
+	@Override
+	protected boolean isShaking(T p_115304_) {
+		return false;
+	}
 }
