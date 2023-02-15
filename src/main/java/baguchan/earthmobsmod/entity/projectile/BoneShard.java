@@ -21,7 +21,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -32,8 +31,8 @@ import net.minecraft.world.phys.HitResult;
 import java.util.Set;
 
 public class BoneShard extends ThrowableItemProjectile {
-	private Potion potion = Potions.EMPTY;
-	private final Set<MobEffectInstance> effects = Sets.newHashSet();
+	protected Potion potion = Potions.EMPTY;
+	protected final Set<MobEffectInstance> effects = Sets.newHashSet();
 
 	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BoneShard.class, EntityDataSerializers.INT);
 
@@ -47,6 +46,14 @@ public class BoneShard extends ThrowableItemProjectile {
 
 	public BoneShard(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
 		super(ModEntities.BONE_SHARD.get(), p_37395_, p_37396_, p_37397_, p_37394_);
+	}
+
+	public BoneShard(EntityType<? extends BoneShard> entity, double x, double y, double z, Level level) {
+		super(entity, x, y, z, level);
+	}
+
+	public BoneShard(EntityType<? extends BoneShard> entity, Level level, LivingEntity livingEntity) {
+		super(entity, livingEntity, level);
 	}
 
 	protected Item getDefaultItem() {
@@ -148,9 +155,9 @@ public class BoneShard extends ThrowableItemProjectile {
 
 	protected ItemStack getPickupItem() {
 		if (this.effects.isEmpty() && this.potion == Potions.EMPTY) {
-			return new ItemStack(Items.ARROW);
+			return new ItemStack(ModItems.BONE_SHARD.get());
 		} else {
-			ItemStack itemstack = new ItemStack(Items.TIPPED_ARROW);
+			ItemStack itemstack = new ItemStack(ModItems.BONE_SHARD.get());
 			PotionUtils.setPotion(itemstack, this.potion);
 			PotionUtils.setCustomEffects(itemstack, this.effects);
 
@@ -159,18 +166,18 @@ public class BoneShard extends ThrowableItemProjectile {
 	}
 
 	protected void onHitEntity(EntityHitResult p_37404_) {
-		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), 3);
+		if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 3)) {
 
-		if (entity instanceof LivingEntity) {
-			for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
-				((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
-			}
+			if (entity instanceof LivingEntity) {
+				for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
+					((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
+				}
 
-			if (!this.effects.isEmpty()) {
-				for (MobEffectInstance mobeffectinstance1 : this.effects) {
-					((LivingEntity) entity).addEffect(mobeffectinstance1, entity);
+				if (!this.effects.isEmpty()) {
+					for (MobEffectInstance mobeffectinstance1 : this.effects) {
+						((LivingEntity) entity).addEffect(mobeffectinstance1, entity);
+					}
 				}
 			}
 		}

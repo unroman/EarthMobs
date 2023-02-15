@@ -1,8 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
-import baguchan.earthmobsmod.entity.projectile.BoneShard;
+import baguchan.earthmobsmod.entity.projectile.StrayBoneShard;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -19,7 +18,7 @@ public class StrayBoneSpider extends BoneSpider {
 	}
 
 	public void performRangedAttack(LivingEntity p_29912_, float p_29913_) {
-		BoneShard bone = new BoneShard(this.level, this);
+		StrayBoneShard bone = new StrayBoneShard(this.level, this);
 		double d1 = p_29912_.getX() - this.getX();
 		double d2 = p_29912_.getEyeY() - this.getEyeY();
 		double d3 = p_29912_.getZ() - this.getZ();
@@ -31,8 +30,6 @@ public class StrayBoneSpider extends BoneSpider {
 				bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 4, 0));
 			}
 		}
-		bone.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
-
 		this.level.addFreshEntity(bone);
 	}
 }

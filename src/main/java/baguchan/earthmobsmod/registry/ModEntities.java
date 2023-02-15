@@ -1,35 +1,8 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.entity.BabyGhast;
-import baguchan.earthmobsmod.entity.BoneSpider;
-import baguchan.earthmobsmod.entity.BoulderingDrowned;
-import baguchan.earthmobsmod.entity.BoulderingZombie;
-import baguchan.earthmobsmod.entity.CluckShroom;
-import baguchan.earthmobsmod.entity.Duck;
-import baguchan.earthmobsmod.entity.FancyChicken;
-import baguchan.earthmobsmod.entity.HornedSheep;
-import baguchan.earthmobsmod.entity.HyperRabbit;
-import baguchan.earthmobsmod.entity.JumboRabbit;
-import baguchan.earthmobsmod.entity.LobberDrowned;
-import baguchan.earthmobsmod.entity.LobberZombie;
-import baguchan.earthmobsmod.entity.MelonGolem;
-import baguchan.earthmobsmod.entity.Moobloom;
-import baguchan.earthmobsmod.entity.Moolip;
-import baguchan.earthmobsmod.entity.SkeletonWolf;
-import baguchan.earthmobsmod.entity.StrayBoneSpider;
-import baguchan.earthmobsmod.entity.TropicalSlime;
-import baguchan.earthmobsmod.entity.UmbraCow;
-import baguchan.earthmobsmod.entity.VilerWitch;
-import baguchan.earthmobsmod.entity.WitherSkeletonWolf;
-import baguchan.earthmobsmod.entity.WoolyCow;
-import baguchan.earthmobsmod.entity.ZombifiedPig;
-import baguchan.earthmobsmod.entity.projectile.BoneShard;
-import baguchan.earthmobsmod.entity.projectile.DuckEgg;
-import baguchan.earthmobsmod.entity.projectile.FancyEgg;
-import baguchan.earthmobsmod.entity.projectile.MelonSeed;
-import baguchan.earthmobsmod.entity.projectile.SmellyEgg;
-import baguchan.earthmobsmod.entity.projectile.ZombieFlesh;
+import baguchan.earthmobsmod.entity.*;
+import baguchan.earthmobsmod.entity.projectile.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
@@ -94,6 +67,8 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<DuckEgg>> DUCK_EGG = ENTITIES.register("duck_egg", () -> EntityType.Builder.<DuckEgg>of(DuckEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("duck_egg")));
 
 	public static final RegistryObject<EntityType<BoneShard>> BONE_SHARD = ENTITIES.register("bone_shard", () -> EntityType.Builder.<BoneShard>of(BoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("bone_shard")));
+	public static final RegistryObject<EntityType<StrayBoneShard>> STRAY_BONE_SHARD = ENTITIES.register("stray_bone_shard", () -> EntityType.Builder.<StrayBoneShard>of(StrayBoneShard::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("stray_bone_shard")));
+
 	public static final RegistryObject<EntityType<MelonSeed>> MELON_SEED = ENTITIES.register("melon_seeds", () -> EntityType.Builder.<MelonSeed>of(MelonSeed::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("melon_seeds")));
 	public static final RegistryObject<EntityType<ZombieFlesh>> ZOMBIE_FLESH = ENTITIES.register("zombie_flesh", () -> EntityType.Builder.<ZombieFlesh>of(ZombieFlesh::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("zombie_flesh")));
 
