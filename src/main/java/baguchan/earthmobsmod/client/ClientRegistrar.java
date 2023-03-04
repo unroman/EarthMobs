@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.api.distmarker.Dist;
@@ -31,6 +32,10 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.FANCY_CHICKEN.get(), FancyChickenRenderer::new);
 		event.registerEntityRenderer(ModEntities.WOOLY_COW.get(), WoolyCowRenderer::new);
 		event.registerEntityRenderer(ModEntities.UMBRA_COW.get(), UmbraCowRenderer::new);
+
+		event.registerEntityRenderer(ModEntities.ALBINO_COW.get(), (r) -> new RevampedCowRenderer<>(r, new ResourceLocation(EarthMobsMod.MODID, "textures/cow/albino_cow.png")));
+		event.registerEntityRenderer(ModEntities.CREAM_COW.get(), (r) -> new RevampedCowRenderer<>(r, new ResourceLocation(EarthMobsMod.MODID, "textures/cow/cream_cow.png")));
+
 		event.registerEntityRenderer(ModEntities.HORNED_SHEEP.get(), HornedSheepRenderer::new);
 		event.registerEntityRenderer(ModEntities.HYPER_RABBIT.get(), HyperRabbitRenderer::new);
 		event.registerEntityRenderer(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);

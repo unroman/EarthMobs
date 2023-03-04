@@ -89,28 +89,27 @@ public class ClientEvents {
 				double deltaZ = shadowZ - ownerInZ;
 				double deltaX2 = shadowX2 - shadowX;
 				double deltaY2 = shadowY2 - shadowY;
-				double deltaZ2 = shadowZ2 - shadowZ;
+                double deltaZ2 = shadowZ2 - shadowZ;
 
-				Pose pose = entity.getPose();
+                Pose pose = entity.getPose();
 
-				posestack.translate(deltaX, deltaY, deltaZ);
+                posestack.translate(deltaX, deltaY, deltaZ);
 
-				if (pose != Pose.SLEEPING) {
-					posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
-				}
+                if (!entity.hasPose(Pose.SLEEPING)) {
+                    posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
+                }
 
-				posestack.scale(-1.0F, -1.0F, 1.0F);
-				if (entity instanceof HyperRabbit) {
-					float scale = entity.isBaby() ? 0.4F : 0.6F;
-					posestack.scale(scale, scale, scale);
-				}
-				posestack.translate(0.0F, (double) -1.501F, 0.0F);
+                //renderer.setupRotations(entity, posestack, f7, f, partialtick);
+
+                posestack.scale(-1.0F, -1.0F, 1.0F);
+                //renderer.scale(entity, posestack, partialtick);
+                posestack.translate(0.0F, (double) -1.501F, 0.0F);
 
 
-				float f8 = 0.0F;
-				float f5 = 0.0F;
-				if (!shouldSit && entity.isAlive()) {
-					f8 = Mth.lerp(partialtick, entity.animationSpeedOld, entity.animationSpeed);
+                float f8 = 0.0F;
+                float f5 = 0.0F;
+                if (!shouldSit && entity.isAlive()) {
+                    f8 = Mth.lerp(partialtick, entity.animationSpeedOld, entity.animationSpeed);
 					f5 = entity.animationPosition - entity.animationSpeed * (1.0F - partialtick);
 					if (entity.isBaby()) {
 						f5 *= 3.0F;
@@ -152,27 +151,26 @@ public class ClientEvents {
 					Direction direction = entity.getBedOrientation();
 					if (direction != null) {
 						float f4 = entity.getEyeHeight(Pose.STANDING) - 0.1F;
-						posestack.translate((double) ((float) (-direction.getStepX()) * f4), 0.0D, (double) ((float) (-direction.getStepZ()) * f4));
-					}
-				}
+                        posestack.translate((double) ((float) (-direction.getStepX()) * f4), 0.0D, (double) ((float) (-direction.getStepZ()) * f4));
+                    }
+                }
 
-				posestack.translate(deltaX2, deltaY2, deltaZ2);
+                posestack.translate(deltaX2, deltaY2, deltaZ2);
 
-				if (pose != Pose.SLEEPING) {
-					posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
-				}
+                if (!entity.hasPose(Pose.SLEEPING)) {
+                    posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
+                }
 
-				posestack.scale(-1.0F, -1.0F, 1.0F);
-				if (entity instanceof HyperRabbit) {
-					float scale = entity.isBaby() ? 0.4F : 0.6F;
-					posestack.scale(scale, scale, scale);
-				}
-				posestack.translate(0.0F, (double) -1.501F, 0.0F);
+                //renderer.setupRotations(entity, posestack, f7, f, partialtick);
+
+                posestack.scale(-1.0F, -1.0F, 1.0F);
+                //renderer.scale(entity, posestack, partialtick);
+                posestack.translate(0.0F, (double) -1.501F, 0.0F);
 
 
-				renderer.getModel().prepareMobModel(entity, f5, f8, partialtick);
-				renderer.getModel().setupAnim(entity, f5, f8, f7, f2, f6);
-				renderer.getModel().renderToBuffer(posestack, vertexconsumer, light, i, 1.0F, 1.0F, 1.0F, 0.15F);
+                renderer.getModel().prepareMobModel(entity, f5, f8, partialtick);
+                renderer.getModel().setupAnim(entity, f5, f8, f7, f2, f6);
+                renderer.getModel().renderToBuffer(posestack, vertexconsumer, light, i, 1.0F, 1.0F, 1.0F, 0.15F);
 
 				posestack.popPose();
 			}

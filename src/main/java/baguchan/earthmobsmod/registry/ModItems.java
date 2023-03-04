@@ -6,11 +6,7 @@ import baguchan.earthmobsmod.item.FixedInstrumentItem;
 import baguchan.earthmobsmod.item.ModEggItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.InstrumentTags;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -45,6 +41,10 @@ public class ModItems {
 	public static final RegistryObject<Item> FANCY_CHICKEN_SPAWNEGG = ITEMS.register("fancy_chicken_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.FANCY_CHICKEN, 0xF4A213, 0x202F22, (new Item.Properties())));
 	public static final RegistryObject<Item> WOOLY_COW_SPAWNEGG = ITEMS.register("wooly_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WOOLY_COW, 0xDB8948, 0xFFDBB6, (new Item.Properties())));
 	public static final RegistryObject<Item> UMBRA_COW_SPAWNEGG = ITEMS.register("umbra_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.UMBRA_COW, 0x403E57, 0x0A0B1D, (new Item.Properties())));
+	public static final RegistryObject<Item> ALBINO_COW_SPAWNEGG = ITEMS.register("albino_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.ALBINO_COW, 0xECE2E2, 0xE1CFCF, (new Item.Properties())));
+	public static final RegistryObject<Item> CREAM_COW_SPAWNEGG = ITEMS.register("cream_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.CREAM_COW, 0xE2AB5B, 0xE8DCBB, (new Item.Properties())));
+
+
 	public static final RegistryObject<Item> HORNED_SHEEP_SPAWNEGG = ITEMS.register("horned_sheep_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HORNED_SHEEP, 15198183, 16758197, (new Item.Properties())));
 	public static final RegistryObject<Item> HYPER_RABBIT_SPAWNEGG = ITEMS.register("hyper_rabbit_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HYPER_RABBIT, 0xDA784A, 0xF4BF83, (new Item.Properties())));
 	public static final RegistryObject<Item> MOOBLOOM_SPAWNEGG = ITEMS.register("moobloom_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MOOBLOOM, 0xFDCA00, 0xF7EDC1, (new Item.Properties())));
@@ -73,6 +73,8 @@ public class ModItems {
 			event.accept(FANCY_CHICKEN_SPAWNEGG);
 			event.accept(WOOLY_COW_SPAWNEGG);
 			event.accept(UMBRA_COW_SPAWNEGG);
+			event.accept(ALBINO_COW_SPAWNEGG);
+			event.accept(CREAM_COW_SPAWNEGG);
 			event.accept(HORNED_SHEEP_SPAWNEGG);
 			event.accept(HYPER_RABBIT_SPAWNEGG);
 			event.accept(MOOBLOOM_SPAWNEGG);

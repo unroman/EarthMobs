@@ -8,6 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -90,10 +91,10 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 			if (!list.isEmpty()) {
 				for (int l = 0; l < list.size(); ++l) {
 					LivingEntity entity2 = list.get(l);
-					if (entity != entity2) {
-						entity2.knockback(2.0D * percentBoost, entity2.getX() - entity.getX(), entity2.getZ() - entity.getZ());
-						entity2.hurt(DamageSource.mobAttack(entity), Mth.floor(8.0F * percentBoost));
-					}
+                    if (entity != entity2 && !entity.isAlliedTo(entity2)) {
+                        entity2.knockback(2.0D * percentBoost, entity2.getX() - entity.getX(), entity2.getZ() - entity.getZ());
+                        entity2.hurt(DamageSource.mobAttack(entity), Mth.floor(8.0F * percentBoost));
+                    }
 				}
 			}
 		}
@@ -110,17 +111,17 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 	}
 
 	protected void tryAddBooster(LivingEntity entity) {
-		if (entity.isSprinting()) {
-			if (percentBoost <= 1) {
-				percentBoost += 0.01F;
-			} else {
-				percentBoost = 1;
-			}
+        if (entity.isSprinting() && entity.getPose() == Pose.STANDING) {
+            if (percentBoost <= 1) {
+                percentBoost += 0.01F;
+            } else {
+                percentBoost = 1;
+            }
 
-		} else {
-			if (percentBoost >= 0) {
-				percentBoost -= 0.1F;
-			} else {
+        } else {
+            if (percentBoost >= 0) {
+                percentBoost -= 0.1F;
+            } else {
 				percentBoost = 0;
 			}
 		}
