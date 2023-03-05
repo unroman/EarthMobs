@@ -42,25 +42,45 @@ public class EarthBiomeModifier implements BiomeModifier {
 
 			if (EarthMobsConfig.COMMON.woolyCowSpawnRate.get() > 0) {
 				if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD) || biome.is(Tags.Biomes.IS_COLD)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.COMMON.woolyCowSpawnRate.get(), 3, 6));
-				}
-			}
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.COMMON.woolyCowSpawnRate.get(), 3, 6));
+                }
+            }
 
-			if (EarthMobsConfig.COMMON.umbraCowSpawnRate.get() > 0) {
-				if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD) || biome.is(Tags.Biomes.IS_COLD)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.UMBRA_COW.get(), EarthMobsConfig.COMMON.umbraCowSpawnRate.get(), 3, 6));
-				}
-			}
+            if (EarthMobsConfig.COMMON.umbraCowSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD) || biome.is(Tags.Biomes.IS_COLD)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.UMBRA_COW.get(), EarthMobsConfig.COMMON.umbraCowSpawnRate.get(), 3, 6));
+                }
+            }
 
-			if (EarthMobsConfig.COMMON.hornedSheepSpawnRate.get() > 0) {
-				if (biome.is(Tags.Biomes.IS_MOUNTAIN)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP.get(), EarthMobsConfig.COMMON.hornedSheepSpawnRate.get(), 3, 6));
-				}
-			}
 
-			if (EarthMobsConfig.COMMON.hyperRabbitSpawnRate.get() > 0) {
-				if (biome.is(Tags.Biomes.IS_PLAINS) || biome.is(BiomeTags.IS_FOREST)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HYPER_RABBIT.get(), EarthMobsConfig.COMMON.hyperRabbitSpawnRate.get(), 3, 4));
+            if (EarthMobsConfig.COMMON.albinoCowSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_PLAINS)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.ALBINO_COW.get(), EarthMobsConfig.COMMON.albinoCowSpawnRate.get(), 3, 6));
+                }
+            }
+
+
+            if (EarthMobsConfig.COMMON.creamCowSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_PLAINS)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.CREAM_COW.get(), EarthMobsConfig.COMMON.creamCowSpawnRate.get(), 3, 6));
+                }
+            }
+
+            if (EarthMobsConfig.COMMON.teacupPigSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_PLAINS)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.TEACUP_PIG.get(), EarthMobsConfig.COMMON.teacupPigSpawnRate.get(), 3, 6));
+                }
+            }
+
+            if (EarthMobsConfig.COMMON.hornedSheepSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_MOUNTAIN)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HORNED_SHEEP.get(), EarthMobsConfig.COMMON.hornedSheepSpawnRate.get(), 3, 6));
+                }
+            }
+
+            if (EarthMobsConfig.COMMON.hyperRabbitSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_PLAINS) || biome.is(BiomeTags.IS_FOREST)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.HYPER_RABBIT.get(), EarthMobsConfig.COMMON.hyperRabbitSpawnRate.get(), 3, 4));
 				}
 			}
 

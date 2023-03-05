@@ -3,6 +3,7 @@ package baguchan.earthmobsmod.registry;
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.item.BoneShardItem;
 import baguchan.earthmobsmod.item.FixedInstrumentItem;
+import baguchan.earthmobsmod.item.MobPotItem;
 import baguchan.earthmobsmod.item.ModEggItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.InstrumentTags;
@@ -35,7 +36,7 @@ public class ModItems {
 	public static final RegistryObject<Item> HYPER_RABBIT_FOOT = ITEMS.register("hyper_rabbit_foot", () -> new Item((new Item.Properties())));
 	public static final RegistryObject<Item> MUD_BUCKET = ITEMS.register("mud_bucket", () -> new BucketItem(ModFluids.MUD, (new Item.Properties()).stacksTo(1).craftRemainder(Items.BUCKET)));
 	public static final RegistryObject<Item> TROPICAL_SLIME_BUCKET = ITEMS.register("tropical_slime_bucket", () -> new MobBucketItem(ModEntities.TROPICAL_SLIME, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, (new Item.Properties()).stacksTo(1).craftRemainder(Items.BUCKET)));
-
+	public static final RegistryObject<Item> TEACUP_PIG_POT = ITEMS.register("teacup_pig_pot", () -> new MobPotItem(ModEntities.TEACUP_PIG, () -> Fluids.EMPTY, () -> SoundEvents.PIG_AMBIENT, (new Item.Properties()).stacksTo(1).craftRemainder(Items.FLOWER_POT)));
 
 	public static final RegistryObject<Item> CLUCK_SHROOM_SPAWNEGG = ITEMS.register("cluck_shroom_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.CLUCK_SHROOM, 0xB52C17, 0xDC883B, (new Item.Properties())));
 	public static final RegistryObject<Item> FANCY_CHICKEN_SPAWNEGG = ITEMS.register("fancy_chicken_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.FANCY_CHICKEN, 0xF4A213, 0x202F22, (new Item.Properties())));
@@ -43,6 +44,7 @@ public class ModItems {
 	public static final RegistryObject<Item> UMBRA_COW_SPAWNEGG = ITEMS.register("umbra_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.UMBRA_COW, 0x403E57, 0x0A0B1D, (new Item.Properties())));
 	public static final RegistryObject<Item> ALBINO_COW_SPAWNEGG = ITEMS.register("albino_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.ALBINO_COW, 0xECE2E2, 0xE1CFCF, (new Item.Properties())));
 	public static final RegistryObject<Item> CREAM_COW_SPAWNEGG = ITEMS.register("cream_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.CREAM_COW, 0xE2AB5B, 0xE8DCBB, (new Item.Properties())));
+	public static final RegistryObject<Item> TEACUP_PIG_SPAWNEGG = ITEMS.register("teacup_pig_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.TEACUP_PIG, 0xEEC9C1, 0xDD5555, (new Item.Properties())));
 
 
 	public static final RegistryObject<Item> HORNED_SHEEP_SPAWNEGG = ITEMS.register("horned_sheep_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HORNED_SHEEP, 15198183, 16758197, (new Item.Properties())));
@@ -75,6 +77,7 @@ public class ModItems {
 			event.accept(UMBRA_COW_SPAWNEGG);
 			event.accept(ALBINO_COW_SPAWNEGG);
 			event.accept(CREAM_COW_SPAWNEGG);
+			event.accept(TEACUP_PIG_SPAWNEGG);
 			event.accept(HORNED_SHEEP_SPAWNEGG);
 			event.accept(HYPER_RABBIT_SPAWNEGG);
 			event.accept(MOOBLOOM_SPAWNEGG);
@@ -110,6 +113,7 @@ public class ModItems {
 		if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
 			event.accept(MUD_BUCKET);
 			event.accept(TROPICAL_SLIME_BUCKET);
+			event.accept(TEACUP_PIG_POT);
 		}
 		if (event.getTab() == CreativeModeTabs.NATURAL_BLOCKS) {
 			event.accept(ModBlocks.CARVED_MELON);

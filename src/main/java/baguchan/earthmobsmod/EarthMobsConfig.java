@@ -14,18 +14,21 @@ public class EarthMobsConfig {
 	}
 
 	public static class Common {
-		public final ForgeConfigSpec.IntValue woolyCowSpawnRate;
-		public final ForgeConfigSpec.IntValue umbraCowSpawnRate;
-		public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
-		public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
-		public final ForgeConfigSpec.IntValue duckSpawnRate;
-		public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
-		public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
-		public final ForgeConfigSpec.IntValue strayBoneSpiderSpawnRate;
-		public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
-		public final ForgeConfigSpec.IntValue moobloomSpawnRate;
-		public final ForgeConfigSpec.IntValue moolipSpawnRate;
-		public final ForgeConfigSpec.IntValue jumboRabbitSpawnRate;
+        public final ForgeConfigSpec.IntValue woolyCowSpawnRate;
+        public final ForgeConfigSpec.IntValue umbraCowSpawnRate;
+        public final ForgeConfigSpec.IntValue albinoCowSpawnRate;
+        public final ForgeConfigSpec.IntValue creamCowSpawnRate;
+        public final ForgeConfigSpec.IntValue teacupPigSpawnRate;
+        public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
+        public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
+        public final ForgeConfigSpec.IntValue duckSpawnRate;
+        public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
+        public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
+        public final ForgeConfigSpec.IntValue strayBoneSpiderSpawnRate;
+        public final ForgeConfigSpec.IntValue hyperRabbitSpawnRate;
+        public final ForgeConfigSpec.IntValue moobloomSpawnRate;
+        public final ForgeConfigSpec.IntValue moolipSpawnRate;
+        public final ForgeConfigSpec.IntValue jumboRabbitSpawnRate;
 
 		public final ForgeConfigSpec.IntValue boulderingZombieSpawnRate;
 		public final ForgeConfigSpec.IntValue lobberZombieSpawnRate;
@@ -41,22 +44,31 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.BooleanValue mudSpawnInOverworld;
 
 		public Common(ForgeConfigSpec.Builder builder) {
-			woolyCowSpawnRate = builder
-					.comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
-					.defineInRange("Wooly cow SpawnRate", 10, 0, 100);
-			umbraCowSpawnRate = builder
-					.comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
-					.defineInRange("Umbra Cow SpawnRate", 10, 0, 100);
-			cluckshroomSpawnRate = builder
-					.comment("Changed Cluckshroom SpawnRate. [0 ~ 100]")
-					.defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
-			fancyChickenSpawnRate = builder
-					.comment("Changed Fancy Chicken SpawnRate. [0 ~ 100]")
-					.defineInRange("Fancy Chicken SpawnRate", 6, 0, 100);
-			duckSpawnRate = builder
-					.comment("Changed Duck SpawnRate. [0 ~ 100]")
-					.defineInRange("Duck SpawnRate", 8, 0, 100);
-			hornedSheepSpawnRate = builder
+            woolyCowSpawnRate = builder
+                    .comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
+                    .defineInRange("Wooly cow SpawnRate", 10, 0, 100);
+            umbraCowSpawnRate = builder
+                    .comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
+                    .defineInRange("Umbra Cow SpawnRate", 10, 0, 100);
+            albinoCowSpawnRate = builder
+                    .comment("Changed Albino Cow SpawnRate. [0 ~ 100]")
+                    .defineInRange("Albino Cow SpawnRate", 6, 0, 100);
+            creamCowSpawnRate = builder
+                    .comment("Changed Cream Cow SpawnRate. [0 ~ 100]")
+                    .defineInRange("Cream Cow SpawnRate", 6, 0, 100);
+            teacupPigSpawnRate = builder
+                    .comment("Changed Teacup Pig SpawnRate. [0 ~ 100]")
+                    .defineInRange(" Teacup Pig SpawnRate", 5, 0, 100);
+            cluckshroomSpawnRate = builder
+                    .comment("Changed Cluckshroom SpawnRate. [0 ~ 100]")
+                    .defineInRange("Cluckshroom SpawnRate", 5, 0, 100);
+            fancyChickenSpawnRate = builder
+                    .comment("Changed Fancy Chicken SpawnRate. [0 ~ 100]")
+                    .defineInRange("Fancy Chicken SpawnRate", 6, 0, 100);
+            duckSpawnRate = builder
+                    .comment("Changed Duck SpawnRate. [0 ~ 100]")
+                    .defineInRange("Duck SpawnRate", 8, 0, 100);
+            hornedSheepSpawnRate = builder
 					.comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
 					.defineInRange("Horned Sheep SpawnRate", 10, 0, 100);
 			hyperRabbitSpawnRate = builder
