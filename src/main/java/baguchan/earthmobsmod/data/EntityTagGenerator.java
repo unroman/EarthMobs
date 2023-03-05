@@ -23,5 +23,6 @@ public class EntityTagGenerator extends EntityTypeTagsProvider {
 		this.tag(EntityTypeTags.FROG_FOOD).add(ModEntities.TROPICAL_SLIME.get());
 		this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(ModEntities.BONE_SHARD.get(), ModEntities.MELON_SEED.get());
 		this.tag(EntityTypeTags.RAIDERS).add(ModEntities.VILER_WITCH.get());
+        this.tag(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(ModEntities.HYPER_RABBIT.get());
 	}
 }
