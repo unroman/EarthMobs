@@ -34,7 +34,14 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 
 	public InteractionResult mobInteract(Player p_28941_, InteractionHand p_28942_) {
 		ItemStack itemstack = p_28941_.getItemInHand(p_28942_);
-		if (itemstack.is(Items.BOWL) && !this.isBaby()) {
+		if (itemstack.is(Items.BONE_MEAL) && !this.isBaby()) {
+			ItemStack itemstack1 = new ItemStack(this.getFlower());
+			ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, p_28941_, itemstack1, false);
+			p_28941_.setItemInHand(p_28942_, itemstack2);
+			SoundEvent soundevent = SoundEvents.BONE_MEAL_USE;
+			this.playSound(soundevent, 1.0F, 1.0F);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
+		} else if (itemstack.is(Items.BOWL) && !this.isBaby()) {
 			Pair<MobEffect, Integer> pair = this.getEffectForCow();
 			ItemStack itemstack1 = new ItemStack(Items.SUSPICIOUS_STEW);
 			SuspiciousStewItem.saveMobEffect(itemstack1, pair.getLeft(), pair.getRight());
