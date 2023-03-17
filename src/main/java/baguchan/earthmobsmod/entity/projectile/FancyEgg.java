@@ -6,7 +6,6 @@ import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -51,7 +50,7 @@ public class FancyEgg extends ThrowableItemProjectile {
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), 0);
+		entity.hurt(this.damageSources().thrown(this, this.getOwner()), 0);
 	}
 
 	protected void onHit(HitResult p_37488_) {

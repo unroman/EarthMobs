@@ -109,16 +109,16 @@ public class ClientEvents {
                 float f8 = 0.0F;
                 float f5 = 0.0F;
                 if (!shouldSit && entity.isAlive()) {
-                    f8 = Mth.lerp(partialtick, entity.animationSpeedOld, entity.animationSpeed);
-					f5 = entity.animationPosition - entity.animationSpeed * (1.0F - partialtick);
-					if (entity.isBaby()) {
-						f5 *= 3.0F;
-					}
+                    f8 = entity.walkAnimation.speed(partialtick);
+                    f5 = entity.walkAnimation.position(partialtick);
+                    if (entity.isBaby()) {
+                        f5 *= 3.0F;
+                    }
 
-					if (f8 > 1.0F) {
-						f8 = 1.0F;
-					}
-				}
+                    if (f8 > 1.0F) {
+                        f8 = 1.0F;
+                    }
+                }
 
 				renderer.getModel().prepareMobModel(entity, f5, f8, partialtick);
 				renderer.getModel().setupAnim(entity, f5, f8, f7, f2, f6);

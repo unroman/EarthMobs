@@ -2,17 +2,14 @@ package baguchan.earthmobsmod;
 
 import baguchan.earthmobsmod.block.CarvedMelonBlock;
 import baguchan.earthmobsmod.capability.ShadowCapability;
-import baguchan.earthmobsmod.entity.BoulderingDrowned;
-import baguchan.earthmobsmod.entity.BoulderingZombie;
-import baguchan.earthmobsmod.entity.LobberDrowned;
-import baguchan.earthmobsmod.entity.LobberZombie;
-import baguchan.earthmobsmod.entity.ZombifiedPig;
+import baguchan.earthmobsmod.entity.*;
 import baguchan.earthmobsmod.registry.ModBlocks;
 import baguchan.earthmobsmod.registry.ModEntities;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -109,7 +106,7 @@ public class CommonEvents {
 	@SubscribeEvent
 	public static void onHurt(LivingHurtEvent event) {
 		event.getEntity().getCapability(EarthMobsMod.SHADOW_CAP).ifPresent(shadowCapability -> {
-			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().isFire() && !event.getSource().isExplosion() && !event.getSource().isBypassArmor()) {
+			if (shadowCapability.getPercentBoost() >= 0.5F && !event.getSource().is(DamageTypeTags.BYPASSES_ARMOR) && !event.getSource().is(DamageTypeTags.IS_EXPLOSION) && !event.getSource().is(DamageTypeTags.IS_FIRE)) {
 				event.setAmount(event.getAmount() * (1.0F - shadowCapability.getPercentBoost()));
 				if (shadowCapability.getPercentBoost() > 0.9F) {
 					event.setCanceled(true);

@@ -11,13 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -99,18 +93,18 @@ public class HyperRabbit extends Rabbit {
 
 	protected void dealDamage(LivingEntity livingentity) {
 		if (this.isAlive() && isSpark() && !this.isAlliedTo(livingentity)) {
-			boolean flag = livingentity.isDamageSourceBlocked(DamageSource.mobAttack(this));
-			float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
+			boolean flag = livingentity.isDamageSourceBlocked(this.damageSources().mobAttack(this));
+            float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
 			float f2 = flag ? 0.25F : 1.0F;
 			int i = getVariant() == Variant.EVIL ? 2 : 1;
 			double d1 = this.getX() - livingentity.getX();
 			double d2 = this.getZ() - livingentity.getZ();
 			if (!flag) {
-				if (livingentity.hurt(DamageSource.mobAttack(this), 3.0F * i)) {
-					this.playSound(SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-					this.doEnchantDamageEffects(this, livingentity);
-					livingentity.knockback(f2 * f1, d1, d2);
-				}
+                if (livingentity.hurt(this.damageSources().mobAttack(this), 3.0F * i)) {
+                    this.playSound(SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                    this.doEnchantDamageEffects(this, livingentity);
+                    livingentity.knockback(f2 * f1, d1, d2);
+                }
 			}
 		}
 	}

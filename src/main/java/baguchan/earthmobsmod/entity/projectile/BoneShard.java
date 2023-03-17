@@ -13,7 +13,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -167,7 +166,7 @@ public class BoneShard extends ThrowableItemProjectile {
 
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		Entity entity = p_37404_.getEntity();
-		if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 2)) {
+		if (entity.hurt(this.damageSources().thrown(this, this.getOwner()), 2)) {
 
 			if (entity instanceof LivingEntity) {
 				for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {

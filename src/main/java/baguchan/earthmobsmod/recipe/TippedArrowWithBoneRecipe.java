@@ -3,6 +3,7 @@ package baguchan.earthmobsmod.recipe;
 import baguchan.earthmobsmod.registry.ModItems;
 import baguchan.earthmobsmod.registry.ModRecipes;
 import com.google.common.collect.Lists;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
@@ -68,9 +69,10 @@ public class TippedArrowWithBoneRecipe extends CustomRecipe {
 		return list3.size() == 1 && list.size() == 1 && list2.size() == 1;
 	}
 
-	public ItemStack assemble(CraftingContainer p_44513_) {
-		for (int i = 0; i < p_44513_.getContainerSize(); ++i) {
-			ItemStack itemstack = p_44513_.getItem(i);
+	@Override
+	public ItemStack assemble(CraftingContainer p_44001_, RegistryAccess p_267165_) {
+		for (int i = 0; i < p_44001_.getContainerSize(); ++i) {
+			ItemStack itemstack = p_44001_.getItem(i);
 			if (itemstack.is(ModItems.BONE_SHARD.get())) {
 				if (PotionUtils.getPotion(itemstack) != Potions.EMPTY) {
 					ItemStack itemstack1 = new ItemStack(Items.TIPPED_ARROW, 2);

@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -67,7 +66,7 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
 
-		if (entity instanceof LivingEntity && entity.hurt(DamageSource.thrown(this, this.getOwner()), 3)) {
+		if (entity instanceof LivingEntity && entity.hurt(this.damageSources().thrown(this, this.getOwner()), 3)) {
 			((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.HUNGER, 60), entity);
 		}
 	}

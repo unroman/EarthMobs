@@ -6,12 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Rabbit;
@@ -39,9 +34,9 @@ public class JumboRabbit extends Rabbit {
 	public boolean doHurtTarget(Entity p_29659_) {
 		if (this.getVariant() == Variant.EVIL) {
 			this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-			return p_29659_.hurt(DamageSource.mobAttack(this), 9.0F);
+			return p_29659_.hurt(this.damageSources().mobAttack(this), 9.0F);
 		} else {
-			return p_29659_.hurt(DamageSource.mobAttack(this), 5.0F);
+			return p_29659_.hurt(this.damageSources().mobAttack(this), 5.0F);
 		}
 	}
 }

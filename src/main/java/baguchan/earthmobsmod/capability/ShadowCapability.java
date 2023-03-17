@@ -5,7 +5,6 @@ import baguchan.earthmobsmod.registry.ModEffects;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -93,7 +92,7 @@ public class ShadowCapability implements ICapabilityProvider, INBTSerializable<C
 					LivingEntity entity2 = list.get(l);
                     if (entity != entity2 && !entity.isAlliedTo(entity2)) {
                         entity2.knockback(2.0D * percentBoost, entity2.getX() - entity.getX(), entity2.getZ() - entity.getZ());
-                        entity2.hurt(DamageSource.mobAttack(entity), Mth.floor(8.0F * percentBoost));
+						entity2.hurt(entity.damageSources().mobAttack(entity), Mth.floor(8.0F * percentBoost));
                     }
 				}
 			}

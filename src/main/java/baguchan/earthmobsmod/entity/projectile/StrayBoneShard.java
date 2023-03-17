@@ -5,7 +5,6 @@ import baguchan.earthmobsmod.registry.ModItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -73,7 +72,7 @@ public class StrayBoneShard extends BoneShard {
 
     protected void onHitEntity(EntityHitResult p_37404_) {
         Entity entity = p_37404_.getEntity();
-        if (entity.hurt(DamageSource.thrown(this, this.getOwner()), 2)) {
+        if (entity.hurt(this.damageSources().thrown(this, this.getOwner()), 2)) {
             if (entity instanceof LivingEntity) {
                 for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
                     ((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
