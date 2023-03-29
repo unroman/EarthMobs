@@ -76,7 +76,7 @@ public class MobPotItem extends MobBucketItem {
         return !p_40701_.getAbilities().instabuild ? new ItemStack(Items.FLOWER_POT) : p_40700_;
     }
 
-    private boolean canBlockContainFluid(Level worldIn, BlockPos posIn, BlockState blockstate) {
+    public boolean canBlockContainFluid(Level worldIn, BlockPos posIn, BlockState blockstate) {
         return blockstate.getBlock() instanceof LiquidBlockContainer && ((LiquidBlockContainer) blockstate.getBlock()).canPlaceLiquid(worldIn, posIn, blockstate, this.getFluid());
     }
 }

@@ -24,7 +24,7 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +38,7 @@ public class CommonEvents {
 	}
 
 	@SubscribeEvent
-	public void onEntityJoinWorld(LivingSpawnEvent.SpecialSpawn event) {
+	public void onEntityJoinWorld(MobSpawnEvent.FinalizeSpawn event) {
 		if (event.getEntity() instanceof final AbstractVillager villager) {
 			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingDrowned.class, 8.0F, 0.8D, 0.6D));
 			villager.targetSelector.addGoal(1, new AvoidEntityGoal<>(villager, BoulderingZombie.class, 8.0F, 0.8D, 0.6D));
