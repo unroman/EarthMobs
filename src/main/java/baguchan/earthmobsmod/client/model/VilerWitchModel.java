@@ -4,11 +4,7 @@ import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -71,7 +67,11 @@ public class VilerWitchModel<T extends LivingEntity> extends HierarchicalModel<T
 	public void setupAnim(T p_102928_, float p_102929_, float p_102930_, float p_102931_, float p_102932_, float p_102933_) {
 		this.head.yRot = p_102932_ * ((float) Math.PI / 180F);
 		this.head.xRot = p_102933_ * ((float) Math.PI / 180F);
-
+		this.nose.setPos(0.0F, -2.0F, 0.0F);
+		float f = 0.01F * (float) (p_102928_.getId() % 10);
+		this.nose.xRot = Mth.sin((float) p_102928_.tickCount * f) * 4.5F * ((float) Math.PI / 180F);
+		this.nose.yRot = 0.0F;
+		this.nose.zRot = Mth.cos((float) p_102928_.tickCount * f) * 2.5F * ((float) Math.PI / 180F);
 		if (this.riding) {
 			this.rightLeg.xRot = -1.4137167F;
 			this.rightLeg.yRot = ((float) Math.PI / 10F);

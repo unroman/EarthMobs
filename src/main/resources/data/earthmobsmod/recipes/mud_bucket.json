@@ -12,9 +12,9 @@
     }
   },
   "pattern": [
-    "B",
+    "W",
     "M",
-    "W"
+    "B"
   ],
   "result": {
     "count": 1,
