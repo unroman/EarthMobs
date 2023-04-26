@@ -1,4 +1,5 @@
 {
+  "block.earthmobsmod.ruby_block": "ルビーブロック",
   "block.earthmobsmod.buttercup": "ゴールデンブローム",
   "block.earthmobsmod.pink_daisy": "ピンクデイジー",
   "block.earthmobsmod.potted_buttercup": "花瓶入りゴールデンブローム",
@@ -7,6 +8,7 @@
   "block.earthmobsmod.carved_melon": "くり抜いたスイカ",
   "block.earthmobsmod.carved_melon_shoot": "怒った顔のスイカ",
   "block.earthmobsmod.mud": "泥",
+  "item.earthmobsmod.ruby": "ルビー",
   "item.earthmobsmod.mud_bucket": "泥バケツ",
   "item.earthmobsmod.tropical_slime_bucket": "トロピカルスライム入りバケツ",
   "item.earthmobsmod.teacup_pig_pot": "ティーカップピッグ入りポット",

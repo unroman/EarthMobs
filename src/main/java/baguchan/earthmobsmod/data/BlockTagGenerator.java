@@ -18,5 +18,6 @@ public class BlockTagGenerator extends BlockTagsProvider {
 	@Override
 	protected void addTags(HolderLookup.Provider p_256380_) {
 		this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.CARVED_MELON.get(), ModBlocks.CARVED_MELON_SHOOT.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.RUBY.get());
 	}
 }

@@ -1,4 +1,5 @@
 {
+  "block.earthmobsmod.ruby_block": "Block of Ruby",
   "block.earthmobsmod.buttercup": "Buttercup",
   "block.earthmobsmod.pink_daisy": "Pink Daisy",
   "block.earthmobsmod.potted_buttercup": "Potted Buttercup",
@@ -7,6 +8,7 @@
   "block.earthmobsmod.carved_melon": "Carved Melon",
   "block.earthmobsmod.carved_melon_shoot": "Carved Melon Shoot",
   "block.earthmobsmod.mud": "Mud",
+  "item.earthmobsmod.ruby": "Ruby",
   "item.earthmobsmod.mud_bucket": "Mud Bucket",
   "item.earthmobsmod.tropical_slime_bucket": "Tropical Slime Bucket",
   "item.earthmobsmod.teacup_pig_pot": "Teacup Pig Pot",
