@@ -125,16 +125,6 @@ public class MagmaCow extends Cow {
 
     }
 
-    public float getHeadEatPositionScale(float p_29881_) {
-        if (this.eatAnimationTick <= 0) {
-            return 0.0F;
-        } else if (this.eatAnimationTick >= 4 && this.eatAnimationTick <= 36) {
-            return 1.0F;
-        } else {
-            return this.eatAnimationTick < 4 ? ((float) this.eatAnimationTick - p_29881_) / 4.0F : -((float) (this.eatAnimationTick - 40) - p_29881_) / 4.0F;
-        }
-    }
-
     public float getHeadEatAngleScale(float p_29883_) {
         if (this.eatAnimationTick > 4 && this.eatAnimationTick <= 36) {
             float f = ((float) (this.eatAnimationTick - 4) - p_29883_) / 32.0F;
@@ -150,18 +140,28 @@ public class MagmaCow extends Cow {
     }
 
     public static boolean checkMagmaSpawnRules(EntityType<? extends Animal> p_218105_, LevelAccessor p_218106_, MobSpawnType p_218107_, BlockPos p_218108_, RandomSource p_218109_) {
-        return (p_218106_.getBlockState(p_218108_.below()).is(Blocks.MAGMA_BLOCK) || p_218106_.getBlockState(p_218108_.below()).is(Blocks.BLACKSTONE));
+        return (p_218106_.getBlockState(p_218108_.below()).is(Blocks.MAGMA_BLOCK) || p_218106_.getBlockState(p_218108_.below()).is(Blocks.BLACKSTONE) || p_218106_.getBlockState(p_218108_.below()).is(Blocks.BASALT));
     }
 
     public float getWalkTargetValue(BlockPos p_27573_, LevelReader p_27574_) {
+        if (p_27574_.getBlockState(p_27573_.below()).is(Blocks.BASALT) || p_27574_.getBlockState(p_27573_.below()).is(Blocks.BLACKSTONE)) {
+            return 1.0F;
+        }
         return p_27574_.getBlockState(p_27573_.below()).is(Blocks.MAGMA_BLOCK) ? 10.0F : 0.0F;
     }
+
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 8;
+    }
+
 
     public void ate() {
         this.heal(2);
         if (this.isBaby()) {
             this.ageUp(60);
         }
+        this.playSound(SoundEvents.FIRE_EXTINGUISH);
         this.level.broadcastEntityEvent(this, (byte) 11);
     }
 }
