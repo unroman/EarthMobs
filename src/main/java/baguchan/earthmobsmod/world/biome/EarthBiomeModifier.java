@@ -157,6 +157,13 @@ public class EarthBiomeModifier implements BiomeModifier {
 			}
 		}
 
+		if (EarthMobsConfig.COMMON.magmaCowSpawnRate.get() > 0) {
+			if (biome.is(Biomes.BASALT_DELTAS)) {
+				builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.MAGMA_COW.get(), EarthMobsConfig.COMMON.magmaCowSpawnRate.get(), 4, 5));
+			}
+		}
+
+
 		if (EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get() > 0) {
 			if (biome.is(Biomes.SOUL_SAND_VALLEY)) {
 				builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.WITHER_SKELETON_WOLF.get(), EarthMobsConfig.COMMON.witherSkeletonWolfNetherSpawnRate.get(), 2, 3));

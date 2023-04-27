@@ -34,6 +34,7 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<AlbinoCow>> ALBINO_COW = ENTITIES.register("albino_cow", () -> EntityType.Builder.of(AlbinoCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).build(prefix("albino_cow")));
 	public static final RegistryObject<EntityType<CreamCow>> CREAM_COW = ENTITIES.register("cream_cow", () -> EntityType.Builder.of(CreamCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).build(prefix("cream_cow")));
     public static final RegistryObject<EntityType<TeaCupPig>> TEACUP_PIG = ENTITIES.register("teacup_pig", () -> EntityType.Builder.of(TeaCupPig::new, MobCategory.CREATURE).sized(0.4F, 0.4F).clientTrackingRange(10).build(prefix("teacup_pig")));
+    public static final RegistryObject<EntityType<MagmaCow>> MAGMA_COW = ENTITIES.register("magma_cow", () -> EntityType.Builder.of(MagmaCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).fireImmune().build(prefix("magma_cow")));
 
 
 	public static final RegistryObject<EntityType<HornedSheep>> HORNED_SHEEP = ENTITIES.register("horned_sheep", () -> EntityType.Builder.of(HornedSheep::new, MobCategory.CREATURE).sized(0.9F, 1.3F).clientTrackingRange(10).build(prefix("horned_sheep")));
@@ -92,6 +93,7 @@ public class ModEntities {
         event.register(ALBINO_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(CREAM_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(TEACUP_PIG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(MAGMA_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MagmaCow::checkMagmaSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
 
         event.register(HORNED_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
@@ -127,6 +129,7 @@ public class ModEntities {
 		event.put(ALBINO_COW.get(), Cow.createAttributes().build());
         event.put(CREAM_COW.get(), Cow.createAttributes().build());
         event.put(TEACUP_PIG.get(), TeaCupPig.createAttributes().build());
+        event.put(MAGMA_COW.get(), MagmaCow.createAttributes().build());
 
 		event.put(HORNED_SHEEP.get(), HornedSheep.createAttributes().build());
 		event.put(HYPER_RABBIT.get(), HyperRabbit.createAttributes().build());

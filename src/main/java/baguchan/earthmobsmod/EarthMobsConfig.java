@@ -40,15 +40,17 @@ public class EarthMobsConfig {
 		public final ForgeConfigSpec.IntValue witherSkeletonWolfNetherSpawnRate;
 
 		public final ForgeConfigSpec.IntValue babyGhastSpawnRate;
+		public final ForgeConfigSpec.IntValue magmaCowSpawnRate;
+
 
 		public final ForgeConfigSpec.BooleanValue mudSpawnInOverworld;
 
 		public Common(ForgeConfigSpec.Builder builder) {
-            woolyCowSpawnRate = builder
-                    .comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
-                    .defineInRange("Wooly cow SpawnRate", 10, 0, 100);
-            umbraCowSpawnRate = builder
-                    .comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
+			woolyCowSpawnRate = builder
+					.comment("Changed WoolyCow SpawnRate. [0 ~ 100]")
+					.defineInRange("Wooly cow SpawnRate", 10, 0, 100);
+			umbraCowSpawnRate = builder
+					.comment("Changed Umbra Cow SpawnRate. [0 ~ 100]")
                     .defineInRange("Umbra Cow SpawnRate", 10, 0, 100);
             albinoCowSpawnRate = builder
                     .comment("Changed Albino Cow SpawnRate. [0 ~ 100]")
@@ -112,6 +114,9 @@ public class EarthMobsConfig {
 			babyGhastSpawnRate = builder
 					.comment("Changed Baby Ghast SpawnRate In Nether. [0 ~ 1000]")
 					.defineInRange("Baby Ghast SpawnRate In Nether", 6, 0, 100);
+			magmaCowSpawnRate = builder
+					.comment("Changed Magma Cow SpawnRate In Nether. [0 ~ 1000]")
+					.defineInRange("Magma Cow SpawnRate In Nether", 8, 0, 100);
 
 			mudSpawnInOverworld = builder
 					.comment("Changed Mud Spawn in Overworld.")

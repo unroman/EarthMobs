@@ -9,11 +9,7 @@ import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.SheepModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class HornedSheepModel<T extends HornedSheep> extends SheepModel<T> {
@@ -51,7 +47,6 @@ public class HornedSheepModel<T extends HornedSheep> extends SheepModel<T> {
 
 	public void prepareMobModel(T p_103687_, float p_103688_, float p_103689_, float p_103690_) {
 		super.prepareMobModel(p_103687_, p_103688_, p_103689_, p_103690_);
-		this.head.y = 6.0F + p_103687_.getHeadEatPositionScale(p_103690_) * 9.0F;
 		this.headXRot = p_103687_.getHeadEatAngleScale(p_103690_);
 
 		if (this.attackTime > 0) {

@@ -68,6 +68,7 @@ public class ModItems {
 	public static final RegistryObject<Item> SKELETON_WOLF_SPAWNEGG = ITEMS.register("skeleton_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.SKELETON_WOLF, 12698049, 4802889, (new Item.Properties())));
 	public static final RegistryObject<Item> WITHER_SKELETON_WOLF_SPAWNEGG = ITEMS.register("wither_skeleton_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WITHER_SKELETON_WOLF, 1315860, 4672845, (new Item.Properties())));
 	public static final RegistryObject<Item> BABY_GHAST_SPAWNEGG = ITEMS.register("baby_ghast_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.BABY_GHAST, 0xFFFFFF, 0xFF9393, (new Item.Properties())));
+    public static final RegistryObject<Item> MAGMA_COW_SPAWNEGG = ITEMS.register("magma_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MAGMA_COW, 0x2C2C33, 0xFBAA59, (new Item.Properties())));
 
 	@SubscribeEvent
 	public static void registerCreativeTabsItem(CreativeModeTabEvent.BuildContents event) {
@@ -97,7 +98,8 @@ public class ModItems {
 			event.accept(TROPICAL_SLIME_SPAWNEGG);
 			event.accept(SKELETON_WOLF_SPAWNEGG);
 			event.accept(VILER_WITCH_SPAWNEGG);
-			event.accept(WITHER_SKELETON_WOLF_SPAWNEGG);
+            event.accept(WITHER_SKELETON_WOLF_SPAWNEGG);
+            event.accept(MAGMA_COW_SPAWNEGG);
 		}
 		if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
 			event.accept(RUBY);

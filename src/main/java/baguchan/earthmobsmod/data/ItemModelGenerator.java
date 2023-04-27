@@ -66,6 +66,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         this.spawnEgg(ModItems.SKELETON_WOLF_SPAWNEGG.get());
         this.spawnEgg(ModItems.VILER_WITCH_SPAWNEGG.get());
         this.spawnEgg(ModItems.WITHER_SKELETON_WOLF_SPAWNEGG.get());
+        this.spawnEgg(ModItems.MAGMA_COW_SPAWNEGG.get());
     }
 
     public ItemModelBuilder itemBlockFlat(Block block) {
