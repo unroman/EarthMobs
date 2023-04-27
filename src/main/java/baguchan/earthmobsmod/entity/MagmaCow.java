@@ -154,7 +154,7 @@ public class MagmaCow extends Cow {
     }
 
     public float getWalkTargetValue(BlockPos p_27573_, LevelReader p_27574_) {
-        return p_27574_.getBlockState(p_27573_.below()).is(Blocks.MAGMA_BLOCK) ? 10.0F : p_27574_.getPathfindingCostFromLightLevels(p_27573_);
+        return p_27574_.getBlockState(p_27573_.below()).is(Blocks.MAGMA_BLOCK) ? 10.0F : 0.0F;
     }
 
     public void ate() {
