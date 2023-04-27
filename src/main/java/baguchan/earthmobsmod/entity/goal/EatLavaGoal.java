@@ -55,7 +55,7 @@ public class EatLavaGoal extends Goal {
 
             BlockPos blockpos1 = blockpos.below();
             if (this.level.getBlockState(blockpos1).is(Blocks.MAGMA_BLOCK)) {
-                this.level.levelEvent(2001, blockpos1, Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
+                this.level.levelEvent(2001, blockpos1, Block.getId(Blocks.LAVA.defaultBlockState()));
                 this.mob.ate();
             }
 

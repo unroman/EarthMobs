@@ -107,16 +107,16 @@ public class EarthMobsConfig {
 
 			skeletonWolfNetherSpawnRate = builder
 					.comment("Changed SkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("SkeletonWolf SpawnRate In Nether", 5, 0, 1000);
+					.defineInRange("SkeletonWolf SpawnRate In Nether", 40, 0, 1000);
 			witherSkeletonWolfNetherSpawnRate = builder
 					.comment("Changed WitherSkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 4, 0, 1000);
+					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 30, 0, 1000);
 			babyGhastSpawnRate = builder
 					.comment("Changed Baby Ghast SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("Baby Ghast SpawnRate In Nether", 6, 0, 100);
+					.defineInRange("Baby Ghast SpawnRate In Nether", 20, 0, 100);
 			magmaCowSpawnRate = builder
 					.comment("Changed Magma Cow SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("Magma Cow SpawnRate In Nether", 8, 0, 100);
+					.defineInRange("Magma Cow SpawnRate In Nether", 100, 0, 100);
 
 			mudSpawnInOverworld = builder
 					.comment("Changed Mud Spawn in Overworld.")

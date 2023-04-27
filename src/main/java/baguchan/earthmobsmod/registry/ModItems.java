@@ -125,5 +125,9 @@ public class ModItems {
 			event.accept(ModBlocks.BUTTERCUP);
 			event.accept(ModBlocks.PINK_DAISY);
 		}
+
+		if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
+			event.accept(ModBlocks.RUBY);
+		}
 	}
 }

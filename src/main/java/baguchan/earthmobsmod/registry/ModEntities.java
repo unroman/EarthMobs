@@ -64,7 +64,7 @@ public class ModEntities {
 
 	public static final RegistryObject<EntityType<SkeletonWolf>> SKELETON_WOLF = ENTITIES.register("skeleton_wolf", () -> EntityType.Builder.of(SkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).build(prefix("skeleton_wolf")));
 	public static final RegistryObject<EntityType<WitherSkeletonWolf>> WITHER_SKELETON_WOLF = ENTITIES.register("wither_skeleton_wolf", () -> EntityType.Builder.of(WitherSkeletonWolf::new, MobCategory.MONSTER).sized(0.6F, 0.85F).fireImmune().immuneTo(Blocks.WITHER_ROSE).build(prefix("wither_skeleton_wolf")));
-	public static final RegistryObject<EntityType<BabyGhast>> BABY_GHAST = ENTITIES.register("baby_ghast", () -> EntityType.Builder.of(BabyGhast::new, MobCategory.MONSTER).sized(0.45F, 0.45F).fireImmune().build(prefix("baby_ghast")));
+	public static final RegistryObject<EntityType<BabyGhast>> BABY_GHAST = ENTITIES.register("baby_ghast", () -> EntityType.Builder.of(BabyGhast::new, MobCategory.CREATURE).sized(0.45F, 0.45F).fireImmune().build(prefix("baby_ghast")));
 
 
 	public static final RegistryObject<EntityType<SmellyEgg>> SMELLY_EGG = ENTITIES.register("smelly_egg", () -> EntityType.Builder.<SmellyEgg>of(SmellyEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(prefix("smelly_egg")));
