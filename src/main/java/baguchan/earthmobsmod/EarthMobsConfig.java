@@ -107,10 +107,10 @@ public class EarthMobsConfig {
 
 			skeletonWolfNetherSpawnRate = builder
 					.comment("Changed SkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("SkeletonWolf SpawnRate In Nether", 40, 0, 1000);
+					.defineInRange("SkeletonWolf SpawnRate In Nether", 30, 0, 1000);
 			witherSkeletonWolfNetherSpawnRate = builder
 					.comment("Changed WitherSkeletonWolf SpawnRate In Nether. [0 ~ 1000]")
-					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 30, 0, 1000);
+					.defineInRange("WitherSkeletonWolf SpawnRate In Nether", 20, 0, 1000);
 			babyGhastSpawnRate = builder
 					.comment("Changed Baby Ghast SpawnRate In Nether. [0 ~ 1000]")
 					.defineInRange("Baby Ghast SpawnRate In Nether", 20, 0, 100);

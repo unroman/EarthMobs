@@ -31,7 +31,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 public class MagmaCow extends Cow {
     private int eatAnimationTick;
@@ -39,6 +41,9 @@ public class MagmaCow extends Cow {
 
     public MagmaCow(EntityType<? extends MagmaCow> p_28285_, Level p_28286_) {
         super(p_28285_, p_28286_);
+        this.setPathfindingMalus(BlockPathTypes.LAVA, 8.0F);
+        this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
+        this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 0.0F);
     }
 
     protected void registerGoals() {
@@ -71,7 +76,7 @@ public class MagmaCow extends Cow {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.2F).add(Attributes.ARMOR, 10F).add(Attributes.ATTACK_DAMAGE, 3F).add(Attributes.KNOCKBACK_RESISTANCE, 0.6F);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.2F).add(Attributes.ARMOR, 10F).add(Attributes.ATTACK_DAMAGE, 4F).add(Attributes.KNOCKBACK_RESISTANCE, 0.6F);
     }
 
     protected void defineSynchedData() {
@@ -145,7 +150,11 @@ public class MagmaCow extends Cow {
     }
 
     public static boolean checkMagmaSpawnRules(EntityType<? extends Animal> p_218105_, LevelAccessor p_218106_, MobSpawnType p_218107_, BlockPos p_218108_, RandomSource p_218109_) {
-        return (p_218106_.getBlockState(p_218108_.below()).is(Blocks.MAGMA_BLOCK) || p_218106_.getBlockState(p_218108_.below()).is(Blocks.BLACKSTONE)) && isBrightEnoughToSpawn(p_218106_, p_218108_);
+        return (p_218106_.getBlockState(p_218108_.below()).is(Blocks.MAGMA_BLOCK) || p_218106_.getBlockState(p_218108_.below()).is(Blocks.BLACKSTONE));
+    }
+
+    public float getWalkTargetValue(BlockPos p_27573_, LevelReader p_27574_) {
+        return p_27574_.getBlockState(p_27573_.below()).is(Blocks.MAGMA_BLOCK) ? 10.0F : p_27574_.getPathfindingCostFromLightLevels(p_27573_);
     }
 
     public void ate() {

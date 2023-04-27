@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -9,6 +10,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 public class WitherSkeletonWolf extends SkeletonWolf {
@@ -46,5 +49,9 @@ public class WitherSkeletonWolf extends SkeletonWolf {
 
 			return true;
 		}
+	}
+
+	public float getWalkTargetValue(BlockPos p_27573_, LevelReader p_27574_) {
+		return p_27574_.getBlockState(p_27573_.below()).is(Blocks.SOUL_SAND) || p_27574_.getBlockState(p_27573_.below()).is(Blocks.SOUL_SOIL) ? 10.0F : super.getWalkTargetValue(p_27573_, p_27574_);
 	}
 }
