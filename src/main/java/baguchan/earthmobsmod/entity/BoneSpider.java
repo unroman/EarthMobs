@@ -28,7 +28,6 @@ import java.util.EnumSet;
 
 public class BoneSpider extends Spider implements RangedAttackMob {
 	private static final EntityDataAccessor<Boolean> DATA_STRAY_CONVERSION_ID = SynchedEntityData.defineId(BoneSpider.class, EntityDataSerializers.BOOLEAN);
-	public static final String CONVERSION_TAG = "StrayConversionTime";
 	private int inPowderSnowTime;
 	private int conversionTime;
 
