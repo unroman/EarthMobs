@@ -19,6 +19,7 @@ public class BoulderingZombie extends Zombie {
 
 	public BoulderingZombie(EntityType<? extends BoulderingZombie> p_34271_, Level p_34272_) {
 		super(p_34271_, p_34272_);
+		this.xpReward = 5;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
