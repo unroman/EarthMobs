@@ -5,8 +5,11 @@ import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.entity.*;
 import baguchan.earthmobsmod.registry.ModBlocks;
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -17,7 +20,13 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
@@ -26,6 +35,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -55,21 +65,67 @@ public class CommonEvents {
 	}
 
 	@SubscribeEvent
+	public static void onRightClickBlock(BlockEvent.EntityPlaceEvent event) {
+
+	}
+
+	@SubscribeEvent
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 		ItemStack itemStack = event.getEntity().getItemInHand(event.getHand());
+		Level level = event.getEntity().level;
 		if (itemStack.getItem() instanceof ShearsItem && event.getEntity().level.getBlockState(event.getPos()).getBlock() == Blocks.MELON) {
 			Direction direction = event.getHitVec().getDirection();
 			if (direction != Direction.DOWN && direction != Direction.UP) {
 				itemStack.hurtAndBreak(1, event.getEntity(), (p_29910_) -> {
 					p_29910_.broadcastBreakEvent(event.getHand());
 				});
-				event.getEntity().level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-				event.getEntity().level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, direction), 2);
+				level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, direction), 2);
 
 				event.setUseItem(Event.Result.ALLOW);
 			}
 		}
+		if (event.getItemStack().is(Blocks.CARVED_PUMPKIN.asItem())) {
+			BlockPattern.BlockPatternMatch blockpattern$blockpatternmatch1 = getOrCreateFurnaceGolemBase().find(level, event.getPos().relative(event.getFace()));
+			if (blockpattern$blockpatternmatch1 != null) {
+				FurnaceGolem irongolem = ModEntities.FURNACE_GOLEM.get().create(level);
+				if (irongolem != null) {
+					spawnGolemInWorld(level, blockpattern$blockpatternmatch1, irongolem, blockpattern$blockpatternmatch1.getBlock(1, 2, 0).getPos());
+				}
+				if (!event.getEntity().isCreative()) {
+					event.getItemStack().shrink(1);
+				}
+				event.getEntity().swing(event.getHand());
+				event.setCanceled(true);
+			}
+
+		}
+	}
+
+	public static void clearPatternBlocks(Level p_249604_, BlockPattern.BlockPatternMatch p_251190_) {
+		for (int i = 0; i < p_251190_.getWidth(); ++i) {
+			for (int j = 0; j < p_251190_.getHeight(); ++j) {
+				BlockInWorld blockinworld = p_251190_.getBlock(i, j, 0);
+				p_249604_.setBlock(blockinworld.getPos(), Blocks.AIR.defaultBlockState(), 2);
+				p_249604_.levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
+			}
+		}
+
+	}
+
+	public static void updatePatternBlocks(Level p_248711_, BlockPattern.BlockPatternMatch p_251935_) {
+		for (int i = 0; i < p_251935_.getWidth(); ++i) {
+			for (int j = 0; j < p_251935_.getHeight(); ++j) {
+				BlockInWorld blockinworld = p_251935_.getBlock(i, j, 0);
+				p_248711_.blockUpdated(blockinworld.getPos(), Blocks.AIR);
+			}
+		}
+
+	}
+
+	private static BlockPattern getOrCreateFurnaceGolemBase() {
+		return BlockPatternBuilder.start().aisle("   ", "SFS", " # ").where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.IRON_BLOCK))).where('F', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.BLAST_FURNACE))).where('S', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.SMOOTH_STONE))).build();
 	}
 
 	@SubscribeEvent
@@ -123,4 +179,18 @@ public class CommonEvents {
 			}
 		});
 	}
+
+	private static void spawnGolemInWorld(Level p_249110_, BlockPattern.BlockPatternMatch p_251293_, Entity p_251251_, BlockPos p_251189_) {
+		clearPatternBlocks(p_249110_, p_251293_);
+		p_251251_.moveTo((double) p_251189_.getX() + 0.5D, (double) p_251189_.getY() + 0.05D, (double) p_251189_.getZ() + 0.5D, 0.0F, 0.0F);
+		p_249110_.addFreshEntity(p_251251_);
+
+		for (ServerPlayer serverplayer : p_249110_.getEntitiesOfClass(ServerPlayer.class, p_251251_.getBoundingBox().inflate(5.0D))) {
+			CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayer, p_251251_);
+		}
+
+		updatePatternBlocks(p_249110_, p_251293_);
+	}
+
+
 }

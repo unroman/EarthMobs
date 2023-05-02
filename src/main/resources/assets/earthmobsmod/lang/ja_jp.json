@@ -79,6 +79,7 @@
   "entity.earthmobsmod.viler_witch": "卑怯なウィッチ",
   "entity.earthmobsmod.baby_ghast": "ベビーガスト",
   "entity.earthmobsmod.melon_golem": "スイカゴーレム",
+  "entity.earthmobsmod.furnace_golem": "かまどゴーレム",
   "entity.earthmobsmod.smelly_egg": "キノコの生えた卵",
   "entity.earthmobsmod.fancy_egg": "派手な鶏の卵",
   "entity.earthmobsmod.duck_egg": "アヒルの卵",
@@ -124,5 +125,7 @@
   "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "スケルトンウルフがあえぐ",
   "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "スケルトンウルフが鳴く",
   "entity.earthmobsmod.baby_ghast.sit": "%1$sは待機中だ",
-  "entity.earthmobsmod.baby_ghast.standing": "%1$sはついてくるようだ"
+  "entity.earthmobsmod.baby_ghast.standing": "%1$sはついてくるようだ",
+  "death.attack.earthmobsmod.buring_attack": "%1$sは、燃えてしまった",
+  "death.attack.earthmobsmod.buring_attack.player": "%1$sは、%2$sによって、燃えてしまった"
 }

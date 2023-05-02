@@ -83,6 +83,7 @@
   "entity.earthmobsmod.viler_witch": "Viler Witch",
   "entity.earthmobsmod.baby_ghast": "Baby Ghast",
   "entity.earthmobsmod.melon_golem": "Melon Golem",
+  "entity.earthmobsmod.furnace_golem": "Furnace Golem",
   "entity.earthmobsmod.smelly_egg": "Smelly Egg",
   "entity.earthmobsmod.fancy_egg": "Fancy Egg",
   "entity.earthmobsmod.duck_egg": "Duck Egg",
@@ -128,5 +129,7 @@
   "subtitles.entity.earthmobsmod.skeleton_wolf.panting": "Skeleton Wolf Panting",
   "subtitles.entity.earthmobsmod.skeleton_wolf.whine": "Skeleton Wolf Whine",
   "entity.earthmobsmod.baby_ghast.sit": "%1$s is now sitting",
-  "entity.earthmobsmod.baby_ghast.standing": "%1$s is now standing"
+  "entity.earthmobsmod.baby_ghast.standing": "%1$s is now standing",
+  "death.attack.earthmobsmod.buring_attack": "%1$s was Burning",
+  "death.attack.earthmobsmod.buring_attack.player": "%1$s was burning by %2$s"
 }
