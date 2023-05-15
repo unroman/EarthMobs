@@ -68,7 +68,9 @@ public class ModItems {
 	public static final RegistryObject<Item> SKELETON_WOLF_SPAWNEGG = ITEMS.register("skeleton_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.SKELETON_WOLF, 12698049, 4802889, (new Item.Properties())));
 	public static final RegistryObject<Item> WITHER_SKELETON_WOLF_SPAWNEGG = ITEMS.register("wither_skeleton_wolf_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WITHER_SKELETON_WOLF, 1315860, 4672845, (new Item.Properties())));
 	public static final RegistryObject<Item> BABY_GHAST_SPAWNEGG = ITEMS.register("baby_ghast_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.BABY_GHAST, 0xFFFFFF, 0xFF9393, (new Item.Properties())));
-    public static final RegistryObject<Item> MAGMA_COW_SPAWNEGG = ITEMS.register("magma_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MAGMA_COW, 0x2C2C33, 0xFBAA59, (new Item.Properties())));
+	public static final RegistryObject<Item> MAGMA_COW_SPAWNEGG = ITEMS.register("magma_cow_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MAGMA_COW, 0x2C2C33, 0xFBAA59, (new Item.Properties())));
+	public static final RegistryObject<Item> MELON_GOLEM_SPAWNEGG = ITEMS.register("melon_golem_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MELON_GOLEM, 14283506, 0x34791E, (new Item.Properties())));
+	public static final RegistryObject<Item> FURNACE_GOLEM_SPAWNEGG = ITEMS.register("furnace_golem_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.FURNACE_GOLEM, 14405058, 0x8F5846, (new Item.Properties())));
 
 	@SubscribeEvent
 	public static void registerCreativeTabsItem(CreativeModeTabEvent.BuildContents event) {
@@ -98,8 +100,10 @@ public class ModItems {
 			event.accept(TROPICAL_SLIME_SPAWNEGG);
 			event.accept(SKELETON_WOLF_SPAWNEGG);
 			event.accept(VILER_WITCH_SPAWNEGG);
-            event.accept(WITHER_SKELETON_WOLF_SPAWNEGG);
-            event.accept(MAGMA_COW_SPAWNEGG);
+			event.accept(WITHER_SKELETON_WOLF_SPAWNEGG);
+			event.accept(MAGMA_COW_SPAWNEGG);
+			event.accept(MELON_GOLEM_SPAWNEGG);
+			event.accept(FURNACE_GOLEM_SPAWNEGG);
 		}
 		if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
 			event.accept(RUBY);

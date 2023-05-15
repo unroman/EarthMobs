@@ -140,6 +140,7 @@ public class FurnaceGolem extends AbstractGolem {
         if (p_36347_ instanceof Enemy && !(p_36347_ instanceof Creeper)) {
             if (p_36347_.isAttackable() && !this.isAlliedTo(p_36347_)) {
                 p_36347_.hurt(this.damageSources().source(ModDamageSource.BURNING, this), 6.0F);
+                p_36347_.setSecondsOnFire(5);
             }
         }
     }
