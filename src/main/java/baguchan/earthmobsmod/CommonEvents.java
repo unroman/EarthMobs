@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -71,32 +72,35 @@ public class CommonEvents {
 
 	@SubscribeEvent
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		ItemStack itemStack = event.getEntity().getItemInHand(event.getHand());
+		InteractionHand hand = event.getHand();
+		ItemStack itemStack = event.getEntity().getItemInHand(hand);
+		BlockPos pos = event.getPos();
+
 		Level level = event.getEntity().level;
-		if (itemStack.getItem() instanceof ShearsItem && event.getEntity().level.getBlockState(event.getPos()).getBlock() == Blocks.MELON) {
+		if (itemStack.getItem() instanceof ShearsItem && event.getEntity().level.getBlockState(pos).getBlock() == Blocks.MELON) {
 			Direction direction = event.getHitVec().getDirection();
 			if (direction != Direction.DOWN && direction != Direction.UP) {
 				itemStack.hurtAndBreak(1, event.getEntity(), (p_29910_) -> {
-					p_29910_.broadcastBreakEvent(event.getHand());
+					p_29910_.broadcastBreakEvent(hand);
 				});
-				level.playSound(null, event.getPos(), SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.playSound(null, pos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-				level.setBlock(event.getPos(), ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, direction), 2);
+				level.setBlock(pos, ModBlocks.CARVED_MELON.get().defaultBlockState().setValue(CarvedMelonBlock.FACING, direction), 2);
 
 				event.setUseItem(Event.Result.ALLOW);
 			}
 		}
-		if (event.getItemStack().is(Blocks.CARVED_PUMPKIN.asItem())) {
-			BlockPattern.BlockPatternMatch blockpattern$blockpatternmatch1 = getOrCreateFurnaceGolemBase().find(level, event.getPos().relative(event.getFace()));
+		if (itemStack.is(Blocks.CARVED_PUMPKIN.asItem())) {
+			BlockPattern.BlockPatternMatch blockpattern$blockpatternmatch1 = getOrCreateFurnaceGolemBase().find(level, pos.relative(event.getFace()));
 			if (blockpattern$blockpatternmatch1 != null) {
 				FurnaceGolem irongolem = ModEntities.FURNACE_GOLEM.get().create(level);
 				if (irongolem != null) {
 					spawnGolemInWorld(level, blockpattern$blockpatternmatch1, irongolem, blockpattern$blockpatternmatch1.getBlock(1, 2, 0).getPos());
 				}
 				if (!event.getEntity().isCreative()) {
-					event.getItemStack().shrink(1);
+					itemStack.shrink(1);
 				}
-				event.getEntity().swing(event.getHand());
+				event.getEntity().swing(hand);
 				event.setCanceled(true);
 			}
 
