@@ -5,6 +5,9 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,6 +22,9 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class ZombieFlesh extends ThrowableItemProjectile {
+	private static final EntityDataAccessor<Boolean> DATA_DROWNED = SynchedEntityData.defineId(ZombieFlesh.class, EntityDataSerializers.BOOLEAN);
+
+
 	public ZombieFlesh(EntityType<? extends ZombieFlesh> p_37391_, Level p_37392_) {
 		super(p_37391_, p_37392_);
 	}
@@ -52,14 +58,25 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(DATA_DROWNED, false);
+	}
+
+	public void setDrowned(boolean flag) {
+		this.entityData.set(DATA_DROWNED, flag);
+	}
+
+	public boolean isDrowned() {
+		return this.entityData.get(DATA_DROWNED);
 	}
 
 	public void addAdditionalSaveData(CompoundTag p_36881_) {
 		super.addAdditionalSaveData(p_36881_);
+		p_36881_.putBoolean("Drowned", this.isDrowned());
 	}
 
 	public void readAdditionalSaveData(CompoundTag p_36875_) {
 		super.readAdditionalSaveData(p_36875_);
+		this.setDrowned(p_36875_.getBoolean("Drowned"));
 	}
 
 	protected void onHitEntity(EntityHitResult p_37404_) {
@@ -79,5 +96,19 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 			this.discard();
 		}
 
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (this.isInWater() && this.isDrowned()) {
+			this.setDeltaMovement(this.getDeltaMovement().scale(1.125F));
+		}
+	}
+
+	@Override
+	protected float getGravity() {
+		return this.isInWater() && this.isDrowned() ? 0.01F : super.getGravity();
 	}
 }

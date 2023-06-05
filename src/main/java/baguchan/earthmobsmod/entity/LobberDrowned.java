@@ -76,7 +76,8 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 			double d1 = p_29912_.getX() - this.getX();
 			double d3 = p_29912_.getZ() - this.getZ();
 			double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double) 0.1F;
-			zombieFlesh.shoot(d1, d0 + d4, d3, 0.9F, 0.4F);
+			zombieFlesh.shoot(d1, d0 + d4, d3, 0.9F, this.isUnderWater() ? 0.5F : 0.1F);
+			zombieFlesh.setDrowned(true);
 			this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 			this.level.addFreshEntity(zombieFlesh);
 			this.swing(InteractionHand.MAIN_HAND);
