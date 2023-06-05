@@ -110,6 +110,7 @@ public class EarthBiomeModifier implements BiomeModifier {
 				if (EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get() > 0) {
 					if (biome.is(Biomes.DRIPSTONE_CAVES)) {
 						builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BOULDERING_DROWNED.get(), EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get(), 4, 4));
+						builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(ModEntities.BOULDERING_ZOMBIE.get(), EarthMobsConfig.COMMON.boulderingZombieSpawnRate.get(), 4, 4));
 					}
 				}
 
