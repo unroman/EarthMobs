@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity;
 
 import baguchan.earthmobsmod.entity.goal.GoToWaterGoal;
+import baguchan.earthmobsmod.entity.goal.RangedAndMeleeAttack;
 import baguchan.earthmobsmod.entity.projectile.ZombieFlesh;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MoveThroughVillageGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -44,7 +44,7 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 
 	protected void addBehaviourGoals() {
 		this.goalSelector.addGoal(1, new GoToWaterGoal(this, 1.0D));
-		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 6.5F));
+		this.goalSelector.addGoal(2, new RangedAndMeleeAttack(this, 1.0D, 40, 6.5F));
 		this.goalSelector.addGoal(6, new MoveThroughVillageGoal(this, 1.0D, true, 4, this::canBreakDoors));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(ZombifiedPiglin.class));
@@ -76,7 +76,7 @@ public class LobberDrowned extends Drowned implements RangedAttackMob {
 			double d1 = p_29912_.getX() - this.getX();
 			double d3 = p_29912_.getZ() - this.getZ();
 			double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double) 0.1F;
-			zombieFlesh.shoot(d1, d0 + d4, d3, 0.9F, this.isUnderWater() ? 0.5F : 0.1F);
+			zombieFlesh.shoot(d1, d0 + d4, d3, 0.9F, this.isUnderWater() ? 0.85F : 0.1F);
 			zombieFlesh.setDrowned(true);
 			this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 			this.level.addFreshEntity(zombieFlesh);

@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.entity;
 
+import baguchan.earthmobsmod.entity.goal.RangedAndMeleeAttack;
 import baguchan.earthmobsmod.entity.projectile.BoneShard;
 import baguchan.earthmobsmod.registry.ModEntities;
 import baguchan.earthmobsmod.registry.ModSounds;
@@ -15,7 +16,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Spider;
@@ -47,9 +51,15 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 
 	@Override
 	protected void registerGoals() {
-		super.registerGoals();
-		this.goalSelector.addGoal(2, new BoneSpiderAttackGoal(this));
-	}
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(4, new BoneSpiderAttackGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new SpiderTargetGoal<>(this, Player.class));
+        this.targetSelector.addGoal(3, new SpiderTargetGoal<>(this, IronGolem.class));
+    }
 
 	public boolean isFreezeConverting() {
 		return this.getEntityData().get(DATA_STRAY_CONVERSION_ID);
@@ -135,96 +145,41 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		return true;
 	}
 
-	static class BoneSpiderAttackGoal extends Goal {
-		private final BoneSpider spider;
-		private int attackStep;
-		private int attackTime;
-		private int lastSeen;
+    static class BoneSpiderAttackGoal extends RangedAndMeleeAttack {
+        private final BoneSpider spider;
 
-		public BoneSpiderAttackGoal(BoneSpider p_32247_) {
-			this.spider = p_32247_;
-			this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-		}
+        public BoneSpiderAttackGoal(BoneSpider p_32247_) {
+            super(p_32247_, 1.0F, 40, 80, 14);
+            this.spider = p_32247_;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        }
 
-		public boolean canUse() {
-			LivingEntity livingentity = this.spider.getTarget();
-			return livingentity != null && livingentity.isAlive() && this.spider.canAttack(livingentity);
-		}
+        public void tick() {
+            super.tick();
+            if (this.attackTime == 15) {
+                this.spider.playSound(ModSounds.BONE_SPIDER_SPIT.get(), this.spider.getSoundVolume(), 0.4F / (this.spider.getRandom().nextFloat() * 0.4F + 0.8F));
+            }
+        }
 
-		public void start() {
-			this.attackStep = 0;
-		}
+        @Override
+        public boolean canUse() {
+            return super.canUse();
+        }
 
-		public void stop() {
-			this.lastSeen = 0;
-		}
+        public boolean canContinueToUse() {
+            float f = this.mob.getLightLevelDependentMagicValue();
+            if (f >= 0.5F && this.mob.getRandom().nextInt(100) == 0) {
+                this.mob.setTarget((LivingEntity) null);
+                return false;
+            } else {
+                return super.canContinueToUse();
+            }
+        }
 
-		public void tick() {
-			--this.attackTime;
-			LivingEntity livingentity = this.spider.getTarget();
-			if (livingentity != null) {
-				boolean flag = this.spider.getSensing().hasLineOfSight(livingentity);
-				if (flag) {
-					this.lastSeen = 0;
-				} else {
-					++this.lastSeen;
-				}
-
-				double d0 = this.spider.distanceToSqr(livingentity);
-				if (d0 < 32.0D) {
-					if (!flag) {
-						return;
-					}
-					this.attackStep = 0;
-
-					if (d0 < 4.0D + this.spider.getBbWidth() && this.attackTime <= 0) {
-						this.attackTime = 20;
-						this.spider.doHurtTarget(livingentity);
-					}
-
-					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
-				} else if (d0 < this.getFollowDistance() * this.getFollowDistance() && flag) {
-					if (this.attackStep == 1) {
-						if (this.attackTime == 15) {
-							this.spider.playSound(ModSounds.BONE_SPIDER_SPIT.get(), this.spider.getSoundVolume(), 0.4F / (this.spider.getRandom().nextFloat() * 0.4F + 0.8F));
-						}
-					}
-					if (this.attackTime <= 0) {
-						++this.attackStep;
-						if (this.attackStep == 1) {
-							this.attackTime = 30;
-						} else if (this.attackStep <= 3) {
-							this.attackTime = 15;
-							if (this.attackStep <= 2) {
-								this.spider.playSound(ModSounds.BONE_SPIDER_SPIT.get(), this.spider.getSoundVolume(), 0.4F / (this.spider.getRandom().nextFloat() * 0.4F + 0.8F));
-							}
-						} else {
-							this.attackTime = 10;
-							this.attackStep = 0;
-						}
-
-						if (this.attackStep > 1) {
-							double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
-
-							this.spider.performRangedAttack(livingentity, attackTime);
-						}
-					}
-
-					this.spider.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-					this.spider.getNavigation().stop();
-				} else if (this.lastSeen < 5) {
-					this.spider.getNavigation().moveTo(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.0F);
-				}
-
-				super.tick();
-			}
-		}
-
-		private double getFollowDistance() {
-			return this.spider.getAttributeValue(Attributes.FOLLOW_RANGE);
-		}
-	}
+        protected double getAttackReachSqr(LivingEntity p_33825_) {
+            return (double) (4.0F + p_33825_.getBbWidth());
+        }
+    }
 
 	public void performRangedAttack(LivingEntity p_29912_, float p_29913_) {
 		BoneShard bone = new BoneShard(this.level, this);
@@ -235,14 +190,25 @@ public class BoneSpider extends Spider implements RangedAttackMob {
 		Collection<MobEffectInstance> collection = this.getActiveEffects();
 		if (!collection.isEmpty()) {
 			for (MobEffectInstance mobEffectInstance : this.getActiveEffects()) {
-				bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 4, 0));
-			}
-		}
-		this.level.addFreshEntity(bone);
-	}
+                bone.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 4, 0));
+            }
+        }
+        this.level.addFreshEntity(bone);
+    }
 
-	@Override
-	public float getScale() {
-		return this.isBaby() ? 0.6F : 1.0F;
-	}
+    @Override
+    public float getScale() {
+        return this.isBaby() ? 0.6F : 1.0F;
+    }
+
+    static class SpiderTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
+        public SpiderTargetGoal(Spider p_33832_, Class<T> p_33833_) {
+            super(p_33832_, p_33833_, true);
+        }
+
+        public boolean canUse() {
+            float f = this.mob.getLightLevelDependentMagicValue();
+            return f >= 0.5F ? false : super.canUse();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package baguchan.earthmobsmod.entity.projectile;
 
 import baguchan.earthmobsmod.registry.ModEntities;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -9,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,8 +20,9 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class ZombieFlesh extends ThrowableItemProjectile {
 	private static final EntityDataAccessor<Boolean> DATA_DROWNED = SynchedEntityData.defineId(ZombieFlesh.class, EntityDataSerializers.BOOLEAN);
@@ -82,20 +85,49 @@ public class ZombieFlesh extends ThrowableItemProjectile {
 	protected void onHitEntity(EntityHitResult p_37404_) {
 		super.onHitEntity(p_37404_);
 		Entity entity = p_37404_.getEntity();
+		Vec3 projectileMovement = this.getDeltaMovement();
 
-		if (entity instanceof LivingEntity && entity.hurt(this.damageSources().thrown(this, this.getOwner()), 3)) {
-			((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.HUNGER, 60), entity);
+		int damage = Mth.ceil((3 * projectileMovement.length()));
+		if (damage > 0) {
+			if (entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage)) {
+
+				if (!this.level.isClientSide) {
+					this.level.broadcastEntityEvent(this, (byte) 3);
+					this.playSound(SoundEvents.SLIME_BLOCK_BREAK, 0.4F, 1.0F);
+					this.discard();
+				}
+				if (entity instanceof LivingEntity living) {
+					(living).addEffect(new MobEffectInstance(MobEffects.HUNGER, 60), entity);
+				}
+			} else {
+				this.setDeltaMovement(projectileMovement.multiply(-0.8, -0.8, -0.8));
+			}
+		} else {
+			this.setDeltaMovement(projectileMovement.multiply(-0.8, -0.8, -0.8));
 		}
 	}
 
-	protected void onHit(HitResult p_37488_) {
-		super.onHit(p_37488_);
-		if (!this.level.isClientSide) {
-			this.level.broadcastEntityEvent(this, (byte) 3);
+	@Override
+	protected void onHitBlock(BlockHitResult blockHitResult) {
+		super.onHitBlock(blockHitResult);
+		Vec3 projectileMovement = this.getDeltaMovement();
+		if (projectileMovement.length() > 0.3) {
+			Vec3i direction = blockHitResult.getDirection().getNormal();
+			switch (blockHitResult.getDirection()) {
+				case UP, SOUTH, EAST:
+					direction = direction.multiply(-1);
+				default:
+			}
+			direction = new Vec3i(direction.getX() == 0 ? 1 : direction.getX(), direction.getY() == 0 ? 1 : direction.getY(), direction.getZ() == 0 ? 1 : direction.getZ());
+			this.setDeltaMovement(projectileMovement.multiply(new Vec3(direction.getX(), direction.getY(), direction.getZ())).multiply(0.75, 0.65, 0.75));
 			this.playSound(SoundEvents.SLIME_BLOCK_BREAK, 0.4F, 1.0F);
-			this.discard();
+		} else {
+			if (!this.level.isClientSide) {
+				this.level.broadcastEntityEvent(this, (byte) 3);
+				this.playSound(SoundEvents.SLIME_BLOCK_BREAK, 0.4F, 1.0F);
+				this.discard();
+			}
 		}
-
 	}
 
 	@Override

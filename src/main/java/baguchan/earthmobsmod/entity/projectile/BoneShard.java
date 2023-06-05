@@ -13,6 +13,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -26,6 +27,8 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -142,43 +145,50 @@ public class BoneShard extends ThrowableItemProjectile {
 	public void readAdditionalSaveData(CompoundTag p_36875_) {
 		super.readAdditionalSaveData(p_36875_);
 		if (p_36875_.contains("Potion", 8)) {
-			this.potion = PotionUtils.getPotion(p_36875_);
-		}
+            this.potion = PotionUtils.getPotion(p_36875_);
+        }
 
-		for (MobEffectInstance mobeffectinstance : PotionUtils.getCustomEffects(p_36875_)) {
-			this.addEffect(mobeffectinstance);
-		}
+        for (MobEffectInstance mobeffectinstance : PotionUtils.getCustomEffects(p_36875_)) {
+            this.addEffect(mobeffectinstance);
+        }
 
-		this.updateColor();
-	}
+        this.updateColor();
+    }
 
-	protected ItemStack getPickupItem() {
-		if (this.effects.isEmpty() && this.potion == Potions.EMPTY) {
-			return new ItemStack(ModItems.BONE_SHARD.get());
-		} else {
-			ItemStack itemstack = new ItemStack(ModItems.BONE_SHARD.get());
-			PotionUtils.setPotion(itemstack, this.potion);
-			PotionUtils.setCustomEffects(itemstack, this.effects);
+    @Nullable
+    @Override
+    public ItemStack getPickResult() {
+        if (this.effects.isEmpty() && this.potion == Potions.EMPTY) {
+            return new ItemStack(ModItems.BONE_SHARD.get());
+        } else {
+            ItemStack itemstack = new ItemStack(ModItems.BONE_SHARD.get());
+            PotionUtils.setPotion(itemstack, this.potion);
+            PotionUtils.setCustomEffects(itemstack, this.effects);
 
-			return itemstack;
-		}
-	}
+            return itemstack;
+        }
+    }
 
 	protected void onHitEntity(EntityHitResult p_37404_) {
-		Entity entity = p_37404_.getEntity();
-		if (entity.hurt(this.damageSources().thrown(this, this.getOwner()), 2)) {
+        Entity entity = p_37404_.getEntity();
+        Vec3 projectileMovement = this.getDeltaMovement();
 
-			if (entity instanceof LivingEntity) {
-				for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
-					((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
-				}
+        int damage = Mth.ceil((3 * projectileMovement.length()));
+        if (damage > 0) {
+            if (entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage)) {
 
-				if (!this.effects.isEmpty()) {
-					for (MobEffectInstance mobeffectinstance1 : this.effects) {
-						((LivingEntity) entity).addEffect(mobeffectinstance1, entity);
-					}
-				}
-			}
+                if (entity instanceof LivingEntity) {
+                    for (MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
+                        ((LivingEntity) entity).addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
+                    }
+
+                    if (!this.effects.isEmpty()) {
+                        for (MobEffectInstance mobeffectinstance1 : this.effects) {
+                            ((LivingEntity) entity).addEffect(mobeffectinstance1, entity);
+                        }
+                    }
+                }
+            }
 		}
 	}
 
