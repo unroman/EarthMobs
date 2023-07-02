@@ -23,8 +23,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.TropicalFish;
@@ -38,8 +36,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
-import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 
@@ -76,11 +72,6 @@ public class TropicalSlime extends Slime implements Bucketable {
 			return Math.abs(p_33641_.getY() - this.getY()) <= 4.0D;
 		}));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-	}
-
-	@Override
-	protected PathNavigation createNavigation(Level p_21480_) {
-		return new TropicalPathNavigation(this, p_21480_);
 	}
 
 	@Override
@@ -368,7 +359,6 @@ public class TropicalSlime extends Slime implements Bucketable {
 
 		public SlimeKeepOnJumpingGoal(Slime p_33660_) {
 			this.slime = p_33660_;
-			this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
 		}
 
 		public boolean canUse() {
@@ -380,28 +370,9 @@ public class TropicalSlime extends Slime implements Bucketable {
 		}
 	}
 
-	static class TropicalPathNavigation extends WaterBoundPathNavigation {
-		TropicalPathNavigation(TropicalSlime p_30294_, Level p_30295_) {
-			super(p_30294_, p_30295_);
-		}
-
-		protected boolean canUpdatePath() {
-			return true;
-		}
-
-		protected PathFinder createPathFinder(int p_30298_) {
-			this.nodeEvaluator = new AmphibiousNodeEvaluator(false);
-			return new PathFinder(this.nodeEvaluator, p_30298_);
-		}
-
-		public boolean isStableDestination(BlockPos p_30300_) {
-			return !this.level.getBlockState(p_30300_.below()).isAir();
-		}
-	}
-
 	public void travel(Vec3 p_32394_) {
 		if (this.isEffectiveAi() && this.isInWater()) {
-			this.moveRelative(0.01F, p_32394_);
+			this.moveRelative(this.getSpeed(), p_32394_);
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
 		} else {
@@ -437,26 +408,36 @@ public class TropicalSlime extends Slime implements Bucketable {
 		}
 
 		public void tick() {
+			this.mob.setDeltaMovement(this.mob.getDeltaMovement().add(0.0D, -0.008D, 0.0D));
+
+
 			this.mob.setYRot(this.rotlerp(this.mob.getYRot(), this.yRot, 90.0F));
 			this.mob.yHeadRot = this.mob.getYRot();
 			this.mob.yBodyRot = this.mob.getYRot();
 			if (this.operation != MoveControl.Operation.MOVE_TO) {
+				this.mob.setSpeed(0.0F);
 				this.mob.setZza(0.0F);
 			} else {
 				this.operation = MoveControl.Operation.WAIT;
-				if (this.slime.isInWater() && !this.mob.onGround()) {
+				if (this.mob.isInWater() && !this.mob.onGround()) {
+
 
 					float f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
 
 					double d1 = this.wantedY - this.mob.getY();
+					boolean flag = d1 < 0.0D && this.mob.getTarget() != null;
 					//add Y movement
-					if (Math.abs(d1) > (double) 1.0E-5F) {
-						this.mob.setYya(d1 > 0.0D ? Mth.lerp(2.0F, this.slime.getSpeed(), f1) : -Mth.lerp(2.0F, this.slime.getSpeed(), f1));
-					}
-					this.slime.setSpeed(Mth.lerp(2.0F, this.slime.getSpeed(), f1));
 
+					float f2 = Mth.lerp(0.125F, this.mob.getSpeed(), f1);
+					this.mob.setSpeed(f2);
+					if (flag) {
+						if (Math.abs(d1) > (double) 1.0E-5F) {
+							this.mob.setYya(f2 * 3F);
+						}
+					}
 				} else if (this.mob.onGround()) {
 					this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+
 					if (this.jumpDelay-- <= 0) {
 						this.jumpDelay = this.slime.getJumpDelay();
 						if (this.isAggressive) {
@@ -469,7 +450,7 @@ public class TropicalSlime extends Slime implements Bucketable {
 						}
 					} else {
 						this.slime.xxa = 0.0F;
-						this.slime.zza = 0.0F;
+						this.mob.setZza(0.0F);
 						this.mob.setSpeed(0.0F);
 					}
 				} else {
