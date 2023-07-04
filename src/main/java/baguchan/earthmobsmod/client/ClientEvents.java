@@ -99,11 +99,11 @@ public class ClientEvents {
                     posestack.mulPose(Axis.YP.rotationDegrees(180.0F - f));
                 }
 
-                //renderer.setupRotations(entity, posestack, f7, f, partialtick);
+                renderer.setupRotations(entity, posestack, f7, f, partialtick);
 
-                posestack.scale(-1.0F, -1.0F, 1.0F);
-                //renderer.scale(entity, posestack, partialtick);
-                posestack.translate(0.0F, (double) -1.501F, 0.0F);
+				posestack.scale(-1.0F, -1.0F, 1.0F);
+				renderer.scale(entity, posestack, partialtick);
+				posestack.translate(0.0F, (double) -1.501F, 0.0F);
 
 
                 float f8 = 0.0F;

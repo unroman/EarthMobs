@@ -93,18 +93,16 @@ public class HyperRabbit extends Rabbit {
 
 	protected void dealDamage(LivingEntity livingentity) {
 		if (this.isAlive() && isSpark() && !this.isAlliedTo(livingentity)) {
-			boolean flag = livingentity.isDamageSourceBlocked(this.damageSources().mobAttack(this));
-            float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
+			boolean flag = livingentity.isDamageSourceBlocked(this.damageSources().indirectMagic(this, this));
+			float f1 = (float) Mth.clamp(livingentity.getDeltaMovement().horizontalDistanceSqr() * 1.15F, 0.2F, 3.0F);
 			float f2 = flag ? 0.25F : 1.0F;
-			int i = getVariant() == Variant.EVIL ? 2 : 1;
+			float i = getVariant() == Variant.EVIL ? 1.5F : 1F;
 			double d1 = this.getX() - livingentity.getX();
 			double d2 = this.getZ() - livingentity.getZ();
-			if (!flag) {
-                if (livingentity.hurt(this.damageSources().mobAttack(this), 3.0F * i)) {
-                    this.playSound(SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-                    this.doEnchantDamageEffects(this, livingentity);
-                    livingentity.knockback(f2 * f1, d1, d2);
-                }
+			if (livingentity.hurt(this.damageSources().indirectMagic(this, this), 2.0F * i)) {
+				this.playSound(SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				this.doEnchantDamageEffects(this, livingentity);
+				livingentity.knockback(f2 * f1, d1, d2);
 			}
 		}
 	}
