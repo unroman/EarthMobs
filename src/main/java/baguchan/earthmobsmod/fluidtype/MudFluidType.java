@@ -56,8 +56,8 @@ public class MudFluidType extends FluidType {
 		super.initializeClient(consumer);
 		consumer.accept(new IClientFluidTypeExtensions() {
 			private static final ResourceLocation TEXTURE_STILL = new ResourceLocation(EarthMobsMod.MODID, "block/mud");
-			private static final ResourceLocation TEXTURE_FLOW = new ResourceLocation(EarthMobsMod.MODID, "block/flow_mud");
-			private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(EarthMobsMod.MODID, "textures/block/mud.png");
+            private static final ResourceLocation TEXTURE_FLOW = new ResourceLocation(EarthMobsMod.MODID, "block/flowing_mud");
+            private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(EarthMobsMod.MODID, "textures/block/mud.png");
 
 			@Override
 			public ResourceLocation getStillTexture() {

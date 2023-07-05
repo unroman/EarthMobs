@@ -22,7 +22,7 @@ public class BlockstateGenerator extends BlockStateProvider {
         this.crossBlock(ModBlocks.PINK_DAISY.get());
         this.horizontalBlock(ModBlocks.CARVED_MELON.get(), new ResourceLocation("minecraft:block/melon_side"), new ResourceLocation(EarthMobsMod.MODID, "block/carved_melon"), new ResourceLocation("minecraft:block/melon_top"));
         this.horizontalBlock(ModBlocks.CARVED_MELON_SHOOT.get(), new ResourceLocation("minecraft:block/melon_side"), new ResourceLocation(EarthMobsMod.MODID, "block/carved_melon_shoot"), new ResourceLocation("minecraft:block/melon_top"));
-        this.cubeAll(ModBlocks.RUBY.get());
+        this.simpleBlock(ModBlocks.RUBY.get());
     }
 
 
