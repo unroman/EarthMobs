@@ -98,12 +98,12 @@ public class SkeletonWolf extends Wolf {
 					return InteractionResult.PASS;
 				}
 
-			} else if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH)) && !this.isAngry()) {
+			} else if ((itemstack.is(Tags.Items.BONES) || itemstack.is(Items.ROTTEN_FLESH))) {
 				if (!p_30412_.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
 
-				if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_30412_)) {
+				if (this.random.nextInt(4) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_30412_)) {
 					this.tame(p_30412_);
 					this.navigation.stop();
 					this.setTarget((LivingEntity) null);
