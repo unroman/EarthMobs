@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-public class CluckShroom extends Chicken implements Shearable, net.minecraftforge.common.IForgeShearable {
+public class CluckShroom extends Chicken implements Shearable, net.minecraftforge.common.IForgeShearable, IPlantMob {
 	private static final EntityDataAccessor<String> DATA_TYPE = SynchedEntityData.defineId(CluckShroom.class, EntityDataSerializers.STRING);
 
 	private UUID lastLightningBoltUUID;
@@ -176,6 +176,11 @@ public class CluckShroom extends Chicken implements Shearable, net.minecraftforg
 	@Override
 	public boolean isShearable(@javax.annotation.Nonnull ItemStack item, Level world, BlockPos pos) {
 		return readyForShearing();
+	}
+
+	@Override
+	public Block getPlant() {
+		return this.getCluckShroomType().blockState.getBlock();
 	}
 
 	public static enum CluckShroomType {

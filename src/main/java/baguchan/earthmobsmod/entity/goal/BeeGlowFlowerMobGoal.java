@@ -1,7 +1,7 @@
 package baguchan.earthmobsmod.entity.goal;
 
-import baguchan.earthmobsmod.entity.IFlowerCow;
 import baguchan.earthmobsmod.entity.IHasFlower;
+import baguchan.earthmobsmod.entity.IPlantMob;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 
 public class BeeGlowFlowerMobGoal extends Goal {
     public static final Predicate<LivingEntity> FLOWER_MOB_SELECTOR = (p_30437_) -> {
-        return p_30437_ instanceof IHasFlower && p_30437_ instanceof IFlowerCow && ((IHasFlower) p_30437_).hasFlower();
+        return p_30437_ instanceof IPlantMob && (!(p_30437_ instanceof IHasFlower) || p_30437_ instanceof IHasFlower && ((IHasFlower) p_30437_).hasFlower());
     };
     private final Bee bee;
 
@@ -51,10 +51,10 @@ public class BeeGlowFlowerMobGoal extends Goal {
                     int y = optional.get().getBlockY() + this.bee.getRandom().nextInt(6) - this.bee.getRandom().nextInt(3);
                     int z = optional.get().getBlockZ() + this.bee.getRandom().nextInt(6) - this.bee.getRandom().nextInt(3);
                     BlockPos blockPos = new BlockPos(x, y, z);
-                    if (optional.get() instanceof IFlowerCow flowerCow) {
-                        if (flowerCow.getFlower().canSurvive(flowerCow.getFlower().defaultBlockState(), this.bee.level(), blockPos)) {
+                    if (optional.get() instanceof IPlantMob flowerCow) {
+                        if (flowerCow.getPlant().canSurvive(flowerCow.getPlant().defaultBlockState(), this.bee.level(), blockPos)) {
                             if (this.bee.level().getBlockState(blockPos).isAir()) {
-                                this.bee.level().setBlock(blockPos, flowerCow.getFlower().defaultBlockState(), 3);
+                                this.bee.level().setBlock(blockPos, flowerCow.getPlant().defaultBlockState(), 3);
                             }
                         }
                     }
