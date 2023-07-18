@@ -1,9 +1,9 @@
 package baguchan.earthmobsmod.client.render;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.client.ModModelLayers;
 import baguchan.earthmobsmod.client.model.WoolyCowModel;
 import baguchan.earthmobsmod.entity.WoolyCow;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ public class WoolyCowRenderer<T extends WoolyCow> extends MobRenderer<T, WoolyCo
 
 
 	public WoolyCowRenderer(EntityRendererProvider.Context p_173952_) {
-		super(p_173952_, new WoolyCowModel<>(p_173952_.bakeLayer(ModModelLayers.WOOLY_COW)), 0.5F);
+		super(p_173952_, new WoolyCowModel<>(p_173952_.bakeLayer(ModelLayers.COW)), 0.5F);
 	}
 
 
