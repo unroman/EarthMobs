@@ -160,7 +160,7 @@ public class EarthBiomeModifier implements BiomeModifier {
 
 		if (EarthMobsConfig.COMMON.magmaCowSpawnRate.get() > 0) {
 			if (biome.is(Biomes.BASALT_DELTAS)) {
-				builder.getMobSpawnSettings().getSpawner(ModEntities.BASALT_ANIMAL).add(new MobSpawnSettings.SpawnerData(ModEntities.MAGMA_COW.get(), EarthMobsConfig.COMMON.magmaCowSpawnRate.get(), 3, 4));
+				builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.MAGMA_COW.get(), EarthMobsConfig.COMMON.magmaCowSpawnRate.get(), 3, 4));
 			}
 		}
 
