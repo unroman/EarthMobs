@@ -1,5 +1,6 @@
 package baguchan.earthmobsmod.mixin;
 
+import baguchan.earthmobsmod.entity.goal.BeeGlowFlowerMobGoal;
 import baguchan.earthmobsmod.entity.goal.BeePollinateFlowerMobGoal;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
@@ -29,7 +30,8 @@ public abstract class BeeMixin extends Animal {
 			method = "registerGoals"
 	)
 	protected void registerGoals(CallbackInfo callbackInfo) {
-		beePollinateGoal = new BeePollinateFlowerMobGoal((Bee) (Object) this);
+        this.goalSelector.addGoal(0, new BeeGlowFlowerMobGoal((Bee) (Object) this));
+        beePollinateGoal = new BeePollinateFlowerMobGoal((Bee) (Object) this);
 
 		this.goalSelector.addGoal(3, beePollinateGoal);
 	}
