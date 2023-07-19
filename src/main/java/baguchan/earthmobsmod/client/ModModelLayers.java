@@ -13,8 +13,9 @@ public class ModModelLayers {
     public static ModelLayerLocation JUMBO_RABBIT = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "jumbo_rabbit"), "jumbo_rabbit");
 
     public static ModelLayerLocation TEACUP_PIG = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "teacup_pig"), "teacup_pig");
-
     public static ModelLayerLocation MUDDY_PIG = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "muddy_pig"), "muddy_pig");
+    public static ModelLayerLocation JOLLY_LLAMA = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "jolly_llama"), "jolly_llama");
+
 
     public static ModelLayerLocation BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bone_spider"), "bone_spider");
     public static ModelLayerLocation STRAY_BONE_SPIDER = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "stray_bone_spider"), "stray_bone_spider");
@@ -23,7 +24,7 @@ public class ModModelLayers {
     public static ModelLayerLocation BABY_GHAST_CORE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "baby_ghast_core"), "baby_ghast_core");
 
 
-	public static ModelLayerLocation BOULDERING_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_zombie"), "bouldering_zombie");
+    public static ModelLayerLocation BOULDERING_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_zombie"), "bouldering_zombie");
 	public static ModelLayerLocation LOBBER_ZOMBIE = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "lobber_zombie"), "lobber_zombie");
 
 	public static ModelLayerLocation BOULDERING_DROWNED = new ModelLayerLocation(new ResourceLocation(EarthMobsMod.MODID, "bouldering_drowned"), "bouldering_drowned");

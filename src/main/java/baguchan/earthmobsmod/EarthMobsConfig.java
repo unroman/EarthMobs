@@ -22,6 +22,7 @@ public class EarthMobsConfig {
         public final ForgeConfigSpec.IntValue cluckshroomSpawnRate;
         public final ForgeConfigSpec.IntValue fancyChickenSpawnRate;
         public final ForgeConfigSpec.IntValue duckSpawnRate;
+        public final ForgeConfigSpec.IntValue jollyLLamaSpawnRate;
         public final ForgeConfigSpec.IntValue hornedSheepSpawnRate;
         public final ForgeConfigSpec.IntValue boneSpiderSpawnRate;
         public final ForgeConfigSpec.IntValue strayBoneSpiderSpawnRate;
@@ -70,16 +71,19 @@ public class EarthMobsConfig {
             duckSpawnRate = builder
                     .comment("Changed Duck SpawnRate. [0 ~ 100]")
                     .defineInRange("Duck SpawnRate", 8, 0, 100);
+            jollyLLamaSpawnRate = builder
+                    .comment("Changed Jolly LLama SpawnRate. [0 ~ 100]")
+                    .defineInRange("Jolly Llama SpawnRate", 5, 0, 100);
             hornedSheepSpawnRate = builder
-					.comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
-					.defineInRange("Horned Sheep SpawnRate", 10, 0, 100);
-			hyperRabbitSpawnRate = builder
-					.comment("Changed Hyper Rabbit SpawnRate. [0 ~ 100]")
-					.defineInRange("Hyper Rabbit SpawnRate", 5, 0, 100);
-			moobloomSpawnRate = builder
-					.comment("Changed Moobloom SpawnRate. [0 ~ 100]")
-					.defineInRange("Moobloom SpawnRate", 10, 0, 100);
-			moolipSpawnRate = builder
+                    .comment("Changed Horned Sheep SpawnRate. [0 ~ 100]")
+                    .defineInRange("Horned Sheep SpawnRate", 10, 0, 100);
+            hyperRabbitSpawnRate = builder
+                    .comment("Changed Hyper Rabbit SpawnRate. [0 ~ 100]")
+                    .defineInRange("Hyper Rabbit SpawnRate", 5, 0, 100);
+            moobloomSpawnRate = builder
+                    .comment("Changed Moobloom SpawnRate. [0 ~ 100]")
+                    .defineInRange("Moobloom SpawnRate", 10, 0, 100);
+            moolipSpawnRate = builder
 					.comment("Changed Moolip SpawnRate. [0 ~ 100]")
 					.defineInRange("Moolip SpawnRate", 10, 0, 100);
 			jumboRabbitSpawnRate = builder

@@ -36,13 +36,19 @@ public class EarthBiomeModifier implements BiomeModifier {
 
 			if (EarthMobsConfig.COMMON.duckSpawnRate.get() > 0) {
 				if (biome.is(Tags.Biomes.IS_PLAINS) && !biome.is(Tags.Biomes.IS_COLD) && !biome.is(Tags.Biomes.IS_HOT) || biome.is(Tags.Biomes.IS_SWAMP) || biome.is(Biomes.RIVER)) {
-					builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.DUCK.get(), EarthMobsConfig.COMMON.duckSpawnRate.get(), 3, 6));
-				}
-			}
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.DUCK.get(), EarthMobsConfig.COMMON.duckSpawnRate.get(), 3, 6));
+                }
+            }
 
-			if (EarthMobsConfig.COMMON.woolyCowSpawnRate.get() > 0) {
-				if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD) || biome.is(Tags.Biomes.IS_COLD)) {
+            if (EarthMobsConfig.COMMON.woolyCowSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD) || biome.is(Tags.Biomes.IS_COLD)) {
                     builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.COMMON.woolyCowSpawnRate.get(), 3, 6));
+                }
+            }
+
+            if (EarthMobsConfig.COMMON.jollyLLamaSpawnRate.get() > 0) {
+                if (biome.is(Tags.Biomes.IS_MOUNTAIN) && biome.is(Tags.Biomes.IS_COLD)) {
+                    builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ModEntities.WOOLY_COW.get(), EarthMobsConfig.COMMON.jollyLLamaSpawnRate.get(), 4, 6));
                 }
             }
 

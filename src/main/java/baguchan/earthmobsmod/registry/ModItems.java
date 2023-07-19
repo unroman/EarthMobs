@@ -55,6 +55,7 @@ public class ModItems {
 	public static final RegistryObject<Item> JUMBO_RABBIT_SPAWNEGG = ITEMS.register("jumbo_rabbit_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.JUMBO_RABBIT, 0x9E5C48, 0xE5B2A3, (new Item.Properties())));
 	public static final RegistryObject<Item> ZOMBIFILED_PIG_SPAWNEGG = ITEMS.register("zombified_pig_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.ZOMBIFIED_PIG, 15373203, 5009705, (new Item.Properties())));
 	public static final RegistryObject<Item> DUCK_SPAWNEGG = ITEMS.register("duck_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.DUCK, 0x64413A, 0x17951E, (new Item.Properties())));
+    public static final RegistryObject<Item> JOLLY_LAMMA_SPAWNEGG = ITEMS.register("jolly_llama_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.JOLLY_LLAMA, 0x673727, 0xD2BFB2, (new Item.Properties())));
 
 
 	public static final RegistryObject<Item> BONE_SPIDER_SPAWNEGG = ITEMS.register("bone_spider_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.BONE_SPIDER, 0x461C2E, 0x6130B7, (new Item.Properties())));
@@ -88,7 +89,8 @@ public class ModItems {
 			event.accept(MOOLIP_SPAWNEGG);
 			event.accept(JUMBO_RABBIT_SPAWNEGG);
 			event.accept(ZOMBIFILED_PIG_SPAWNEGG);
-			event.accept(DUCK_SPAWNEGG);
+            event.accept(DUCK_SPAWNEGG);
+            event.accept(JOLLY_LAMMA_SPAWNEGG);
 
 			event.accept(BONE_SPIDER_SPAWNEGG);
 			event.accept(STRAY_BONE_SPIDER_SPAWNEGG);

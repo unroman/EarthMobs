@@ -63,6 +63,7 @@ public class ClientRegistrar {
 		event.registerEntityRenderer(ModEntities.BABY_GHAST.get(), BabyGhastRenderer::new);
         event.registerEntityRenderer(ModEntities.MAGMA_COW.get(), MagmaCowRenderer::new);
         event.registerEntityRenderer(ModEntities.FURNACE_GOLEM.get(), FurnaceGolemRenderer::new);
+		event.registerEntityRenderer(ModEntities.JOLLY_LLAMA.get(), JollyLlamaRenderer::new);
 
 		event.registerEntityRenderer(ModEntities.SMELLY_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(ModEntities.FANCY_EGG.get(), ThrownItemRenderer::new);
@@ -89,7 +90,8 @@ public class ClientRegistrar {
 		event.registerLayerDefinition(ModModelLayers.BABY_GHAST, BabyGhastModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BABY_GHAST_CORE, BabyGhastModel::createCoreLayer);
         event.registerLayerDefinition(ModModelLayers.MAGMA_COW, MagmaCowModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.FURNACE_GOLEM, FurnaceGolemModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.FURNACE_GOLEM, FurnaceGolemModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.JOLLY_LLAMA, JollyLlamaModel::createBodyLayer);
 
 		LayerDefinition layerDefinition = BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE);
 		LayerDefinition layerDefinition2 = LobberZombieModel.createBodyLayer(CubeDeformation.NONE);
