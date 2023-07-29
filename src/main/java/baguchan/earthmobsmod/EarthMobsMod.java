@@ -2,16 +2,8 @@ package baguchan.earthmobsmod;
 
 import baguchan.earthmobsmod.capability.ShadowCapability;
 import baguchan.earthmobsmod.client.ClientRegistrar;
-import baguchan.earthmobsmod.registry.ModBiomeModifiers;
-import baguchan.earthmobsmod.registry.ModBlocks;
-import baguchan.earthmobsmod.registry.ModEffects;
-import baguchan.earthmobsmod.registry.ModEntities;
-import baguchan.earthmobsmod.registry.ModFluidTypes;
-import baguchan.earthmobsmod.registry.ModFluids;
-import baguchan.earthmobsmod.registry.ModInteractionInformations;
-import baguchan.earthmobsmod.registry.ModItems;
-import baguchan.earthmobsmod.registry.ModRecipes;
-import baguchan.earthmobsmod.registry.ModSounds;
+import baguchan.earthmobsmod.message.SyncFishMessage;
+import baguchan.earthmobsmod.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,6 +19,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +36,14 @@ public class EarthMobsMod {
 	public static Capability<ShadowCapability> SHADOW_CAP = CapabilityManager.get(new CapabilityToken<>() {
 	});
 
+	public static final String PROTOCOL_VERSION = "1";
+	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+			EarthMobsMod.prefix("channel"),
+			() -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals,
+			PROTOCOL_VERSION::equals
+	);
+
 	public EarthMobsMod() {
 		// Register the setup method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -52,6 +54,7 @@ public class EarthMobsMod {
 
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+		this.setupMessages();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		ModSounds.SOUND_EVENTS.register(modBus);
 		ModBlocks.BLOCKS.register(modBus);
@@ -73,6 +76,12 @@ public class EarthMobsMod {
 	private void setup(final FMLCommonSetupEvent event) {
 		ModEffects.init();
 		ModInteractionInformations.init();
+
+	}
+
+	private void setupMessages() {
+		CHANNEL.registerMessage(0, SyncFishMessage.class,
+				SyncFishMessage::serialize, SyncFishMessage::deserialize, SyncFishMessage::handle);
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {

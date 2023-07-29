@@ -1,10 +1,7 @@
 package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
-import baguchan.earthmobsmod.item.BoneShardItem;
-import baguchan.earthmobsmod.item.FixedInstrumentItem;
-import baguchan.earthmobsmod.item.MobPotItem;
-import baguchan.earthmobsmod.item.ModEggItem;
+import baguchan.earthmobsmod.item.*;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.InstrumentTags;
 import net.minecraft.world.item.*;
@@ -22,6 +19,7 @@ public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, EarthMobsMod.MODID);
 
 	public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", () -> new Item((new Item.Properties())));
+    public static final RegistryObject<Item> TROPICAL_BALL = ITEMS.register("tropical_ball", () -> new TropicalBallItem((new Item.Properties())));
 
 	public static final RegistryObject<Item> SMELLY_EGG = ITEMS.register("smelly_egg", () -> new ModEggItem(ModEntities.SMELLY_EGG, (new Item.Properties().stacksTo(16))));
 	public static final RegistryObject<Item> FANCY_EGG = ITEMS.register("fancy_egg", () -> new ModEggItem(ModEntities.FANCY_EGG, (new Item.Properties().stacksTo(16))));
@@ -109,6 +107,7 @@ public class ModItems {
 		}
 		if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
 			event.accept(RUBY);
+            event.accept(TROPICAL_BALL);
 			event.accept(SMELLY_EGG);
 			event.accept(FANCY_EGG);
 			event.accept(DUCK_EGG);
@@ -119,6 +118,9 @@ public class ModItems {
 			event.accept(HYPER_RABBIT_FOOT);
 
 		}
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            event.accept(ModBlocks.TROPICAL_SLIME_BLOCK);
+        }
 
 		if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
 			event.accept(MUD_BUCKET);

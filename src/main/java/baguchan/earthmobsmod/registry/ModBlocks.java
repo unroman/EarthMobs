@@ -2,6 +2,7 @@ package baguchan.earthmobsmod.registry;
 
 import baguchan.earthmobsmod.EarthMobsMod;
 import baguchan.earthmobsmod.block.CarvedMelonBlock;
+import baguchan.earthmobsmod.block.TropicalSlimeBlock;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -29,6 +30,7 @@ public class ModBlocks {
 
 	public static final RegistryObject<Block> CARVED_MELON = register("carved_melon", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> CARVED_MELON_SHOOT = register("carved_melon_shoot", () -> new CarvedMelonBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> TROPICAL_SLIME_BLOCK = register("tropical_slime_block", () -> new TropicalSlimeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).friction(0.8F).noOcclusion().sound(SoundType.SLIME_BLOCK)));
 
 	public static final RegistryObject<FlowerBlock> BUTTERCUP = register("buttercup", () -> new FlowerBlock(MobEffects.ABSORPTION, 30, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
 	public static final RegistryObject<FlowerBlock> PINK_DAISY = register("pink_daisy", () -> new FlowerBlock(MobEffects.REGENERATION, 10, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));

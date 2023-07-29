@@ -52,10 +52,10 @@ public class TropicalSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 
 	public void render(Slime p_115976_, float p_115977_, float p_115978_, PoseStack p_115979_, MultiBufferSource p_115980_, int p_115981_) {
 		this.shadowRadius = 0.25F * (float) p_115976_.getSize();
-		super.render(p_115976_, p_115977_, p_115978_, p_115979_, p_115980_, p_115981_);
 		if (p_115976_ instanceof TropicalSlime) {
 			renderFish((TropicalSlime) p_115976_, p_115978_, p_115979_, p_115980_, p_115981_);
 		}
+        super.render(p_115976_, p_115977_, p_115978_, p_115979_, p_115980_, p_115981_);
 	}
 
 	/*
@@ -99,11 +99,11 @@ public class TropicalSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 		int i = parent.getSize();
 		ListTag listTag = (ListTag) compoundTag.get(TAG_FISH_LIST);
 
-		if (compoundTag != null && listTag != null && !listTag.isEmpty()) {
+        if (compoundTag != null && listTag != null) {
 			float f = (float) i / 3.0F;
 			for (int l = 0; l < listTag.size(); ++l) {
-				float f1 = ((float) (l % 2) - 0.5F) * f;
-				float f2 = ((float) (l / 2) - 0.5F) * f;
+                double f1 = ((CompoundTag) listTag.get(l)).getDouble(TropicalSlime.TAG_FISH_POSX);
+                double f2 = ((CompoundTag) listTag.get(l)).getDouble(TropicalSlime.TAG_FISH_POSZ);
 
 				int variant = ((CompoundTag) listTag.get(l)).getInt(TAG_FISH_VARIANT);
 
@@ -112,7 +112,7 @@ public class TropicalSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 
 
 				double fishInX = (Mth.lerp(partialTicks, parent.xOld + (double) f1, parent.getX() + (double) f1) - Mth.lerp(partialTicks, parent.xOld, parent.getX()));
-				double fishInY = (parent.getY() + 1.0F + parent.getSize() * 0.5F) - parent.getY();
+                double fishInY = ((CompoundTag) listTag.get(l)).getDouble(TropicalSlime.TAG_FISH_POSY);
 				double fishInZ = (Mth.lerp(partialTicks, parent.zOld + (double) f2, parent.getZ() + (double) f2) - Mth.lerp(partialTicks, parent.zOld, parent.getZ()));
 
 				stack.pushPose();
@@ -123,7 +123,7 @@ public class TropicalSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 
 				stack.translate(fishInX, fishInY, fishInZ);
 				stack.scale(-1.0F, -1.0F, 1.0F);
-
+                stack.translate(0.0F, -1.501F, 0.0F);
 				basemodel.setupAnim(parent, 0.0F, 0.0F, getBob(parent, partialTicks), 0.0F, 0.0F);
 				basemodel.renderToBuffer(stack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 				basemodel.setColor(1.0F, 1.0F, 1.0F);
@@ -138,6 +138,7 @@ public class TropicalSlimeRenderer extends MobRenderer<Slime, SlimeModel<Slime>>
 
 				stack.translate(fishInX, fishInY, fishInZ);
 				stack.scale(-1.0F, -1.0F, 1.0F);
+                stack.translate(0.0F, -1.501F, 0.0F);
 				patternModel.setupAnim(parent, 0.0F, 0.0F, getBob(parent, partialTicks), 0.0F, 0.0F);
 				patternModel.renderToBuffer(stack, vertexConsumer2, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 				patternModel.setColor(1.0F, 1.0F, 1.0F);

@@ -26,6 +26,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         this.itemBlockFlat(ModBlocks.PINK_DAISY.get());
         this.toBlock(ModBlocks.CARVED_MELON.get());
         this.toBlock(ModBlocks.CARVED_MELON_SHOOT.get());
+        this.toBlock(ModBlocks.TROPICAL_SLIME_BLOCK.get());
 
         this.basicItem(ModItems.BONE_SHARD.get());
         this.basicItem(ModItems.BONE_SPIDER_EYE.get());
@@ -40,6 +41,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         this.basicItem(ModItems.TROPICAL_SLIME_BUCKET.get());
         this.basicItem(ModItems.TEACUP_PIG_POT.get());
         this.basicItem(ModItems.RUBY.get());
+        this.basicItem(ModItems.TROPICAL_BALL.get());
 
         this.spawnEgg(ModItems.CLUCK_SHROOM_SPAWNEGG.get());
         this.spawnEgg(ModItems.FANCY_CHICKEN_SPAWNEGG.get());

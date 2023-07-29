@@ -23,6 +23,15 @@ public class BlockstateGenerator extends BlockStateProvider {
         this.horizontalBlock(ModBlocks.CARVED_MELON.get(), new ResourceLocation("minecraft:block/melon_side"), new ResourceLocation(EarthMobsMod.MODID, "block/carved_melon"), new ResourceLocation("minecraft:block/melon_top"));
         this.horizontalBlock(ModBlocks.CARVED_MELON_SHOOT.get(), new ResourceLocation("minecraft:block/melon_side"), new ResourceLocation(EarthMobsMod.MODID, "block/carved_melon_shoot"), new ResourceLocation("minecraft:block/melon_top"));
         this.simpleBlock(ModBlocks.RUBY.get());
+        this.translucentBlock(ModBlocks.TROPICAL_SLIME_BLOCK.get());
+    }
+
+    public void translucentBlock(Block block) {
+        simpleBlock(block, translucentCubeAll(block));
+    }
+
+    private ModelFile translucentCubeAll(Block block) {
+        return models().cubeAll(name(block), blockTexture(block)).renderType("minecraft:translucent");
     }
 
 
