@@ -66,6 +66,7 @@ public class EarthMobsMod {
 		ModEffects.POTION.register(modBus);
 		ModItems.ITEMS.register(modBus);
 		ModRecipes.RECIPE_SERIALIZERS.register(modBus);
+		ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
