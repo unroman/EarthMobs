@@ -95,12 +95,14 @@ public class ClientRegistrar {
 
 		LayerDefinition layerDefinition = BoulderingZombieModel.createBodyLayer(CubeDeformation.NONE);
 		LayerDefinition layerDefinition2 = LobberZombieModel.createBodyLayer(CubeDeformation.NONE);
+		LayerDefinition layerDefinition3 = BoulderingDrownedModel.createBodyLayer(CubeDeformation.NONE);
+		LayerDefinition layerDefinition4 = LobberDrownedModel.createBodyLayer(CubeDeformation.NONE);
 		event.registerLayerDefinition(ModModelLayers.BOULDERING_ZOMBIE, () -> layerDefinition);
 		event.registerLayerDefinition(ModModelLayers.LOBBER_ZOMBIE, () -> layerDefinition2);
-		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED, () -> layerDefinition);
-		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED, () -> layerDefinition2);
-		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED_OUTER, () -> BoulderingZombieModel.createBodyLayer(new CubeDeformation(0.25F)));
-		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED_OUTER, () -> LobberZombieModel.createBodyLayer(new CubeDeformation(0.25F)));
+		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED, () -> layerDefinition3);
+		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED, () -> layerDefinition4);
+		event.registerLayerDefinition(ModModelLayers.BOULDERING_DROWNED_OUTER, () -> BoulderingDrownedModel.createBodyLayer(new CubeDeformation(0.25F)));
+		event.registerLayerDefinition(ModModelLayers.LOBBER_DROWNED_OUTER, () -> LobberDrownedModel.createBodyLayer(new CubeDeformation(0.25F)));
 	}
 
 	@SubscribeEvent

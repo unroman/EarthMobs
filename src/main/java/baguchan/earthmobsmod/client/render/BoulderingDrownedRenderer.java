@@ -24,7 +24,7 @@ public class BoulderingDrownedRenderer extends AbstractZombieRenderer<Bouldering
 	private static final ResourceLocation OUTER_LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/bouldering_zombie/bouldering_drowned_outer_layer.png");
 
 	public BoulderingDrownedRenderer(EntityRendererProvider.Context p_173964_) {
-		super(p_173964_, new BoulderingDrownedModel<>(p_173964_.bakeLayer(ModModelLayers.BOULDERING_DROWNED)), new ZombieModel(p_173964_.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new ZombieModel(p_173964_.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)));
+		super(p_173964_, new BoulderingDrownedModel<>(p_173964_.bakeLayer(ModModelLayers.BOULDERING_DROWNED)), new BoulderingDrownedModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new BoulderingDrownedModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)));
 		this.addLayer(new ZombieOuterLayer<>(this, new BoulderingDrownedModel<>(p_173964_.bakeLayer(ModModelLayers.BOULDERING_DROWNED_OUTER)), OUTER_LOCATION));
 		this.addLayer(new SpinAttackEffectLayer<>(this, p_173964_.getModelSet()))
 		;

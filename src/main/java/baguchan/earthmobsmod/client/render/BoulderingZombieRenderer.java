@@ -18,7 +18,7 @@ public class BoulderingZombieRenderer extends AbstractZombieRenderer<BoulderingZ
 	private static final ResourceLocation LOCATION = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/bouldering_zombie/bouldering_zombie.png");
 
 	public BoulderingZombieRenderer(EntityRendererProvider.Context p_173964_) {
-		super(p_173964_, new BoulderingZombieModel<>(p_173964_.bakeLayer(ModModelLayers.BOULDERING_ZOMBIE)), new ZombieModel(p_173964_.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new ZombieModel(p_173964_.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)));
+		super(p_173964_, new BoulderingZombieModel<>(p_173964_.bakeLayer(ModModelLayers.BOULDERING_ZOMBIE)), new BoulderingZombieModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new BoulderingZombieModel<>(p_173964_.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)));
 	}
 
 	public ResourceLocation getTextureLocation(Zombie p_114115_) {
