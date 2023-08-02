@@ -34,13 +34,17 @@ public class OneItemLootModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         LootTable extraTable = context.getResolver().getLootTable(this.lootTable);
-        extraTable.getRandomItemsRaw(context, generatedLoot::add);
+
         ObjectArrayList<ItemStack> stacks = new ObjectArrayList<>();
-        List<ItemStack> itemStacks = generatedLoot.stream().filter(itemStack -> {
+        extraTable.getRandomItemsRaw(context, stacks::add);
+        List<ItemStack> itemStacks = stacks.stream().filter(itemStack -> {
             return !itemStack.isEmpty();
         }).toList();
-        stacks.add(itemStacks.get(context.getRandom().nextInt(itemStacks.size())));
-        return stacks;
+        if (!itemStacks.isEmpty()) {
+            return stacks;
+        } else {
+            return generatedLoot;
+        }
     }
 
     @Override
