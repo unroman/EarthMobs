@@ -3,7 +3,8 @@
   "render_type": "minecraft:translucent",
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "tropical_slime_block"
+    "0": "earthmobsmod:block/tropical_slime_block",
+    "particle": "earthmobsmod:block/tropical_slime_block"
   },
   "elements": [
     {

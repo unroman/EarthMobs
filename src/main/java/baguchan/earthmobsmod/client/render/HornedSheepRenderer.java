@@ -14,6 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HornedSheepRenderer extends MobRenderer<HornedSheep, HornedSheepModel<HornedSheep>> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/horned_sheep.png");
+    private static final ResourceLocation TEXTURE_HORNLESS = new ResourceLocation(EarthMobsMod.MODID, "textures/entity/horned_sheep_hornless.png");
+
 
 
 	public HornedSheepRenderer(EntityRendererProvider.Context p_173952_) {
@@ -24,6 +26,9 @@ public class HornedSheepRenderer extends MobRenderer<HornedSheep, HornedSheepMod
 
 	@Override
 	public ResourceLocation getTextureLocation(HornedSheep p_110775_1_) {
+        if (!p_110775_1_.hasHorn()) {
+            return TEXTURE_HORNLESS;
+        }
 		return TEXTURE;
 	}
 }
