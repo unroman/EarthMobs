@@ -95,7 +95,7 @@ public class Moobloom extends Cow implements net.minecraftforge.common.IForgeShe
 
 			java.util.List<ItemStack> items = new java.util.ArrayList<>();
 			for (int i = 0; i < 4; ++i) {
-				items.add(new ItemStack(ModBlocks.BUTTERCUP.get()));
+				items.add(new ItemStack(this.getFlower()));
 			}
 			return items;
 		}
